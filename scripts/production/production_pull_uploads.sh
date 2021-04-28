@@ -1,12 +1,22 @@
 #! /bin/bash
 
-cat << EOF
-Usage: wrt production pull uploads
+source .env
+source scripts/shared/vars.sh
+source scripts/shared/check_ownership.sh
 
-This is an empty script file intended for you to place your code for 
-downloading wp uploads used in production. This allows you to develop your 
-code with the uploaded files that are currently in production.
+check_ownership "$HOST_UPLOADS_DIR"
 
-You can edit this file at scripts/production/production_pull_uploads.sh
+PROD_UPLOADS_BACKUP_DIR=$REMOTE_CONTENT_DIR/wp-content/uploads
+HOST_UPLOADS_BACKUP_DIR=$PWD/$HOST_UPLOADS_DIR
 
-EOF
+echo 'Clearing current uploads'
+rm -rf $HOST_UPLOADS_DIR/*
+
+echo "Downloading production uploads to \"$HOST_UPLOADS_DIR\"..."
+gcloud compute scp \
+  --recurse \
+  --compress \
+  --zone "$ZONE" \
+  $USER@$VM:$PROD_UPLOADS_BACKUP_DIR/* \
+  $HOST_UPLOADS_BACKUP_DIR
+  

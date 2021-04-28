@@ -1,12 +1,44 @@
 #! /bin/bash
 
-cat << EOF
-Usage: wrt production push plugins
+source .env
+source scripts/shared/vars.sh
+source scripts/shared/check_ownership.sh
 
-This is an empty script file intended for you to place your code for 
-uploading plugin files used in development. This allows you to run your 
-production with the plugins that you use in development.
+check_ownership "$HOST_PLUGINS_DIR"
 
-You can edit this file at scripts/production/production_push_plugins.sh
+PROD_PLUGINS_DIR=$REMOTE_PROJECT_DIR/plugins
+HOST_PLUGINS_ABS_DIR=$PWD/$HOST_PLUGINS_DIR
 
-EOF
+
+
+# # Create plugins dir if it doesn't exist
+echo "Creating new plugins directory"
+gcloud compute ssh \
+  $USER@$VM \
+  --zone=$ZONE \
+  --command="mkdir -p $PROD_PLUGINS_DIR"
+
+# Clear internals of the plugins directory
+echo "Removing production plugins"
+gcloud compute ssh \
+  $USER@$VM \
+  --zone=$ZONE \
+  --command="rm -rf $PROD_PLUGINS_DIR/*"
+
+# Upload content
+echo "Pushing plugins..."
+gcloud compute scp \
+  --recurse \
+  --zone $ZONE \
+  --compress \
+  $HOST_PLUGINS_ABS_DIR/* \
+  $USER@$VM:$PROD_PLUGINS_DIR
+
+# Adjust file privileges
+echo "Adjusting file ownerships..."
+gcloud compute ssh \
+  $USER@$VM \
+  --zone $ZONE \
+  --command "docker exec \
+    basakbeykoz_wp_p \
+    bash -c 'chown -R www-data:www-data /var/www/html/wp-content'" 

@@ -1,12 +1,21 @@
 #! /bin/bash
 
-cat << EOF
-Usage: wrt production pull plugins
+source .env
+source scripts/shared/vars.sh
+source scripts/shared/check_ownership.sh
 
-This is an empty script file intended for you to place your code for 
-downloading plugin files used in production. This allows you to develop your 
-code with the plugins that are currently running in production.
+check_ownership "$HOST_PLUGINS_DIR"
 
-You can edit this file at scripts/production/production_pull_plugins.sh
+PROD_PLUGINS_DIR=$REMOTE_PROJECT_DIR/plugins
+HOST_PLUGINS_ABS_DIR=$PWD/$HOST_PLUGINS_DIR
 
-EOF
+echo 'Clearing current plugins'
+rm -rf $HOST_PLUGINS_ABS_DIR/*
+
+echo "Downloading production plugins to \"$HOST_PLUGINS_DIR\"..."
+gcloud compute scp \
+  --recurse \
+  --compress \
+  --zone "$ZONE" \
+  $USER@$VM:$PROD_PLUGINS_DIR/* \
+  $HOST_PLUGINS_ABS_DIR
