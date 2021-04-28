@@ -3,6 +3,7 @@
 source .env
 source scripts/shared/vars.sh
 source scripts/shared/check_ownership.sh
+source scripts/shared/exit_if_devcontainer.sh
 
 check_ownership "$HOST_UPLOADS_DIR"
 

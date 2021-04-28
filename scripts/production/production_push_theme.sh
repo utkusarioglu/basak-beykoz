@@ -3,6 +3,7 @@
 source .env
 source scripts/shared/vars.sh
 source scripts/shared/messages.sh
+source scripts/shared/exit_if_devcontainer.sh
 
 if ! [ -d "${PWD}/build" ]; then 
   build_doesnt_exist_error
