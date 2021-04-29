@@ -17,7 +17,7 @@ export type WrtErrorResponse<MetaArgs extends Record<string, any>> = {
  * Shape of a post item response body from wrt
  */
 
-export type WrtPostItem = {
+export type WrtSingularItem = {
   id: number;
   title: string;
   content: string;

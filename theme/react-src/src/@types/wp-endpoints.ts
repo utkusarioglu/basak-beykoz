@@ -1,7 +1,7 @@
 import type { GetMeek } from 'endpoint-tools';
 import type {
   WrtSuccessResponse,
-  WrtPostItem,
+  WrtSingularItem,
   WrtErrorResponse,
   GetWpMenuSuccess,
   GetWpMenuFail,
@@ -18,7 +18,7 @@ export type GetSingular = GetMeek<
   '/wp-json/wrt/v1/singular',
   {},
   { slug: string },
-  WrtSuccessResponse<WrtPostItem>,
+  WrtSuccessResponse<WrtSingularItem>,
   WrtErrorResponse<{
     post_type: 'post' | 'page';
     name: string; // slug
@@ -36,7 +36,7 @@ export type GetCategoryPosts = GetMeek<
   '/wp-json/wrt/v1/category_posts',
   {},
   { slug: string },
-  WrtSuccessResponse<WrtPostItem[]>,
+  WrtSuccessResponse<WrtSingularItem[]>,
   WrtErrorResponse<{
     category_name: string; // slug
   }>
