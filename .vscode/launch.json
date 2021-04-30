@@ -6,7 +6,8 @@
       "request": "launch",
       "name": "Launch",
       "port": 9222,
-      "url": "http://localhost"
+      "url": "http://localhost",
+      "runtimeArgs": ["--incognito"]
     }
   ]
 }
