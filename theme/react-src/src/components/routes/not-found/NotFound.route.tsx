@@ -2,11 +2,11 @@ import React from 'react';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
 
-const CreditsRoute = () => {
+const NotFoundRoute = () => {
   const { pageTitle, titleSeparator } = window.config;
   const { pathname, search } = window.location;
   ReactGA.pageview(pathname + search);
-  const routeTitle = 'Teşekkürler';
+  const routeTitle = 'Paylaşımlar';
 
   return (
     <>
@@ -15,9 +15,9 @@ const CreditsRoute = () => {
           {pageTitle} {titleSeparator} {routeTitle}
         </title>
       </Helmet>
-      <p>Credits</p>
+      <p>Not found</p>
     </>
   );
 };
 
-export default CreditsRoute;
+export default NotFoundRoute;

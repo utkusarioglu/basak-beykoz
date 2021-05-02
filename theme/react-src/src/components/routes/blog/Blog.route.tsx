@@ -1,12 +1,14 @@
 import React from 'react';
+import CategoryPostsFeedView from '../../views/category-posts-feed/CategoryPostsFeed.view';
+import { BLOG_POSTS_CATEGORY } from '../../../config';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
 
-const CreditsRoute = () => {
+const BlogRoute = () => {
   const { pageTitle, titleSeparator } = window.config;
   const { pathname, search } = window.location;
   ReactGA.pageview(pathname + search);
-  const routeTitle = 'Teşekkürler';
+  const routeTitle = 'Paylaşımlar';
 
   return (
     <>
@@ -15,9 +17,9 @@ const CreditsRoute = () => {
           {pageTitle} {titleSeparator} {routeTitle}
         </title>
       </Helmet>
-      <p>Credits</p>
+      <p>Blog</p>
     </>
   );
 };
 
-export default CreditsRoute;
+export default BlogRoute;
