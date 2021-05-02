@@ -58,6 +58,7 @@ export type WpMenuItem = {
   slug: string;
   url: string;
   object: string; // type of the link object ex: page, post
+  child_items: WpMenuItem[];
 };
 
 /**
