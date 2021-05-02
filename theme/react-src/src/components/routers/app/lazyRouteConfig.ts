@@ -5,11 +5,12 @@ import {
   lazyWithPreload,
 } from '../../../utils/lazyWithPreload.util';
 import prefetch from '../../../services/prefetch.service';
+import type { PrefetcherArgs } from '../../../services/prefetch.service';
 
 interface LazyRouteConfig {
   path: string;
   component: PreloadableComponent<FC<any>>;
-  prefetch?: (config: any) => Promise<void>;
+  prefetch?: (config: PrefetcherArgs) => Promise<void>;
 }
 
 export const lazyRoutes: LazyRouteConfig[] = [

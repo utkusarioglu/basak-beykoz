@@ -29,7 +29,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
         component={lazyWithPreload(
           () => import('../../routes/singular/Singular.route')
         )}
-        prefetch={() => prefetch.singular(props.item.slug)}
+        prefetch={() => prefetch.singular({ slug: props.item.slug })}
       >
         <div>
           <div

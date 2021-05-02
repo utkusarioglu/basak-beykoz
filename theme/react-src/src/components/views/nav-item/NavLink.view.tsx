@@ -18,7 +18,7 @@ export const NavLinkView: FC<NavLinkViewProps> = ({ urlfulSlug, children }) => {
     lazyRoutes.find((route) => route.path === '/:slug');
 
   const prefetch = lazyRoute && lazyRoute.prefetch && lazyRoute.prefetch;
-  const prefetchFunc = prefetch && (() => prefetch(restfulSlug));
+  const prefetchFunc = prefetch && (() => prefetch({ slug: restfulSlug }));
   const Component = lazyRoute?.component as PreloadableComponent<FC<any>>;
 
   return (

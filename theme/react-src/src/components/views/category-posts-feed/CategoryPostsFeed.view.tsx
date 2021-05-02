@@ -15,13 +15,14 @@ const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
   slug: requestSlug,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { items: posts, slug: storeSlug, fetchTime } = useSelector(selectPosts);
+  const { items: posts } = useSelector(selectPosts);
 
   useEffect(() => {
-    if (storeSlug !== requestSlug || fetchTime === 0) {
-      setIsLoading(true);
-      prefetch.categoryPosts(requestSlug).then(() => setIsLoading(false));
-    }
+    prefetch.categoryPosts({
+      slug: requestSlug,
+      onFetchStart: () => setIsLoading(true),
+      onFetchComplete: () => setIsLoading(false),
+    });
   }, []);
 
   return (

@@ -20,7 +20,7 @@ const SingularRoute = () => {
 
   useEffect(() => {
     if (!singular.render) {
-      prefetch.singular(cleanedSlug);
+      prefetch.singular({ slug: cleanedSlug });
     }
   }, []);
 
