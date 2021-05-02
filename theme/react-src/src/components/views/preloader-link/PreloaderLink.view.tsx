@@ -2,7 +2,10 @@ import React from 'react';
 import { FC, SyntheticEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { PreloadableComponent } from '../../../utils/lazyWithPreload.util';
-import { delayedIsLoading } from '../../../utils/delayedIsLoading.util';
+import {
+  enableIsLoadingDelayed,
+  disableIsLoadingDelayed,
+} from '../../../slices/app/app.slice';
 
 interface PreloaderLinkProps {
   to: string;
@@ -30,12 +33,12 @@ const PreloaderLink: FC<PreloaderLinkProps> = ({
 
   const preloadAndRedirect = (e: SyntheticEvent) => {
     e.preventDefault();
-    const cancelIsLoading = delayedIsLoading(true, 500);
+    const cancelIsLoading = enableIsLoadingDelayed();
     onSelect && onSelect();
 
     Promise.all([component.preload(), prefetch()]).then(() => {
       cancelIsLoading();
-      delayedIsLoading(false, 0);
+      disableIsLoadingDelayed();
       onLoadComplete && onLoadComplete();
       history.push(to);
     });

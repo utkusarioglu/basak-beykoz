@@ -11,3 +11,9 @@ export interface AppSliceState {
 export type SetIsLoading = (isLoading: boolean) => void;
 
 export type SelectIsLoading = Selector<RootState, AppSliceState['isLoading']>;
+
+export type DelayedIsLoading = (state: boolean, latency: number) => () => void;
+
+export type EnableIsLoadingDelayed = () => () => void;
+
+export type DisableIsLoadingDelayed = () => () => void;
