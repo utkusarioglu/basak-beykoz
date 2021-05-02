@@ -5,6 +5,7 @@ import type {
 } from '../@types/wp-endpoints';
 import { prepareEndpoint } from 'endpoint-tools';
 import { REST_TIMEOUT } from '../config';
+import { addToSingularRepo } from '../slices/singular-repo/singularRepo.slice';
 
 class Rest {
   /**
@@ -62,6 +63,7 @@ class Rest {
           if (data.state === 'fail') {
             throw new Error(data.errorCode);
           }
+          addToSingularRepo(data.body);
           return data;
         })
     );
