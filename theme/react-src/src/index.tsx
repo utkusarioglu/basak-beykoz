@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import ReactGA from 'react-ga';
 import reportWebVitals from './reportWebVitals';
+import AppRouter from './components/routers/app/App.router';
 import { GOOGLE_ANALYTICS_ID } from './config';
 
 ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: false });
@@ -11,6 +12,7 @@ ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: false });
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <AppRouter />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
