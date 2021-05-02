@@ -34,6 +34,10 @@ const AppRouter = () => {
             </ErrorBoundaryUtil>
           </Route>
         ))}
+
+        <Route path="*">
+          <Redirect to="/404" />
+        </Route>
       </Switch>
 
       <FooterLayout />
