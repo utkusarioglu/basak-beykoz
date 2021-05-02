@@ -2,9 +2,11 @@ import React from 'react';
 
 const InlineLoaderView = () => (
   <div className="cat-loading">
-    <h1 role="img" aria-label="cat">
-      😺
-    </h1>
+    <div>
+      <span role="img" aria-label="loading">
+        😺
+      </span>
+    </div>
     <h4>Kedi sayfayı yüklüyor...</h4>
   </div>
 );

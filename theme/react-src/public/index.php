@@ -58,10 +58,16 @@
       top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
+      
     }
 
-    .cat-loading * {
+    .cat-loading > * {
       text-align: center;
+      margin: 0 auto;
+    }
+
+    .cat-loading span {
+      font-size: 40px;
     }
   </style>
   <script>
@@ -78,9 +84,11 @@
   </noscript>
   <div id="root">
     <div class="cat-loading">
-      <h1 role="img" aria-label="cat">
-        😺
-      </h1>
+      <div>
+        <span role="img" aria-label="cat">
+          😺
+        </span>
+      </div>
       <h4>Kedi sayfayı yüklüyor...</h4>
     </div>
   </div>
