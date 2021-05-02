@@ -2,7 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
+import ReactGA from 'react-ga';
 import reportWebVitals from './reportWebVitals';
+import { GOOGLE_ANALYTICS_ID } from './config';
+
+ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: false });
 
 ReactDOM.render(
   <React.StrictMode>
