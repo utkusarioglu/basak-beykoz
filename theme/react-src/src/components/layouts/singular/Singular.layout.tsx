@@ -22,7 +22,10 @@ const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
               💙
             </span>
           </h3>
-          <CategoryPostsFeedView slug={singular.category} />
+          <CategoryPostsFeedView
+            categorySlug={singular.category}
+            excludePostSlug={singular.slug}
+          />
         </>
       )}
     </>
