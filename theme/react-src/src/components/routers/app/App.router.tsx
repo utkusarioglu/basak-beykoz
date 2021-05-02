@@ -10,6 +10,7 @@ import HeaderLayout from '../../layouts/header/Header.layout';
 import { HOME_SLUG } from '../../../config';
 import IsLoadingView from '../../views/is-loading/IsLoading.view';
 import { lazyRoutes } from './lazyRouteConfig';
+import InlineLoaderView from '../../views/inline-loader/InlineLoader.view';
 
 const AppRouter = () => {
   return (
@@ -24,7 +25,7 @@ const AppRouter = () => {
 
         {lazyRoutes.map(({ path, component: Component }) => (
           <Route path={path} exact key={path}>
-            <Suspense fallback={<LoadingPlaceholder />}>
+            <Suspense fallback={<InlineLoaderView />}>
               <Component />
             </Suspense>
           </Route>
@@ -35,7 +36,5 @@ const AppRouter = () => {
     </Router>
   );
 };
-
-const LoadingPlaceholder = () => <div>Loading...</div>;
 
 export default AppRouter;
