@@ -6,7 +6,7 @@ declare global {
       REACT_APP_BLOG_SLUG: string;
       REACT_APP_REST_ENDPOINT: string;
       REACT_APP_REST_TIMEOUT: string;
-      REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID: string;
+      REACT_APP_GOOGLE_ANALYTICS_ID: string;
       REACT_APP_BLOG_POSTS_CATEGORY: string;
       GENERATE_SOURCEMAP: boolean;
     }
