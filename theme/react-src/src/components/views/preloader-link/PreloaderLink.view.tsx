@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { FC, SyntheticEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { PreloadableComponent } from '../../../utils/lazyWithPreload.util';
@@ -6,6 +6,9 @@ import {
   enableIsLoadingDelayed,
   disableIsLoadingDelayed,
 } from '../../../slices/app/app.slice';
+import { HOME_SLUG } from '../../../config';
+import { lazyWithPreload } from '../../../utils/lazyWithPreload.util';
+import prefetcher from '../../../services/prefetch.service';
 
 interface PreloaderLinkProps {
   to: string;
@@ -13,6 +16,7 @@ interface PreloaderLinkProps {
   prefetch?: () => Promise<void>;
   onSelect?: () => void;
   onLoadComplete?: () => void;
+  style?: CSSProperties;
 }
 
 /**
@@ -21,10 +25,11 @@ interface PreloaderLinkProps {
  * @param param0 props
  * @returns preloader link component
  */
-const PreloaderLink: FC<PreloaderLinkProps> = ({
+const PreloaderLinkView: FC<PreloaderLinkProps> = ({
   to,
   children,
   component,
+  style,
   onSelect,
   prefetch = () => Promise.resolve(),
   onLoadComplete,
@@ -45,10 +50,41 @@ const PreloaderLink: FC<PreloaderLinkProps> = ({
   };
 
   return (
-    <a href={to} onClick={preloadAndRedirect}>
+    <a href={to} onClick={preloadAndRedirect} style={style}>
       {children}
     </a>
   );
 };
 
-export default PreloaderLink;
+type SingularPreloaderLinkViewProps = Omit<
+  PreloaderLinkProps,
+  'component' | 'prefetch'
+>;
+
+/**
+ * Preloader link for loading singular content only
+ * @param param0 props
+ * @returns Preloader component for Singular content
+ */
+export const SingularPreloaderLinkView: FC<SingularPreloaderLinkViewProps> = ({
+  to,
+  children,
+  style,
+  onSelect,
+  onLoadComplete,
+}) => {
+  return (
+    <PreloaderLinkView
+      to={to}
+      component={lazyWithPreload(
+        () => import('../../routes/singular/Singular.route')
+      )}
+      prefetch={() => prefetcher.singular({ slug: to })}
+      style={style}
+    >
+      {children}
+    </PreloaderLinkView>
+  );
+};
+
+export default PreloaderLinkView;

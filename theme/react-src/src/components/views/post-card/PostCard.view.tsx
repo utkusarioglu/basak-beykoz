@@ -1,9 +1,8 @@
 import React from 'react';
 import type { FC } from 'react';
 import type { WrtSingularItem } from '../../../@types/wp-types';
-import PreloaderLink from '../preloader-link/PreloaderLink.view';
-import { lazyWithPreload } from '../../../utils/lazyWithPreload.util';
-import prefetch from '../../../services/prefetch.service';
+import { SingularPreloaderLinkView } from '../preloader-link/PreloaderLink.view';
+import { urlSlug } from '../../../utils/slug.util';
 
 type PostCardSkeletonProps = {
   asSkeleton: true;
@@ -24,13 +23,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
     );
   } else {
     return (
-      <PreloaderLink
-        to={`/${props.item.slug}`}
-        component={lazyWithPreload(
-          () => import('../../routes/singular/Singular.route')
-        )}
-        prefetch={() => prefetch.singular({ slug: props.item.slug })}
-      >
+      <SingularPreloaderLinkView to={urlSlug(props.item.slug)}>
         <div>
           <div
             style={{
@@ -44,7 +37,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
           ></div>
           <h4 dangerouslySetInnerHTML={{ __html: props.item.title }}></h4>
         </div>
-      </PreloaderLink>
+      </SingularPreloaderLinkView>
     );
   }
 };
