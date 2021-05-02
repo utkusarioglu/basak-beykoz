@@ -30,6 +30,6 @@ export const restSlug: StringIdentityFunc = (slug) =>
  * @returns slug that could be used for state comparison
  */
 export const cleanSlug: StringIdentityFunc = (rawSlug) => {
-  const slashlessSlug = rawSlug.replace('/', '');
+  const slashlessSlug = (rawSlug || '').replace('/', '');
   return rawSlug === undefined ? HOME_SLUG : slashlessSlug;
 };
