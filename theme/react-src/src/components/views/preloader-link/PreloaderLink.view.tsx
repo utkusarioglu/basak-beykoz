@@ -8,6 +8,8 @@ interface PreloaderLinkProps {
   to: string;
   component: PreloadableComponent<FC<any>>;
   prefetch?: () => Promise<void>;
+  onSelect?: () => void;
+  onLoadComplete?: () => void;
 }
 
 /**
@@ -20,16 +22,21 @@ const PreloaderLink: FC<PreloaderLinkProps> = ({
   to,
   children,
   component,
+  onSelect,
   prefetch = () => Promise.resolve(),
+  onLoadComplete,
 }) => {
   const history = useHistory();
 
   const preloadAndRedirect = (e: SyntheticEvent) => {
     e.preventDefault();
     const cancelIsLoading = delayedIsLoading(true, 500);
+    onSelect && onSelect();
+
     Promise.all([component.preload(), prefetch()]).then(() => {
       cancelIsLoading();
       delayedIsLoading(false, 0);
+      onLoadComplete && onLoadComplete();
       history.push(to);
     });
   };
