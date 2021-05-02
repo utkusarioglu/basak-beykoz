@@ -22,6 +22,7 @@ const SingularRoute = () => {
           </title>
         </Helmet>
       )}
+      <SingularLayout singular={singular} />
     </>
   );
 };
