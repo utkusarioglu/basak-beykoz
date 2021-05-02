@@ -5,7 +5,15 @@ const {
   REACT_APP_BLOG_POSTS_CATEGORY,
 } = process.env;
 
+/*
+ * CONFIG FROM ENV
+ */
 export const REST_TIMEOUT = +REACT_APP_REST_TIMEOUT || 5000;
 export const HOME_SLUG = REACT_APP_HOME_SLUG;
 export const BLOG_SLUG = REACT_APP_BLOG_SLUG;
 export const BLOG_POSTS_CATEGORY = REACT_APP_BLOG_POSTS_CATEGORY;
+
+/*
+ * LOCAL CONFIG
+ */
+export const FETCH_STALE_TIME = 60 * 1000; // 60 seconds
