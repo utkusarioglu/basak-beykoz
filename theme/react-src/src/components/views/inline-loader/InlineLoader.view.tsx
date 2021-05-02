@@ -1,11 +1,11 @@
 import React from 'react';
 
 const InlineLoaderView = () => (
-  <div>
-    <h1 role="img" aria-label="cat" style={{ textAlign: 'center' }}>
+  <div className="cat-loading">
+    <h1 role="img" aria-label="cat">
       😺
     </h1>
-    <h4 style={{ textAlign: 'center' }}>Kedi sayfayı yüklüyor...</h4>
+    <h4>Kedi sayfayı yüklüyor...</h4>
   </div>
 );
 

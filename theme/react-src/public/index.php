@@ -52,6 +52,17 @@
       text-decoration-thickness: 4px;
       text-decoration-color: rgb(0 95 53 / 63%);
     }
+
+    .cat-loading {
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cat-loading * {
+      text-align: center;
+    }
   </style>
   <script>
     window.config = {
@@ -66,7 +77,12 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root">
-    <div style="text-align: center; margin-top: 50px;">🦒 Mutlulukla yüklüyor... </div>
+    <div class="cat-loading">
+      <h1 role="img" aria-label="cat">
+        😺
+      </h1>
+      <h4>Kedi sayfayı yüklüyor...</h4>
+    </div>
   </div>
   </body>
 </html>
