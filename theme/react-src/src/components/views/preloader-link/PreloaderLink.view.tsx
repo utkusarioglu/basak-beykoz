@@ -6,7 +6,6 @@ import {
   enableIsLoadingDelayed,
   disableIsLoadingDelayed,
 } from '../../../slices/app/app.slice';
-import { HOME_SLUG } from '../../../config';
 import { lazyWithPreload } from '../../../utils/lazyWithPreload.util';
 import prefetcher from '../../../services/prefetch.service';
 
