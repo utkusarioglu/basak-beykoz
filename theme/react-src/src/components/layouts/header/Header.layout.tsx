@@ -1,4 +1,6 @@
 import React from 'react';
+import NavView from '../../views/nav/nav.view';
+import SocialView from '../../views/social/Social.view';
 
 const HeaderLayout = () => {
   return (
@@ -12,6 +14,8 @@ const HeaderLayout = () => {
           backgroundRepeat: 'no-repeat',
         }}
       ></div>
+      <NavView />
+      <SocialView />
     </header>
   );
 };
