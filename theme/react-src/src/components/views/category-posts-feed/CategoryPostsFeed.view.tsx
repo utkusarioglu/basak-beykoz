@@ -8,11 +8,13 @@ import PostCardSkeletonsView from './PostCardSkeletons.view';
 import { selectPosts } from '../../../slices/category-posts/categoryPosts.slice';
 import prefetch from '../../../services/prefetch.service';
 interface CategoryPostsFeedViewProps {
-  slug: string;
+  categorySlug: string;
+  excludePostSlug?: string;
 }
 
 const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
-  slug: requestSlug,
+  categorySlug: requestSlug,
+  excludePostSlug = undefined,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { items: posts } = useSelector(selectPosts);
@@ -30,9 +32,11 @@ const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
       {isLoading ? (
         <PostCardSkeletonsView count={5} minOpacity={0.5} />
       ) : posts.length > 0 ? (
-        posts.map((post) => (
-          <PostCardView key={post.id} asSkeleton={false} item={post} />
-        ))
+        posts
+          .filter((post) => post.slug !== excludePostSlug)
+          .map((post) => (
+            <PostCardView key={post.id} asSkeleton={false} item={post} />
+          ))
       ) : (
         <NoPostsView />
       )}
