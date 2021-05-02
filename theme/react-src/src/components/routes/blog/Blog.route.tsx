@@ -18,7 +18,7 @@ const BlogRoute = () => {
         </title>
       </Helmet>
       <p>Blog</p>
-      <CategoryPostsFeedView slug={BLOG_POSTS_CATEGORY} />
+      <CategoryPostsFeedView categorySlug={BLOG_POSTS_CATEGORY} />
     </>
   );
 };
