@@ -27,7 +27,7 @@ const NavView = () => {
     >
       {menu.length > 0
         ? menu.map((menuItem) => (
-            <p>{menuItem.title}</p>
+            <NavItemView {...{ ...menuItem, depth: 0, key: menuItem.ID }} />
           ))
         : null}
     </nav>
