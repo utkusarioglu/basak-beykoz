@@ -8,7 +8,7 @@ type StringIdentityFunc = (slug: string) => string;
  * @returns address bar routing compatible slug
  */
 export const urlSlug: StringIdentityFunc = (slug) =>
-  slug !== undefined && slug !== '' ? `/${slug}` : '/';
+  (slug !== undefined && slug !== '' ? `/${slug}/` : '/').replace('//', '/');
 
 /**
  * Converts raw slug to values that the rest api would understand.
