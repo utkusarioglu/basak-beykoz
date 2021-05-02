@@ -30,7 +30,7 @@ class Rest {
    * as main prop.
    */
   // TODO remove any types
-  private withTimeout(fetchFunc: Promise<unknown>): Promise<any> {
+  private async withTimeout(fetchFunc: Promise<unknown>): Promise<any> {
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         reject('rest_timeout');
