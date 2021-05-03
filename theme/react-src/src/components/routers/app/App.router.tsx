@@ -9,7 +9,7 @@ import FooterLayout from '../../layouts/footer/Footer.layout';
 import HeaderLayout from '../../layouts/header/Header.layout';
 import { HOME_SLUG } from '../../../config';
 import IsLoadingView from '../../views/is-loading/IsLoading.view';
-import { lazyRoutes } from './lazyRouteConfig';
+import { routes } from './routeConfig';
 import InlineLoaderView from '../../views/inline-loader/InlineLoader.view';
 import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
 import ErrorFallbackView from '../../views/error-fallback/ErrorFallback.view';
@@ -22,11 +22,7 @@ const AppRouter = () => {
         <HeaderLayout />
 
         <Switch>
-          <Route path={`/${HOME_SLUG}`}>
-            <Redirect to="/" />
-          </Route>
-
-          {lazyRoutes.map(({ path, component: Component }) => (
+          {routes.map(({ path, component: Component }) => (
             <Route path={path} exact key={path}>
               <ErrorBoundaryUtil fallback={<ErrorFallbackView />}>
                 <Suspense fallback={<InlineLoaderView />}>
@@ -35,6 +31,10 @@ const AppRouter = () => {
               </ErrorBoundaryUtil>
             </Route>
           ))}
+
+          <Route path={`/${HOME_SLUG}`}>
+            <Redirect to="/" />
+          </Route>
 
           <Route path="*">
             <Redirect to="/404" />

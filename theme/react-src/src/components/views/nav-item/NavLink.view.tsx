@@ -1,25 +1,23 @@
 import React from 'react';
 import { FC } from 'react';
 import PreloaderLinkView from '../preloader-link/PreloaderLink.view';
-import { lazyRoutes } from '../../routers/app/lazyRouteConfig';
 import { PreloadableComponent } from '../../../utils/lazyWithPreload.util';
 import { restSlug } from '../../../utils/slug.util';
 import { Link } from 'react-router-dom';
+import { findRoute } from '../../routers/app/findRoute';
 
 type NavLinkViewProps = {
   urlfulSlug: string;
 };
+
 export const NavLinkView: FC<NavLinkViewProps> = ({ urlfulSlug, children }) => {
   let doPreload = true;
   const restfulSlug = restSlug(urlfulSlug);
+  const route = findRoute(restfulSlug);
 
-  const lazyRoute =
-    lazyRoutes.find((route) => route.path === restfulSlug) ||
-    lazyRoutes.find((route) => route.path === '/:slug');
-
-  const prefetch = lazyRoute && lazyRoute.prefetch && lazyRoute.prefetch;
+  const prefetch = route && route.prefetch;
   const prefetchFunc = prefetch && (() => prefetch({ slug: restfulSlug }));
-  const Component = lazyRoute?.component as PreloadableComponent<FC<any>>;
+  const Component = route?.component as PreloadableComponent<FC<any>>;
 
   return (
     <>

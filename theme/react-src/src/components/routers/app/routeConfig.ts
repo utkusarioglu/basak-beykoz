@@ -13,7 +13,7 @@ interface LazyRouteConfig {
   prefetch?: (config: PrefetcherArgs) => Promise<void>;
 }
 
-export const lazyRoutes: LazyRouteConfig[] = [
+export const routes: LazyRouteConfig[] = [
   {
     path: '/404',
     component: lazyWithPreload(
@@ -21,7 +21,7 @@ export const lazyRoutes: LazyRouteConfig[] = [
     ),
   },
   {
-    path: `/${BLOG_SLUG}`,
+    path: `/${BLOG_SLUG}/`,
     component: lazyWithPreload(() => import('../../routes/blog/Blog.route')),
     prefetch: prefetch.categoryPosts,
   },
