@@ -30,15 +30,15 @@
 
     :root {
       --brush-white: rgb(251, 251, 251);
-      --brush-lightGray: #edf3f3;
-      --brush-gray: #859fa4;
-      --brush-darkGray: #34414b;
-      --brush-black: #34414b;
-      --brush-lightBlue: #adcbdd;
-      --brush-darkBlue: #324358;
-      --brush-lightYellow: #ffeec6;
-      --brush-darkYellow: #ffc05b;
-      --brush-lightGreen: #c6dfd7;
+      --brush-lightGray: rgb(237, 243, 243);
+      --brush-gray: rgb(133, 159, 164);
+      --brush-black: rgb(52, 65, 75);
+      --brush-black-transparent: rgba(52, 65, 75, 0.5);
+      --brush-lightBlue: rgb(173, 203, 221);
+      --brush-darkBlue: rgb(50, 67, 88);
+      --brush-lightYellow: rgb(255, 238, 198);
+      --brush-darkYellow: rgb(255, 192, 91);
+      --brush-lightGreen: rgb(198, 223, 215);
 
       --height-menu: 50px;
     }
