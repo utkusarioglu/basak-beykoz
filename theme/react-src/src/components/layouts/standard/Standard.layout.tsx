@@ -6,6 +6,7 @@ interface StandardLayoutProps {
   hideThumbnail?: boolean;
   hideTitle?: boolean;
   thumbnailUrl?: string;
+  sideMargins?: boolean;
 }
 
 const StandardLayout: FC<StandardLayoutProps> = ({
@@ -14,6 +15,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   hideThumbnail,
   thumbnailUrl,
   hideTitle,
+  sideMargins = true,
 }) => {
   return (
     <>
@@ -49,8 +51,12 @@ const StandardLayout: FC<StandardLayoutProps> = ({
         </div>
       )}
 
-      <div>
-        {!hideTitle && <h2>{title}</h2>}
+      <div
+        style={{
+          marginLeft: sideMargins ? 'var(--spacing)' : 0,
+          marginRight: sideMargins ? 'var(--spacing)' : 0,
+        }}
+      >
         {children}
       </div>
     </>
