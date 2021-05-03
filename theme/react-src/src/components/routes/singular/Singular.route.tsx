@@ -22,7 +22,7 @@ const SingularRoute = () => {
     if (!singular.render) {
       prefetch.singular({ slug: cleanedSlug });
     }
-  }, []);
+  }, [cleanedSlug, singular.render]);
 
   return (
     <>
