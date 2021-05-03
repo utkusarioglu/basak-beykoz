@@ -13,6 +13,8 @@ import { routes } from './routeConfig';
 import InlineLoaderView from '../../views/inline-loader/InlineLoader.view';
 import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
 import ErrorFallbackView from '../../views/error-fallback/ErrorFallback.view';
+import MobileNavView from '../../views/mobile-nav/MobileNav.view';
+import MobileShareView from '../../views/mobile-share/MobileShare.view';
 
 const AppRouter = () => {
   return (
@@ -43,6 +45,8 @@ const AppRouter = () => {
       </div>
 
       <FooterLayout />
+      <MobileNavView />
+      <MobileShareView />
     </Router>
   );
 };
