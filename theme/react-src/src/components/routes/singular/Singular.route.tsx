@@ -8,7 +8,7 @@ import { HOME_SLUG } from '../../../config';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
 import prefetch from '../../../services/prefetch.service';
-import InlineLoaderView from '../../views/inline-loader/InlineLoader.view';
+import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
 
 const SingularRoute = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -37,7 +37,7 @@ const SingularRoute = () => {
           <SingularLayout singular={singular} />
         </>
       ) : (
-        <InlineLoaderView />
+        <LoaderHtmlView />
       )}
     </>
   );

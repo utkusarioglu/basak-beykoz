@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InlineLoaderView = () => (
+const LoaderHtmlView = () => (
   <div className="cat-loading">
     <div>
       <span role="img" aria-label="loading">
@@ -11,4 +11,4 @@ const InlineLoaderView = () => (
   </div>
 );
 
-export default InlineLoaderView;
+export default LoaderHtmlView;

@@ -10,7 +10,7 @@ import HeaderLayout from '../../layouts/header/Header.layout';
 import { HOME_SLUG } from '../../../config';
 import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
 import { routes } from './routeConfig';
-import InlineLoaderView from '../../views/inline-loader/InlineLoader.view';
+import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
 import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
 import ErrorFallbackView from '../../views/error-fallback/ErrorFallback.view';
 import MobileMenuContainerView from '../../views/mobile-menu-container/MobileMenuContainer.view';
@@ -40,7 +40,7 @@ const AppRouter = () => {
           {routes.map(({ path, component: Component }) => (
             <Route path={path} exact key={path}>
               <ErrorBoundaryUtil fallback={<ErrorFallbackView />}>
-                <Suspense fallback={<InlineLoaderView />}>
+                <Suspense fallback={<LoaderHtmlView />}>
                   <Component />
                 </Suspense>
               </ErrorBoundaryUtil>
