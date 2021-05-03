@@ -39,8 +39,10 @@
       --brush-lightYellow: rgb(255, 238, 198);
       --brush-darkYellow: rgb(255, 192, 91);
       --brush-lightGreen: rgb(198, 223, 215);
+      --brush-darkGreen: rgb(12, 80, 58);
 
       --height-menu: 50px;
+      --spacing: 8px;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -58,6 +60,7 @@
       padding: 0;
 
     }
+    
     html,
     body,
     #root {
