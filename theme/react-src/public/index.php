@@ -41,6 +41,12 @@
     body {
       margin: 0;
       padding; 0;
+
+    }
+    html,
+    body,
+    #root {
+      height: 100%;
     }
 
     .singular-view a {
@@ -68,6 +74,10 @@
 
     .cat-loading span {
       font-size: 40px;
+    }
+
+    .min-height-100-p {
+      min-height: 100%;
     }
   </style>
   <script>

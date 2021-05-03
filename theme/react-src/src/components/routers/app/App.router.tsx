@@ -18,27 +18,29 @@ const AppRouter = () => {
   return (
     <Router>
       <IsLoadingView />
-      <HeaderLayout />
+      <div className="min-height-100-p">
+        <HeaderLayout />
 
-      <Switch>
-        <Route path={`/${HOME_SLUG}`}>
-          <Redirect to="/" />
-        </Route>
-
-        {lazyRoutes.map(({ path, component: Component }) => (
-          <Route path={path} exact key={path}>
-            <ErrorBoundaryUtil fallback={<ErrorFallbackView />}>
-              <Suspense fallback={<InlineLoaderView />}>
-                <Component />
-              </Suspense>
-            </ErrorBoundaryUtil>
+        <Switch>
+          <Route path={`/${HOME_SLUG}`}>
+            <Redirect to="/" />
           </Route>
-        ))}
 
-        <Route path="*">
-          <Redirect to="/404" />
-        </Route>
-      </Switch>
+          {lazyRoutes.map(({ path, component: Component }) => (
+            <Route path={path} exact key={path}>
+              <ErrorBoundaryUtil fallback={<ErrorFallbackView />}>
+                <Suspense fallback={<InlineLoaderView />}>
+                  <Component />
+                </Suspense>
+              </ErrorBoundaryUtil>
+            </Route>
+          ))}
+
+          <Route path="*">
+            <Redirect to="/404" />
+          </Route>
+        </Switch>
+      </div>
 
       <FooterLayout />
     </Router>
