@@ -23,7 +23,7 @@ import {
 
 const AppRouter = () => {
   const LazyMobileNav = lazy(
-    () => import('../../views/mobile-nav/MobileNav.view')
+    () => import('../../views/nav-mobile/NavMobile.view')
   );
 
   const LazyMobileShare = lazy(

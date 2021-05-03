@@ -6,7 +6,7 @@ import { selectNav } from '../../../slices/nav/nav.slice';
 import prefetch from '../../../services/prefetch.service';
 import LoaderMobileMenu from '../loader-mobile-menu/LoaderMobileMenu.view';
 
-const MobileNavView = () => {
+const NavMobileView = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { items: menu } = useSelector(selectNav);
 
@@ -42,4 +42,4 @@ const MobileNavView = () => {
   );
 };
 
-export default MobileNavView;
+export default NavMobileView;
