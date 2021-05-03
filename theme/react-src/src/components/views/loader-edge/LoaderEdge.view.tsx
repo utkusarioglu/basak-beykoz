@@ -2,9 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectIsLoading } from '../../../slices/app/app.slice';
 
-const IsLoadingView = () => {
+/**
+ * Displays an edge loading band
+ * @returns FC
+ */
+const LoaderEdge = () => {
   const isLoading = useSelector(selectIsLoading);
-  // const loadingText = 'Yüklüyor...';
 
   return isLoading ? (
     <div
@@ -30,4 +33,4 @@ const IsLoadingView = () => {
   ) : null;
 };
 
-export default IsLoadingView;
+export default LoaderEdge;

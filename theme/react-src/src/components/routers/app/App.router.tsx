@@ -8,7 +8,7 @@ import {
 import FooterLayout from '../../layouts/footer/Footer.layout';
 import HeaderLayout from '../../layouts/header/Header.layout';
 import { HOME_SLUG } from '../../../config';
-import IsLoadingView from '../../views/is-loading/IsLoading.view';
+import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
 import { routes } from './routeConfig';
 import InlineLoaderView from '../../views/inline-loader/InlineLoader.view';
 import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
@@ -32,7 +32,7 @@ const AppRouter = () => {
 
   return (
     <Router>
-      <IsLoadingView />
+      <LoaderEdgeView />
       <div className="min-height-100-p">
         <HeaderLayout />
 
