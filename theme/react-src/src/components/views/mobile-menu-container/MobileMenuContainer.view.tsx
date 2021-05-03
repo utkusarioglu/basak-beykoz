@@ -41,7 +41,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
             style={{
               position: 'absolute',
               bottom: 'calc(var(--height-menu) - 8px)',
-              left: 'var(--spacing)',
+              minWidth: 200,
               right: 'var(--spacing)',
               borderRadius: 'var(--spacing)',
               backgroundColor: MENU_DECORATION_COLOR,
@@ -53,8 +53,8 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
               style={{
                 backgroundColor: MENU_BG_COLOR,
                 borderRadius: 'var(--spacing)',
-                marginTop: 8,
-                marginBottom: 8,
+                marginTop: 'var(--spacing)',
+                marginBottom: 'var(--spacing)',
                 minHeight: '2em',
               }}
             >
