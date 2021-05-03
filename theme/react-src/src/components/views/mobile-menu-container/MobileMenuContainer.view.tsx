@@ -53,11 +53,9 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
               style={{
                 backgroundColor: MENU_BG_COLOR,
                 borderRadius: 'var(--spacing)',
-                position: 'absolute',
-                top: 8,
-                right: 0,
-                bottom: 8,
-                left: 0,
+                marginTop: 8,
+                marginBottom: 8,
+                minHeight: '2em',
               }}
             >
               <div style={{ padding: 'var(--spacing)' }}>
@@ -89,7 +87,5 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
     </>
   );
 };
-
-const MenuLoadingView = () => <div>Geliyor...</div>;
 
 export default MobileMenuContainerView;
