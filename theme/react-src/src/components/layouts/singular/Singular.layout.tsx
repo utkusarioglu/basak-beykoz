@@ -15,6 +15,7 @@ const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
     <StandardLayout
       title={singular.title}
       hideThumbnail={hideThumbnail(singular.slug)}
+      thumbnailUrl={singular.thumbnail}
       hideTitle={hideTitle(singular.slug)}
     >
       <SingularView {...singular} />
