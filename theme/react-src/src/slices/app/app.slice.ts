@@ -8,6 +8,12 @@ import type {
   DelayedIsLoading,
   EnableIsLoadingDelayed,
   DisableIsLoadingDelayed,
+  SetMobileNavState,
+  SelectMobileNavState,
+  ToggleMobileNavState,
+  SetMobileShareState,
+  ToggleMobileShareState,
+  SelectMobileShareState,
 } from './app.slice.types';
 import {
   LOADING_INDICATOR_APPEAR_AFTER,
@@ -16,6 +22,8 @@ import {
 
 const initialState: AppSliceState = {
   isLoading: false,
+  mobileNavOpen: false,
+  mobileShareOpen: false,
 };
 
 /**
@@ -38,6 +46,44 @@ const { actions, reducer } = createSlice({
       return {
         ...state,
         isLoading,
+      };
+    },
+
+    setMobileNavState: (
+      state,
+      { payload: mobileNavOpen }: PayloadAction<boolean>
+    ) => {
+      return {
+        ...state,
+        mobileNavOpen,
+        mobileShareOpen: false,
+      };
+    },
+
+    setMobileShareState: (
+      state,
+      { payload: mobileNavOpen }: PayloadAction<boolean>
+    ) => {
+      return {
+        ...state,
+        mobileNavOpen,
+        mobileShareOpen: false,
+      };
+    },
+
+    toggleMobileNavState: (state) => {
+      return {
+        ...state,
+        mobileNavOpen: !state.mobileNavOpen,
+        mobileShareOpen: false,
+      };
+    },
+
+    toggleMobileShareState: (state) => {
+      return {
+        ...state,
+        mobileShareOpen: !state.mobileShareOpen,
+        mobileNavOpen: false,
       };
     },
   },
@@ -89,3 +135,49 @@ export const delayedIsLoading: DelayedIsLoading = (state, latency) => {
   const timer = setTimeout(() => setIsLoading(state), latency);
   return () => clearTimeout(timer);
 };
+
+/**
+ * Sets the open/close state of mobile menu
+ * @param state boolean for whether the mobile menu is open
+ * @returns void
+ */
+export const setMobileNavState: SetMobileNavState = (state) =>
+  dispatch(actions.setMobileNavState(state));
+
+/**
+ * Toggles the boolean that controls whether the mobile nav is open
+ * @returns void
+ */
+export const toggleMobileNavState: ToggleMobileNavState = () =>
+  dispatch(actions.toggleMobileNavState());
+
+/**
+ * Returns a boolean for whether the mobile menu is open
+ * @param state root state
+ * @returns boolean for whether the mobile menu is open
+ */
+export const selectMobileNavState: SelectMobileNavState = (state) =>
+  state.app.mobileNavOpen;
+
+/**
+ * Sets the boolean that controls whether the mobile share menu is open
+ * @param state boolean for whether the mobile share menu is open
+ * @returns void
+ */
+export const setMobileShareState: SetMobileShareState = (state) =>
+  dispatch(actions.setMobileShareState(state));
+
+/**
+ * Toggles the boolean that controls whether the mobile share menu is open
+ * @returns void
+ */
+export const toggleMobileShareState: ToggleMobileShareState = () =>
+  dispatch(actions.toggleMobileShareState());
+
+/**
+ * Returns true if the mobile share menu is open
+ * @param state root state
+ * @returns boolean for whether the mobile share menu is open
+ */
+export const selectMobileShareState: SelectMobileShareState = (state) =>
+  state.app.mobileShareOpen;

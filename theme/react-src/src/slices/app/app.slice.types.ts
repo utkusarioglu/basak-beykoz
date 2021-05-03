@@ -6,6 +6,8 @@ import type { RootState } from '../../store';
  */
 export interface AppSliceState {
   isLoading: boolean;
+  mobileNavOpen: boolean;
+  mobileShareOpen: boolean;
 }
 
 export type SetIsLoading = (isLoading: boolean) => void;
@@ -17,3 +19,21 @@ export type DelayedIsLoading = (state: boolean, latency: number) => () => void;
 export type EnableIsLoadingDelayed = () => () => void;
 
 export type DisableIsLoadingDelayed = () => () => void;
+
+export type SetMobileNavState = (mobileNavOpen: boolean) => void;
+
+export type ToggleMobileNavState = () => void;
+
+export type SelectMobileNavState = Selector<
+  RootState,
+  AppSliceState['mobileNavOpen']
+>;
+
+export type SetMobileShareState = (mobileShareOpen: boolean) => void;
+
+export type ToggleMobileShareState = () => void;
+
+export type SelectMobileShareState = Selector<
+  RootState,
+  AppSliceState['mobileShareOpen']
+>;
