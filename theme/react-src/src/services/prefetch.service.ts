@@ -7,7 +7,7 @@ import { FETCH_STALE_TIME } from '../config';
 
 export type PrefetcherArgs = {
   slug: string;
-  onFetchStart?: () => void;
+  onFetchStart?: (() => void) | (() => () => void);
   onFetchComplete?: () => void;
 };
 
@@ -32,9 +32,13 @@ class Prefetch {
         singular === undefined ||
         singular.fetchTime < Date.now() - FETCH_STALE_TIME
       ) {
-        onFetchStart && onFetchStart();
+        const cancelOnFetchStart = onFetchStart && onFetchStart();
         rest.fetchSingular(cleanedSlug).then((data) => {
           onFetchComplete && onFetchComplete();
+          cancelOnFetchStart &&
+            cancelOnFetchStart instanceof Function &&
+            cancelOnFetchStart();
+
           if (data.state === 'fail') {
             console.error(data);
             reject();
@@ -70,9 +74,13 @@ class Prefetch {
         posts.slug !== cleanedSlug ||
         posts.fetchTime < Date.now() - FETCH_STALE_TIME
       ) {
-        onFetchStart && onFetchStart();
+        const cancelOnFetchStart = onFetchStart && onFetchStart();
         rest.fetchCategoryPosts(cleanedSlug).then((data) => {
           onFetchComplete && onFetchComplete();
+          cancelOnFetchStart &&
+            cancelOnFetchStart instanceof Function &&
+            cancelOnFetchStart();
+
           if (data.state === 'fail') {
             if (data.state === 'fail') {
               console.error(data);
