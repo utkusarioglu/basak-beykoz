@@ -4,7 +4,7 @@ import { selectIsLoading } from '../../../slices/app/app.slice';
 
 const IsLoadingView = () => {
   const isLoading = useSelector(selectIsLoading);
-  const loadingText = 'Yüklüyor...';
+  // const loadingText = 'Yüklüyor...';
 
   return isLoading ? (
     <div
@@ -13,15 +13,19 @@ const IsLoadingView = () => {
         top: 0,
         right: 0,
         left: 0,
-        height: '20px',
-        backgroundColor: '#005f35',
-        opacity: 0.8,
+        height: '25px',
+        backgroundColor: 'var(--brush-darkGreen)',
+        // opacity: 0.8,
         color: 'white',
         zIndex: 100,
         textAlign: 'center',
+        padding: 3,
       }}
     >
-      {loadingText}
+      <span role="img" aria-label="loading">
+        😺
+      </span>
+      Kedi çalışıyor
     </div>
   ) : null;
 };
