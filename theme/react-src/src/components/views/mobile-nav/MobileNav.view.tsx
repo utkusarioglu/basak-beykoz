@@ -4,7 +4,7 @@ import NavItemView from '../nav-item/NavItem.view';
 import { useSelector } from 'react-redux';
 import { selectNav } from '../../../slices/nav/nav.slice';
 import prefetch from '../../../services/prefetch.service';
-import MenuLoaderView from '../menu-loader/MenuLoader.view';
+import LoaderMobileMenu from '../loader-mobile-menu/LoaderMobileMenu.view';
 
 const MobileNavView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +21,7 @@ const MobileNavView = () => {
   return (
     <>
       {isLoading ? (
-        <MenuLoaderView />
+        <LoaderMobileMenu />
       ) : (
         <nav
           style={{

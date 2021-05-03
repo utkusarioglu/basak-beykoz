@@ -8,7 +8,7 @@ import {
   MENU_DECORATION_COLOR,
   MENU_BACKDROP_COLOR,
 } from '../../../config';
-import MenuLoaderView from '../menu-loader/MenuLoader.view';
+import LoaderMobileMenuView from '../loader-mobile-menu/LoaderMobileMenu.view';
 
 interface MobileMenuContainerViewProps {
   selector: (state: any) => boolean;
@@ -59,7 +59,9 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
               }}
             >
               <div style={{ padding: 'var(--spacing)' }}>
-                <Suspense fallback={<MenuLoaderView />}>{children}</Suspense>
+                <Suspense fallback={<LoaderMobileMenuView />}>
+                  {children}
+                </Suspense>
               </div>
             </div>
           </div>

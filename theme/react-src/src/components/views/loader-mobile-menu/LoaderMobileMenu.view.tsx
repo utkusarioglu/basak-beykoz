@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => (
+const LoaderMobileMenuView = () => (
   <div>
     <p style={{ textAlign: 'center' }}>
       <span role="img" aria-label="loading">
@@ -10,3 +10,5 @@ export default () => (
     </p>
   </div>
 );
+
+export default LoaderMobileMenuView;
