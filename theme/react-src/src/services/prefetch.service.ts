@@ -4,6 +4,8 @@ import { setPosts } from '../slices/category-posts/categoryPosts.slice';
 import { getState } from '../store';
 import { cleanSlug } from '../utils/slug.util';
 import { FETCH_STALE_TIME } from '../config';
+import { GetWpMenuFail, GetWpMenuSuccess } from '../@types/wp-types';
+import { setNav } from '../slices/nav/nav.slice';
 
 export type PrefetcherArgs = {
   slug: string;
@@ -99,6 +101,44 @@ class Prefetch {
       } else {
         resolve();
         return posts.items;
+      }
+    });
+  }
+
+  /**
+   * Check whether the state contains nav items. If it doesn't, makes a
+   * request to the server, sets the new items in the state
+   * @param param0 prefetch arguments
+   * @returns void promise
+   */
+  async menu({
+    slug,
+    onFetchStart,
+    onFetchComplete,
+  }: PrefetcherArgs): Promise<void> {
+    const cleanedSlug = cleanSlug(slug);
+    let nav = getState().nav;
+
+    return new Promise<void>((resolve, reject) => {
+      if (nav === undefined || nav.fetchTime === 0) {
+        const cancelOnFetchStart = onFetchStart && onFetchStart();
+        rest.fetchMenu(cleanedSlug).then((data) => {
+          onFetchComplete && onFetchComplete();
+          cancelOnFetchStart &&
+            cancelOnFetchStart instanceof Function &&
+            cancelOnFetchStart();
+
+          if ((data as GetWpMenuFail).code) {
+            console.error(data);
+            reject();
+            return;
+          }
+          setNav({ items: (data as GetWpMenuSuccess).items, slug: 'nav' });
+          resolve();
+        });
+      } else {
+        setNav({ items: nav.items, slug: 'nav' });
+        resolve();
       }
     });
   }
