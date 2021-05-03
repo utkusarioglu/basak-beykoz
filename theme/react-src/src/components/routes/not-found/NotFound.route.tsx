@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
+import StandardLayout from '../../layouts/standard/Standard.layout';
 
 const NotFoundRoute = () => {
   const { pageTitle, titleSeparator } = window.config;
@@ -15,7 +16,9 @@ const NotFoundRoute = () => {
           {pageTitle} {titleSeparator} {routeTitle}
         </title>
       </Helmet>
-      <p>Not found</p>
+      <StandardLayout title="404">
+        <p>Not found</p>
+      </StandardLayout>
     </>
   );
 };

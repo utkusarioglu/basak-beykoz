@@ -3,6 +3,7 @@ import CategoryPostsFeedView from '../../views/category-posts-feed/CategoryPosts
 import { BLOG_POSTS_CATEGORY } from '../../../config';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
+import StandardLayout from '../../layouts/standard/Standard.layout';
 
 const BlogRoute = () => {
   const { pageTitle, titleSeparator } = window.config;
@@ -17,8 +18,9 @@ const BlogRoute = () => {
           {pageTitle} {titleSeparator} {routeTitle}
         </title>
       </Helmet>
-      <p>Blog</p>
-      <CategoryPostsFeedView categorySlug={BLOG_POSTS_CATEGORY} />
+      <StandardLayout title="Blog">
+        <CategoryPostsFeedView categorySlug={BLOG_POSTS_CATEGORY} />
+      </StandardLayout>
     </>
   );
 };

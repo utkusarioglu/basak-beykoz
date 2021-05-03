@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
+import StandardLayout from '../../layouts/standard/Standard.layout';
 
 const CreditsRoute = () => {
   const { pageTitle, titleSeparator } = window.config;
@@ -15,7 +16,9 @@ const CreditsRoute = () => {
           {pageTitle} {titleSeparator} {routeTitle}
         </title>
       </Helmet>
-      <p>Credits</p>
+      <StandardLayout title="Credits">
+        <p>Thank youuu</p>
+      </StandardLayout>
     </>
   );
 };
