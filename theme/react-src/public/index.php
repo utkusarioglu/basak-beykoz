@@ -28,13 +28,28 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito&family=Raleway:wght@500&display=swap');
 
+    :root {
+      --brush-white: rgb(251, 251, 251);
+      --brush-lightGray: #edf3f3;
+      --brush-gray: #859fa4;
+      --brush-darkGray: #34414b;
+      --brush-black: #34414b;
+      --brush-lightBlue: #adcbdd;
+      --brush-darkBlue: #324358;
+      --brush-lightYellow: #ffeec6;
+      --brush-darkYellow: #ffc05b;
+      --brush-lightGreen: #c6dfd7;
+
+      --height-menu: 50px;
+    }
+
     h1, h2, h3, h4, h5, h6 {
       font-family: 'Raleway', sans-serif;
     }
 
     p, a, span, div {
       font-family: 'Nunito', sans-serif;
-      color: black;
+      color: var(--brush-darkBlue);
       text-decoration: none;
     }
 
@@ -64,7 +79,6 @@
       top: 30%;
       left: 50%;
       transform: translate(-50%, -50%);
-      
     }
 
     .cat-loading > * {
@@ -78,6 +92,15 @@
 
     .min-height-100-p {
       min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    figure {
+      padding: 0;
+      margin-block-start: 0;
+      margin-block-end: 0;
+      margin-inline-start: 0;
+      margin-inline-end: 0;
     }
   </style>
   <script>
