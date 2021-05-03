@@ -1,12 +1,10 @@
 import React from 'react';
 
-const FOOTER_HEIGHT = 150;
-
 const FooterLayout = () => {
   return (
     <footer
       style={{
-        height: FOOTER_HEIGHT,
+        height: 'calc(var(--height-footer) + var(--height-menu)',
         position: 'relative',
         textAlign: 'center',
       }}
@@ -14,10 +12,10 @@ const FooterLayout = () => {
       <div
         style={{
           position: 'absolute',
+          top: 0,
           left: 0,
           right: 0,
-          bottom: 0,
-          height: FOOTER_HEIGHT,
+          height: 'var(--height-footer)',
           backgroundColor: '#eee',
         }}
       >

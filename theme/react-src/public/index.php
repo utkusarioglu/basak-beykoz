@@ -42,6 +42,7 @@
       --brush-darkGreen: rgb(12, 80, 58);
 
       --height-menu: 50px;
+      --height-footer: 150px;
       --spacing: 8px;
     }
 
