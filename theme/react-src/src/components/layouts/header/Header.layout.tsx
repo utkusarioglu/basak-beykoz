@@ -40,7 +40,8 @@ const HeaderLayout = () => {
             backgroundRepeat: 'no-repeat',
             backgroundPositionY: 'center',
             height: '100%',
-            width: '50px',
+            maxWidth: 150,
+            minWidth: 120,
           }}
         />
       </SingularPreloaderLinkView>
