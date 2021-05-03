@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,10 +13,23 @@ import { routes } from './routeConfig';
 import InlineLoaderView from '../../views/inline-loader/InlineLoader.view';
 import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
 import ErrorFallbackView from '../../views/error-fallback/ErrorFallback.view';
-import MobileNavView from '../../views/mobile-nav/MobileNav.view';
-import MobileShareView from '../../views/mobile-share/MobileShare.view';
+import MobileMenuContainerView from '../../views/mobile-menu-container/MobileMenuContainer.view';
+import {
+  selectMobileNavState,
+  selectMobileShareState,
+  setMobileNavState,
+  setMobileShareState,
+} from '../../../slices/app/app.slice';
 
 const AppRouter = () => {
+  const LazyMobileNav = lazy(
+    () => import('../../views/mobile-nav/MobileNav.view')
+  );
+
+  const LazyMobileShare = lazy(
+    () => import('../../views/mobile-share/MobileShare.view')
+  );
+
   return (
     <Router>
       <IsLoadingView />
@@ -45,8 +58,19 @@ const AppRouter = () => {
       </div>
 
       <FooterLayout />
-      <MobileNavView />
-      <MobileShareView />
+
+      <MobileMenuContainerView
+        selector={selectMobileNavState}
+        closer={setMobileNavState}
+      >
+        <LazyMobileNav />
+      </MobileMenuContainerView>
+      <MobileMenuContainerView
+        selector={selectMobileShareState}
+        closer={setMobileShareState}
+      >
+        <LazyMobileShare />
+      </MobileMenuContainerView>
     </Router>
   );
 };

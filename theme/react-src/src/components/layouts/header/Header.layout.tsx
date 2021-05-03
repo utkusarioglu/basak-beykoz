@@ -4,13 +4,7 @@ import React from 'react';
 import { SingularPreloaderLinkView } from '../../views/preloader-link/PreloaderLink.view';
 import { HOME_SLUG } from '../../../config';
 import { urlSlug } from '../../../utils/slug.util';
-import MobileHeaderButtonView from '../../views/mobile-header-button/MobileHeaderButton.view';
-import { TiThMenu } from 'react-icons/ti';
-import { FiShare2 } from 'react-icons/fi';
-import {
-  toggleMobileNavState,
-  toggleMobileShareState,
-} from '../../../slices/app/app.slice';
+import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
 
 const HeaderLayout = () => {
   const isMobile = true;
@@ -47,16 +41,7 @@ const HeaderLayout = () => {
       </SingularPreloaderLinkView>
       <div style={{ flexGrow: 1 }}></div>
 
-      {isMobile && (
-        <>
-          <MobileHeaderButtonView onClick={toggleMobileShareState}>
-            <FiShare2 />
-          </MobileHeaderButtonView>
-          <MobileHeaderButtonView onClick={toggleMobileNavState}>
-            <TiThMenu />
-          </MobileHeaderButtonView>
-        </>
-      )}
+      {isMobile && <MobileHeaderButtonsView />}
       {/* <NavView /> */}
       {/* <SocialView /> */}
     </header>
