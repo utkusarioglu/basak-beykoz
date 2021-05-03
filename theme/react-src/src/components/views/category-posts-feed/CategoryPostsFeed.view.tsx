@@ -25,7 +25,7 @@ const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
       onFetchStart: () => setIsLoading(true),
       onFetchComplete: () => setIsLoading(false),
     });
-  }, []);
+  }, [requestSlug]);
 
   return (
     <>
