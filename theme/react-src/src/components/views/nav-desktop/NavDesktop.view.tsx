@@ -4,7 +4,7 @@ import type { WpMenuItem, GetWpMenuSuccess } from '../../../@types/wp-types';
 import rest from '../../../services/rest.service';
 import NavItemView from '../nav-item/NavItem.view';
 
-const DesktopNavView = () => {
+const NavDesktopView = () => {
   const [menu, setMenu] = useState<WpMenuItem[]>([]);
 
   useEffect(() => {
@@ -34,4 +34,4 @@ const DesktopNavView = () => {
   );
 };
 
-export default DesktopNavView;
+export default NavDesktopView;
