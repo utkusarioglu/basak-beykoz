@@ -27,6 +27,8 @@ const HeaderLayout = () => {
         height: 'var(--height-menu)',
         backgroundColor: 'var(--brush-white)',
         zIndex: 100,
+        paddingRight: 'var(--spacing)',
+        paddingLeft: 'var(--spacing)',
       }}
     >
       <SingularPreloaderLinkView to={urlSlug(HOME_SLUG)}>
