@@ -7,7 +7,6 @@ interface StandardLayoutProps {
   hideTitle?: boolean;
   thumbnailUrl?: string;
 }
-const THUMBNAIL_MD_WIDTH = '30%';
 
 const StandardLayout: FC<StandardLayoutProps> = ({
   title,
