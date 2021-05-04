@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { WpMenuItem } from '../../../@types/wp-types';
 import { urlSlug } from '../../../utils/slug.util';
 import { NavDesktopChildItemsView } from './NavDesktopChildItems.view';
-import { NavLinkView } from './NavLink.view';
+import { LinkNavView } from '../link-nav/LinkNav.view';
 
 type NavDesktopItemViewProps = WpMenuItem & { depth: number };
 
@@ -22,7 +22,7 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <NavLinkView urlfulSlug={urlfulSlug}>
+      <LinkNavView urlfulSlug={urlfulSlug}>
         <div
           style={{
             marginLeft: 8,
@@ -31,7 +31,7 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
         >
           {title}
         </div>
-      </NavLinkView>
+      </LinkNavView>
 
       {hovered && child_items && child_items.length > 0 && (
         <NavDesktopChildItemsView children={child_items} depth={depth} />

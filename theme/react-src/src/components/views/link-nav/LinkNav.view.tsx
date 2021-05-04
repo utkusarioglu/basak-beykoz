@@ -10,7 +10,7 @@ type NavLinkViewProps = {
   urlfulSlug: string;
 };
 
-export const NavLinkView: FC<NavLinkViewProps> = ({ urlfulSlug, children }) => {
+export const LinkNavView: FC<NavLinkViewProps> = ({ urlfulSlug, children }) => {
   let doPreload = true;
   const restfulSlug = restSlug(urlfulSlug);
   const route = findRoute(restfulSlug);
