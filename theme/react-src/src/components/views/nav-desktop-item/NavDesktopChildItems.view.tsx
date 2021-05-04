@@ -1,13 +1,13 @@
 import React from 'react';
 import { FC } from 'react';
 import { WpMenuItem } from '../../../@types/wp-types';
-import { NavItemView } from './NavItem.view';
+import { NavDesktopItemView } from './NavDesktopItem.view';
 
 type NavChildItemsViewProps = {
   children: WpMenuItem[];
   depth: number;
 };
-export const NavChildItemsView: FC<NavChildItemsViewProps> = ({
+export const NavDesktopChildItemsView: FC<NavChildItemsViewProps> = ({
   children,
   depth,
 }) => (
@@ -17,7 +17,7 @@ export const NavChildItemsView: FC<NavChildItemsViewProps> = ({
     }}
   >
     {children.map((item) => (
-      <NavItemView {...{ ...item, depth, key: item.ID }} />
+      <NavDesktopItemView {...{ ...item, depth, key: item.ID }} />
     ))}
   </div>
 );

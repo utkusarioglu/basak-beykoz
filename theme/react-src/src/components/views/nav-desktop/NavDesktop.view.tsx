@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import type { WpMenuItem, GetWpMenuSuccess } from '../../../@types/wp-types';
 import rest from '../../../services/rest.service';
-import NavItemView from '../nav-item/NavItem.view';
+import NavDesktopItemView from '../nav-desktop-item/NavDesktopItem.view';
 
 const NavDesktopView = () => {
   const [menu, setMenu] = useState<WpMenuItem[]>([]);
@@ -27,7 +27,9 @@ const NavDesktopView = () => {
     >
       {menu.length > 0
         ? menu.map((menuItem) => (
-            <NavItemView {...{ ...menuItem, depth: 0, key: menuItem.ID }} />
+            <NavDesktopItemView
+              {...{ ...menuItem, depth: 0, key: menuItem.ID }}
+            />
           ))
         : null}
     </nav>

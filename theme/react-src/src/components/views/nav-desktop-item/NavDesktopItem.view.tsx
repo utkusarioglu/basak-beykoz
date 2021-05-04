@@ -3,12 +3,12 @@ import { FC } from 'react';
 import { useState } from 'react';
 import { WpMenuItem } from '../../../@types/wp-types';
 import { urlSlug } from '../../../utils/slug.util';
-import { NavChildItemsView } from './NavChildItems.view';
+import { NavDesktopChildItemsView } from './NavDesktopChildItems.view';
 import { NavLinkView } from './NavLink.view';
 
-type NavItemViewProps = WpMenuItem & { depth: number };
+type NavDesktopItemViewProps = WpMenuItem & { depth: number };
 
-export const NavItemView: FC<NavItemViewProps> = ({
+export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
   title,
   slug,
   child_items,
@@ -34,10 +34,10 @@ export const NavItemView: FC<NavItemViewProps> = ({
       </NavLinkView>
 
       {hovered && child_items && child_items.length > 0 && (
-        <NavChildItemsView children={child_items} depth={depth} />
+        <NavDesktopChildItemsView children={child_items} depth={depth} />
       )}
     </div>
   );
 };
 
-export default NavItemView;
+export default NavDesktopItemView;
