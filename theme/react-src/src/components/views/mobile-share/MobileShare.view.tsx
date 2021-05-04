@@ -11,9 +11,11 @@ import {
 } from 'react-share';
 import { selectSingular } from '../../../slices/singular/singular.slice';
 import { useSelector } from 'react-redux';
+import { MOBILE_MENU_PADDING } from '../../../config';
+import MobileMenuSectionTitleView from '../mobile-menu-section-title/MobileMenuSectionTitleViewProps';
 
 const iconProps = {
-  size: 40,
+  size: 35,
   style: {
     borderRadius: 'var(--spacing)',
   },
@@ -24,8 +26,10 @@ const buttonProps = {
     display: 'grid',
     gridTemplateColumns: `${iconProps.size}px 1fr`,
     alignItems: 'center',
-    marginTop: 'var(--spacing)',
-    marginBottom: 'var(--spacing)',
+    paddingRight: MOBILE_MENU_PADDING.horizontal,
+    paddingLeft: MOBILE_MENU_PADDING.horizontal,
+    paddingTop: MOBILE_MENU_PADDING.vertical,
+    paddingBottom: MOBILE_MENU_PADDING.vertical,
     gridColumnGap: 'var(--spacing)',
   },
 };
@@ -41,72 +45,82 @@ const MobileShareView = () => {
     : `Profesyonel Koç Başak Beykoz'un internet sitesi`;
 
   return (
-    <ol
+    <div
       style={{
-        listStyle: 'none',
-        margin: 0,
-        marginBlockStart: 0,
-        marginBlockEnd: 0,
-        marginInlineStart: 0,
-        marginInlineEnd: 0,
-        paddingInlineStart: 0,
+        // marginTop: 'calc(var(--spacing) * 2)',
+        marginBottom: 'calc(var(--spacing) * 2)',
       }}
     >
-      <li>
-        <FacebookShareButton
-          {...{
-            url,
-            quote: title,
-            ...buttonProps,
-          }}
-        >
-          <FacebookIcon {...iconProps} />
-          Facebook
-        </FacebookShareButton>
-      </li>
+      <MobileMenuSectionTitleView>
+        Bu sayfayı paylaşın
+      </MobileMenuSectionTitleView>
+      <ol
+        style={{
+          listStyle: 'none',
+          margin: 0,
+          marginBlockStart: 0,
+          marginBlockEnd: 0,
+          marginInlineStart: 0,
+          marginInlineEnd: 0,
+          paddingInlineStart: 0,
+        }}
+      >
+        <li>
+          <FacebookShareButton
+            {...{
+              url,
+              quote: title,
+              ...buttonProps,
+            }}
+          >
+            <FacebookIcon {...iconProps} />
+            Facebook
+          </FacebookShareButton>
+        </li>
 
-      <li>
-        <TwitterShareButton
-          {...{
-            url,
-            title,
-            ...buttonProps,
-          }}
-        >
-          <TwitterIcon {...iconProps} />
-          Twitter
-        </TwitterShareButton>
-      </li>
+        <li>
+          <TwitterShareButton
+            {...{
+              url,
+              title,
+              ...buttonProps,
+            }}
+          >
+            <TwitterIcon {...iconProps} />
+            Twitter
+          </TwitterShareButton>
+        </li>
 
-      <li>
-        <WhatsappShareButton
-          {...{
-            url,
-            title,
-            separator: titleSeparator,
-            ...buttonProps,
-          }}
-        >
-          <WhatsappIcon {...iconProps} />
-          WhatsApp
-        </WhatsappShareButton>
-      </li>
+        <li>
+          <WhatsappShareButton
+            {...{
+              url,
+              title,
+              separator: titleSeparator,
+              ...buttonProps,
+            }}
+          >
+            <WhatsappIcon {...iconProps} />
+            WhatsApp
+          </WhatsappShareButton>
+        </li>
 
-      <li>
-        <LinkedinShareButton
-          {...{
-            source: url,
-            url,
-            title,
-            summary: excerpt,
-            ...buttonProps,
-          }}
-        >
-          <LinkedinIcon {...iconProps} />
-          LinkedIn
-        </LinkedinShareButton>
-      </li>
-    </ol>
+        <li>
+          <LinkedinShareButton
+            {...{
+              source: url,
+              url,
+              title,
+              summary: excerpt,
+              ...buttonProps,
+            }}
+          >
+            <LinkedinIcon {...iconProps} />
+            LinkedIn
+          </LinkedinShareButton>
+        </li>
+      </ol>
+    </div>
   );
 };
 
