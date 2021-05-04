@@ -27,11 +27,11 @@ const NavMobileView = () => {
       ) : (
         <div
           style={{
-            paddingTop: 'calc(var(--spacing) * 2)',
-            paddingBottom: 'calc(var(--spacing) * 2)',
+            marginTop: 'calc(var(--spacing) * 2)',
+            marginBottom: 'calc(var(--spacing) * 2)',
           }}
         >
-          {/* <MobileMenuSectionTitleView>Sayfalar</MobileMenuSectionTitleView> */}
+          <MobileMenuSectionTitleView>Sayfalar</MobileMenuSectionTitleView>
           <nav
             style={{
               display: 'flex',
