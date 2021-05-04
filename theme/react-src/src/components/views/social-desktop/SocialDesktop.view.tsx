@@ -14,7 +14,7 @@ const socialItems = [
   },
 ];
 
-const SocialView = () => {
+const SocialDesktopView = () => {
   return (
     <div>
       {socialItems.map(({ title, link, icon }) => (
@@ -33,4 +33,4 @@ const SocialView = () => {
   );
 };
 
-export default SocialView;
+export default SocialDesktopView;
