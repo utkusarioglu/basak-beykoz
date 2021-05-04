@@ -9,6 +9,7 @@ import {
   MENU_BACKDROP_COLOR,
 } from '../../../config';
 import LoaderMobileMenuView from '../loader-mobile-menu/LoaderMobileMenu.view';
+import { GrClose } from 'react-icons/gr';
 
 interface MobileMenuContainerViewProps {
   selector: (state: any) => boolean;
@@ -37,6 +38,21 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
             backgroundColor: MENU_BACKDROP_COLOR,
           }}
         >
+          <button
+            style={{
+              position: 'fixed',
+              top: 'var(--spacing)',
+              right: 'var(--spacing)',
+              backgroundColor: 'var(brush--white)',
+              borderRadius: '50%',
+              border: 0,
+              padding: 'var(--spacing)',
+              width: 31,
+              height: 31,
+            }}
+          >
+            <GrClose size={15} style={{ color: 'var(--brush-black)' }} />
+          </button>
           <div
             style={{
               position: 'absolute',
@@ -58,7 +74,13 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
                 minHeight: '2em',
               }}
             >
-              <div style={{ padding: 'var(--spacing)' }}>
+              <div
+                style={{
+                  overflowY: 'auto',
+                  overflowX: 'hidden',
+                  maxHeight: 'calc(100vh - var(--height-menu) - 80px)',
+                }}
+              >
                 <Suspense fallback={<LoaderMobileMenuView />}>
                   {children}
                 </Suspense>
