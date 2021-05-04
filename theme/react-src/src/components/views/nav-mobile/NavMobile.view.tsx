@@ -6,6 +6,7 @@ import { selectNav } from '../../../slices/nav/nav.slice';
 import prefetch from '../../../services/prefetch.service';
 import LoaderMobileMenu from '../loader-mobile-menu/LoaderMobileMenu.view';
 import NavMobileItemView from '../nav-mobile-item/NavMobileItem.view';
+import SocialMobileView from '../social-mobile/SocialMobile.view';
 
 const NavMobileView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +42,7 @@ const NavMobileView = () => {
                 ))
               : null}
           </nav>
+          <SocialMobileView />
         </>
       )}
     </>
