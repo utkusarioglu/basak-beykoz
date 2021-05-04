@@ -25,3 +25,22 @@ export const LOADING_INDICATOR_DISAPPEAR_AFTER = 200;
 export const MENU_BG_COLOR = 'var(--brush-white)';
 export const MENU_DECORATION_COLOR = 'var(--brush-darkYellow)';
 export const MENU_BACKDROP_COLOR = 'var(--brush-black-transparent)';
+
+interface SocialLink {
+  title: string;
+  type: string;
+  link: string;
+}
+
+export const SOCIAL_LINKS: SocialLink[] = [
+  {
+    title: 'Instagram',
+    type: 'instagram',
+    link: 'https://www.instagram.com/basak_beykoz/',
+  },
+  {
+    title: 'Linkedin',
+    link: 'https://www.linkedin.com/in/basakbeykoz/',
+    type: 'linkedin',
+  },
+];
