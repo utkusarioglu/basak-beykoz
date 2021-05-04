@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import NavDesktopItemView from '../nav-desktop-item/NavDesktopItem.view';
 import { useSelector } from 'react-redux';
 import { selectNav } from '../../../slices/nav/nav.slice';
 import prefetch from '../../../services/prefetch.service';
 import LoaderMobileMenu from '../loader-mobile-menu/LoaderMobileMenu.view';
 import NavMobileItemView from '../nav-mobile-item/NavMobileItem.view';
 import SocialMobileView from '../social-mobile/SocialMobile.view';
+import MobileMenuSectionTitleView from '../mobile-menu-section-title/MobileMenuSectionTitleViewProps';
 
 const NavMobileView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,13 +25,18 @@ const NavMobileView = () => {
       {isLoading ? (
         <LoaderMobileMenu />
       ) : (
-        <>
+        <div
+          style={{
+            paddingTop: 'calc(var(--spacing) * 2)',
+            paddingBottom: 'calc(var(--spacing) * 2)',
+          }}
+        >
+          {/* <MobileMenuSectionTitleView>Sayfalar</MobileMenuSectionTitleView> */}
           <nav
             style={{
               display: 'flex',
               flexDirection: 'column',
               position: 'relative',
-              // textAlign: 'right',
             }}
           >
             {menu.length > 0
@@ -42,8 +47,10 @@ const NavMobileView = () => {
                 ))
               : null}
           </nav>
+
+          <MobileMenuSectionTitleView>Sosyal Medya</MobileMenuSectionTitleView>
           <SocialMobileView />
-        </>
+        </div>
       )}
     </>
   );
