@@ -45,7 +45,14 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                 width: '100%',
               }}
             >
-              <h2>{title}</h2>
+              <h2
+                style={{
+                  paddingLeft: 'var(--spacing)',
+                  paddingRight: 'var(--spacing)',
+                }}
+              >
+                {title}
+              </h2>
             </div>
           )}
         </div>
