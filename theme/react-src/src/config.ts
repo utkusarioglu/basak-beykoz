@@ -44,3 +44,8 @@ export const SOCIAL_LINKS: SocialLink[] = [
     type: 'linkedin',
   },
 ];
+
+export const MOBILE_MENU_PADDING = {
+  horizontal: 'calc(var(--spacing) * 2)',
+  vertical: 'calc(var(--spacing) / 2)',
+};
