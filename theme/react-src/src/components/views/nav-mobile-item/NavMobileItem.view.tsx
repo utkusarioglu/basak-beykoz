@@ -4,6 +4,7 @@ import { WpMenuItem } from '../../../@types/wp-types';
 import { urlSlug } from '../../../utils/slug.util';
 import NavMobileChildItemsView from './NavMobileChildItems.view';
 import { LinkNavView } from '../link-nav/LinkNav.view';
+import { MOBILE_MENU_PADDING } from '../../../config';
 
 type NavMobileItemViewProps = WpMenuItem & { depth: number };
 
@@ -24,10 +25,10 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
       <LinkNavView urlfulSlug={urlfulSlug}>
         <div
           style={{
-            marginLeft: 8,
-            marginRight: 8,
-            paddingTop: 4,
-            paddingBottom: 4,
+            marginLeft: MOBILE_MENU_PADDING.horizontal,
+            marginRight: MOBILE_MENU_PADDING.horizontal,
+            paddingTop: MOBILE_MENU_PADDING.vertical,
+            paddingBottom: MOBILE_MENU_PADDING.vertical,
           }}
         >
           {title}
