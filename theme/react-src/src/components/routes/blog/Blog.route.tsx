@@ -18,7 +18,10 @@ const BlogRoute = () => {
           {pageTitle} {titleSeparator} {routeTitle}
         </title>
       </Helmet>
-      <StandardLayout title="Blog">
+      <StandardLayout
+        title="Blog"
+        thumbnailUrl="/wp-content/uploads/yazilar-feature-image.jpg"
+      >
         <CategoryPostsFeedView categorySlug={BLOG_POSTS_CATEGORY} />
       </StandardLayout>
     </>
