@@ -1,23 +1,11 @@
 import React from 'react';
 import { AiFillLinkedin, AiFillInstagram } from 'react-icons/ai';
-
-const socialItems = [
-  {
-    title: 'Instagram',
-    icon: <AiFillInstagram size="1.3em" />,
-    link: 'https://www.instagram.com/basak_beykoz/',
-  },
-  {
-    title: 'Linkedin',
-    link: 'https://www.linkedin.com/in/basakbeykoz/',
-    icon: <AiFillLinkedin size="1.3em" />,
-  },
-];
+import { SOCIAL_LINKS } from '../../../config';
 
 const SocialDesktopView = () => {
   return (
     <div>
-      {socialItems.map(({ title, link, icon }) => (
+      {SOCIAL_LINKS.map(({ title, link, type }) => (
         <a
           key={title}
           href={link}
@@ -26,11 +14,22 @@ const SocialDesktopView = () => {
           title={title}
           style={{ marginLeft: '0.8em' }}
         >
-          {icon}
+          {getIcon(type, '1.3em')}
         </a>
       ))}
     </div>
   );
 };
+
+function getIcon(socialLinkType: string, size: string) {
+  switch (socialLinkType) {
+    case 'instagram':
+      return <AiFillInstagram size={size} />;
+    case 'linkedin':
+      return <AiFillLinkedin size={size} />;
+    default:
+      throw new Error(`No icon set for type ${socialLinkType} for desktop`);
+  }
+}
 
 export default SocialDesktopView;
