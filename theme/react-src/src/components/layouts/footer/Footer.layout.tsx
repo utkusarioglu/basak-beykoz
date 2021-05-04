@@ -1,4 +1,7 @@
 import React from 'react';
+import FooterButtonView from '../../views/footer-button/FooterButton.view';
+import { ReactComponent as FooterArtBg } from '../../../static/footer-art-bg.svg';
+import { ReactComponent as FooterArtFg } from '../../../static/footer-art-fg.svg';
 
 const FooterLayout = () => {
   return (
@@ -16,10 +19,26 @@ const FooterLayout = () => {
           left: 0,
           right: 0,
           height: 'var(--height-footer)',
-          backgroundColor: '#eee',
         }}
       >
-        Footer
+        <FooterButtonView />
+
+        <FooterArtBg
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+        />
+
+        <FooterArtFg
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            maxHeight: 200,
+            left: '25vw',
+            right: '5vw',
+          }}
+        />
       </div>
     </footer>
   );
