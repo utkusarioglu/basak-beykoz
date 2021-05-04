@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import NavItemView from '../nav-item/NavItem.view';
+// import NavDesktopItemView from '../nav-desktop-item/NavDesktopItem.view';
 import { useSelector } from 'react-redux';
 import { selectNav } from '../../../slices/nav/nav.slice';
 import prefetch from '../../../services/prefetch.service';
 import LoaderMobileMenu from '../loader-mobile-menu/LoaderMobileMenu.view';
+import NavMobileItemView from '../nav-mobile-item/NavMobileItem.view';
 
 const NavMobileView = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,20 +24,24 @@ const NavMobileView = () => {
       {isLoading ? (
         <LoaderMobileMenu />
       ) : (
-        <nav
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            textAlign: 'right',
-          }}
-        >
-          {menu.length > 0
-            ? menu.map((menuItem) => (
-                <NavItemView {...{ ...menuItem, depth: 0, key: menuItem.ID }} />
-              ))
-            : null}
-        </nav>
+        <>
+          <nav
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'relative',
+              // textAlign: 'right',
+            }}
+          >
+            {menu.length > 0
+              ? menu.map((menuItem) => (
+                  <NavMobileItemView
+                    {...{ ...menuItem, depth: 0, key: menuItem.ID }}
+                  />
+                ))
+              : null}
+          </nav>
+        </>
       )}
     </>
   );
