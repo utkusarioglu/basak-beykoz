@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiFillLinkedin, AiFillInstagram } from 'react-icons/ai';
 import { SOCIAL_LINKS } from '../../../config';
+import { MOBILE_MENU_PADDING } from '../../../config';
 
 const SocialMobileView = () => {
   return (
@@ -23,7 +24,10 @@ const SocialMobileView = () => {
             rel="noopener noreferrer"
             title={title}
             style={{
-              padding: 'var(--spacing)',
+              paddingLeft: MOBILE_MENU_PADDING.horizontal,
+              paddingRight: MOBILE_MENU_PADDING.horizontal,
+              paddingTop: MOBILE_MENU_PADDING.vertical,
+              paddingBottom: MOBILE_MENU_PADDING.vertical,
               display: 'flex',
               alignItems: 'center',
             }}
@@ -31,8 +35,8 @@ const SocialMobileView = () => {
             {getIcon(type, '1.5em')}
             <div
               style={{
-                marginLeft: 'calc(var(--spacing) / 2)',
-                paddingTop: 3, // ! magic number
+                marginLeft: MOBILE_MENU_PADDING.vertical,
+                paddingTop: 2, // ! magic number
               }}
             >
               {title}
