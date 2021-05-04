@@ -30,11 +30,10 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           onClick={() => closer(false)}
           style={{
             position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+            height: '100%',
+            width: '100%',
             zIndex: 105,
+            backdropFilter: 'blur(4px)',
             backgroundColor: MENU_BACKDROP_COLOR,
           }}
         >
@@ -78,7 +77,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
                 style={{
                   overflowY: 'auto',
                   overflowX: 'hidden',
-                  maxHeight: 'calc(100vh - var(--height-menu) - 80px)',
+                  maxHeight: 'calc(100vh - var(--height-menu) - 150px)',
                 }}
               >
                 <Suspense fallback={<LoaderMobileMenuView />}>

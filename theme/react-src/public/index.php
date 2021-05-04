@@ -61,11 +61,31 @@
       padding: 0;
 
     }
-    
-    html,
-    body,
-    #root {
+
+    html {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none; 
+      -ms-user-select: none;
+      user-select: none; 
+      overflow: hidden;
+      width: 100%;
       height: 100%;
+    }
+
+    body {
+      /* position: fixed; */
+      width: 100%;
+      height: 100%;
+    }
+
+    #root {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
     }
 
     .singular-view a {

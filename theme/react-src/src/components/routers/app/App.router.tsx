@@ -33,6 +33,20 @@ const AppRouter = () => {
   return (
     <Router>
       <LoaderEdgeView />
+
+      <MobileMenuContainerView
+        selector={selectMobileNavState}
+        closer={setMobileNavState}
+      >
+        <LazyMobileNav />
+      </MobileMenuContainerView>
+      <MobileMenuContainerView
+        selector={selectMobileShareState}
+        closer={setMobileShareState}
+      >
+        <LazyMobileShare />
+      </MobileMenuContainerView>
+
       <div className="min-height-100-p">
         <HeaderLayout />
 
@@ -58,19 +72,6 @@ const AppRouter = () => {
       </div>
 
       <FooterLayout />
-
-      <MobileMenuContainerView
-        selector={selectMobileNavState}
-        closer={setMobileNavState}
-      >
-        <LazyMobileNav />
-      </MobileMenuContainerView>
-      <MobileMenuContainerView
-        selector={selectMobileShareState}
-        closer={setMobileShareState}
-      >
-        <LazyMobileShare />
-      </MobileMenuContainerView>
     </Router>
   );
 };
