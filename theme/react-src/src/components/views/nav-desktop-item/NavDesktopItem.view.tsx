@@ -23,14 +23,15 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
       onMouseLeave={() => setHovered(false)}
     >
       <LinkNavView urlfulSlug={urlfulSlug}>
-        <div
+        <h4
           style={{
+            // marginTop: 3,
             marginLeft: 8,
             marginRight: 8,
           }}
         >
           {title}
-        </div>
+        </h4>
       </LinkNavView>
 
       {hovered && child_items && child_items.length > 0 && (
