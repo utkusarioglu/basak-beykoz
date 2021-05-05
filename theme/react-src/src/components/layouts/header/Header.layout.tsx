@@ -1,7 +1,7 @@
 import React from 'react';
 import NavDesktopView from '../../views/nav-desktop/NavDesktop.view';
 import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
-import { SingularPreloaderLinkView } from '../../views/preloader-link/PreloaderLink.view';
+import { LinkPreloaderSingularView } from '../../views/link-preloader/LinkPreloader.view';
 import { HOME_SLUG } from '../../../config';
 import { urlSlug } from '../../../utils/slug.util';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
@@ -29,7 +29,7 @@ const HeaderLayout = () => {
         paddingLeft: isDesktop ? '5vw' : 'var(--spacing)',
       }}
     >
-      <SingularPreloaderLinkView to={urlSlug(HOME_SLUG)}>
+      <LinkPreloaderSingularView to={urlSlug(HOME_SLUG)}>
         <div
           style={{
             backgroundImage:
@@ -43,7 +43,7 @@ const HeaderLayout = () => {
             width: isDesktop ? '180px' : 'auto',
           }}
         />
-      </SingularPreloaderLinkView>
+      </LinkPreloaderSingularView>
       <div style={{ flexGrow: 1 }}></div>
 
       {isDesktop ? (

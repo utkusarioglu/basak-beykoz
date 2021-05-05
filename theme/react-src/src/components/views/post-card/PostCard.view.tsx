@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import type { WrtSingularItem } from '../../../@types/wp-types';
-import { SingularPreloaderLinkView } from '../preloader-link/PreloaderLink.view';
+import { LinkPreloaderSingularView } from '../link-preloader/LinkPreloader.view';
 import { urlSlug } from '../../../utils/slug.util';
 
 type PostCardSkeletonProps = {
@@ -23,7 +23,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
     );
   } else {
     return (
-      <SingularPreloaderLinkView to={urlSlug(props.item.slug)}>
+      <LinkPreloaderSingularView to={urlSlug(props.item.slug)}>
         <div
           style={{
             paddingTop: 'var(--spacing)',
@@ -77,7 +77,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
             </div> */}
           </div>
         </div>
-      </SingularPreloaderLinkView>
+      </LinkPreloaderSingularView>
     );
   }
 };

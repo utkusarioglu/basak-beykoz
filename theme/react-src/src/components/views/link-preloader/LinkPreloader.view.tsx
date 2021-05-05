@@ -24,7 +24,7 @@ interface PreloaderLinkProps {
  * @param param0 props
  * @returns preloader link component
  */
-const PreloaderLinkView: FC<PreloaderLinkProps> = ({
+const LinkPreloaderView: FC<PreloaderLinkProps> = ({
   to,
   children,
   component,
@@ -55,7 +55,7 @@ const PreloaderLinkView: FC<PreloaderLinkProps> = ({
   );
 };
 
-type SingularPreloaderLinkViewProps = Omit<
+type LinkPreloaderSingularViewProps = Omit<
   PreloaderLinkProps,
   'component' | 'prefetch'
 >;
@@ -65,7 +65,7 @@ type SingularPreloaderLinkViewProps = Omit<
  * @param param0 props
  * @returns Preloader component for Singular content
  */
-export const SingularPreloaderLinkView: FC<SingularPreloaderLinkViewProps> = ({
+export const LinkPreloaderSingularView: FC<LinkPreloaderSingularViewProps> = ({
   to,
   children,
   style,
@@ -73,7 +73,7 @@ export const SingularPreloaderLinkView: FC<SingularPreloaderLinkViewProps> = ({
   onLoadComplete,
 }) => {
   return (
-    <PreloaderLinkView
+    <LinkPreloaderView
       to={to}
       component={lazyWithPreload(
         () => import('../../routes/singular/Singular.route')
@@ -82,8 +82,8 @@ export const SingularPreloaderLinkView: FC<SingularPreloaderLinkViewProps> = ({
       style={style}
     >
       {children}
-    </PreloaderLinkView>
+    </LinkPreloaderView>
   );
 };
 
-export default PreloaderLinkView;
+export default LinkPreloaderView;

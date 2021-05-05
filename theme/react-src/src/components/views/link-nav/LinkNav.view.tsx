@@ -1,6 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
-import PreloaderLinkView from '../preloader-link/PreloaderLink.view';
+import LinkPreloaderView from '../link-preloader/LinkPreloader.view';
 import { PreloadableComponent } from '../../../utils/lazyWithPreload.util';
 import { restSlug } from '../../../utils/slug.util';
 import { Link } from 'react-router-dom';
@@ -22,13 +22,13 @@ export const LinkNavView: FC<NavLinkViewProps> = ({ urlfulSlug, children }) => {
   return (
     <>
       {doPreload ? (
-        <PreloaderLinkView
+        <LinkPreloaderView
           to={urlfulSlug}
           component={Component}
           prefetch={prefetchFunc}
         >
           {children}
-        </PreloaderLinkView>
+        </LinkPreloaderView>
       ) : (
         <Link key={urlfulSlug} to={urlfulSlug}>
           {children}
