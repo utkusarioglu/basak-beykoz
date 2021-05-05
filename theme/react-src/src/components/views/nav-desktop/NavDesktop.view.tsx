@@ -23,6 +23,7 @@ const NavDesktopView = () => {
         display: 'flex',
         flexDirection: 'row',
         position: 'relative',
+        alignItems: 'center',
       }}
     >
       {menu.length > 0

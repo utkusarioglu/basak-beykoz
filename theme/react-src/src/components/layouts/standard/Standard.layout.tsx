@@ -1,5 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { DESKTOP_MIN_WIDTH } from '../../../config';
 
 interface StandardLayoutProps {
   title: string;
@@ -17,15 +19,28 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   hideTitle,
   sideMargins = true,
 }) => {
+  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+
   return (
     <>
       {!hideThumbnail && (
         <div
-          style={{
-            position: 'relative',
-            width: '100%',
-            height: '40vh',
-          }}
+          style={
+            isDesktop
+              ? {
+                  position: 'fixed',
+                  left: 0,
+                  bottom: 0,
+                  // top: 'var(--height-desktop-menu)',
+                  top: 0,
+                  width: '25vw',
+                }
+              : {
+                  position: 'relative',
+                  width: '100%',
+                  height: '40vh',
+                }
+          }
         >
           <div
             style={{
@@ -36,7 +51,8 @@ const StandardLayout: FC<StandardLayoutProps> = ({
               height: '100%',
             }}
           ></div>
-          {!hideTitle && (
+
+          {!hideTitle && !isDesktop && (
             <div
               style={{
                 position: 'absolute',
@@ -59,15 +75,33 @@ const StandardLayout: FC<StandardLayoutProps> = ({
       )}
 
       <div
-        style={{
-          marginLeft: sideMargins ? 'var(--spacing)' : 0,
-          marginRight: sideMargins ? 'var(--spacing)' : 0,
-        }}
+        style={
+          !hideThumbnail && isDesktop
+            ? {
+                marginLeft: '35vw',
+                marginRight: '10vw',
+                paddingTop: 'var(--height-desktop-menu)',
+                marginBottom: 150,
+              }
+            : {
+                marginTop: 'var(--spacing)',
+                marginLeft: horizontalMargins(sideMargins, isDesktop),
+                marginRight: horizontalMargins(sideMargins, isDesktop),
+                marginBottom: 100,
+              }
+        }
       >
+        {isDesktop && !hideTitle && (
+          <h2 style={{ marginBottom: '2em' }}>{title}</h2>
+        )}
         {children}
       </div>
     </>
   );
 };
+
+function horizontalMargins(sideMargins: boolean, isDesktop: boolean) {
+  return !sideMargins ? 0 : !isDesktop ? 'var(--spacing)' : '5vw';
+}
 
 export default StandardLayout;

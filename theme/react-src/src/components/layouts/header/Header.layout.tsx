@@ -1,13 +1,15 @@
 import React from 'react';
-// import NavView from '../../views/nav/nav.view';
-// import SocialView from '../../views/social/Social.view';
+import NavDesktopView from '../../views/nav-desktop/NavDesktop.view';
+import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
 import { SingularPreloaderLinkView } from '../../views/preloader-link/PreloaderLink.view';
 import { HOME_SLUG } from '../../../config';
 import { urlSlug } from '../../../utils/slug.util';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
+import { useMediaQuery } from 'react-responsive';
+import { DESKTOP_MIN_WIDTH } from '../../../config';
 
 const HeaderLayout = () => {
-  const isMobile = true;
+  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
 
   return (
     <header
@@ -15,14 +17,16 @@ const HeaderLayout = () => {
         display: 'flex',
         flexDirection: 'row',
         position: 'fixed',
-        bottom: 0,
+        top: isDesktop ? 0 : 'auto',
+        bottom: isDesktop ? 'auto' : 0,
         left: 0,
         right: 0,
-        height: 'var(--height-menu)',
-        backgroundColor: 'var(--brush-white)',
+        height: isDesktop ? 'var(--height-desktop-menu)' : 'var(--height-menu)',
+        backgroundColor: 'rgb(251, 251, 251, 0.5)',
+        backdropFilter: 'blur(10px)',
         zIndex: 100,
-        paddingRight: 'var(--spacing)',
-        paddingLeft: 'var(--spacing)',
+        paddingRight: isDesktop ? '5vw' : 'var(--spacing)',
+        paddingLeft: isDesktop ? '5vw' : 'var(--spacing)',
       }}
     >
       <SingularPreloaderLinkView to={urlSlug(HOME_SLUG)}>
@@ -34,16 +38,22 @@ const HeaderLayout = () => {
             backgroundRepeat: 'no-repeat',
             backgroundPositionY: 'center',
             height: '100%',
-            maxWidth: 150,
+            maxWidth: isDesktop ? 180 : 150,
             minWidth: 120,
+            width: isDesktop ? '180px' : 'auto',
           }}
         />
       </SingularPreloaderLinkView>
       <div style={{ flexGrow: 1 }}></div>
 
-      {isMobile && <MobileHeaderButtonsView />}
-      {/* <NavView /> */}
-      {/* <SocialView /> */}
+      {isDesktop ? (
+        <>
+          <NavDesktopView />
+          <SocialDesktopView />
+        </>
+      ) : (
+        <MobileHeaderButtonsView />
+      )}
     </header>
   );
 };

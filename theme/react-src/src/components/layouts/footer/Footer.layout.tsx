@@ -2,12 +2,18 @@ import React from 'react';
 import FooterButtonView from '../../views/footer-button/FooterButton.view';
 import { ReactComponent as FooterArtBg } from '../../../static/footer-art-bg.svg';
 import { ReactComponent as FooterArtFg } from '../../../static/footer-art-fg.svg';
+import { useMediaQuery } from 'react-responsive';
+import { DESKTOP_MIN_WIDTH } from '../../../config';
 
 const FooterLayout = () => {
+  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+
   return (
     <footer
       style={{
-        height: 'calc(var(--height-footer) + var(--height-menu)',
+        height: isDesktop
+          ? 'var(--height-footer)'
+          : 'calc(var(--height-footer) + var(--height-menu)',
         position: 'relative',
         textAlign: 'center',
       }}
@@ -36,7 +42,7 @@ const FooterLayout = () => {
             bottom: 0,
             maxHeight: 200,
             left: '25vw',
-            right: '5vw',
+            right: isDesktop ? '25vw' : '5vw',
           }}
         />
       </div>

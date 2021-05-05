@@ -22,6 +22,8 @@ export const FETCH_STALE_TIME = 60 * 1000; // 60 seconds
 export const LOADING_INDICATOR_APPEAR_AFTER = 500;
 export const LOADING_INDICATOR_DISAPPEAR_AFTER = 200;
 
+export const DESKTOP_MIN_WIDTH = 800;
+
 export const MENU_BG_COLOR = 'var(--brush-white)';
 export const MENU_DECORATION_COLOR = 'var(--brush-darkYellow)';
 export const MENU_BACKDROP_COLOR = 'var(--brush-black-transparent)';

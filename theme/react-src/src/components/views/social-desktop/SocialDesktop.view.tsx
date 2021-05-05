@@ -2,9 +2,17 @@ import React from 'react';
 import { AiFillLinkedin, AiFillInstagram } from 'react-icons/ai';
 import { SOCIAL_LINKS } from '../../../config';
 
+const SOCIAL_DESKTOP_ICON_SIZE = '1.5em';
+
 const SocialDesktopView = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}
+    >
       {SOCIAL_LINKS.map(({ title, link, type }) => (
         <a
           key={title}
@@ -12,9 +20,12 @@ const SocialDesktopView = () => {
           target="_blank"
           rel="noopener noreferrer"
           title={title}
-          style={{ marginLeft: '0.8em' }}
+          style={{
+            marginLeft: '0.8em',
+            height: SOCIAL_DESKTOP_ICON_SIZE,
+          }}
         >
-          {getIcon(type, '1.3em')}
+          {getIcon(type, SOCIAL_DESKTOP_ICON_SIZE)}
         </a>
       ))}
     </div>
