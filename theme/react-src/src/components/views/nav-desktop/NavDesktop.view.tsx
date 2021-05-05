@@ -1,39 +1,43 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import type { WpMenuItem, GetWpMenuSuccess } from '../../../@types/wp-types';
-import rest from '../../../services/rest.service';
+import { useSelector } from 'react-redux';
+import { selectNav } from '../../../slices/nav/nav.slice';
 import NavDesktopItemView from '../nav-desktop-item/NavDesktopItem.view';
+import prefetch from '../../../services/prefetch.service';
 
 const NavDesktopView = () => {
-  const [menu, setMenu] = useState<WpMenuItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { items: menu } = useSelector(selectNav);
 
   useEffect(() => {
-    rest.fetchMenu('nav').then((data) => {
-      if (data.hasOwnProperty('code')) {
-        setMenu([]);
-      } else {
-        setMenu((data as GetWpMenuSuccess).items);
-      }
+    prefetch.menu({
+      slug: 'nav',
+      onFetchStart: () => setIsLoading(true),
+      onFetchComplete: () => setIsLoading(false),
     });
   }, []);
 
   return (
-    <nav
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        position: 'relative',
-        alignItems: 'center',
-      }}
-    >
-      {menu.length > 0
-        ? menu.map((menuItem) => (
-            <NavDesktopItemView
-              {...{ ...menuItem, depth: 0, key: menuItem.ID }}
-            />
-          ))
-        : null}
-    </nav>
+    <>
+      {isLoading ? null : (
+        <nav
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            position: 'relative',
+            alignItems: 'center',
+          }}
+        >
+          {menu.length > 0
+            ? menu.map((menuItem) => (
+                <NavDesktopItemView
+                  {...{ ...menuItem, depth: 0, key: menuItem.ID }}
+                />
+              ))
+            : null}
+        </nav>
+      )}
+    </>
   );
 };
 
