@@ -41,6 +41,7 @@ const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
 function hideTitle(slug: string) {
   switch (slug) {
     case HOME_SLUG:
+    case 'restart':
       return true;
 
     default:
