@@ -42,6 +42,7 @@
       --brush-darkGreen: rgb(12, 80, 58);
 
       --height-menu: 50px;
+      --height-desktop-menu: 60px;
       --height-footer: 150px;
       --spacing: 8px;
     }
@@ -59,7 +60,7 @@
     body {
       margin: 0;
       padding: 0;
-
+      background-color: var(--brush-white);
     }
 
     html {
