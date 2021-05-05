@@ -40,12 +40,15 @@ const LinkPreloaderView: FC<PreloaderLinkProps> = ({
     const cancelIsLoading = enableIsLoadingDelayed();
     onSelect && onSelect();
 
-    Promise.all([component.preload(), prefetch()]).then(() => {
-      cancelIsLoading();
-      disableIsLoadingDelayed();
-      onLoadComplete && onLoadComplete();
-      history.push(to);
-    });
+    Promise.all([component.preload(), prefetch()])
+      .then(() => {
+        history.push(to);
+      })
+      .finally(() => {
+        cancelIsLoading();
+        disableIsLoadingDelayed();
+        onLoadComplete && onLoadComplete();
+      });
   };
 
   return (
