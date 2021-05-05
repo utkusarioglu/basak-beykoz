@@ -21,7 +21,7 @@ export const routes: LazyRouteConfig[] = [
     ),
   },
   {
-    path: `/${BLOG_SLUG}/`,
+    path: `/${BLOG_SLUG}`,
     component: lazyWithPreload(() => import('../../routes/blog/Blog.route')),
     prefetch: prefetch.categoryPosts,
   },
