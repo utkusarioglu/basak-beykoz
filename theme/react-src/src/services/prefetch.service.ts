@@ -43,7 +43,7 @@ class Prefetch {
 
           if (data.state === 'fail') {
             console.error(data);
-            reject();
+            reject(data.errorCode);
             return;
           }
           setSingular(data.body);
@@ -86,7 +86,7 @@ class Prefetch {
           if (data.state === 'fail') {
             if (data.state === 'fail') {
               console.error(data);
-              reject();
+              reject(data.errorCode);
               return;
             }
           } else {
@@ -130,7 +130,7 @@ class Prefetch {
 
           if ((data as GetWpMenuFail).code) {
             console.error(data);
-            reject();
+            reject((data as GetWpMenuFail).code);
             return;
           }
           setNav({ items: (data as GetWpMenuSuccess).items, slug: 'nav' });
