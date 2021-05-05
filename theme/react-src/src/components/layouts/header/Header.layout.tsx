@@ -2,8 +2,6 @@ import React from 'react';
 import NavDesktopView from '../../views/nav-desktop/NavDesktop.view';
 import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
 import { LinkPreloaderSingularView } from '../../views/link-preloader/LinkPreloader.view';
-import { HOME_SLUG } from '../../../config';
-import { urlSlug } from '../../../utils/slug.util';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
 import { useMediaQuery } from 'react-responsive';
 import { DESKTOP_MIN_WIDTH } from '../../../config';
@@ -29,7 +27,7 @@ const HeaderLayout = () => {
         paddingLeft: isDesktop ? '5vw' : 'var(--spacing)',
       }}
     >
-      <LinkPreloaderSingularView to={urlSlug(HOME_SLUG)}>
+      <LinkPreloaderSingularView to="/">
         <div
           style={{
             backgroundImage:
