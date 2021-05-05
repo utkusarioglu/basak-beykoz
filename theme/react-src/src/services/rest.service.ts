@@ -16,7 +16,7 @@ class Rest {
     console.log(`Fetch error: ${errorCode}`);
     return {
       state: 'fail',
-      errorCode: errorCode,
+      errorCode,
       meta: {
         restTimeout: REST_TIMEOUT,
       },
@@ -110,11 +110,11 @@ class Rest {
         })
       )
         .then((response) => response.json())
-        .then((response) => {
-          if (response.code) {
-            throw new Error(response.code);
+        .then((data) => {
+          if (data.code) {
+            throw new Error(data.code)
           }
-          return response;
+          return data;
         })
     );
   }
