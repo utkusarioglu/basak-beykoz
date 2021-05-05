@@ -172,6 +172,7 @@ function build_post_item()
     'comment_status' => $post->comment_status,
     'thumbnail' => get_the_post_thumbnail_url(),
   );
+
   wp_reset_postdata();
   return $item;
 }
