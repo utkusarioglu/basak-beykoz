@@ -18,7 +18,9 @@ const LoaderEdge = () => {
   return isLoading ? (
     <>
       <ConcaveCornerView
+        fill={LOADER_BG_COLOR}
         horizontalDirection="left"
+        verticalDirection="down"
         style={{
           position: 'fixed',
           top: LOADER_THICKNESS,
@@ -30,7 +32,9 @@ const LoaderEdge = () => {
       />
 
       <ConcaveCornerView
+        fill={LOADER_BG_COLOR}
         horizontalDirection="right"
+        verticalDirection="down"
         style={{
           position: 'fixed',
           top: LOADER_THICKNESS,
