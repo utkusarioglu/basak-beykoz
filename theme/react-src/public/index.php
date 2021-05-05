@@ -41,9 +41,32 @@
       --brush-lightGreen: rgb(198, 223, 215);
       --brush-darkGreen: rgb(12, 80, 58);
 
+      /**
+      Controls the height of the mobile menu and the shim under the footer
+      where the menu lodges if the user scrolls all the way down.
+       */
       --height-menu: 50px;
+      /**
+      Controls the height of the desktop menu and its components
+       */
       --height-desktop-menu: 60px;
+      /**
+      Controls the height of mobile footer
+       */
       --height-footer: 150px;
+      /**
+      Controls the height of the ladies in the footer. 
+      This value is also used for the footer reserved space; Pushing the 
+      footer below the unscrolled viewport, making the appearance of
+      the ladies a surprise to unsuspecting eyes.
+       */
+      --height-desktop-footer: 200px;
+      /** 
+      Controls the height of the footer elements other than the sitting
+      ladies. Meaning, it sets the height of the square button and the 
+      wavy background color. 
+      */
+      --height-desktop-footer-button: 150px;
       --spacing: 8px;
     }
 

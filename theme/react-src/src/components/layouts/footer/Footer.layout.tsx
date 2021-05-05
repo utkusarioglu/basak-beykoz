@@ -12,7 +12,7 @@ const FooterLayout = () => {
     <footer
       style={{
         height: isDesktop
-          ? 'var(--height-footer)'
+          ? 'var(--height-desktop-footer)'
           : 'calc(var(--height-footer) + var(--height-menu)',
         position: 'relative',
         textAlign: 'center',
@@ -21,10 +21,12 @@ const FooterLayout = () => {
       <div
         style={{
           position: 'absolute',
-          top: 0,
+          top: isDesktop
+            ? 'calc(var(--height-desktop-footer) - var(--height-desktop-footer-button))'
+            : 0,
           left: 0,
           right: 0,
-          height: 'var(--height-footer)',
+          height: 'var(--height-desktop-footer-button)',
         }}
       >
         <FooterButtonView />
