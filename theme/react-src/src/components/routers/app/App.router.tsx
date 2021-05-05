@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import FooterLayout from '../../layouts/footer/Footer.layout';
 import HeaderLayout from '../../layouts/header/Header.layout';
-import { HOME_SLUG } from '../../../config';
+import { HOME_SLUG, DESKTOP_MIN_WIDTH } from '../../../config';
 import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
 import { routes } from './routeConfig';
 import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
@@ -20,8 +20,11 @@ import {
   setMobileNavState,
   setMobileShareState,
 } from '../../../slices/app/app.slice';
+import { useMediaQuery } from 'react-responsive';
 
 const AppRouter = () => {
+  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+
   const LazyMobileNav = lazy(
     () => import('../../views/nav-mobile/NavMobile.view')
   );
@@ -30,22 +33,30 @@ const AppRouter = () => {
     () => import('../../views/mobile-share/MobileShare.view')
   );
 
+  const LazyMobileMenuContainerView = lazy(
+    () => import('../../views/mobile-menu-container/MobileMenuContainer.view')
+  );
+
   return (
     <Router>
       <LoaderEdgeView />
 
-      <MobileMenuContainerView
-        selector={selectMobileNavState}
-        closer={setMobileNavState}
-      >
-        <LazyMobileNav />
-      </MobileMenuContainerView>
-      <MobileMenuContainerView
-        selector={selectMobileShareState}
-        closer={setMobileShareState}
-      >
-        <LazyMobileShare />
-      </MobileMenuContainerView>
+        {!isDesktop && (
+          <Suspense fallback={null}>
+            <LazyMobileMenuContainerView
+              selector={selectMobileNavState}
+              closer={setMobileNavState}
+            >
+              <LazyMobileNav />
+            </LazyMobileMenuContainerView>
+            <LazyMobileMenuContainerView
+              selector={selectMobileShareState}
+              closer={setMobileShareState}
+            >
+              <LazyMobileShare />
+            </LazyMobileMenuContainerView>
+          </Suspense>
+        )}
 
       <div className="min-height-100-p">
         <HeaderLayout />
