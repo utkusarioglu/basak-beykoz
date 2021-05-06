@@ -12,15 +12,15 @@ import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
 import { routes } from './routeConfig';
 import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
 import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
-import ErrorFallbackView from '../../views/error-fallback/ErrorFallback.view';
-import MobileMenuContainerView from '../../views/mobile-menu-container/MobileMenuContainer.view';
 import {
   selectMobileNavState,
   selectMobileShareState,
   setMobileNavState,
   setMobileShareState,
 } from '../../../slices/app/app.slice';
+import ErrorFallbackLazyView from '../../views/error-fallback-lazy/ErrorFallbackLazy.view';
 import { useMediaQuery } from 'react-responsive';
+import ErrorRoute from '../../routes/error/Error.route';
 
 const AppRouter = () => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
@@ -38,8 +38,11 @@ const AppRouter = () => {
   );
 
   return (
-    <Router>
-      <LoaderEdgeView />
+    <ErrorBoundaryUtil
+      fallback={<ErrorFallbackLazyView errorCode="routing_level_error" />}
+    >
+      <Router>
+        <HeaderLayout />
 
         {!isDesktop && (
           <Suspense fallback={null}>
@@ -58,32 +61,41 @@ const AppRouter = () => {
           </Suspense>
         )}
 
-      <div className="min-height-100-p">
-        <HeaderLayout />
+        <LoaderEdgeView />
 
-        <Switch>
-          {routes.map(({ path, component: Component }) => (
-            <Route path={path} exact key={path}>
-              <ErrorBoundaryUtil fallback={<ErrorFallbackView />}>
-                <Suspense fallback={<LoaderHtmlView />}>
-                  <Component />
-                </Suspense>
-              </ErrorBoundaryUtil>
+        <div className="min-height-100-p">
+          <Switch>
+            <Route path={`/${HOME_SLUG}`} exact>
+              <Redirect to="/" />
             </Route>
-          ))}
 
-          <Route path={`/${HOME_SLUG}`}>
-            <Redirect to="/" />
-          </Route>
+            <Route path="/error" exact>
+              <ErrorRoute />
+            </Route>
 
-          <Route path="*">
-            <Redirect to="/404" />
-          </Route>
-        </Switch>
-      </div>
+            {routes.map(({ path, component: Component }) => (
+              <Route path={path} exact key={path}>
+                <ErrorBoundaryUtil
+                  fallback={
+                    <ErrorFallbackLazyView errorCode="routing_level_error" />
+                  }
+                >
+                  <Suspense fallback={<LoaderHtmlView />}>
+                    <Component />
+                  </Suspense>
+                </ErrorBoundaryUtil>
+              </Route>
+            ))}
 
-      <FooterLayout />
-    </Router>
+            <Route>
+              <Redirect to="/404" />
+            </Route>
+          </Switch>
+        </div>
+
+        <FooterLayout />
+      </Router>
+    </ErrorBoundaryUtil>
   );
 };
 
