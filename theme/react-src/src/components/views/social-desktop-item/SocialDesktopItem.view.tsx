@@ -22,9 +22,10 @@ export const SocialDesktopItemView: FC<SocialDesktopItemViewProps> = ({
       style={{
         borderRadius: 'var(--spacing)',
         backgroundColor: hovered ? MENU_ITEM_HOVERED_COLOR : 'transparent',
-        height: '100%',
         display: 'flex',
         alignItems: 'center',
+        paddingTop: '1.33em', // h4 margin top
+        paddingBottom: '1.33em', // h4 margin top
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -38,7 +39,9 @@ export const SocialDesktopItemView: FC<SocialDesktopItemViewProps> = ({
         style={{
           marginLeft: 'var(--spacing)',
           marginRight: 'var(--spacing)',
-          height: SOCIAL_DESKTOP_ICON_SIZE,
+          // height: SOCIAL_DESKTOP_ICON_SIZE,
+          // ! magic number, this better aligns the icons with the nav links
+          marginBottom: 1,
         }}
       >
         {getIcon(type, SOCIAL_DESKTOP_ICON_SIZE)}
@@ -50,8 +53,10 @@ function getIcon(socialLinkType: string, size: string) {
   switch (socialLinkType) {
     case 'instagram':
       return <AiFillInstagram size={size} />;
+
     case 'linkedin':
       return <AiFillLinkedin size={size} />;
+
     default:
       throw new Error(`No icon set for type ${socialLinkType} for desktop`);
   }
