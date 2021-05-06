@@ -56,7 +56,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
             style={{
               position: 'absolute',
               bottom: 'calc(var(--height-menu) - 8px)',
-              minWidth: 200,
+              minWidth: 190,
               right: 'var(--spacing)',
               borderRadius: 'var(--spacing)',
               backgroundColor: MENU_DECORATION_COLOR,
