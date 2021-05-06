@@ -43,8 +43,12 @@ const FooterLayout = () => {
             position: 'absolute',
             bottom: 0,
             maxHeight: 200,
-            left: '25vw',
-            right: isDesktop ? '25vw' : '5vw',
+            // fixes svg sizing issues with ios (70 + 25 + 5)vw = 100vw
+            // The numbers come from the 3 props below.
+            maxWidth: '70vw',
+            left: '25vw', // reserves space for the footer-button
+            // 22 is a magic number that emerges from the behavior of the svg
+            right: isDesktop ? '22vw' : '5vw',
           }}
         />
       </div>
