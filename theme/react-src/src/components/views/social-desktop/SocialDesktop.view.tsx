@@ -15,7 +15,7 @@ const SocialDesktopView = () => {
       }}
     >
       {SOCIAL_LINKS.map((item) => (
-        <SocialDesktopItemView {...item} />
+        <SocialDesktopItemView {...item} key={item.type} />
       ))}
     </div>
   );
