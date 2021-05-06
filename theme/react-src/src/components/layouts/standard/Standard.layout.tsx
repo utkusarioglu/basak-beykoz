@@ -49,8 +49,22 @@ const StandardLayout: FC<StandardLayoutProps> = ({
               filter: 'sepia(50%) opacity(.5)',
               width: '100%',
               height: '100%',
+              position: 'relative',
             }}
-          ></div>
+          />
+          {!isDesktop && (
+            <div
+              style={{
+                width: '100%',
+                height: 16,
+                backgroundColor: 'var(--brush-white)',
+                position: 'absolute',
+                bottom: -8,
+                borderRadius: 8,
+                // boxShadow: '0px -4px 4px var(--brush-black-transparent)',
+              }}
+            />
+          )}
 
           {!hideTitle && !isDesktop && (
             <div
