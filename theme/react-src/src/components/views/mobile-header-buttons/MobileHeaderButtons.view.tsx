@@ -27,12 +27,16 @@ const MobileHeaderButtonsView = () => {
       <MobileHeaderButtonView
         onClick={toggleMobileShareState}
         selector={selectMobileShareState}
+        listPosition={0}
+        listLength={2}
       >
         <FiShare2 {...iconProps} />
       </MobileHeaderButtonView>
       <MobileHeaderButtonView
         onClick={toggleMobileNavState}
         selector={selectMobileNavState}
+        listPosition={1}
+        listLength={2}
       >
         <TiThMenu {...iconProps} />
       </MobileHeaderButtonView>

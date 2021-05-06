@@ -30,6 +30,7 @@ export const MENU_BACKDROP_COLOR = 'var(--brush-black-transparent)';
 
 export const MENU_ITEM_HOVERED_COLOR = 'var(--brush-lightGreen)';
 export const MENU_BORDER_RADIUS = 'calc(var(--spacing) * 2)';
+export const MENU_VERTICAL_DECORATION_HEIGHT = 'var(--spacing)';
 
 interface SocialLink {
   title: string;

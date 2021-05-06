@@ -7,6 +7,7 @@ import {
   MENU_BG_COLOR,
   MENU_DECORATION_COLOR,
   MENU_BACKDROP_COLOR,
+  MENU_VERTICAL_DECORATION_HEIGHT,
 } from '../../../config';
 import LoaderMobileMenuView from '../loader-mobile-menu/LoaderMobileMenu.view';
 import { GrClose } from 'react-icons/gr';
@@ -56,13 +57,13 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           <div
             style={{
               position: 'absolute',
-              bottom: 'calc(var(--height-menu) - 8px)',
+              bottom: `calc(var(--height-menu) - ${MENU_VERTICAL_DECORATION_HEIGHT})`,
               minWidth: 190,
               right: 'var(--spacing)',
               borderRadius: 'var(--spacing)',
               backgroundColor: MENU_DECORATION_COLOR,
               minHeight: 50,
-              zIndex: 110,
+              zIndex: 115,
             }}
           >
             <div
@@ -89,7 +90,6 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           </div>
           <div
             style={{
-              overflow: 'hidden',
               display: 'flex',
               flexDirection: 'row',
               position: 'fixed',
@@ -97,7 +97,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
               right: 0,
               height: 'var(--height-menu)',
               backgroundColor: MENU_BG_COLOR,
-              zIndex: 105,
+              zIndex: 110,
               marginRight: 'var(--spacing)',
               marginLeft: 'var(--spacing)',
               borderBottomLeftRadius: 'var(--spacing)',

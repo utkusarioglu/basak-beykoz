@@ -2,11 +2,16 @@ import React from 'react';
 import type { FC } from 'react';
 import { useSelector } from 'react-redux';
 import ConcaveCornerView from '../concave-corner/ConcaveCorner.view';
-import { MENU_DECORATION_COLOR } from '../../../config';
+import {
+  MENU_DECORATION_COLOR,
+  MENU_VERTICAL_DECORATION_HEIGHT,
+} from '../../../config';
 
 interface MobileHeaderButtonViewProps {
   onClick: () => void;
   selector: (state: any) => boolean;
+  listPosition: number;
+  listLength: number;
 }
 
 const DECORATION_SIZE = 'var(--spacing)';
@@ -15,8 +20,11 @@ const MobileHeaderButtonView: FC<MobileHeaderButtonViewProps> = ({
   onClick,
   children,
   selector,
+  listLength,
+  listPosition,
 }) => {
   const selected = useSelector(selector);
+  const isLast = listPosition === listLength - 1;
 
   return (
     <div
@@ -25,6 +33,8 @@ const MobileHeaderButtonView: FC<MobileHeaderButtonViewProps> = ({
       }}
     >
       {selected && (
+        // You could need an "!isFirst" check above if the
+        // lists weren't all facing right
         <ConcaveCornerView
           fill={MENU_DECORATION_COLOR}
           horizontalDirection="left"
@@ -33,12 +43,13 @@ const MobileHeaderButtonView: FC<MobileHeaderButtonViewProps> = ({
             width: DECORATION_SIZE,
             height: DECORATION_SIZE,
             position: 'absolute',
-            top: 'var(--spacing)',
+            top: MENU_VERTICAL_DECORATION_HEIGHT,
             left: `calc(${DECORATION_SIZE} * -1)`,
             zIndex: 115,
           }}
         />
       )}
+
       <button
         onClick={onClick}
         style={{
@@ -54,6 +65,22 @@ const MobileHeaderButtonView: FC<MobileHeaderButtonViewProps> = ({
       >
         {children}
       </button>
+
+      {selected && !isLast && (
+        <ConcaveCornerView
+          fill={MENU_DECORATION_COLOR}
+          horizontalDirection="right"
+          verticalDirection="down"
+          style={{
+            width: DECORATION_SIZE,
+            height: DECORATION_SIZE,
+            position: 'absolute',
+            top: 'var(--spacing)',
+            right: `calc(${DECORATION_SIZE} * -1)`,
+            zIndex: 115,
+          }}
+        />
+      )}
     </div>
   );
 };
