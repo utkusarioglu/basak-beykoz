@@ -15,6 +15,7 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
   depth,
 }) => {
   const urlfulSlug = urlSlug(slug);
+  const hasChildren = child_items && child_items.length > 0;
 
   return (
     <div
@@ -35,7 +36,7 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
         </div>
       </LinkNavView>
 
-      {child_items && child_items.length > 0 && (
+      {hasChildren && (
         <NavMobileChildItemsView children={child_items} depth={depth + 1} />
       )}
     </div>
