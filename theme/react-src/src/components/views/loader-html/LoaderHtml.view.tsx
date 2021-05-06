@@ -1,6 +1,12 @@
 import React from 'react';
 
 const LoaderHtmlView = () => (
+  <div className="cat-loading-container">
+    <LoaderHtmlContentsView />
+  </div>
+);
+
+export const LoaderHtmlContentsView = () => (
   <div className="cat-loading">
     <div>
       <span role="img" aria-label="loading">

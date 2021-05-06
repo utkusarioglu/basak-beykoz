@@ -123,7 +123,7 @@
       text-decoration-color: rgb(0 95 53 / 63%);
     }
 
-    .cat-loading {
+    .cat-loading-container {
       position: fixed;
       top: 30%;
       left: 50%;
@@ -165,13 +165,15 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root">
-    <div class="cat-loading">
-      <div>
-        <span role="img" aria-label="cat">
-          😺
-        </span>
+    <div class="cat-loading-container">
+      <div class="cat-loading">
+        <div>
+          <span role="img" aria-label="cat">
+            😺
+          </span>
+        </div>
+        <h4>Kedi sayfayı yüklüyor...</h4>
       </div>
-      <h4>Kedi sayfayı yüklüyor...</h4>
     </div>
   </div>
   </body>

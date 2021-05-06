@@ -9,6 +9,7 @@ import FooterLayout from '../../layouts/footer/Footer.layout';
 import HeaderLayout from '../../layouts/header/Header.layout';
 import { HOME_SLUG, DESKTOP_MIN_WIDTH } from '../../../config';
 import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
+import LoaderDesktopView from '../../views/loader-desktop/LoaderDesktop.view';
 import { routes } from './routeConfig';
 import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
 import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
@@ -61,7 +62,7 @@ const AppRouter = () => {
           </Suspense>
         )}
 
-        <LoaderEdgeView />
+        {isDesktop ? <LoaderDesktopView /> : <LoaderEdgeView />}
 
         <div className="min-height-100-p">
           <Switch>
