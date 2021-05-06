@@ -27,6 +27,7 @@ export const DESKTOP_MIN_WIDTH = 800;
 export const MENU_BG_COLOR = 'var(--brush-white)';
 export const MENU_DECORATION_COLOR = 'var(--brush-darkYellow)';
 export const MENU_BACKDROP_COLOR = 'var(--brush-black-transparent)';
+export const MENU_ITEM_ACTIVE_COLOR = 'var(--brush-darkYellow)';
 
 export const MENU_ITEM_HOVERED_COLOR = 'var(--brush-lightGreen)';
 export const MENU_BORDER_RADIUS = 'calc(var(--spacing) * 2)';

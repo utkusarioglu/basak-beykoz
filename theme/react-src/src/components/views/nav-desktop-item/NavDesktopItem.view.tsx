@@ -8,11 +8,15 @@ import { LinkNavView } from '../link-nav/LinkNav.view';
 import { useLocation } from 'react-router-dom';
 import { ReactComponent as Stars } from '../../../static/nav-desktop-stars.svg';
 import ConcaveCornerView from '../concave-corner/ConcaveCorner.view';
-import { MENU_ITEM_HOVERED_COLOR, MENU_BORDER_RADIUS } from '../../../config';
+import {
+  MENU_ITEM_HOVERED_COLOR,
+  MENU_BORDER_RADIUS,
+  MENU_ITEM_ACTIVE_COLOR,
+} from '../../../config';
 
 type NavDesktopItemViewProps = WpMenuItem & { depth: number };
 
-const MENU_ITEM_HORIZONTAL_SPACING = 'calc(var(--spacing) * 2)';
+const DESKTOP_MENU_ITEM_HORIZONTAL_SPACING = 'calc(var(--spacing) * 2)';
 const MENU_ITEM_VERTICAL_SPACING_DEEP = 'calc(var(--spacing) * 1.5)';
 
 export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
@@ -44,38 +48,29 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
         }}
       >
         <LinkNavView urlfulSlug={urlfulSlug}>
-          <h4
+          <div
             style={{
-              marginTop: depth > 0 ? MENU_ITEM_VERTICAL_SPACING_DEEP : '',
-              marginBottom: depth > 0 ? MENU_ITEM_VERTICAL_SPACING_DEEP : '',
+              width: 'max-content',
+              position: 'relative',
               marginLeft:
                 depth > 1
-                  ? `calc(${MENU_ITEM_HORIZONTAL_SPACING} * ${depth})`
-                  : MENU_ITEM_HORIZONTAL_SPACING,
-              marginRight: MENU_ITEM_HORIZONTAL_SPACING,
+                  ? `calc(${DESKTOP_MENU_ITEM_HORIZONTAL_SPACING} * ${depth})`
+                  : DESKTOP_MENU_ITEM_HORIZONTAL_SPACING,
+              marginRight: DESKTOP_MENU_ITEM_HORIZONTAL_SPACING,
             }}
           >
-            {title}
-          </h4>
+            {isActive && <ActiveIndicatorView depth={depth} />}
 
-          {isActive && (
-            <Stars
+            <h4
               style={{
-                position: 'absolute',
-                top: '50%',
-                left: depth === 0 ? '50%' : 40,
-                height: 50,
-                width: 70,
-                color: 'red',
-                stroke: 'pink',
-                fill: 'var(--brush-darkYellow)',
-                transform: 'translate(-50%, -50%)',
-                pointerEvents: 'none',
-                opacity: 0.6,
-                // zIndex: -1,
+                position: 'relative',
+                marginTop: depth > 0 ? MENU_ITEM_VERTICAL_SPACING_DEEP : '',
+                marginBottom: depth > 0 ? MENU_ITEM_VERTICAL_SPACING_DEEP : '',
               }}
-            />
-          )}
+            >
+              {title}
+            </h4>
+          </div>
 
           {hovered && hasChildren && (
             <ConcaveCornerView
@@ -99,5 +94,36 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
     </div>
   );
 };
+
+interface ActiveIndicatorViewProps {
+  depth: number;
+}
+
+const ActiveIndicatorView: FC<ActiveIndicatorViewProps> = ({ depth }) => (
+  <>
+    <Stars
+      style={{
+        fill: MENU_ITEM_ACTIVE_COLOR,
+        height: 60,
+        left: depth === 0 ? '50%' : 40,
+        pointerEvents: 'none',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 80,
+      }}
+    />
+    <div
+      style={{
+        backgroundColor: MENU_ITEM_ACTIVE_COLOR,
+        borderRadius: '50%',
+        height: '4px',
+        position: 'absolute',
+        top: `calc(50% + 1em /2)`,
+        width: '100%',
+      }}
+    />
+  </>
+);
 
 export default NavDesktopItemView;

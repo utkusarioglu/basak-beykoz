@@ -4,7 +4,10 @@ import { WpMenuItem } from '../../../@types/wp-types';
 import { urlSlug } from '../../../utils/slug.util';
 import NavMobileChildItemsView from './NavMobileChildItems.view';
 import { LinkNavView } from '../link-nav/LinkNav.view';
-import { MOBILE_MENU_PADDING } from '../../../config';
+import {
+  MOBILE_MENU_PADDING as MOBILE_MENU_ITEM_SPACING,
+  MENU_ITEM_ACTIVE_COLOR,
+} from '../../../config';
 import { useLocation } from 'react-router';
 import { ReactComponent as Stars } from '../../../static/nav-desktop-stars.svg';
 
@@ -31,34 +34,26 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
       <LinkNavView urlfulSlug={urlfulSlug}>
         <div
           style={{
-            marginLeft: MOBILE_MENU_PADDING.horizontal,
-            marginRight: MOBILE_MENU_PADDING.horizontal,
-            paddingTop: MOBILE_MENU_PADDING.vertical,
-            paddingBottom: MOBILE_MENU_PADDING.vertical,
+            width: 'max-content',
+            position: 'relative',
+            marginLeft: MOBILE_MENU_ITEM_SPACING.horizontal,
+            marginRight: MOBILE_MENU_ITEM_SPACING.horizontal,
           }}
         >
-          {title}
+          {isActive && <ActiveIndicatorView depth={depth} />}
+
+          <div
+            style={{
+              position: 'relative',
+              width: 'max-content',
+              paddingTop: MOBILE_MENU_ITEM_SPACING.vertical,
+              paddingBottom: MOBILE_MENU_ITEM_SPACING.vertical,
+            }}
+          >
+            {title}
+          </div>
         </div>
       </LinkNavView>
-
-      {isActive && (
-        <Stars
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: 30,
-            height: 40,
-            width: 50,
-            color: 'red',
-            stroke: 'pink',
-            fill: 'var(--brush-darkYellow)',
-            transform: 'translate(-50%, -50%)',
-            pointerEvents: 'none',
-            opacity: 0.6,
-            // zIndex: -1,
-          }}
-        />
-      )}
 
       {hasChildren && (
         <NavMobileChildItemsView children={child_items} depth={depth + 1} />
@@ -66,5 +61,36 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
     </div>
   );
 };
+
+interface ActiveIndicatorViewProps {
+  depth: number;
+}
+
+const ActiveIndicatorView: FC<ActiveIndicatorViewProps> = ({ depth }) => (
+  <>
+    <Stars
+      style={{
+        fill: MENU_ITEM_ACTIVE_COLOR,
+        height: 50,
+        left: 30,
+        pointerEvents: 'none',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 60,
+      }}
+    />
+    <div
+      style={{
+        backgroundColor: MENU_ITEM_ACTIVE_COLOR,
+        borderRadius: '50%',
+        height: '4px',
+        position: 'absolute',
+        top: `calc(50% + 0.9em /2)`,
+        width: '100%',
+      }}
+    />
+  </>
+);
 
 export default NavMobileItemView;
