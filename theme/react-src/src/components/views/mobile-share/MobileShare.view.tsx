@@ -18,19 +18,19 @@ const iconProps = {
   size: 35,
   style: {
     borderRadius: 'var(--spacing)',
+    marginRight: 'var(--spacing)',
   },
 };
 
 const buttonProps = {
   style: {
-    display: 'grid',
-    gridTemplateColumns: `${iconProps.size}px 1fr`,
+    display: 'flex',
+    flexDirection: 'row' as 'row', // fixes issue with react-share
     alignItems: 'center',
     paddingRight: MOBILE_MENU_PADDING.horizontal,
     paddingLeft: MOBILE_MENU_PADDING.horizontal,
     paddingTop: MOBILE_MENU_PADDING.vertical,
     paddingBottom: MOBILE_MENU_PADDING.vertical,
-    gridColumnGap: 'var(--spacing)',
   },
 };
 
@@ -47,7 +47,6 @@ const MobileShareView = () => {
   return (
     <div
       style={{
-        // marginTop: 'calc(var(--spacing) * 2)',
         marginBottom: 'calc(var(--spacing) * 2)',
       }}
     >
