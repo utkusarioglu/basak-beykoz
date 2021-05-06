@@ -22,6 +22,7 @@ const HeaderLayout = () => {
         height: isDesktop ? 'var(--height-desktop-menu)' : 'var(--height-menu)',
         backgroundColor: 'rgb(251, 251, 251, 0.5)',
         backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
         zIndex: 100,
         paddingRight: isDesktop ? '5vw' : 'var(--spacing)',
         paddingLeft: isDesktop ? '5vw' : 'var(--spacing)',

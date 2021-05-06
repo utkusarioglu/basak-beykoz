@@ -33,8 +33,9 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
             height: '100%',
             width: '100%',
             zIndex: 105,
-            backdropFilter: 'blur(4px)',
             backgroundColor: MENU_BACKDROP_COLOR,
+            backdropFilter: 'blur(4px)',
+            WebkitBackdropFilter: 'blur(4px)',
           }}
         >
           <button
