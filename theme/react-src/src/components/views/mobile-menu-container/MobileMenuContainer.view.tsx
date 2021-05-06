@@ -42,7 +42,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
               position: 'fixed',
               top: 'var(--spacing)',
               right: 'var(--spacing)',
-              backgroundColor: 'var(brush--white)',
+              backgroundColor: 'var(--brush-white)',
               borderRadius: '50%',
               border: 0,
               padding: 'var(--spacing)',
