@@ -17,8 +17,8 @@ const ConcaveCornerView: FC<ConcaveCornerViewProps> = ({
   // TODO replace this with a cheap hash
   const maskName = Math.random().toString();
   return (
-    <svg viewBox="0 0 25 25" style={style}>
-      <defs>
+    <svg viewBox="0 0 25 25" style={style} className="concave-border">
+      <defs fill="black">
         <mask id={maskName} x="0" y="0" width="25" height="25">
           <rect x="0" y="0" width="25" height="25" fill="#fff" />
           <circle
