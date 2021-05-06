@@ -18,6 +18,8 @@ const iconProps = {
   style: {
     padding: HEADER_ICON_PADDING,
     color: HEADER_ICON_COLOR,
+    // type casting fixes type issue with react-icons
+    boxSizing: 'content-box' as 'content-box',
   },
 };
 
