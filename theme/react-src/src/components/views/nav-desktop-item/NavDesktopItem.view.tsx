@@ -21,10 +21,11 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
   child_items,
   depth,
 }) => {
+  const urlfulSlug = urlSlug(slug);
   const location = useLocation();
   let [hovered, setHovered] = useState(false);
-  const urlfulSlug = urlSlug(slug);
   const hasChildren = child_items && child_items.length > 0;
+  const isActive = urlfulSlug === location.pathname;
 
   return (
     <div
@@ -57,9 +58,8 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
             {title}
           </h4>
 
-          {urlfulSlug === location.pathname && (
+          {isActive && (
             <Stars
-              fill="red"
               style={{
                 position: 'absolute',
                 top: '50%',
@@ -71,8 +71,8 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
                 fill: 'var(--brush-darkYellow)',
                 transform: 'translate(-50%, -50%)',
                 pointerEvents: 'none',
-                // opacity: 0.6,
-                zIndex: -1,
+                opacity: 0.6,
+                // zIndex: -1,
               }}
             />
           )}
@@ -80,7 +80,7 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
           {hovered && hasChildren && (
             <ConcaveCornerView
               fill={MENU_ITEM_HOVERED_COLOR}
-              horizontalDirection="left"
+              horizontalDirection="right"
               verticalDirection="up"
               style={{
                 position: 'absolute',

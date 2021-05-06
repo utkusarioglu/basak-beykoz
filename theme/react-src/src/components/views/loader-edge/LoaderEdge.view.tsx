@@ -19,7 +19,7 @@ const LoaderEdge = () => {
     <>
       <ConcaveCornerView
         fill={LOADER_BG_COLOR}
-        horizontalDirection="left"
+        horizontalDirection="right"
         verticalDirection="down"
         style={{
           position: 'fixed',
@@ -33,7 +33,7 @@ const LoaderEdge = () => {
 
       <ConcaveCornerView
         fill={LOADER_BG_COLOR}
-        horizontalDirection="right"
+        horizontalDirection="left"
         verticalDirection="down"
         style={{
           position: 'fixed',
