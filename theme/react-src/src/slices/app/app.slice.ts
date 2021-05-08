@@ -14,6 +14,7 @@ import type {
   SetMobileShareState,
   ToggleMobileShareState,
   SelectMobileShareState,
+  CloseAllMenus,
 } from './app.slice.types';
 import {
   LOADING_INDICATOR_APPEAR_AFTER,
@@ -181,3 +182,11 @@ export const toggleMobileShareState: ToggleMobileShareState = () =>
  */
 export const selectMobileShareState: SelectMobileShareState = (state) =>
   state.app.mobileShareOpen;
+
+/**
+ * Closes all the menus owned by app slice
+ */
+export const closeAllMenus: CloseAllMenus = () => {
+  dispatch(actions.setMobileNavState(false));
+  dispatch(actions.setMobileShareState(false));
+};

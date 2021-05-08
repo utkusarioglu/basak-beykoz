@@ -37,3 +37,5 @@ export type SelectMobileShareState = Selector<
   RootState,
   AppSliceState['mobileShareOpen']
 >;
+
+export type CloseAllMenus = () => void;
