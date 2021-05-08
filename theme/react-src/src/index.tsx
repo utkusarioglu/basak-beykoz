@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import reportWebVitals from './reportWebVitals';
 import AppRouter from './components/routers/app/App.router';
 import { GOOGLE_ANALYTICS_ID } from './config';
+import './index.scss';
 
 ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: false });
 
