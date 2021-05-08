@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { WrtSingularItem } from '../../../@types/wp-types';
 import { LinkPreloaderSingularView } from '../link-preloader/LinkPreloader.view';
@@ -6,37 +6,41 @@ import { urlSlug } from '../../../utils/slug.util';
 import { useMediaQuery } from 'react-responsive';
 import { DESKTOP_MIN_WIDTH } from '../../../config';
 
-type PostCardSkeletonProps = {
-  asSkeleton: true;
-  opacity: number;
-};
-
-type BlogPostCardViewProps =
-  | {
-      asSkeleton: false;
-      item: WrtSingularItem;
-    }
-  | PostCardSkeletonProps;
-
-const dateFormat = new Intl.DateTimeFormat('TR-TR');
+type BlogPostCardViewProps = {
+  asSkeleton: boolean;
+  opacity?: number;
+} & Pick<
+  WrtSingularItem,
+  'slug' | 'title' | 'date' | 'excerpt' | 'thumbnail' | 'categories'
+>;
 
 const DETAILS_PADDING = 'calc(var(--spacing) /2 )';
+const SKELETON_COLOR =
+  'linear-gradient(to right, var(--brush-lightBlue), var(--brush-lightGray))';
 
-const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
+const asSkeletonProps: CSSProperties = {
+  background: SKELETON_COLOR,
+  color: 'transparent',
+  borderRadius: 'var(--spacing)',
+};
+
+const BlogPostCardView: FC<BlogPostCardViewProps> = ({
+  asSkeleton,
+  opacity = 1,
+  slug,
+  title,
+  date,
+  excerpt,
+  thumbnail,
+  categories,
+}) => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
-
-  if (props.asSkeleton === true) {
-    return (
-      <div style={{ opacity: props.opacity }}>Loading...{props.opacity}</div>
-    );
-  }
-
-  const { slug, title, date, excerpt, thumbnail, categories } = props.item;
 
   return (
     <LinkPreloaderSingularView to={urlSlug(slug)}>
       <div
         style={{
+          opacity,
           display: 'grid',
           ...(isDesktop
             ? {
@@ -46,7 +50,6 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
                     "thumbnail summary"
                   `,
                 gridTemplateColumns: '4fr 6fr',
-                gridTemplateRows: '4fr', // ! this doesn't work for setting square thumbnails
                 paddingRight: 'calc(var(--spacing) * 2)',
                 gridColumnGap: 'calc(var(--spacing) * 2)',
               }
@@ -71,62 +74,74 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
             gridArea: 'thumbnail',
             height: isDesktop ? '100%' : '40vw',
             width: '100%',
-            backgroundImage: `url(${thumbnail})`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
             borderRadius: 'var(--spacing)',
+            ...(asSkeleton
+              ? {
+                  background: SKELETON_COLOR,
+                }
+              : {
+                  backgroundImage: `url(${thumbnail})`,
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                }),
           }}
         />
-        <h4
+
+        <div
           style={{
             gridArea: 'title',
-            marginTop: isDesktop ? 0 : 'var(--spacing)',
             marginBottom: 'var(--spacing)',
             ...(!isDesktop && {
               paddingLeft: 'var(--spacing)',
               paddingRight: 'var(--spacing)',
             }),
           }}
-          dangerouslySetInnerHTML={{ __html: title }}
-        />
+        >
+          <h4
+            style={{
+              margin: 0,
+              ...(asSkeleton && asSkeletonProps),
+            }}
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
+        </div>
+
         <div
           style={{
             gridArea: 'date-and-categories',
             marginTop: `calc(${DETAILS_PADDING} * -2)`,
-            ...(isDesktop
-              ? {
-                  // marginLeft: `calc(${DETAILS_PADDING} * -1)`,
-                }
-              : {
-                  paddingLeft: 'var(--spacing)',
-                  paddingRight: 'var(--spacing)',
-                }),
+            ...(!isDesktop && {
+              paddingLeft: 'var(--spacing)',
+              paddingRight: 'var(--spacing)',
+            }),
           }}
         >
           <time
             dateTime={date}
             style={{
-              // gridArea: 'date',
               fontSize: '0.7em',
               backgroundColor: 'var(--brush-lightBlue)',
               padding: DETAILS_PADDING,
               borderRadius: DETAILS_PADDING,
               marginRight: DETAILS_PADDING,
+              ...(asSkeleton && asSkeletonProps),
             }}
           >
-            {dateFormat.format(new Date(date))}
+            {date}
           </time>
 
           {categories.map((category) => (
             <span
               key={category}
               style={{
+                minWidth: 100,
                 fontSize: '0.7em',
                 backgroundColor: 'var(--brush-lightYellow)',
                 padding: DETAILS_PADDING,
                 borderRadius: DETAILS_PADDING,
                 marginRight: DETAILS_PADDING,
+                ...(asSkeleton && asSkeletonProps),
               }}
             >
               {category}
@@ -134,19 +149,28 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = (props) => {
           ))}
         </div>
 
-        <p
+        <div
           style={{
             gridArea: 'summary',
-            margin: 0,
             ...(!isDesktop && {
               paddingLeft: 'var(--spacing)',
               paddingRight: 'var(--spacing)',
             }),
+            margin: 0,
           }}
-          dangerouslySetInnerHTML={{
-            __html: excerpt,
-          }}
-        />
+        >
+          <p
+            style={{
+              margin: 0,
+              padding: 0,
+              minHeight: 50,
+              ...(asSkeleton && asSkeletonProps),
+            }}
+            dangerouslySetInnerHTML={{
+              __html: excerpt,
+            }}
+          />
+        </div>
       </div>
     </LinkPreloaderSingularView>
   );

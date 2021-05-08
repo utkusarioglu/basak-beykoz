@@ -7,6 +7,17 @@ interface PostCardSkeletonsViewProps {
   minOpacity: number;
 }
 
+/**
+ * Produces a unique filler for each call
+ */
+let getFiller = (function* () {
+  const starter = '-';
+  let index = 1;
+  while (true) {
+    yield starter.repeat(++index);
+  }
+})();
+
 const PostCardSkeletonsView: FC<PostCardSkeletonsViewProps> = ({
   count,
   minOpacity,
@@ -19,6 +30,12 @@ const PostCardSkeletonsView: FC<PostCardSkeletonsViewProps> = ({
           key={i}
           asSkeleton={true}
           opacity={1 - (i * (1 - minOpacity)) / count}
+          slug={getFiller.next().value}
+          title={getFiller.next().value}
+          date="1970-01-01 00:00:00"
+          excerpt={getFiller.next().value}
+          thumbnail={getFiller.next().value}
+          categories={[getFiller.next().value, getFiller.next().value]}
         />
       ))}
   </>

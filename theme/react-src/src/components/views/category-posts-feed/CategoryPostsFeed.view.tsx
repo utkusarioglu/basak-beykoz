@@ -30,12 +30,12 @@ const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
   return (
     <>
       {isLoading ? (
-        <PostCardSkeletonsView count={5} minOpacity={0.5} />
+        <PostCardSkeletonsView count={5} minOpacity={0.3} />
       ) : posts.length > 0 ? (
         posts
           .filter((post) => post.slug !== excludePostSlug)
           .map((post) => (
-            <PostCardView key={post.id} asSkeleton={false} item={post} />
+            <PostCardView key={post.id} asSkeleton={false} {...post} />
           ))
       ) : (
         <NoPostsView />
