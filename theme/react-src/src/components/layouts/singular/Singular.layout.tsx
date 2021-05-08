@@ -21,7 +21,11 @@ const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
       <SingularView {...singular} />
 
       {singular.type === 'post' && (
-        <>
+        <div
+          style={{
+            marginTop: '10vh',
+          }}
+        >
           <h3>
             Daha fazlası{' '}
             <span role="img" aria-label="love">
@@ -32,7 +36,7 @@ const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
             categorySlug={singular.category}
             excludePostSlug={singular.slug}
           />
-        </>
+        </div>
       )}
     </StandardLayout>
   );
