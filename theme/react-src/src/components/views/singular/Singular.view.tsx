@@ -5,7 +5,7 @@ type SingularViewProps = SingularSliceRenderEnabled;
 
 const SingularView: FC<SingularViewProps> = ({ content }) => {
   return (
-    <div
+    <article
       className="singular-view"
       dangerouslySetInnerHTML={{ __html: content }}
     />
