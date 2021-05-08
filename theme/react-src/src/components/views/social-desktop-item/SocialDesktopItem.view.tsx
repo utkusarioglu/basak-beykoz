@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { AiFillLinkedin, AiFillInstagram } from 'react-icons/ai';
 import { MENU_ITEM_HOVERED_COLOR } from '../../../config';
 import { useState } from 'react';
-import { SOCIAL_DESKTOP_ICON_SIZE } from '../social-desktop/SocialDesktop.view';
+import { SOCIAL_DESKTOP_ICON_SIZE } from '../../../config';
 
 interface SocialDesktopItemViewProps {
   title: string;

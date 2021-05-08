@@ -33,6 +33,8 @@ export const MENU_ITEM_HOVERED_COLOR = 'var(--brush-lightGreen)';
 export const MENU_BORDER_RADIUS = 'calc(var(--spacing) * 2)';
 export const MENU_VERTICAL_DECORATION_HEIGHT = 'var(--spacing)';
 
+export const SOCIAL_DESKTOP_ICON_SIZE = '1.5em';
+
 interface SocialLink {
   title: string;
   type: string;
