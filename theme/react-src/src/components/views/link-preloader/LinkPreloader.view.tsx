@@ -8,8 +8,7 @@ import {
 } from '../../../slices/app/app.slice';
 import { lazyWithPreload } from '../../../utils/lazyWithPreload.util';
 import prefetcher from '../../../services/prefetch.service';
-import { cleanSlug } from '../../../utils/slug.util';
-import { jumpTop } from '../../../utils/scroll';
+import { jumpTop } from '../../../utils/scroll.util';
 
 interface PreloaderLinkProps {
   to: string;
