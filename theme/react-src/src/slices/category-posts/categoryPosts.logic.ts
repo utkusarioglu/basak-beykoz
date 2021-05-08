@@ -1,4 +1,5 @@
 import { WrtSingularItem } from '../../@types/wp-types';
+import { formatDate } from '../../utils/date.util';
 
 /**
  *
@@ -47,12 +48,7 @@ function buildExcerpt({ content, excerpt }: WrtSingularItem): string {
 }
 
 /**
- * Converts the post to the format that the slice state requires
- *
- * @remarks
- * Not much actually changes with the post slice items for this project. But
- * the possibility of the excerpt being lacking has created the need to do
- * some processing on the client side.
+ * Converts the post to the format that the slice state requires.
  *
  * @param rawPost post coming from the server
  * @returns post with props that the frontend app expects
@@ -61,5 +57,6 @@ export function prepareSlicePost(rawPost: WrtSingularItem): WrtSingularItem {
   return {
     ...rawPost,
     excerpt: buildExcerpt(rawPost),
+    date: formatDate(rawPost.date),
   };
 }
