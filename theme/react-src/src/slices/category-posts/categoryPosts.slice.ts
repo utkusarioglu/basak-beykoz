@@ -2,14 +2,15 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { dispatch } from '../../store';
 import {
-  PostsSliceState,
+  CategoryPostsSliceState,
   SetPostsPayload,
   SetPosts,
   ClearPosts,
   SelectPosts,
 } from './categoryPosts.slice.types';
+import { prepareSlicePost } from './categoryPosts.logic';
 
-const initialState: PostsSliceState = {
+const initialState: CategoryPostsSliceState = {
   slug: '',
   fetchTime: 0,
   items: [],
@@ -35,7 +36,7 @@ const { reducer, actions } = createSlice({
     ) => ({
       slug,
       fetchTime: Date.now(),
-      items,
+      items: items.map(prepareSlicePost),
     }),
   },
 });
