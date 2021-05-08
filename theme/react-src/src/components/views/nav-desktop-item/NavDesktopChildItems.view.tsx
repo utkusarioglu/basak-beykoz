@@ -9,6 +9,8 @@ type NavChildItemsViewProps = {
   depth: number;
 };
 
+const MENU_HOVER_HACK_HEIGHT = 200;
+
 const NavDesktopChildItemsView: FC<NavChildItemsViewProps> = ({
   children,
   depth,
@@ -28,6 +30,26 @@ const NavDesktopChildItemsView: FC<NavChildItemsViewProps> = ({
     {children.map((item) => (
       <NavDesktopItemView {...{ ...item, depth, key: item.ID }} />
     ))}
+
+    {
+      /**
+       * Creates a transparent div at the end of the depth === 1 menu so that
+       * the size fluctuations caused by the children don't end the hover state
+       * prematurely. This is a hacky method to increase UX but this will
+       * hold for a while.
+       */
+      depth === 1 && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: -MENU_HOVER_HACK_HEIGHT,
+            width: '100%',
+            height: MENU_HOVER_HACK_HEIGHT,
+            zIndex: 90,
+          }}
+        />
+      )
+    }
   </div>
 );
 
