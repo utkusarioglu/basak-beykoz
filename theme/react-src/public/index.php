@@ -75,7 +75,7 @@
       font-family: 'Raleway', sans-serif;
     }
 
-    p, a, span, div {
+    p, a, span, div, button {
       font-family: 'Nunito', sans-serif;
       color: var(--brush-darkBlue);
       text-decoration: none;
