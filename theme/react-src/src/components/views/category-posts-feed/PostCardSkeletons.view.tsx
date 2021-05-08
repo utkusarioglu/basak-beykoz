@@ -11,10 +11,9 @@ interface PostCardSkeletonsViewProps {
  * Produces a unique filler for each call
  */
 let getFiller = (function* () {
-  const starter = '-';
   let index = 1;
   while (true) {
-    yield starter.repeat(++index);
+    yield `${++index}`.padStart(10, '-');
   }
 })();
 
@@ -32,7 +31,7 @@ const PostCardSkeletonsView: FC<PostCardSkeletonsViewProps> = ({
           opacity={1 - (i * (1 - minOpacity)) / count}
           slug={getFiller.next().value}
           title={getFiller.next().value}
-          date="1970-01-01 00:00:00"
+          date="1970-01-01"
           excerpt={getFiller.next().value}
           thumbnail={getFiller.next().value}
           categories={[getFiller.next().value, getFiller.next().value]}
