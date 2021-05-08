@@ -13,7 +13,6 @@ class Rest {
    * @param errorCode errorCode from the server
    */
   private handleError(errorCode: string) {
-    console.log(`Fetch error: ${errorCode}`);
     return {
       state: 'fail',
       errorCode,
@@ -112,7 +111,7 @@ class Rest {
         .then((response) => response.json())
         .then((data) => {
           if (data.code) {
-            throw new Error(data.code)
+            throw new Error(data.code);
           }
           return data;
         })
