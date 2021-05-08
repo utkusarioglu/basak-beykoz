@@ -33,7 +33,7 @@ const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
             </span>
           </h3>
           <CategoryPostsFeedView
-            categorySlug={singular.category}
+            categorySlug={singular.categories.join(',')}
             excludePostSlug={singular.slug}
           />
         </div>

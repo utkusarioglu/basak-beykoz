@@ -156,6 +156,11 @@ function build_post_item()
 {
   global $post;
   $categories = get_the_category($post->ID);
+  $category_names = array();
+
+  foreach($categories as $category) {
+    array_push($category_names, $category->cat_name);
+  }
 
   $item = array(
     'title' => $post->post_title,
@@ -167,7 +172,7 @@ function build_post_item()
     'excerpt' => $post->post_excerpt,
     'status' => $post->post_status,
     'slug' => $post->post_name,
-    'category' => $categories[0]->cat_name,
+    'categories' => $category_names,
     'comment_count' => $post->comment_count,
     'comment_status' => $post->comment_status,
     'thumbnail' => get_the_post_thumbnail_url(),

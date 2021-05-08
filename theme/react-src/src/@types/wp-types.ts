@@ -27,7 +27,7 @@ export type WrtSingularItem = {
   excerpt: string;
   status: singularStatus;
   slug: string;
-  category: string;
+  categories: string[];
   comment_count: number;
   comment_status: commentStatus;
   thumbnail: string;
