@@ -8,6 +8,8 @@ import {
 } from '../../../slices/app/app.slice';
 import { lazyWithPreload } from '../../../utils/lazyWithPreload.util';
 import prefetcher from '../../../services/prefetch.service';
+import { cleanSlug } from '../../../utils/slug.util';
+import { jumpTop } from '../../../utils/scroll';
 
 interface PreloaderLinkProps {
   to: string;
@@ -16,6 +18,7 @@ interface PreloaderLinkProps {
   onSelect?: () => void;
   onLoadComplete?: () => void;
   style?: CSSProperties;
+  jumpTop?: boolean;
 }
 
 /**
@@ -32,6 +35,7 @@ const LinkPreloaderView: FC<PreloaderLinkProps> = ({
   onSelect,
   prefetch = () => Promise.resolve(),
   onLoadComplete,
+  jumpTop: jumpTopEnabled = true,
 }) => {
   const history = useHistory();
 
@@ -44,10 +48,14 @@ const LinkPreloaderView: FC<PreloaderLinkProps> = ({
       .then(() => {
         history.push(to);
       })
+      .catch((e) => {
+        history.push(`/error?code=${e}&referrer=${cleanSlug(to)}`);
+      })
       .finally(() => {
         cancelIsLoading();
         disableIsLoadingDelayed();
         onLoadComplete && onLoadComplete();
+        jumpTopEnabled && jumpTop();
       });
   };
 
