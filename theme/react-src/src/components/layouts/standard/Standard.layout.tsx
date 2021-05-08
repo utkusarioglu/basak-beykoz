@@ -48,9 +48,15 @@ const StandardLayout: FC<StandardLayoutProps> = ({
         >
           <div
             style={{
-              background: `var(--brush-lightGreen) url(${thumbnailUrl}) no-repeat center center`,
-              backgroundSize: 'cover', // FIXME  there seems to be a react issue with this
-              filter: 'sepia(50%) opacity(.5)',
+              backgroundColor: 'var(--brush-lightGreen)',
+              ...(thumbnailUrl && {
+                backgroundImage: `url(${thumbnailUrl})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPositionX: 'center',
+                backgroundPositionY: 'center',
+                backgroundSize: 'cover', // FIXME  there seems to be a react issue with this
+                filter: 'sepia(50%) opacity(.5)',
+              }),
               width: '100%',
               height: '100%',
               position: 'relative',
@@ -65,7 +71,6 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                 position: 'absolute',
                 bottom: -8,
                 borderRadius: 8,
-                // boxShadow: '0px -4px 4px var(--brush-black-transparent)',
               }}
             />
           )}
