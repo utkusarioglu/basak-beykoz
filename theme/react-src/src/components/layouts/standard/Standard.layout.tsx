@@ -1,7 +1,12 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { DESKTOP_MIN_WIDTH } from '../../../config';
+import {
+  DESKTOP_MIN_WIDTH,
+  VERTICAL_WHITESPACE_DESKTOP,
+} from '../../../config';
+
+const THUMBNAIL_WIDTH_DESKTOP = '30vw';
 
 interface StandardLayoutProps {
   title: string;
@@ -31,9 +36,8 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                   position: 'fixed',
                   left: 0,
                   bottom: 0,
-                  // top: 'var(--height-desktop-menu)',
                   top: 0,
-                  width: '25vw',
+                  width: THUMBNAIL_WIDTH_DESKTOP,
                 }
               : {
                   position: 'relative',
@@ -92,14 +96,14 @@ const StandardLayout: FC<StandardLayoutProps> = ({
         style={
           !hideThumbnail && isDesktop
             ? {
-                marginLeft: '35vw',
-                marginRight: '10vw',
-                paddingTop: 'var(--height-desktop-menu)',
-                marginBottom: 150,
+                marginLeft: `calc(${THUMBNAIL_WIDTH_DESKTOP} + ${VERTICAL_WHITESPACE_DESKTOP})`, // VERTICAL_WHITESPACE_DESKTOP ??
+                marginRight: VERTICAL_WHITESPACE_DESKTOP, // VERTICAL_WHITESPACE_DESKTOP ??
+                paddingTop: '12vh', // comes from heading and some whitespace creation
               }
             : {
                 marginTop: 'var(--spacing)',
-                // marginBottom: 100,
+                marginLeft: verticalWhitespace(sideMargins, isDesktop),
+                marginRight: verticalWhitespace(sideMargins, isDesktop),
               }
         }
       >
@@ -112,8 +116,12 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   );
 };
 
-function horizontalMargins(sideMargins: boolean, isDesktop: boolean) {
-  return !sideMargins ? 0 : !isDesktop ? 'var(--spacing)' : '5vw';
+function verticalWhitespace(sideMargins: boolean, isDesktop: boolean) {
+  return !sideMargins
+    ? 0
+    : !isDesktop
+    ? 'var(--spacing)'
+    : VERTICAL_WHITESPACE_DESKTOP;
 }
 
 export default StandardLayout;
