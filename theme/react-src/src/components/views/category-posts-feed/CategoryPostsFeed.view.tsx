@@ -13,7 +13,7 @@ interface CategoryPostsFeedViewProps {
 }
 
 const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
-  categorySlug: requestSlug,
+  categorySlug: requestSlugCsv,
   excludePostSlug = undefined,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,11 +21,11 @@ const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
 
   useEffect(() => {
     prefetch.categoryPosts({
-      slug: requestSlug,
+      slug: requestSlugCsv,
       onFetchStart: () => setIsLoading(true),
       onFetchComplete: () => setIsLoading(false),
     });
-  }, [requestSlug]);
+  }, [requestSlugCsv]);
 
   return (
     <>
