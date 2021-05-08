@@ -1,7 +1,6 @@
 import React from 'react';
 import { AiFillLinkedin, AiFillInstagram } from 'react-icons/ai';
-import { SOCIAL_LINKS } from '../../../config';
-import { MOBILE_MENU_PADDING } from '../../../config';
+import { SOCIAL_LINKS, MOBILE_MENU_PADDING } from '../../../config';
 
 const SocialMobileView = () => {
   return (
