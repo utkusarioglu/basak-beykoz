@@ -16,6 +16,9 @@ const FooterLayout = () => {
           : 'calc(var(--height-footer) + var(--height-menu)',
         position: 'relative',
         textAlign: 'center',
+        marginTop: isDesktop
+          ? 'calc(var(--spacing) * 15)'
+          : 'calc(var(--spacing) * 10)',
       }}
     >
       <div

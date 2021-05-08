@@ -99,9 +99,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
               }
             : {
                 marginTop: 'var(--spacing)',
-                marginLeft: horizontalMargins(sideMargins, isDesktop),
-                marginRight: horizontalMargins(sideMargins, isDesktop),
-                marginBottom: 100,
+                // marginBottom: 100,
               }
         }
       >
