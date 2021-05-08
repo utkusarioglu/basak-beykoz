@@ -10,6 +10,7 @@ import {
 } from '../../../config';
 import { useLocation } from 'react-router';
 import { ReactComponent as Stars } from '../../../static/nav-desktop-stars.svg';
+import { closeAllMenus } from '../../../slices/app/app.slice';
 
 type NavMobileItemViewProps = WpMenuItem & { depth: number };
 
@@ -31,7 +32,7 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
         position: 'relative',
       }}
     >
-      <LinkNavView urlfulSlug={urlfulSlug}>
+      <LinkNavView urlfulSlug={urlfulSlug} onSelect={closeAllMenus}>
         <div
           style={{
             width: 'max-content',

@@ -8,9 +8,14 @@ import { findRoute } from '../../routers/app/findRoute';
 
 type NavLinkViewProps = {
   urlfulSlug: string;
+  onSelect?: () => void;
 };
 
-export const LinkNavView: FC<NavLinkViewProps> = ({ urlfulSlug, children }) => {
+export const LinkNavView: FC<NavLinkViewProps> = ({
+  urlfulSlug,
+  children,
+  onSelect,
+}) => {
   let doPreload = true;
   const restfulSlug = restSlug(urlfulSlug);
   const route = findRoute(restfulSlug);
@@ -26,11 +31,12 @@ export const LinkNavView: FC<NavLinkViewProps> = ({ urlfulSlug, children }) => {
           to={urlfulSlug}
           component={Component}
           prefetch={prefetchFunc}
+          onSelect={onSelect}
         >
           {children}
         </LinkPreloaderView>
       ) : (
-        <Link key={urlfulSlug} to={urlfulSlug}>
+        <Link key={urlfulSlug} to={urlfulSlug} onClick={onSelect}>
           {children}
         </Link>
       )}

@@ -48,14 +48,14 @@ const AppRouter = () => {
         {!isDesktop && (
           <Suspense fallback={null}>
             <LazyMobileMenuContainerView
-              selector={selectMobileNavState}
-              closer={setMobileNavState}
+              menuStateSelector={selectMobileNavState}
+              menuStateSetter={setMobileNavState}
             >
               <LazyMobileNav />
             </LazyMobileMenuContainerView>
             <LazyMobileMenuContainerView
-              selector={selectMobileShareState}
-              closer={setMobileShareState}
+              menuStateSelector={selectMobileShareState}
+              menuStateSetter={setMobileShareState}
             >
               <LazyMobileShare />
             </LazyMobileMenuContainerView>

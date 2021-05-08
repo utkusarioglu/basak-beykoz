@@ -13,6 +13,7 @@ import { selectSingular } from '../../../slices/singular/singular.slice';
 import { useSelector } from 'react-redux';
 import { MOBILE_MENU_PADDING } from '../../../config';
 import MobileMenuSectionTitleView from '../mobile-menu-section-title/MobileMenuSectionTitleViewProps';
+import { closeAllMenus } from '../../../slices/app/app.slice';
 
 const iconProps = {
   size: 35,
@@ -32,6 +33,7 @@ const buttonProps = {
     paddingTop: MOBILE_MENU_PADDING.vertical,
     paddingBottom: MOBILE_MENU_PADDING.vertical,
   },
+  onClick: closeAllMenus,
 };
 
 const MobileShareView = () => {

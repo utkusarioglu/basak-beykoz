@@ -13,101 +13,106 @@ import LoaderMobileMenuView from '../loader-mobile-menu/LoaderMobileMenu.view';
 import { GrClose } from 'react-icons/gr';
 
 interface MobileMenuContainerViewProps {
-  selector: (state: any) => boolean;
-  closer: (state: boolean) => void;
+  menuStateSelector: (state: any) => boolean;
+  menuStateSetter: (state: boolean) => void;
 }
 
 const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
-  selector,
-  closer,
+  menuStateSelector: selector,
+  menuStateSetter: closer,
   children,
 }) => {
   const menuOpen = useSelector(selector);
 
+  if (!menuOpen) {
+    return null;
+  }
+
   return (
     <>
-      {menuOpen ? (
+      <div
+        onClick={() => closer(false)}
+        style={{
+          position: 'fixed',
+          height: '100%',
+          width: '100%',
+          zIndex: 105,
+          backgroundColor: MENU_BACKDROP_COLOR,
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)',
+        }}
+      />
+
+      <button
+        onClick={() => closer(false)}
+        style={{
+          position: 'fixed',
+          top: 'var(--spacing)',
+          right: 'var(--spacing)',
+          backgroundColor: 'var(--brush-white)',
+          borderRadius: '50%',
+          border: 0,
+          padding: 'var(--spacing)',
+          width: 32,
+          height: 32,
+          zIndex: 110,
+          display: 'grid', // fixes centering issues
+        }}
+      >
+        <GrClose size={16} style={{ color: 'var(--brush-black)' }} />
+      </button>
+
+      <div
+        style={{
+          position: 'fixed',
+          bottom: `calc(var(--height-menu) - ${MENU_VERTICAL_DECORATION_HEIGHT})`,
+          minWidth: 190,
+          right: 'var(--spacing)',
+          borderRadius: 'var(--spacing)',
+          backgroundColor: MENU_DECORATION_COLOR,
+          minHeight: 50,
+          zIndex: 115,
+        }}
+      >
         <div
-          onClick={() => closer(false)}
           style={{
-            position: 'fixed',
-            height: '100%',
-            width: '100%',
-            zIndex: 105,
-            backgroundColor: MENU_BACKDROP_COLOR,
-            backdropFilter: 'blur(4px)',
-            WebkitBackdropFilter: 'blur(4px)',
+            backgroundColor: MENU_BG_COLOR,
+            borderRadius: 'var(--spacing)',
+            marginTop: 'var(--spacing)',
+            marginBottom: 'var(--spacing)',
+            minHeight: '2em',
           }}
         >
-          <button
-            style={{
-              position: 'fixed',
-              top: 'var(--spacing)',
-              right: 'var(--spacing)',
-              backgroundColor: 'var(--brush-white)',
-              borderRadius: '50%',
-              border: 0,
-              padding: 'var(--spacing)',
-              width: 31,
-              height: 31,
-            }}
-          >
-            <GrClose size={15} style={{ color: 'var(--brush-black)' }} />
-          </button>
           <div
             style={{
-              position: 'absolute',
-              bottom: `calc(var(--height-menu) - ${MENU_VERTICAL_DECORATION_HEIGHT})`,
-              minWidth: 190,
-              right: 'var(--spacing)',
-              borderRadius: 'var(--spacing)',
-              backgroundColor: MENU_DECORATION_COLOR,
-              minHeight: 50,
-              zIndex: 115,
+              overflowY: 'auto',
+              overflowX: 'hidden',
+              maxHeight: 'calc(100vh - var(--height-menu) - 150px)',
             }}
           >
-            <div
-              style={{
-                backgroundColor: MENU_BG_COLOR,
-                borderRadius: 'var(--spacing)',
-                marginTop: 'var(--spacing)',
-                marginBottom: 'var(--spacing)',
-                minHeight: '2em',
-              }}
-            >
-              <div
-                style={{
-                  overflowY: 'auto',
-                  overflowX: 'hidden',
-                  maxHeight: 'calc(100vh - var(--height-menu) - 150px)',
-                }}
-              >
-                <Suspense fallback={<LoaderMobileMenuView />}>
-                  {children}
-                </Suspense>
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              position: 'fixed',
-              bottom: 0,
-              right: 0,
-              height: 'var(--height-menu)',
-              backgroundColor: MENU_BG_COLOR,
-              zIndex: 110,
-              marginRight: 'var(--spacing)',
-              marginLeft: 'var(--spacing)',
-              borderBottomLeftRadius: 'var(--spacing)',
-              borderBottomRightRadius: 'var(--spacing)',
-            }}
-          >
-            <MobileHeaderButtonsView />
+            <Suspense fallback={<LoaderMobileMenuView />}>{children}</Suspense>
           </div>
         </div>
-      ) : null}
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          height: 'var(--height-menu)',
+          backgroundColor: MENU_BG_COLOR,
+          zIndex: 110,
+          marginRight: 'var(--spacing)',
+          marginLeft: 'var(--spacing)',
+          borderBottomLeftRadius: 'var(--spacing)',
+          borderBottomRightRadius: 'var(--spacing)',
+        }}
+      >
+        <MobileHeaderButtonsView />
+      </div>
     </>
   );
 };
