@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import SingularLayout from '../../layouts/singular/Singular.layout';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -9,36 +9,38 @@ import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
 import prefetch from '../../../services/prefetch.service';
 import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
+import { useErrorHandler } from 'react-error-boundary';
 
 const SingularRoute = () => {
+  const handleError = useRef(useErrorHandler());
   const { slug } = useParams<{ slug: string }>();
   const cleanedSlug = slug !== undefined ? slug : 'home';
-  const { pageTitle, titleSeparator, pageTagline } = window.config;
   const singular = useSelector(selectSingular);
-  const { pathname, search } = window.location;
-  ReactGA.pageview(pathname + search);
 
   useEffect(() => {
     if (!singular.render) {
-      prefetch.singular({ slug: cleanedSlug });
+      prefetch.singular({ slug: cleanedSlug }).catch(handleError.current);
     }
   }, [cleanedSlug, singular.render]);
 
+  if (!singular.render) {
+    return <LoaderHtmlView />;
+  }
+
+  const { pageTitle, titleSeparator, pageTagline } = window.config;
+  const { pathname, search } = window.location;
+  ReactGA.pageview(pathname + search);
+
   return (
     <>
-      {singular.render ? (
-        <>
-          <Helmet>
-            <title>
-              {pageTitle} {titleSeparator}{' '}
-              {singular.slug === HOME_SLUG ? pageTagline : singular.title}
-            </title>
-          </Helmet>
-          <SingularLayout singular={singular} />
-        </>
-      ) : (
-        <LoaderHtmlView />
-      )}
+      <Helmet>
+        <title>
+          {`${pageTitle} ${titleSeparator} ${
+            singular.slug === HOME_SLUG ? pageTagline : singular.title
+          }`}
+        </title>
+      </Helmet>
+      <SingularLayout singular={singular} />
     </>
   );
 };

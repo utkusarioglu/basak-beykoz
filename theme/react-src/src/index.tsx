@@ -7,14 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import AppRouter from './components/routers/app/App.router';
 import { GOOGLE_ANALYTICS_ID } from './config';
 import './index.scss';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallbackLayout from './components/layouts/error-fallback/ErrorFallback.layout';
 
-ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: false });
+ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: true });
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <AppRouter />
-    </Provider>
+    <ErrorBoundary FallbackComponent={ErrorFallbackLayout}>
+      <Provider store={store}>
+        <AppRouter />
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );

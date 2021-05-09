@@ -12,16 +12,15 @@ import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
 import LoaderDesktopView from '../../views/loader-desktop/LoaderDesktop.view';
 import { routes } from './routeConfig';
 import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
-import ErrorBoundaryUtil from '../../../utils/ErrorBoundary.util';
 import {
   selectMobileNavState,
   selectMobileShareState,
   setMobileNavState,
   setMobileShareState,
 } from '../../../slices/app/app.slice';
-import ErrorFallbackLazyView from '../../views/error-fallback-lazy/ErrorFallbackLazy.view';
 import { useMediaQuery } from 'react-responsive';
-import ErrorRoute from '../../routes/error/Error.route';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallbackLayout from '../../layouts/error-fallback/ErrorFallback.layout';
 
 const AppRouter = () => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
@@ -39,64 +38,52 @@ const AppRouter = () => {
   );
 
   return (
-    <ErrorBoundaryUtil
-      fallback={<ErrorFallbackLazyView errorCode="routing_level_error" />}
-    >
-      <Router>
-        <HeaderLayout />
+    <Router>
+      <HeaderLayout />
 
-        {!isDesktop && (
-          <Suspense fallback={null}>
-            <LazyMobileMenuContainerView
-              menuStateSelector={selectMobileNavState}
-              menuStateSetter={setMobileNavState}
-            >
-              <LazyMobileNav />
-            </LazyMobileMenuContainerView>
-            <LazyMobileMenuContainerView
-              menuStateSelector={selectMobileShareState}
-              menuStateSetter={setMobileShareState}
-            >
-              <LazyMobileShare />
-            </LazyMobileMenuContainerView>
-          </Suspense>
-        )}
+      {!isDesktop && (
+        <Suspense fallback={null}>
+          <LazyMobileMenuContainerView
+            menuStateSelector={selectMobileNavState}
+            menuStateSetter={setMobileNavState}
+          >
+            <LazyMobileNav />
+          </LazyMobileMenuContainerView>
+          <LazyMobileMenuContainerView
+            menuStateSelector={selectMobileShareState}
+            menuStateSetter={setMobileShareState}
+          >
+            <LazyMobileShare />
+          </LazyMobileMenuContainerView>
+        </Suspense>
+      )}
 
-        {isDesktop ? <LoaderDesktopView /> : <LoaderEdgeView />}
+      {isDesktop ? <LoaderDesktopView /> : <LoaderEdgeView />}
 
-        <div className="min-height-100-p">
-          <Switch>
-            <Route path={`/${HOME_SLUG}`} exact>
-              <Redirect to="/" />
+      <div className="min-height-100-p">
+        <Switch>
+          <Route path={`/${HOME_SLUG}`} exact>
+            <Redirect to="/" />
+          </Route>
+
+          {routes.map(({ path, component: Component }) => (
+            <Route path={path} exact key={path}>
+              <ErrorBoundary FallbackComponent={ErrorFallbackLayout}>
+                <Suspense fallback={<LoaderHtmlView />}>
+                  <Component />
+                </Suspense>
+              </ErrorBoundary>
             </Route>
+          ))}
 
-            <Route path="/error" exact>
-              <ErrorRoute />
-            </Route>
+          <Route>
+            <Redirect to="/404" />
+          </Route>
+        </Switch>
+      </div>
 
-            {routes.map(({ path, component: Component }) => (
-              <Route path={path} exact key={path}>
-                <ErrorBoundaryUtil
-                  fallback={
-                    <ErrorFallbackLazyView errorCode="routing_level_error" />
-                  }
-                >
-                  <Suspense fallback={<LoaderHtmlView />}>
-                    <Component />
-                  </Suspense>
-                </ErrorBoundaryUtil>
-              </Route>
-            ))}
-
-            <Route>
-              <Redirect to="/404" />
-            </Route>
-          </Switch>
-        </div>
-
-        <FooterLayout />
-      </Router>
-    </ErrorBoundaryUtil>
+      <FooterLayout />
+    </Router>
   );
 };
 

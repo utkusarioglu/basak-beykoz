@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
-import { FC, SyntheticEvent } from 'react';
+import type { FC, SyntheticEvent } from 'react';
+import { useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { PreloadableComponent } from '../../../utils/lazyWithPreload.util';
 import {
@@ -9,6 +10,7 @@ import {
 import { lazyWithPreload } from '../../../utils/lazyWithPreload.util';
 import prefetcher from '../../../services/prefetch.service';
 import { jumpTop } from '../../../utils/scroll.util';
+import { useErrorHandler } from 'react-error-boundary';
 
 interface PreloaderLinkProps {
   to: string;
@@ -37,6 +39,7 @@ const LinkPreloaderView: FC<PreloaderLinkProps> = ({
   jumpTop: jumpTopEnabled = true,
 }) => {
   const history = useHistory();
+  const handleError = useRef(useErrorHandler());
 
   const preloadAndRedirect = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -47,9 +50,7 @@ const LinkPreloaderView: FC<PreloaderLinkProps> = ({
       .then(() => {
         history.push(to);
       })
-      .catch((e) => {
-        history.push(`/error?code=${e}&referrer=${cleanSlug(to)}`);
-      })
+      .catch(handleError.current)
       .finally(() => {
         cancelIsLoading();
         disableIsLoadingDelayed();

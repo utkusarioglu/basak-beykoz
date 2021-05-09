@@ -11,6 +11,8 @@ import {
 } from '../../../config';
 import LoaderMobileMenuView from '../loader-mobile-menu/LoaderMobileMenu.view';
 import { GrClose } from 'react-icons/gr';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorBoundaryLazyView from '../error-fallback-lazy/ErrorFallbackLazy.view';
 
 interface MobileMenuContainerViewProps {
   menuStateSelector: (state: any) => boolean;
@@ -90,7 +92,11 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
               maxHeight: 'calc(100vh - var(--height-menu) - 150px)',
             }}
           >
-            <Suspense fallback={<LoaderMobileMenuView />}>{children}</Suspense>
+            <ErrorBoundary FallbackComponent={ErrorBoundaryLazyView}>
+              <Suspense fallback={<LoaderMobileMenuView />}>
+                {children}
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </div>
       </div>

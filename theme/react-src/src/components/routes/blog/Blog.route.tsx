@@ -4,6 +4,8 @@ import { BLOG_POSTS_CATEGORY } from '../../../config';
 import ReactGA from 'react-ga';
 import { Helmet } from 'react-helmet';
 import StandardLayout from '../../layouts/standard/Standard.layout';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallbackView from '../../views/error-fallback-lazy/ErrorFallbackLazy.view';
 
 const BlogRoute = () => {
   const { pageTitle, titleSeparator } = window.config;
@@ -22,7 +24,9 @@ const BlogRoute = () => {
         title="Blog"
         thumbnailUrl="/wp-content/uploads/yazilar-feature-image.jpg"
       >
-        <CategoryPostsFeedView categorySlug={BLOG_POSTS_CATEGORY} />
+        <ErrorBoundary FallbackComponent={ErrorFallbackView}>
+          <CategoryPostsFeedView categorySlug={BLOG_POSTS_CATEGORY} />
+        </ErrorBoundary>
       </StandardLayout>
     </>
   );
