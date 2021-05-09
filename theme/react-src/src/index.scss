@@ -1,1 +1,10 @@
-@import './styles/base/css-vars.scss';
+@import 'styles/base/css-vars.scss';
+@import 'styles/base/reset';
+@import 'styles/base/typography.scss';
+
+@import 'styles/components/figure';
+@import 'styles/components/html-loader';
+
+@import 'styles/layout/helpers';
+
+@import 'styles/theme/default';

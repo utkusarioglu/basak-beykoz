@@ -1,0 +1,9 @@
+///
+/// Styles that help create a layout
+///
+
+/** Sets 100% height to consuming node*/
+.min-height-100-p {
+  min-height: 100%;
+  overflow-x: hidden;
+}

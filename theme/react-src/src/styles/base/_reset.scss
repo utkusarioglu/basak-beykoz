@@ -1,0 +1,35 @@
+///
+/// Note that this project uses normalize.css
+/// The library is imported by index.php.
+/// "reset" accordingly.
+///
+
+/** 
+Solves issues with mobile 100vh fluctuations.
+Do not use 100vh anywhere in the app. Use height: 100% across lineage.
+*/
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  overflow: hidden;
+
+  /** select disable upon client request */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#root {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  /** Fixes smooth scrolling issues that emerge with ios */
+  -webkit-overflow-scrolling: touch;
+}
