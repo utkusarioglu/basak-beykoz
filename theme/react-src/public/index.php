@@ -39,8 +39,8 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root">
-    <div class="cat-loading-container">
-      <div class="cat-loading">
+    <div class="loader-html__container">
+      <div class="loader-html">
         <div>
           <span role="img" aria-label="cat">
             😺
