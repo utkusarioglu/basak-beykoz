@@ -10,7 +10,7 @@ import './index.scss';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackLayout from './components/layouts/error-fallback/ErrorFallback.layout';
 
-ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: true });
+ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: false });
 
 ReactDOM.render(
   <React.StrictMode>
