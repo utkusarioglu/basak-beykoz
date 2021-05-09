@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import React from 'react';
 import { MOBILE_MENU_PADDING } from '../../../config';
 
