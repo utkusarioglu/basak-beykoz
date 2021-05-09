@@ -5,7 +5,7 @@
   $TITLE_SEPARATOR = '-';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="utf-8" />
   <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
