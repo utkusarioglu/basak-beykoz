@@ -14,7 +14,7 @@ interface MobileHeaderButtonViewProps {
   listLength: number;
 }
 
-const DECORATION_SIZE = 'var(--spacing)';
+const DECORATION_SIZE = 'var(--sp)';
 
 const MobileHeaderButtonView: FC<MobileHeaderButtonViewProps> = ({
   onClick,
@@ -59,8 +59,8 @@ const MobileHeaderButtonView: FC<MobileHeaderButtonViewProps> = ({
           margin: 0,
           height: '100%',
           width: '100%',
-          borderBottomLeftRadius: selected ? 'var(--spacing)' : 0,
-          borderBottomRightRadius: selected ? 'var(--spacing)' : 0,
+          borderBottomLeftRadius: selected ? 'var(--sp)' : 0,
+          borderBottomRightRadius: selected ? 'var(--sp)' : 0,
         }}
       >
         {children}
@@ -75,7 +75,7 @@ const MobileHeaderButtonView: FC<MobileHeaderButtonViewProps> = ({
             width: DECORATION_SIZE,
             height: DECORATION_SIZE,
             position: 'absolute',
-            top: 'var(--spacing)',
+            top: 'var(--sp)',
             right: `calc(${DECORATION_SIZE} * -1)`,
             zIndex: 115,
           }}

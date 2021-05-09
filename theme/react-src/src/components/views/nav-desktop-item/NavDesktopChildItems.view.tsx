@@ -22,8 +22,8 @@ const NavDesktopChildItemsView: FC<NavChildItemsViewProps> = ({
       borderTopRightRadius: MENU_BORDER_RADIUS,
       borderBottomLeftRadius: MENU_BORDER_RADIUS,
       borderBottomRightRadius: MENU_BORDER_RADIUS,
-      paddingTop: depth > 1 ? 0 : 'var(--spacing)',
-      paddingBottom: 'var(--spacing)',
+      paddingTop: depth > 1 ? 0 : 'var(--sp)',
+      paddingBottom: 'var(--sp)',
       width: depth > 1 ? '100%' : 'auto',
     }}
   >

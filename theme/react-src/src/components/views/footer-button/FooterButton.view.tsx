@@ -16,7 +16,7 @@ const FooterButtonView = () => {
           maxHeight: 'var(--height-desktop-footer-button)',
           maxWidth: 'var(--height-desktop-footer-button)',
           backgroundColor: 'var(--brush-black)',
-          borderTopRightRadius: 'calc(var(--spacing) * 3)',
+          borderTopRightRadius: 'calc(var(--sp) * 3)',
           position: 'absolute',
           left: 0,
           bottom: 0,
@@ -29,7 +29,7 @@ const FooterButtonView = () => {
           // this div fixes text placement issues with ios devices
           style={{
             color: 'var(--brush-white)',
-            margin: 'var(--spacing)',
+            margin: 'var(--sp)',
           }}
         >
           ♡

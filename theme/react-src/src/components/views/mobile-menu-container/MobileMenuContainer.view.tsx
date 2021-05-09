@@ -49,12 +49,12 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
         onClick={() => closer(false)}
         style={{
           position: 'fixed',
-          top: 'var(--spacing)',
-          right: 'var(--spacing)',
+          top: 'var(--sp)',
+          right: 'var(--sp)',
           backgroundColor: 'var(--brush-white)',
           borderRadius: '50%',
           border: 0,
-          padding: 'var(--spacing)',
+          padding: 'var(--sp)',
           width: 32,
           height: 32,
           zIndex: 110,
@@ -69,9 +69,9 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           position: 'fixed',
           bottom: `calc(var(--height-menu) - ${MENU_VERTICAL_DECORATION_HEIGHT})`,
           minWidth: 190,
-          maxWidth: 'calc(100vw - var(--spacing) * 2)',
-          right: 'var(--spacing)',
-          borderRadius: 'var(--spacing)',
+          maxWidth: 'calc(100vw - var(--sp) * 2)',
+          right: 'var(--sp)',
+          borderRadius: 'var(--sp)',
           backgroundColor: MENU_DECORATION_COLOR,
           minHeight: 50,
           zIndex: 115,
@@ -80,9 +80,9 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
         <div
           style={{
             backgroundColor: MENU_BG_COLOR,
-            borderRadius: 'var(--spacing)',
-            marginTop: 'var(--spacing)',
-            marginBottom: 'var(--spacing)',
+            borderRadius: 'var(--sp)',
+            marginTop: 'var(--sp)',
+            marginBottom: 'var(--sp)',
             minHeight: '2em',
           }}
         >
@@ -112,10 +112,10 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           height: 'var(--height-menu)',
           backgroundColor: MENU_BG_COLOR,
           zIndex: 110,
-          marginRight: 'var(--spacing)',
-          marginLeft: 'var(--spacing)',
-          borderBottomLeftRadius: 'var(--spacing)',
-          borderBottomRightRadius: 'var(--spacing)',
+          marginRight: 'var(--sp)',
+          marginLeft: 'var(--sp)',
+          borderBottomLeftRadius: 'var(--sp)',
+          borderBottomRightRadius: 'var(--sp)',
         }}
       >
         <MobileHeaderButtonsView />

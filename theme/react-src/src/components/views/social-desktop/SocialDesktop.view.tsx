@@ -9,7 +9,7 @@ const SocialDesktopView = () => {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: 'calc(var(--spacing) * -1)',
+        marginRight: 'calc(var(--sp) * -1)',
       }}
     >
       {SOCIAL_LINKS.map((item) => (

@@ -14,14 +14,14 @@ type BlogPostCardViewProps = {
   'slug' | 'title' | 'date' | 'excerpt' | 'thumbnail' | 'categories'
 >;
 
-const DETAILS_PADDING = 'calc(var(--spacing) /2 )';
+const DETAILS_PADDING = 'calc(var(--sp) /2 )';
 const SKELETON_COLOR =
   'linear-gradient(to right, var(--brush-lightBlue), var(--brush-lightGray))';
 
 const asSkeletonProps: CSSProperties = {
   background: SKELETON_COLOR,
   color: 'transparent',
-  borderRadius: 'var(--spacing)',
+  borderRadius: 'var(--sp)',
 };
 
 const BlogPostCardView: FC<BlogPostCardViewProps> = ({
@@ -50,8 +50,8 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
                     "thumbnail summary"
                   `,
                 gridTemplateColumns: '4fr 6fr',
-                paddingRight: 'calc(var(--spacing) * 2)',
-                gridColumnGap: 'calc(var(--spacing) * 2)',
+                paddingRight: 'calc(var(--sp) * 2)',
+                gridColumnGap: 'calc(var(--sp) * 2)',
               }
             : {
                 gridTemplateAreas: `
@@ -61,11 +61,11 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
                     "summary"
                   `,
               }),
-          gridRowGap: 'var(--spacing)',
-          paddingTop: 'var(--spacing)',
-          paddingBottom: 'var(--spacing)',
-          marginBottom: 'calc(var(--spacing) * 3)',
-          borderRadius: 'var(--spacing)',
+          gridRowGap: 'var(--sp)',
+          paddingTop: 'var(--sp)',
+          paddingBottom: 'var(--sp)',
+          marginBottom: 'calc(var(--sp) * 3)',
+          borderRadius: 'var(--sp)',
           backgroundColor: 'var(--brush-lightGray)',
         }}
       >
@@ -74,7 +74,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
             gridArea: 'thumbnail',
             height: isDesktop ? '100%' : '40vw',
             width: '100%',
-            borderRadius: 'var(--spacing)',
+            borderRadius: 'var(--sp)',
             ...(asSkeleton
               ? {
                   background: SKELETON_COLOR,
@@ -91,10 +91,10 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
         <div
           style={{
             gridArea: 'title',
-            marginBottom: 'var(--spacing)',
+            marginBottom: 'var(--sp)',
             ...(!isDesktop && {
-              paddingLeft: 'var(--spacing)',
-              paddingRight: 'var(--spacing)',
+              paddingLeft: 'var(--sp)',
+              paddingRight: 'var(--sp)',
             }),
           }}
         >
@@ -112,8 +112,8 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
             gridArea: 'date-and-categories',
             marginTop: `calc(${DETAILS_PADDING} * -2)`,
             ...(!isDesktop && {
-              paddingLeft: 'var(--spacing)',
-              paddingRight: 'var(--spacing)',
+              paddingLeft: 'var(--sp)',
+              paddingRight: 'var(--sp)',
             }),
           }}
         >
@@ -153,8 +153,8 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
           style={{
             gridArea: 'summary',
             ...(!isDesktop && {
-              paddingLeft: 'var(--spacing)',
-              paddingRight: 'var(--spacing)',
+              paddingLeft: 'var(--sp)',
+              paddingRight: 'var(--sp)',
             }),
             margin: 0,
           }}

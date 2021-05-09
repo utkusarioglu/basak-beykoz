@@ -14,8 +14,8 @@ const NavMobileChildItemsView: FC<NavMobileChildItemsViewProps> = ({
 }) => (
   <div
     style={{
-      marginTop: 'var(--spacing)',
-      paddingLeft: `calc(var(--spacing) * ${depth} * 2)`,
+      marginTop: 'var(--sp)',
+      paddingLeft: `calc(var(--sp) * ${depth} * 2)`,
     }}
   >
     {children.map((item) => (

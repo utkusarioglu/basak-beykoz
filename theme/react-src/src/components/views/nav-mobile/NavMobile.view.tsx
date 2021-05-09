@@ -31,8 +31,8 @@ const NavMobileView = () => {
   return (
     <div
       style={{
-        marginTop: 'calc(var(--spacing) * 2)',
-        marginBottom: 'calc(var(--spacing) * 2)',
+        marginTop: 'calc(var(--sp) * 2)',
+        marginBottom: 'calc(var(--sp) * 2)',
       }}
     >
       <MobileMenuSectionTitleView>Sayfalar</MobileMenuSectionTitleView>

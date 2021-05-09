@@ -20,7 +20,7 @@ export const SocialDesktopItemView: FC<SocialDesktopItemViewProps> = ({
   return (
     <div
       style={{
-        borderRadius: 'var(--spacing)',
+        borderRadius: 'var(--sp)',
         backgroundColor: hovered ? MENU_ITEM_HOVERED_COLOR : 'transparent',
         display: 'flex',
         alignItems: 'center',
@@ -37,8 +37,8 @@ export const SocialDesktopItemView: FC<SocialDesktopItemViewProps> = ({
         rel="noopener noreferrer"
         title={title}
         style={{
-          marginLeft: 'var(--spacing)',
-          marginRight: 'var(--spacing)',
+          marginLeft: 'var(--sp)',
+          marginRight: 'var(--sp)',
           // height: SOCIAL_DESKTOP_ICON_SIZE,
           // ! magic number, this better aligns the icons with the nav links
           marginBottom: 1,

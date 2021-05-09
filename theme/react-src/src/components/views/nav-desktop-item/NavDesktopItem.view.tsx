@@ -16,8 +16,8 @@ import {
 
 type NavDesktopItemViewProps = WpMenuItem & { depth: number };
 
-const DESKTOP_MENU_ITEM_HORIZONTAL_SPACING = 'calc(var(--spacing) * 2)';
-const MENU_ITEM_VERTICAL_SPACING_DEEP = 'calc(var(--spacing) * 1.5)';
+const DESKTOP_MENU_ITEM_HORIZONTAL_SPACING = 'calc(var(--sp) * 2)';
+const MENU_ITEM_VERTICAL_SPACING_DEEP = 'calc(var(--sp) * 1.5)';
 
 export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
   title,

@@ -29,10 +29,8 @@ const HeaderLayout = () => {
           : 'var(--height-menu)',
         maxHeight: isDesktop ? 100 : 'var(--height-menu)',
         height: isDesktop ? '10vh' : 'var(--height-menu)',
-        paddingRight: isDesktop
-          ? VERTICAL_WHITESPACE_DESKTOP
-          : 'var(--spacing)',
-        paddingLeft: isDesktop ? VERTICAL_WHITESPACE_DESKTOP : 'var(--spacing)',
+        paddingRight: isDesktop ? VERTICAL_WHITESPACE_DESKTOP : 'var(--sp)',
+        paddingLeft: isDesktop ? VERTICAL_WHITESPACE_DESKTOP : 'var(--sp)',
         marginRight: isDesktop ? '17px' : 0, // magic number coming from common browser scrollbar width
 
         backgroundColor: 'rgb(251, 251, 251, 0.5)',

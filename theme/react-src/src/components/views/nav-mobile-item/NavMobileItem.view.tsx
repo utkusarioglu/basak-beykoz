@@ -28,7 +28,7 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
   return (
     <div
       style={{
-        marginTop: 'var(--spacing)',
+        marginTop: 'var(--sp)',
         position: 'relative',
       }}
     >

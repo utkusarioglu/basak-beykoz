@@ -9,8 +9,8 @@ const BUTTON_STYLE = {
   border: 'none',
   backgroundColor: 'var(--brush-darkYellow)',
   color: 'var(--brush-black)',
-  padding: 'var(--spacing)',
-  borderRadius: 'var(--spacing)',
+  padding: 'var(--sp)',
+  borderRadius: 'var(--sp)',
   cursor: 'pointer',
 };
 
@@ -24,7 +24,7 @@ export const ErrorFallbackView: FC<FallbackProps> = ({
     <div
       role="alert"
       style={{
-        padding: 'var(--spacing)',
+        padding: 'var(--sp)',
         height: '100%',
         width: '100%',
       }}
@@ -51,8 +51,8 @@ export const ErrorFallbackView: FC<FallbackProps> = ({
           style={{
             gridArea: 'title',
             textAlign: 'center',
-            marginTop: 'var(--spacing)',
-            marginBottom: 'var(--spacing)',
+            marginTop: 'var(--sp)',
+            marginBottom: 'var(--sp)',
           }}
         >
           İlginç bir şeyler oldu{' '}

@@ -86,8 +86,8 @@ const StandardLayout: FC<StandardLayoutProps> = ({
             >
               <h2
                 style={{
-                  paddingLeft: 'var(--spacing)',
-                  paddingRight: 'var(--spacing)',
+                  paddingLeft: 'var(--sp)',
+                  paddingRight: 'var(--sp)',
                 }}
               >
                 {title}
@@ -106,7 +106,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                 paddingTop: '12vh', // comes from heading and some whitespace creation
               }
             : {
-                marginTop: 'var(--spacing)',
+                marginTop: 'var(--sp)',
                 marginLeft: verticalWhitespace(sideMargins, isDesktop),
                 marginRight: verticalWhitespace(sideMargins, isDesktop),
               }
@@ -125,7 +125,7 @@ function verticalWhitespace(sideMargins: boolean, isDesktop: boolean) {
   return !sideMargins
     ? 0
     : !isDesktop
-    ? 'var(--spacing)'
+    ? 'var(--sp)'
     : VERTICAL_WHITESPACE_DESKTOP;
 }
 

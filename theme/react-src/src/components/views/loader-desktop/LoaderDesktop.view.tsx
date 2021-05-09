@@ -5,7 +5,7 @@ import { LoaderHtmlContentsView } from '../loader-html/LoaderHtml.view';
 
 export const LOADER_BG_COLOR = 'var(--brush-darkGreen)';
 
-const LOADER_SPACING = 'calc(var(--spacing) * 4) ';
+const LOADER_SPACING = 'calc(var(--sp) * 4) ';
 
 /**
  * Displays an edge loading band
@@ -29,8 +29,8 @@ const LoaderEdge = () => {
       <div
         style={{
           borderRadius: LOADER_SPACING,
-          marginTop: 'var(--spacing)',
-          marginBottom: 'var(--spacing)',
+          marginTop: 'var(--sp)',
+          marginBottom: 'var(--sp)',
           backgroundColor: 'var(--brush-white)',
           padding: LOADER_SPACING,
         }}

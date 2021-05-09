@@ -18,8 +18,8 @@ import { closeAllMenus } from '../../../slices/app/app.slice';
 const iconProps = {
   size: 35,
   style: {
-    borderRadius: 'var(--spacing)',
-    marginRight: 'var(--spacing)',
+    borderRadius: 'var(--sp)',
+    marginRight: 'var(--sp)',
   },
 };
 
@@ -49,7 +49,7 @@ const MobileShareView = () => {
   return (
     <div
       style={{
-        marginBottom: 'calc(var(--spacing) * 2)',
+        marginBottom: 'calc(var(--sp) * 2)',
       }}
     >
       <MobileMenuSectionTitleView>

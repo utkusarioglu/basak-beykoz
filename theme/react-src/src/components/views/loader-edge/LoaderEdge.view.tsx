@@ -6,7 +6,7 @@ import ConcaveCornerView from '../concave-corner/ConcaveCorner.view';
 export const LOADER_BG_COLOR = 'var(--brush-darkGreen)';
 const LOADER_THICKNESS = 31;
 const LOADER_Z_INDEX = 110;
-const LOADER_CONCAVE_BORDER_SIZE = 'var(--spacing)';
+const LOADER_CONCAVE_BORDER_SIZE = 'var(--sp)';
 
 /**
  * Displays an edge loading band

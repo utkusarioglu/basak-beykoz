@@ -9,7 +9,7 @@ const MobileMenuSectionTitleView: FC<MobileMenuSectionTitleViewProps> = ({
   <h5
     style={{
       marginLeft: MOBILE_MENU_PADDING.horizontal,
-      marginTop: 'calc(var(--spacing) * 2)',
+      marginTop: 'calc(var(--sp) * 2)',
       marginBottom: '0.6em',
     }}
   >
