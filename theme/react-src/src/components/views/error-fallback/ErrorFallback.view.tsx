@@ -7,7 +7,7 @@ import { prepareErrorFields } from '../../../utils/error.util';
 
 const BUTTON_STYLE = {
   border: 'none',
-  backgroundColor: 'var(--brush-darkYellow)',
+  backgroundColor: 'var(--brush-yellow-dark)',
   color: 'var(--brush-black)',
   padding: 'var(--sp)',
   borderRadius: 'var(--sp)',

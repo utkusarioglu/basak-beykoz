@@ -16,7 +16,7 @@ type BlogPostCardViewProps = {
 
 const DETAILS_PADDING = 'calc(var(--sp) /2 )';
 const SKELETON_COLOR =
-  'linear-gradient(to right, var(--brush-lightBlue), var(--brush-lightGray))';
+  'linear-gradient(to right, var(--brush-blue-light), var(--brush-gray-light))';
 
 const asSkeletonProps: CSSProperties = {
   background: SKELETON_COLOR,
@@ -66,7 +66,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
           paddingBottom: 'var(--sp)',
           marginBottom: 'calc(var(--sp) * 3)',
           borderRadius: 'var(--sp)',
-          backgroundColor: 'var(--brush-lightGray)',
+          backgroundColor: 'var(--brush-gray-light)',
         }}
       >
         <div
@@ -121,7 +121,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
             dateTime={date}
             style={{
               fontSize: '0.7em',
-              backgroundColor: 'var(--brush-lightBlue)',
+              backgroundColor: 'var(--brush-blue-light)',
               padding: DETAILS_PADDING,
               borderRadius: DETAILS_PADDING,
               marginRight: DETAILS_PADDING,
@@ -137,7 +137,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
               style={{
                 minWidth: 100,
                 fontSize: '0.7em',
-                backgroundColor: 'var(--brush-lightYellow)',
+                backgroundColor: 'var(--brush-yellow-light)',
                 padding: DETAILS_PADDING,
                 borderRadius: DETAILS_PADDING,
                 marginRight: DETAILS_PADDING,

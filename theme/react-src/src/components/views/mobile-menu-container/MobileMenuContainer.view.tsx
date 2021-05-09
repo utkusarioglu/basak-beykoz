@@ -67,7 +67,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
       <div
         style={{
           position: 'fixed',
-          bottom: `calc(var(--height-menu) - ${MENU_VERTICAL_DECORATION_HEIGHT})`,
+          bottom: `calc(var(--height-header-mobile) - ${MENU_VERTICAL_DECORATION_HEIGHT})`,
           minWidth: 190,
           maxWidth: 'calc(100vw - var(--sp) * 2)',
           right: 'var(--sp)',
@@ -90,7 +90,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
             style={{
               overflowY: 'auto',
               overflowX: 'hidden',
-              maxHeight: 'calc(100vh - var(--height-menu) - 150px)',
+              maxHeight: 'calc(100vh - var(--height-header-mobile) - 150px)',
             }}
           >
             <ErrorBoundary FallbackComponent={ErrorBoundaryLazyView}>
@@ -109,7 +109,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           position: 'fixed',
           bottom: 0,
           right: 0,
-          height: 'var(--height-menu)',
+          height: 'var(--height-header-mobile)',
           backgroundColor: MENU_BG_COLOR,
           zIndex: 110,
           marginRight: 'var(--sp)',

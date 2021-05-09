@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectIsLoading } from '../../../slices/app/app.slice';
 import { LoaderHtmlContentsView } from '../loader-html/LoaderHtml.view';
 
-export const LOADER_BG_COLOR = 'var(--brush-darkGreen)';
+export const LOADER_BG_COLOR = 'var(--brush-green-dark)';
 
 const LOADER_SPACING = 'calc(var(--sp) * 4) ';
 
@@ -21,7 +21,7 @@ const LoaderEdge = () => {
         top: `30%`,
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: 'var(--brush-lightGreen)',
+        backgroundColor: 'var(--brush-green-light)',
         zIndex: 100,
         borderRadius: LOADER_SPACING,
       }}

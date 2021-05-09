@@ -25,11 +25,11 @@ export const LOADING_INDICATOR_DISAPPEAR_AFTER = 200;
 export const DESKTOP_MIN_WIDTH = 800;
 
 export const MENU_BG_COLOR = 'var(--brush-white)';
-export const MENU_DECORATION_COLOR = 'var(--brush-darkYellow)';
+export const MENU_DECORATION_COLOR = 'var(--brush-yellow-dark)';
 export const MENU_BACKDROP_COLOR = 'var(--brush-black-transparent)';
-export const MENU_ITEM_ACTIVE_COLOR = 'var(--brush-darkYellow)';
+export const MENU_ITEM_ACTIVE_COLOR = 'var(--brush-yellow-dark)';
 
-export const MENU_ITEM_HOVERED_COLOR = 'var(--brush-lightGreen)';
+export const MENU_ITEM_HOVERED_COLOR = 'var(--brush-green-light)';
 export const MENU_BORDER_RADIUS = 'calc(var(--sp) * 2)';
 export const MENU_VERTICAL_DECORATION_HEIGHT = 'var(--sp)';
 export const VERTICAL_WHITESPACE_DESKTOP = '8vw';

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectIsLoading } from '../../../slices/app/app.slice';
 import ConcaveCornerView from '../concave-corner/ConcaveCorner.view';
 
-export const LOADER_BG_COLOR = 'var(--brush-darkGreen)';
+export const LOADER_BG_COLOR = 'var(--brush-green-dark)';
 const LOADER_THICKNESS = 31;
 const LOADER_Z_INDEX = 110;
 const LOADER_CONCAVE_BORDER_SIZE = 'var(--sp)';

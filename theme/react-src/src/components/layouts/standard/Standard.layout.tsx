@@ -48,7 +48,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
         >
           <div
             style={{
-              backgroundColor: 'var(--brush-lightGreen)',
+              backgroundColor: 'var(--brush-green-light)',
               ...(thumbnailUrl && {
                 backgroundImage: `url(${thumbnailUrl})`,
                 backgroundRepeat: 'no-repeat',

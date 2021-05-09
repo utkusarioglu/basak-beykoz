@@ -14,7 +14,7 @@ const ErrorFallbackLayout: FC<FallbackProps> = (props) => {
         top: 0,
         left: 0,
         right: 0,
-        bottom: isDesktop ? 'var(--height-menu)' : 0,
+        bottom: isDesktop ? 'var(--height-header-mobile)' : 0,
         display: 'grid',
       }}
     >
