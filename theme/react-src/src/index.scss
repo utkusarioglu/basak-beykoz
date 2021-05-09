@@ -4,10 +4,26 @@
 
 @import 'styles/components/figure';
 @import 'styles/components/html-loader';
+@import 'styles/components/ul';
+@import 'styles/components/figcaption';
+@import 'styles/components/iframe';
 
 @import 'styles/layout/helpers';
 
 @import 'styles/theme/default';
 
 /// Import method for these may change later
-@import 'styles/vendors/wordpress/button';
+@import 'styles/vendors/wordpress/block/button';
+@import 'styles/vendors/wordpress/block/quote';
+@import 'styles/vendors/wordpress/block/pullquote';
+@import 'styles/vendors/wordpress/block/verse';
+@import 'styles/vendors/wordpress/block/code';
+@import 'styles/vendors/wordpress/block/table';
+@import 'styles/vendors/wordpress/block/image';
+@import 'styles/vendors/wordpress/block/cover';
+@import 'styles/vendors/wordpress/block/buttons';
+@import 'styles/vendors/wordpress/helper';
+@import 'styles/vendors/wordpress/block/gallery';
+@import 'styles/vendors/wordpress/block/media-text';
+@import 'styles/vendors/wordpress/block/columns';
+@import 'styles/vendors/wordpress/block/separator';

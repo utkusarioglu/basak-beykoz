@@ -1,0 +1,8 @@
+ul {
+  list-style-type: disc;
+  margin-block-start: 0;
+  margin-block-end: var(--sp);
+  margin-inline-start: calc(var(--sp) * 2);
+  // margin-inline-end: 0px;
+  padding-inline-start: var(--sp);
+}

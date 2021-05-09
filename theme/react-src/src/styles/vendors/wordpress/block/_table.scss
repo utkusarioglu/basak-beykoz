@@ -1,0 +1,56 @@
+.wp-block-table {
+  margin-bottom: var(--sp);
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    /// This section is establishing sideways scrollable tables
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: block;
+    margin-left: calc(var(--sp) * -1);
+    // padding-right: 10px;
+    width: 100vw;
+
+    tbody {
+      margin-left: var(--sp);
+      display: block;
+      width: max-content;
+      position: relative;
+      /// this allows creating some margin at the end without
+      /// using padding or margin
+      &:after {
+        content: '';
+        position: absolute;
+        display: block;
+        right: calc(var(--sp) * -1);
+        bottom: 0;
+        width: var(--sp);
+        height: 1px;
+        // background-color: red;
+      }
+    }
+
+    th,
+    td {
+      border: 1px solid var(--brush-gray);
+    }
+
+    td {
+      padding: calc(var(--sp) / 2) var(--sp);
+    }
+
+    tr:nth-of-type(2n + 1) {
+      background-color: var(--brush-gray-light);
+    }
+
+    tr:hover {
+      background-color: var(--brush-blue-light);
+    }
+
+    th {
+      font-weight: bold;
+    }
+  }
+}

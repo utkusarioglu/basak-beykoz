@@ -1,0 +1,21 @@
+.wp-block-image {
+  margin-bottom: var(--sp);
+
+  /// image comes in two variants. This one has sharp corners
+  /// It also expands to the corners of the viewport, ignoring
+  /// the padding established by the article node
+  &:not(.is-style-rounded) img {
+    margin-left: calc(var(--sp) * -1);
+    width: 100vw;
+    width: 100vw;
+    height: auto;
+  }
+
+  /// This one has rounded corners
+  /// it adheres with the padding established by its lineage
+  &.is-style-rounded img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--sp);
+  }
+}

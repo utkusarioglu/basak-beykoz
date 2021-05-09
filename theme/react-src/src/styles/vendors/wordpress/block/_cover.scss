@@ -1,0 +1,42 @@
+.wp-block-cover {
+  margin-left: calc(var(--sp) * -1);
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  margin-bottom: var(--sp);
+
+  &__inner-container {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+
+    & p {
+      margin: auto;
+      color: var(--brush-white);
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    background-color: inherit;
+  }
+
+  @for $opacity from 0 through 10 {
+    &.has-background-dim-#{$opacity * 10}::before {
+      opacity: #{$opacity/ 10};
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.wp-block-pullquote {
+  & blockquote {
+    margin: 0;
+    margin-bottom: var(--sp);
+    padding: var(--sp);
+    text-align: center;
+    background-color: var(--brush-gray-light);
+    border-radius: var(--sp);
+
+    & p {
+      margin-top: 0;
+      margin-bottom: var(--sp);
+      font-size: 1.3em;
+    }
+
+    cite {
+      font-style: initial;
+    }
+
+    br {
+      display: none;
+    }
+  }
+}

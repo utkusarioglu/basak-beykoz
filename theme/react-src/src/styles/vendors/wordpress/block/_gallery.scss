@@ -1,0 +1,41 @@
+.wp-block-gallery {
+  margin-left: calc(var(--sp) * -1);
+  width: 100vw;
+  overflow-x: scroll;
+  margin-bottom: var(--sp);
+
+  ul {
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    padding-inline-start: 0;
+
+    display: inline-flex;
+    width: max-content;
+  }
+
+  li {
+    figure {
+      height: 100%;
+      width: 100vw;
+      position: relative;
+      overflow: hidden;
+
+      img {
+        // width: 100vw;
+        height: 100%;
+        width: auto;
+      }
+
+      figcaption {
+        position: absolute;
+        bottom: 0;
+        color: white;
+        margin-left: var(--sp);
+        margin-top: 0;
+        margin-bottom: var(--sp);
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.wp-block-media-text {
+  figure {
+    margin-left: calc(var(--sp) * -1);
+    width: 100vw;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__content > p:first-of-type {
+    margin-top: var(--sp);
+  }
+}

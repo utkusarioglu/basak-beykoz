@@ -1,0 +1,25 @@
+.wp-block-quote {
+  margin: 0;
+  margin-bottom: var(--sp);
+  padding: var(--sp);
+  background-color: var(--brush-gray-light);
+  border-radius: var(--sp);
+
+  /// quoted text
+  & p {
+    margin-top: 0;
+    margin-bottom: var(--sp);
+    font-style: italic;
+  }
+
+  /// wp's quote block has two sizes, this covers the larger size
+  /// while & p is used for covering both cases
+  &.is-style-large p {
+    font-size: 1.3em;
+    margin-bottom: var(--sp);
+  }
+
+  & cite {
+    font-style: initial;
+  }
+}

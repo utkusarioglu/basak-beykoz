@@ -1,0 +1,6 @@
+.wp-block-buttons {
+  display: grid;
+  flex-wrap: wrap;
+  gap: var(--sp);
+  grid-auto-flow: column;
+}
