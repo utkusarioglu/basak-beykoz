@@ -9,3 +9,17 @@ Draws oval area for the components
     padding: calc(var(--sp) * 2);
   }
 }
+
+/**
+Draws oval area for the components, this variant produces a
+thinner vertical cross section. Good for objects such as buttons
+*/
+@mixin frame-rounded-padded-thin {
+  padding: var(--sp);
+  border-radius: var(--sp);
+
+  @media screen and (min-width: 800px) {
+    padding: var(--sp) calc(var(--sp) * 2);
+  }
+}
+
