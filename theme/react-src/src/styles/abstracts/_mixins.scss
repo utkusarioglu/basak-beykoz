@@ -1,0 +1,11 @@
+/**
+Draws oval area for the components
+*/
+@mixin frame-rounded-padded {
+  padding: var(--sp);
+  border-radius: var(--sp);
+
+  @media screen and (min-width: 800px) {
+    padding: calc(var(--sp) * 2);
+  }
+}
