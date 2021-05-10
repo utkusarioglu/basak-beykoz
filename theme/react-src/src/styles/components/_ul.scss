@@ -1,8 +1,12 @@
+/**
+These styles are designed for regular text lists. Any other structure
+that uses ul for styling anything other than text shall apply its own
+class names or specific styles. Do not do them here.
+*/
 ul {
   list-style-type: disc;
   margin-block-start: 0;
   margin-block-end: var(--sp);
   margin-inline-start: calc(var(--sp) * 2);
-  // margin-inline-end: 0px;
   padding-inline-start: var(--sp);
 }

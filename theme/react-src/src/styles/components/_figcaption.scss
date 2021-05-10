@@ -1,3 +1,18 @@
+/**
+This tag is extensively used by wp blocks. 
+
+Before altering anything, make sure that you are aware of checking all 
+the blocks listed below:
+
+gallery
+media-text
+embed blocks such as youtube
+table
+image
+pullquote
+
+The same goes for figure tag
+*/
 figcaption {
   margin-top: 0.3em;
   font-size: 0.7em;

@@ -1,3 +1,11 @@
+/**
+Styles the very first loading interface that tells the user that 
+something is happening, that the app is coming
+
+Unlike most css in this project, the style below affects analogous 
+constructs. There is a piece of html in index.php inside #root that and 
+a component named loader-html inside react/components/views.
+*/
 .loader-html {
   &__container {
     position: fixed;
