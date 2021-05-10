@@ -42,6 +42,7 @@ export const SocialDesktopItemView: FC<SocialDesktopItemViewProps> = ({
           // height: SOCIAL_DESKTOP_ICON_SIZE,
           // ! magic number, this better aligns the icons with the nav links
           marginBottom: 1,
+          textDecoration: 'none',
         }}
       >
         {getIcon(type, SOCIAL_DESKTOP_ICON_SIZE)}

@@ -29,6 +29,7 @@ const SocialMobileView = () => {
               paddingBottom: MOBILE_MENU_PADDING.vertical,
               display: 'flex',
               alignItems: 'center',
+              textDecoration: 'none',
             }}
           >
             {getIcon(type, '1.5em')}

@@ -8,4 +8,8 @@
     // wp block button contains an anchor, not a button
     cursor: pointer;
   }
+
+  a {
+    text-decoration: none;
+  }
 }

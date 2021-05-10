@@ -47,7 +47,7 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
           borderBottomLeftRadius: hasChildren ? 0 : MENU_BORDER_RADIUS,
         }}
       >
-        <LinkNavView urlfulSlug={urlfulSlug}>
+        <LinkNavView urlfulSlug={urlfulSlug} style={{ textDecoration: 'none' }}>
           <div
             style={{
               width: 'max-content',

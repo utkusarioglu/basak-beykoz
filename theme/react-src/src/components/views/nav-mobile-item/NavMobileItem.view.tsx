@@ -32,7 +32,11 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
         position: 'relative',
       }}
     >
-      <LinkNavView urlfulSlug={urlfulSlug} onSelect={closeAllMenus}>
+      <LinkNavView
+        urlfulSlug={urlfulSlug}
+        onSelect={closeAllMenus}
+        style={{ textDecoration: 'none' }}
+      >
         <div
           style={{
             width: 'max-content',

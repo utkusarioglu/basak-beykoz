@@ -3,11 +3,16 @@ body {
 }
 
 p,
-a,
 span,
 div,
 button {
   color: var(--brush-blue-dark);
+}
+
+a {
+  color: var(--brush-blue-dark);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
 }
 
 .wp-block-button {

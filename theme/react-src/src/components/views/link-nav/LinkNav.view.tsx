@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { FC } from 'react';
 import LinkPreloaderView from '../link-preloader/LinkPreloader.view';
 import { PreloadableComponent } from '../../../utils/lazyWithPreload.util';
@@ -9,12 +9,14 @@ import { findRoute } from '../../routers/app/findRoute';
 type NavLinkViewProps = {
   urlfulSlug: string;
   onSelect?: () => void;
+  style?: CSSProperties;
 };
 
 export const LinkNavView: FC<NavLinkViewProps> = ({
   urlfulSlug,
   children,
   onSelect,
+  style,
 }) => {
   let doPreload = true;
   const restfulSlug = restSlug(urlfulSlug);
@@ -32,6 +34,7 @@ export const LinkNavView: FC<NavLinkViewProps> = ({
           component={Component}
           prefetch={prefetchFunc}
           onSelect={onSelect}
+          style={style}
         >
           {children}
         </LinkPreloaderView>
