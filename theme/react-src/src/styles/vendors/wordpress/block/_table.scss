@@ -1,56 +1,69 @@
 .wp-block-table {
+  overflow-x: scroll;
+  overflow-y: visible;
+  margin-left: calc(var(--sp) * -1);
+  width: 100vw;
+  position: relative;
   margin-bottom: var(--sp);
 
-  table {
+  @media screen and (min-width: 800px) {
+    overflow: hidden;
+    margin-left: 0;
     width: 100%;
+  }
+
+  table {
     border-collapse: collapse;
+    width: max-content;
+    margin-left: var(--sp);
+    position: relative;
 
-    /// This section is establishing sideways scrollable tables
-    overflow-x: scroll;
-    overflow-y: hidden;
-    display: block;
-    margin-left: calc(var(--sp) * -1);
-    // padding-right: 10px;
-    width: 100vw;
+    @media screen and (min-width: 800px) {
+      margin-left: 0;
+      width: 100%;
+    }
 
-    tbody {
-      margin-left: var(--sp);
+    // creates some margin on the right side of the table
+    // this is done because margin-right doesn't create the spacing required.
+    &::after {
+      content: '';
+      position: absolute;
       display: block;
-      width: max-content;
-      position: relative;
-      /// this allows creating some margin at the end without
-      /// using padding or margin
-      &:after {
-        content: '';
-        position: absolute;
-        display: block;
-        right: calc(var(--sp) * -1);
-        bottom: 0;
-        width: var(--sp);
-        height: 1px;
-        // background-color: red;
-      }
+      right: calc(var(--sp) * -1);
+      bottom: 0;
+      width: var(--sp);
+      height: 1px;
     }
+  }
 
-    th,
-    td {
-      border: 1px solid var(--brush-gray);
+  th,
+  td {
+    border: 1px solid var(--brush-gray);
+    padding: calc(var(--sp) / 2) var(--sp);
+
+    @media screen and (min-width: 800px) {
+      padding: var(--sp) calc(var(--sp) * 2);
     }
+  }
 
-    td {
-      padding: calc(var(--sp) / 2) var(--sp);
-    }
+  tfoot td {
+    border-top: none;
+  }
 
-    tr:nth-of-type(2n + 1) {
-      background-color: var(--brush-gray-light);
-    }
+  tr:nth-of-type(2n) {
+    background-color: var(--brush-gray-light);
+  }
 
-    tr:hover {
-      background-color: var(--brush-blue-light);
-    }
+  tr:hover {
+    background-color: var(--brush-blue-light);
+  }
 
-    th {
-      font-weight: bold;
+  figcaption {
+    margin-left: var(--sp);
+
+    @media screen and (min-width: 800px) {
+      // This aligns with the padding of the table items
+      margin-left: calc(var(--sp) * 2);
     }
   }
 }

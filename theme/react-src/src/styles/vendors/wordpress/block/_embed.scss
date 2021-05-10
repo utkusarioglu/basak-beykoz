@@ -1,0 +1,64 @@
+.wp-block-embed {
+  margin-left: calc(var(--sp) * -1);
+  width: 100vw;
+  height: 100vw;
+  overflow: hidden;
+
+  @media screen and (min-width: 800px) {
+    width: 100%;
+    margin-left: 0;
+    height: 400px;
+  }
+
+  /// handles aspect-ratio specific classes for embeds
+  /// only 3 common classes are supported in this version
+  /// i'm not creating a loop for this yet. It's not clear how
+  /// the requirements may change.
+  &.wp-embed-aspect {
+    &-16-9 {
+      height: 56.25vw;
+
+      @media screen and (min-width: 800px) {
+        height: auto;
+
+        iframe {
+          aspect-ratio: 16/9;
+        }
+      }
+    }
+
+    &-16-10 {
+      height: 62.5vw;
+
+      @media screen and (min-width: 800px) {
+        height: auto;
+
+        iframe {
+          aspect-ratio: 16/9;
+        }
+      }
+    }
+
+    &-4-3 {
+      height: 75vw;
+
+      @media screen and (min-width: 800px) {
+        height: auto;
+
+        iframe {
+          aspect-ratio: 4/3;
+        }
+      }
+    }
+  }
+
+  // iframe values are also edited by the wp-embed subclasses
+  iframe {
+    width: 100%;
+    height: 100%;
+
+    @media screen and (min-width: 800px) {
+      height: auto;
+    }
+  }
+}

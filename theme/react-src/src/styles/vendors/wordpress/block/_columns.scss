@@ -5,10 +5,7 @@
   grid-row-gap: var(--sp);
   margin-bottom: var(--sp);
 
-  .wp-block-column {
-    height: 100px;
-
-    //! this needs to go once dev is done
-    background: linear-gradient(black, red);
+  @media screen and (min-width: 800px) {
+    grid-auto-flow: column;
   }
 }

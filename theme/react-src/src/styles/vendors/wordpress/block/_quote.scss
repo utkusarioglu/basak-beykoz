@@ -5,6 +5,10 @@
   background-color: var(--brush-gray-light);
   border-radius: var(--sp);
 
+  @media screen and (min-width: 800px) {
+    padding: calc(var(--sp) * 2);
+  }
+
   /// quoted text
   & p {
     margin-top: 0;
