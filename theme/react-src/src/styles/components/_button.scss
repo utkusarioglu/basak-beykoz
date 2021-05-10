@@ -1,0 +1,6 @@
+@import '../abstracts/mixins';
+
+/// themed in _default.scss
+button {
+  @include frame-rounded-padded-thin;
+}
