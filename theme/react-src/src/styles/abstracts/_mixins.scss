@@ -36,3 +36,11 @@ Width returns to 100% on bigger screns
     width: 100%;
   }
 }
+
+/**
+Adds a standardized margin at the bottom of the 
+consuming blocks;
+*/
+@mixin block-margin-bottom {
+  margin-bottom: var(--sp);
+}
