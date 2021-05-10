@@ -23,3 +23,16 @@ thinner vertical cross section. Good for objects such as buttons
   }
 }
 
+/**
+makes the content edge to edge on mobile.
+Width returns to 100% on bigger screns
+*/
+@mixin edge-to-edge {
+  margin-left: calc(var(--sp) * -1);
+  width: 100vw;
+
+  @media screen and (min-width: 800px) {
+    margin-left: 0;
+    width: 100%;
+  }
+}
