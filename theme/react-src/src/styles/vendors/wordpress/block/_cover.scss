@@ -1,17 +1,16 @@
+@import '../../../abstracts/mixins';
+@import '../../../abstracts/sass-vars';
+
+/// themed in _default.scss
 .wp-block-cover {
-  margin-left: calc(var(--sp) * -1);
-  width: 100vw;
+  @include edge-to-edge;
+  @include block-margin-bottom;
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   display: flex;
-  margin-bottom: var(--sp);
-
-  @media screen and (min-width: 800px) {
-    margin-left: 0;
-    width: 100%;
-  }
 
   &__inner-container {
     top: 0;
@@ -24,19 +23,21 @@
 
     & p {
       margin: auto;
-      color: var(--brush-white);
     }
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
-    background-color: inherit;
+  /// create a fake margin-right for clearance from the edge
+  @media screen and (max-width: #{$desktop-breakpoint}) {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+      background-color: inherit;
+    }
   }
 
   @for $opacity from 0 through 10 {

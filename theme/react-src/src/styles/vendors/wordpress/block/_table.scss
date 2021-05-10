@@ -1,15 +1,17 @@
+@import '../../../abstracts/mixins';
+@import '../../../abstracts/sass-vars';
+
+/// themed in _default.scss
 .wp-block-table {
+  @include edge-to-edge;
+
   overflow-x: scroll;
   overflow-y: visible;
-  margin-left: calc(var(--sp) * -1);
-  width: 100vw;
   position: relative;
   margin-bottom: var(--sp);
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: #{$desktop-breakpoint}) {
     overflow: hidden;
-    margin-left: 0;
-    width: 100%;
   }
 
   table {
@@ -18,50 +20,43 @@
     margin-left: var(--sp);
     position: relative;
 
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: #{$desktop-breakpoint}) {
       margin-left: 0;
       width: 100%;
     }
 
-    // creates some margin on the right side of the table
-    // this is done because margin-right doesn't create the spacing required.
-    &::after {
-      content: '';
-      position: absolute;
-      display: block;
-      right: calc(var(--sp) * -1);
-      bottom: 0;
-      width: var(--sp);
-      height: 1px;
+    @media screen and (max-width: #{$desktop-breakpoint}) {
+      // creates some margin on the right side of the table
+      // this is done because margin-right doesn't create the spacing required.
+      &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        right: calc(var(--sp) * -1);
+        bottom: 0;
+        width: var(--sp);
+        height: 1px;
+      }
     }
-  }
+    th,
+    td {
+      border: 1px solid var(--brush-gray);
+      padding: calc(var(--sp) / 2) var(--sp);
 
-  th,
-  td {
-    border: 1px solid var(--brush-gray);
-    padding: calc(var(--sp) / 2) var(--sp);
-
-    @media screen and (min-width: 800px) {
-      padding: var(--sp) calc(var(--sp) * 2);
+      @media screen and (min-width: #{$desktop-breakpoint}) {
+        padding: var(--sp) calc(var(--sp) * 2);
+      }
     }
-  }
 
-  tfoot td {
-    border-top: none;
-  }
-
-  tr:nth-of-type(2n) {
-    background-color: var(--brush-gray-light);
-  }
-
-  tr:hover {
-    background-color: var(--brush-blue-light);
+    tfoot td {
+      border-top: none;
+    }
   }
 
   figcaption {
     margin-left: var(--sp);
 
-    @media screen and (min-width: 800px) {
+    @media screen and (min-width: #{$desktop-breakpoint}) {
       // This aligns with the padding of the table items
       margin-left: calc(var(--sp) * 2);
     }

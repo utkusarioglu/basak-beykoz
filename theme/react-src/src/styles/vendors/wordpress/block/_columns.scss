@@ -1,11 +1,15 @@
+@import '../../../abstracts/mixins';
+@import '../../../abstracts/sass-vars';
+
 .wp-block-columns {
+  @include block-margin-bottom;
+
   display: grid;
   grid-auto-flow: row;
   grid-column-gap: var(--sp);
   grid-row-gap: var(--sp);
-  margin-bottom: var(--sp);
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: #{$desktop-breakpoint}) {
     grid-auto-flow: column;
   }
 }

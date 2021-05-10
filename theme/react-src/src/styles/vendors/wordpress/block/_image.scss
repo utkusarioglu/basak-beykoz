@@ -1,13 +1,14 @@
+@import '../../../abstracts/mixins';
+
 .wp-block-image {
-  margin-bottom: var(--sp);
+  @include block-margin-bottom;
 
   /// image comes in two variants. This one has sharp corners
   /// It also expands to the corners of the viewport, ignoring
   /// the padding established by the article node
   &:not(.is-style-rounded) img {
-    margin-left: calc(var(--sp) * -1);
-    width: 100vw;
-    width: 100vw;
+    @include edge-to-edge;
+
     height: auto;
   }
 

@@ -1,4 +1,8 @@
+@import '../../../abstracts/mixins';
+
 .wp-block-buttons {
+  @include block-margin-bottom;
+
   display: grid;
   flex-wrap: wrap;
   gap: var(--sp);

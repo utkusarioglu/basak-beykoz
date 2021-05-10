@@ -1,13 +1,12 @@
+@import '../../../abstracts/mixins';
+
+/// themed in _default.scss
 .wp-block-quote {
+  @include frame-rounded-padded;
+
   margin: 0;
   margin-bottom: var(--sp);
-  padding: var(--sp);
   background-color: var(--brush-gray-light);
-  border-radius: var(--sp);
-
-  @media screen and (min-width: 800px) {
-    padding: calc(var(--sp) * 2);
-  }
 
   /// quoted text
   & p {

@@ -1,19 +1,19 @@
+@import '../../../abstracts/mixins';
+@import '../../../abstracts/sass-vars';
+
 .wp-block-media-text {
   display: grid;
   grid-auto-flow: row;
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: #{$desktop-breakpoint}) {
     grid-auto-flow: column;
     grid-column-gap: var(--sp);
   }
 
   figure {
-    margin-left: calc(var(--sp) * -1);
-    width: 100vw;
+    @include edge-to-edge;
 
-    @media screen and (min-width: 800px) {
-      margin-left: 0; // nullify prev
-      width: 100%;
+    @media screen and (min-width: #{$desktop-breakpoint}) {
       border-radius: var(--sp);
       overflow: hidden;
     }

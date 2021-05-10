@@ -9,3 +9,61 @@ div,
 button {
   color: var(--brush-blue-dark);
 }
+
+.wp-block-button {
+  background-color: var(--brush-yellow-dark);
+  &:hover {
+    background-color: var(--brush-green-dark);
+    & a {
+      color: var(--brush-white);
+    }
+  }
+}
+
+.wp-block-code {
+  background-color: var(--brush-gray-light);
+}
+
+.wp-block-cover {
+  &__inner-container {
+    & p {
+      color: var(--brush-white);
+    }
+  }
+}
+
+.wp-block-gallery {
+  li {
+    figure {
+      figcaption {
+        color: white;
+      }
+    }
+  }
+}
+
+.wp-block-pullquote {
+  & blockquote {
+    background-color: var(--brush-gray-light);
+  }
+}
+
+.wp-block-quote {
+  background-color: var(--brush-gray-light);
+}
+
+.wp-block-separator {
+  border-top: 1px solid var(--brush-blue-light);
+}
+
+.wp-block-table {
+  table {
+    tr:nth-of-type(2n) {
+      background-color: var(--brush-gray-light);
+    }
+
+    tr:hover {
+      background-color: var(--brush-blue-light);
+    }
+  }
+}

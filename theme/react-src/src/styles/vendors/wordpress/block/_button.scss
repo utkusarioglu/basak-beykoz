@@ -1,15 +1,11 @@
+/// themed in _default.scss
 .wp-block-button {
-  padding: var(--sp);
-  background-color: var(--brush-yellow-dark);
-  border-radius: var(--sp);
+  @extend button;
+
   text-align: center;
 
   &:hover {
-    background-color: var(--brush-green-dark);
     // wp block button contains an anchor, not a button
-    & a {
-      color: var(--brush-white);
-      cursor: pointer;
-    }
+    cursor: pointer;
   }
 }

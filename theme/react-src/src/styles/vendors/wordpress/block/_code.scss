@@ -1,10 +1,9 @@
-.wp-block-code {
-  padding: var(--sp);
-  border-radius: var(--sp);
-  background-color: var(--brush-gray-light);
-  font-size: 0.8em;
+@import '../../../abstracts/mixins';
 
-  @media screen and (min-width: 800px) {
-    padding: calc(var(--sp) * 2);
-  }
+/// themed in _default.scss
+.wp-block-code {
+  @include frame-rounded-padded;
+  @include block-margin-bottom;
+
+  font-size: 0.8em;
 }

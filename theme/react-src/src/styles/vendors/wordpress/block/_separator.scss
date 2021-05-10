@@ -1,3 +1,4 @@
+/// themed in _default.scss
 .wp-block-separator {
-  border-top: var(--brush-blue-light);
+  margin: calc(var(--sp) * 4) 0;
 }
