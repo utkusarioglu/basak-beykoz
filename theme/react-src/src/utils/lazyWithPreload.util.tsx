@@ -1,5 +1,4 @@
 import { lazy, createElement } from 'react';
-
 import { ComponentType } from 'react';
 
 /**
@@ -12,6 +11,7 @@ export type PreloadableComponent<T extends ComponentType<any>> = T & {
 
 /**
  * Creates a preloadable component from the import factory input
+ *
  * @example
  * ```ts
  * const component = lazyWithPreload(() => import(...))
