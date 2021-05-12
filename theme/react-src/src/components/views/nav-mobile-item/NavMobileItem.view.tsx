@@ -1,6 +1,6 @@
 import React from 'react';
-import { FC } from 'react';
-import { WpMenuItem } from '../../../@types/wp-types';
+import type { FC } from 'react';
+import type { WpMenuItem } from '../../../@types/wp-types';
 import { urlSlug } from '../../../utils/slug.util';
 import NavMobileChildItemsView from './NavMobileChildItems.view';
 import {
