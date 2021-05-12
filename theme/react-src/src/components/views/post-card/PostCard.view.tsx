@@ -1,7 +1,7 @@
 import React, { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { WrtSingularItem } from '../../../@types/wp-types';
-import { LinkPreloaderSingularView } from '../link-preloader/LinkPreloader.view';
+import { LinkPreloaderView } from '../link-preloader/LinkPreloader.view';
 import { urlSlug } from '../../../utils/slug.util';
 import { useMediaQuery } from 'react-responsive';
 import { DESKTOP_MIN_WIDTH } from '../../../config';
@@ -37,7 +37,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
 
   return (
-    <LinkPreloaderSingularView to={urlSlug(slug)}>
+    <LinkPreloaderView to={urlSlug(slug)} style={{ textDecoration: 'none' }}>
       <div
         style={{
           opacity,
@@ -172,7 +172,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
           />
         </div>
       </div>
-    </LinkPreloaderSingularView>
+    </LinkPreloaderView>
   );
 };
 

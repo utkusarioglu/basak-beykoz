@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { WpMenuItem } from '../../../@types/wp-types';
 import { urlSlug } from '../../../utils/slug.util';
 import NavDesktopChildItemsView from './NavDesktopChildItems.view';
-import { LinkNavView } from '../link-nav/LinkNav.view';
 import { useLocation } from 'react-router-dom';
 import { ReactComponent as Stars } from '../../../static/nav-desktop-stars.svg';
 import ConcaveCornerView from '../concave-corner/ConcaveCorner.view';
@@ -13,6 +12,7 @@ import {
   MENU_BORDER_RADIUS,
   MENU_ITEM_ACTIVE_COLOR,
 } from '../../../config';
+import LinkPreloaderView from '../link-preloader/LinkPreloader.view';
 
 type NavDesktopItemViewProps = WpMenuItem & { depth: number };
 
@@ -47,7 +47,7 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
           borderBottomLeftRadius: hasChildren ? 0 : MENU_BORDER_RADIUS,
         }}
       >
-        <LinkNavView urlfulSlug={urlfulSlug} style={{ textDecoration: 'none' }}>
+        <LinkPreloaderView to={urlfulSlug} style={{ textDecoration: 'none' }}>
           <div
             style={{
               width: 'max-content',
@@ -85,7 +85,7 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
               }}
             />
           )}
-        </LinkNavView>
+        </LinkPreloaderView>
       </div>
 
       {hovered && hasChildren && (

@@ -1,19 +1,9 @@
-import { FC } from 'react';
 import { BLOG_SLUG } from '../../../config';
-import {
-  PreloadableComponent,
-  lazyWithPreload,
-} from '../../../utils/lazyWithPreload.util';
 import prefetch from '../../../services/prefetch.service';
-import type { PrefetcherArgs } from '../../../services/prefetch.service';
+import { lazyWithPreload } from '../../../utils/lazyWithPreload.util';
+import type { RouteConfig } from '../../../@types/routing';
 
-interface LazyRouteConfig {
-  path: string;
-  component: PreloadableComponent<FC<any>>;
-  prefetch?: (config: PrefetcherArgs) => Promise<void>;
-}
-
-export const routes: LazyRouteConfig[] = [
+export const routes: RouteConfig[] = [
   {
     path: '/404',
     component: lazyWithPreload(
@@ -25,6 +15,10 @@ export const routes: LazyRouteConfig[] = [
     component: lazyWithPreload(() => import('../../routes/blog/Blog.route')),
     prefetch: prefetch.categoryPosts,
   },
+  // {
+  //   path: `/${BLOG_SLUG}`,
+  //   component: lazy(() => import('../../routes/blog/Blog.route')),
+  // },
   {
     path: '/credits',
     component: lazyWithPreload(

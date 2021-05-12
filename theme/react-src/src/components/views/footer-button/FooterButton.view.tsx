@@ -1,11 +1,11 @@
 import React from 'react';
-import { LinkNavView } from '../link-nav/LinkNav.view';
+import LinkPreloaderView from '../link-preloader/LinkPreloader.view';
 
 const FooterButtonView = () => {
   const { pageTitle } = window.config;
 
   return (
-    <LinkNavView urlfulSlug="/credits">
+    <LinkPreloaderView to="/credits">
       <div
         style={{
           width: '25vw',
@@ -39,7 +39,7 @@ const FooterButtonView = () => {
           {pageTitle}
         </div>
       </div>
-    </LinkNavView>
+    </LinkPreloaderView>
   );
 };
 

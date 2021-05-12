@@ -1,7 +1,7 @@
 import React from 'react';
 import NavDesktopView from '../../views/nav-desktop/NavDesktop.view';
 import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
-import { LinkPreloaderSingularView } from '../../views/link-preloader/LinkPreloader.view';
+import { LinkPreloaderView } from '../../views/link-preloader/LinkPreloader.view';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
 import { useMediaQuery } from 'react-responsive';
 import {
@@ -39,7 +39,7 @@ const HeaderLayout = () => {
         zIndex: 100,
       }}
     >
-      <LinkPreloaderSingularView to="/">
+      <LinkPreloaderView to="/">
         <div
           style={{
             backgroundImage:
@@ -53,7 +53,7 @@ const HeaderLayout = () => {
             width: isDesktop ? '180px' : 'auto',
           }}
         />
-      </LinkPreloaderSingularView>
+      </LinkPreloaderView>
       <div style={{ flexGrow: 1 }}></div>
 
       {isDesktop ? (

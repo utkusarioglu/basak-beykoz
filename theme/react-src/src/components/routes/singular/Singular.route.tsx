@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import SingularLayout from '../../layouts/singular/Singular.layout';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -14,14 +14,18 @@ import { useErrorHandler } from 'react-error-boundary';
 const SingularRoute = () => {
   const handleError = useRef(useErrorHandler());
   const { slug } = useParams<{ slug: string }>();
-  const cleanedSlug = slug !== undefined ? slug : 'home';
+  const cleanedSlug = slug !== undefined ? slug : HOME_SLUG;
+  const [onScreenSlug, setOnScreenSlug] = useState('');
   const singular = useSelector(selectSingular);
 
   useEffect(() => {
-    if (!singular.render) {
-      prefetch.singular({ slug: cleanedSlug }).catch(handleError.current);
+    if (!singular.render || cleanedSlug !== onScreenSlug) {
+      prefetch
+        .singular({ slug: cleanedSlug })
+        .then(() => setOnScreenSlug(cleanedSlug))
+        .catch(handleError.current);
     }
-  }, [cleanedSlug, singular.render]);
+  }, [cleanedSlug, singular.render, onScreenSlug]);
 
   if (!singular.render) {
     return <LoaderHtmlView />;

@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { WpMenuItem } from '../../../@types/wp-types';
 import { urlSlug } from '../../../utils/slug.util';
 import NavMobileChildItemsView from './NavMobileChildItems.view';
-import { LinkNavView } from '../link-nav/LinkNav.view';
 import {
   MOBILE_MENU_PADDING as MOBILE_MENU_ITEM_SPACING,
   MENU_ITEM_ACTIVE_COLOR,
@@ -11,6 +10,7 @@ import {
 import { useLocation } from 'react-router';
 import { ReactComponent as Stars } from '../../../static/nav-desktop-stars.svg';
 import { closeAllMenus } from '../../../slices/app/app.slice';
+import LinkPreloaderView from '../link-preloader/LinkPreloader.view';
 
 type NavMobileItemViewProps = WpMenuItem & { depth: number };
 
@@ -32,8 +32,8 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
         position: 'relative',
       }}
     >
-      <LinkNavView
-        urlfulSlug={urlfulSlug}
+      <LinkPreloaderView
+        to={urlfulSlug}
         onSelect={closeAllMenus}
         style={{ textDecoration: 'none' }}
       >
@@ -58,7 +58,7 @@ const NavMobileItemView: FC<NavMobileItemViewProps> = ({
             {title}
           </div>
         </div>
-      </LinkNavView>
+      </LinkPreloaderView>
 
       {hasChildren && (
         <NavMobileChildItemsView children={child_items} depth={depth + 1} />
