@@ -29,31 +29,33 @@ class Prefetch {
     const cleanedSlug = cleanSlug(slug);
     let singular = getState().singularRepo[cleanedSlug];
 
-    return new Promise<void>((resolve, reject) => {
-      if (
-        singular === undefined ||
-        singular.fetchTime < Date.now() - FETCH_STALE_TIME
-      ) {
-        const cancelOnFetchStart = onFetchStart && onFetchStart();
-        rest.fetchSingular(cleanedSlug).then((data) => {
-          onFetchComplete && onFetchComplete();
-          cancelOnFetchStart &&
-            cancelOnFetchStart instanceof Function &&
-            cancelOnFetchStart();
+    if (
+      singular !== undefined &&
+      singular.fetchTime >= Date.now() - FETCH_STALE_TIME
+    ) {
+      onFetchComplete && onFetchComplete();
+      setSingular(singular.data);
+      return Promise.resolve();
+    }
 
-          if (data.state === 'fail') {
-            console.error(data);
-            reject(data.errorCode);
-            return;
-          }
-          setSingular(data.body);
-          resolve();
-        });
-      } else {
-        setSingular(singular.data);
-        resolve();
-      }
-    });
+    const cancelOnFetchStart = onFetchStart && onFetchStart();
+
+    return rest
+      .fetchSingular(cleanedSlug)
+      .then((data) => {
+        if (data.state === 'fail') {
+          console.error(data); // ! remove this when the time comes
+          throw new Error(data.errorCode);
+        }
+        setSingular(data.body);
+        return;
+      })
+      .finally(() => {
+        onFetchComplete && onFetchComplete();
+        cancelOnFetchStart &&
+          cancelOnFetchStart instanceof Function &&
+          cancelOnFetchStart();
+      });
   }
 
   /**
@@ -71,38 +73,35 @@ class Prefetch {
   }: PrefetcherArgs): Promise<void> {
     const cleanedSlug = cleanSlug(slug);
     let posts = getState().categoryPosts;
-    return new Promise<void>((resolve, reject) => {
-      if (
-        posts.slug !== cleanedSlug ||
-        posts.fetchTime < Date.now() - FETCH_STALE_TIME
-      ) {
-        const cancelOnFetchStart = onFetchStart && onFetchStart();
-        rest.fetchCategoryPosts(cleanedSlug).then((data) => {
-          onFetchComplete && onFetchComplete();
-          cancelOnFetchStart &&
-            cancelOnFetchStart instanceof Function &&
-            cancelOnFetchStart();
 
-          if (data.state === 'fail') {
-            if (data.state === 'fail') {
-              console.error(data);
-              reject(data.errorCode);
-              return;
-            }
-          } else {
-            setPosts({
-              slug: cleanedSlug,
-              items: data.body,
-            });
-            resolve();
-            return data.body;
-          }
+    if (
+      posts.slug === cleanedSlug &&
+      posts.fetchTime >= Date.now() - FETCH_STALE_TIME
+    ) {
+      onFetchComplete && onFetchComplete();
+      return Promise.resolve();
+    }
+
+    const cancelOnFetchStart = onFetchStart && onFetchStart();
+    return rest
+      .fetchCategoryPosts(cleanedSlug)
+      .then((data) => {
+        if (data.state === 'fail') {
+          console.error(data); // ! remove this when the time comes
+          throw new Error(data.errorCode);
+        }
+        setPosts({
+          slug: cleanedSlug,
+          items: data.body,
         });
-      } else {
-        resolve();
-        return posts.items;
-      }
-    });
+        return;
+      })
+      .finally(() => {
+        onFetchComplete && onFetchComplete();
+        cancelOnFetchStart &&
+          cancelOnFetchStart instanceof Function &&
+          cancelOnFetchStart();
+      });
   }
 
   /**
@@ -119,28 +118,29 @@ class Prefetch {
     const cleanedSlug = cleanSlug(slug);
     let nav = getState().nav;
 
-    return new Promise<void>((resolve, reject) => {
-      if (nav === undefined || nav.fetchTime === 0) {
-        const cancelOnFetchStart = onFetchStart && onFetchStart();
-        rest.fetchMenu(cleanedSlug).then((data) => {
-          onFetchComplete && onFetchComplete();
-          cancelOnFetchStart &&
-            cancelOnFetchStart instanceof Function &&
-            cancelOnFetchStart();
+    if (nav !== undefined && nav.fetchTime !== 0) {
+      onFetchComplete && onFetchComplete();
+      setNav({ items: nav.items, slug: 'nav' });
+      return;
+    }
 
-          if ((data as GetWpMenuFail).code) {
-            console.error(data);
-            reject((data as GetWpMenuFail).code);
-            return;
-          }
-          setNav({ items: (data as GetWpMenuSuccess).items, slug: 'nav' });
-          resolve();
-        });
-      } else {
-        setNav({ items: nav.items, slug: 'nav' });
-        resolve();
-      }
-    });
+    const cancelOnFetchStart = onFetchStart && onFetchStart();
+
+    return rest
+      .fetchMenu(cleanedSlug)
+      .then((data) => {
+        if ((data as GetWpMenuFail).code) {
+          console.error(data); // ! remove this when the time comes
+          throw new Error((data as GetWpMenuFail).code);
+        }
+        setNav({ items: (data as GetWpMenuSuccess).items, slug: 'nav' });
+      })
+      .finally(() => {
+        onFetchComplete && onFetchComplete();
+        cancelOnFetchStart &&
+          cancelOnFetchStart instanceof Function &&
+          cancelOnFetchStart();
+      });
   }
 }
 
