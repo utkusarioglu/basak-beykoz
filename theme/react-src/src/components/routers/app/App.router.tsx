@@ -21,6 +21,7 @@ import {
 import { useMediaQuery } from 'react-responsive';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackLayout from '../../layouts/error-fallback/ErrorFallback.layout';
+import GraceTopView from '../../views/grace-top/GraceTop.view';
 
 const AppRouter = () => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
@@ -83,6 +84,7 @@ const AppRouter = () => {
       </div>
 
       <FooterLayout />
+      <GraceTopView />
     </Router>
   );
 };
