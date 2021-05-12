@@ -8,13 +8,17 @@ import {
   selectMobileNavState,
   selectMobileShareState,
 } from '../../../slices/app/app.slice';
+import {
+  HEADER_ICON_MOBILE_SIZE,
+  HEADER_ICON_MOBILE_VERTICAL_PADDING,
+} from '../../../config';
 
-const HEADER_ICON_SIZE = 20;
-const HEADER_ICON_PADDING = '11 15';
+// const HEADER_ICON_SIZE = 20;
+const HEADER_ICON_PADDING = `11px ${HEADER_ICON_MOBILE_VERTICAL_PADDING}`;
 const HEADER_ICON_COLOR = 'var(--brush-black)';
 
 const iconProps = {
-  size: HEADER_ICON_SIZE,
+  size: HEADER_ICON_MOBILE_SIZE,
   style: {
     padding: HEADER_ICON_PADDING,
     color: HEADER_ICON_COLOR,

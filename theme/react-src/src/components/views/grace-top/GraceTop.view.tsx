@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import { graceTop } from '../../../utils/scroll.util';
 import { GoChevronUp } from 'react-icons/go';
 import { useMediaQuery } from 'react-responsive';
-import { DESKTOP_MIN_WIDTH } from '../../../config';
+import {
+  DESKTOP_MIN_WIDTH,
+  HEADER_ICON_MOBILE_SIZE,
+  HEADER_ICON_MOBILE_VERTICAL_PADDING,
+} from '../../../config';
 
 const root = document.getElementById('root') as HTMLElement;
 
@@ -25,7 +29,7 @@ const GraceTopView = () => {
     <button
       style={{
         position: 'fixed',
-        padding: 'var(--sp) calc(var(--sp) * 2)',
+        padding: `var(--sp) ${HEADER_ICON_MOBILE_VERTICAL_PADDING}`,
         border: 'none',
         background: 'rgba(255, 192, 91, 0.6)',
         color: 'var(--brush-black)',
@@ -43,7 +47,7 @@ const GraceTopView = () => {
       }}
       onClick={graceTop}
     >
-      <GoChevronUp size={20} />
+      <GoChevronUp size={HEADER_ICON_MOBILE_SIZE} />
     </button>
   );
 };

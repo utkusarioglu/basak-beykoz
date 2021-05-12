@@ -55,3 +55,6 @@ export const MOBILE_MENU_PADDING = {
   horizontal: 'calc(var(--sp) * 2)',
   vertical: 'calc(var(--sp) / 2)',
 };
+
+export const HEADER_ICON_MOBILE_SIZE = 20;
+export const HEADER_ICON_MOBILE_VERTICAL_PADDING = 'calc(var(--sp) * 1.5)';
