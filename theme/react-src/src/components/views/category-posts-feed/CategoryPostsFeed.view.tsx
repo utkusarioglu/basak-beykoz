@@ -1,6 +1,6 @@
 import React from 'react';
 import type { FC } from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import PostCardView from '../post-card/PostCard.view';
@@ -18,30 +18,27 @@ const CategoryPostsFeedView: FC<CategoryPostsFeedViewProps> = ({
   excludePostSlug = undefined,
 }) => {
   const handleError = useRef(useErrorHandler());
-  const [isLoading, setIsLoading] = useState(false);
-  const { items: posts } = useSelector(selectPosts);
+  const { items, fetchTime } = useSelector(selectPosts);
 
   useEffect(() => {
     prefetch
       .categoryPosts({
         slug: requestSlugCsv,
-        onFetchStart: () => setIsLoading(true),
-        onFetchComplete: () => setIsLoading(false),
       })
       .catch(handleError.current);
   }, [requestSlugCsv]);
 
-  if (isLoading) {
+  if (fetchTime === 0) {
     return <PostCardSkeletonsView count={5} minOpacity={0.3} />;
   }
 
-  if (posts.length === 0) {
+  if (fetchTime !== 0 && items.length === 0) {
     return <NoPostsView />;
   }
 
   return (
     <>
-      {posts
+      {items
         .filter((post) => post.slug !== excludePostSlug)
         .map((post) => (
           <PostCardView key={post.id} asSkeleton={false} {...post} />
