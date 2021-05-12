@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import SingularLayout from '../../layouts/singular/Singular.layout';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -10,22 +10,34 @@ import { Helmet } from 'react-helmet';
 import prefetch from '../../../services/prefetch.service';
 import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
 import { useErrorHandler } from 'react-error-boundary';
+import {
+  enableIsLoadingDelayed,
+  disableIsLoadingDelayed,
+} from '../../../slices/app/app.slice';
+import { cleanSlug } from '../../../utils/slug.util';
 
 const SingularRoute = () => {
   const handleError = useRef(useErrorHandler());
   const { slug } = useParams<{ slug: string }>();
-  const cleanedSlug = slug !== undefined ? slug : HOME_SLUG;
-  const [onScreenSlug, setOnScreenSlug] = useState('');
+  const cleanedSlug = cleanSlug(slug);
   const singular = useSelector(selectSingular);
 
   useEffect(() => {
-    if (!singular.render || cleanedSlug !== onScreenSlug) {
-      prefetch
-        .singular({ slug: cleanedSlug })
-        .then(() => setOnScreenSlug(cleanedSlug))
-        .catch(handleError.current);
-    }
-  }, [cleanedSlug, singular.render, onScreenSlug]);
+    let cancelIsLoadingDelayed = singular.render && enableIsLoadingDelayed();
+    prefetch
+      .singular({ slug: cleanedSlug })
+      .catch(handleError.current)
+      .finally(() => {
+        if (singular.render) {
+          cancelIsLoadingDelayed && cancelIsLoadingDelayed();
+          disableIsLoadingDelayed();
+        }
+      });
+
+    return () => {
+      cancelIsLoadingDelayed && cancelIsLoadingDelayed();
+    };
+  }, [cleanedSlug, singular.render]);
 
   if (!singular.render) {
     return <LoaderHtmlView />;
