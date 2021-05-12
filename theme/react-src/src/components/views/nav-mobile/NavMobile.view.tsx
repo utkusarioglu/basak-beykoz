@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectNav } from '../../../slices/nav/nav.slice';
 import prefetch from '../../../services/prefetch.service';
@@ -11,21 +11,18 @@ import { useErrorHandler } from 'react-error-boundary';
 
 const NavMobileView = () => {
   const handleError = useRef(useErrorHandler());
-  const [isLoading, setIsLoading] = useState(false);
-  const { items: menu } = useSelector(selectNav);
+  const { items: menu, fetchTime } = useSelector(selectNav);
 
   useEffect(() => {
-    prefetch
-      .menu({
-        slug: 'nav',
-        onFetchStart: () => setIsLoading(true),
-        onFetchComplete: () => setIsLoading(false),
-      })
-      .catch(handleError.current);
+    prefetch.menu({ slug: 'nav' }).catch(handleError.current);
   }, []);
 
-  if (isLoading) {
+  if (fetchTime === 0) {
     return <LoaderMobileMenu />;
+  }
+
+  if (menu.length === 0 && fetchTime !== 0) {
+    return <p>There is nothing in this menu</p>;
   }
 
   return (
@@ -43,13 +40,9 @@ const NavMobileView = () => {
           position: 'relative',
         }}
       >
-        {menu.length > 0
-          ? menu.map((menuItem) => (
-              <NavMobileItemView
-                {...{ ...menuItem, depth: 0, key: menuItem.ID }}
-              />
-            ))
-          : null}
+        {menu.map((menuItem) => (
+          <NavMobileItemView {...{ ...menuItem, depth: 0, key: menuItem.ID }} />
+        ))}
       </nav>
 
       <MobileMenuSectionTitleView>Sosyal Medya</MobileMenuSectionTitleView>
