@@ -16,7 +16,7 @@ const NavDesktopView = () => {
       .menu({
         slug: 'nav',
         onFetchStart: () => setIsLoading(true),
-        onFetchComplete: () => setIsLoading(false),
+        onComplete: () => setIsLoading(false),
       })
       .catch(handleError.current);
   }, []);

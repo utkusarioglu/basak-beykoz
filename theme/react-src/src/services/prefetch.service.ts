@@ -8,8 +8,25 @@ import { GetWpMenuFail, GetWpMenuSuccess } from '../@types/wp-types';
 import { setNav } from '../slices/nav/nav.slice';
 
 export type PrefetcherArgs = {
+  /**
+   * The slug to prefetch
+   */
   slug: string;
+  /**
+   * Called on complete regardless of whether the content was prefetched
+   * or had to be retrieved from the server
+   */
+  onComplete?: () => void;
+  /**
+   * Called if the content hasn't been fetched before and the fetch operation
+   * is starting
+   */
   onFetchStart?: (() => void) | (() => () => void);
+  /**
+   * Called only if the content hasn't been fetched before and the fetch
+   * operation has completed. This one isn't called if the content didn't have
+   * to be retrieved from the server
+   */
   onFetchComplete?: () => void;
 };
 
@@ -23,6 +40,7 @@ class Prefetch {
    */
   async singular({
     slug,
+    onComplete,
     onFetchStart,
     onFetchComplete,
   }: PrefetcherArgs): Promise<void> {
@@ -33,7 +51,7 @@ class Prefetch {
       singular !== undefined &&
       singular.fetchTime >= Date.now() - FETCH_STALE_TIME
     ) {
-      onFetchComplete && onFetchComplete();
+      onComplete && onComplete();
       setSingular(singular.data);
       return Promise.resolve();
     }
@@ -51,6 +69,7 @@ class Prefetch {
         return;
       })
       .finally(() => {
+        onComplete && onComplete();
         onFetchComplete && onFetchComplete();
         cancelOnFetchStart &&
           cancelOnFetchStart instanceof Function &&
@@ -69,7 +88,7 @@ class Prefetch {
   async categoryPosts({
     slug,
     onFetchStart,
-    onFetchComplete,
+    onComplete: onFetchComplete,
   }: PrefetcherArgs): Promise<void> {
     const cleanedSlug = cleanSlug(slug);
     let posts = getState().categoryPosts;
@@ -113,7 +132,7 @@ class Prefetch {
   async menu({
     slug,
     onFetchStart,
-    onFetchComplete,
+    onComplete: onFetchComplete,
   }: PrefetcherArgs): Promise<void> {
     const cleanedSlug = cleanSlug(slug);
     let nav = getState().nav;

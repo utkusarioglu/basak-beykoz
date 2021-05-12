@@ -11,6 +11,7 @@ type SingularViewProps = SingularSliceRenderEnabled;
 const SingularView: FC<SingularViewProps> = ({ content }) => {
   const history = useRef(useHistory());
   const handleError = useRef(useErrorHandler());
+
   useLayoutEffect(
     () => interceptLinks(history.current, handleError.current),
     [content]
