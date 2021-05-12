@@ -1,3 +1,5 @@
+import { SocialLink } from './@types/social';
+
 const {
   REACT_APP_REST_TIMEOUT,
   REACT_APP_HOME_SLUG,
@@ -18,7 +20,7 @@ export const GOOGLE_ANALYTICS_ID = REACT_APP_GOOGLE_ANALYTICS_ID;
 /*
  * LOCAL CONFIG
  */
-export const FETCH_STALE_TIME = 60 * 1000; // 60 seconds
+export const FETCH_STALE_TIME = 1 * 60 * 60 * 1000; // 1 hour
 export const LOADING_INDICATOR_APPEAR_AFTER = 500;
 export const LOADING_INDICATOR_DISAPPEAR_AFTER = 200;
 
@@ -35,12 +37,6 @@ export const MENU_VERTICAL_DECORATION_HEIGHT = 'var(--sp)';
 export const VERTICAL_WHITESPACE_DESKTOP = '8vw';
 
 export const SOCIAL_DESKTOP_ICON_SIZE = '1.5em';
-
-interface SocialLink {
-  title: string;
-  type: string;
-  link: string;
-}
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
