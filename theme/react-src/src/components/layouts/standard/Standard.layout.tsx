@@ -54,7 +54,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                 backgroundRepeat: 'no-repeat',
                 backgroundPositionX: 'center',
                 backgroundPositionY: 'center',
-                backgroundSize: 'cover', // FIXME  there seems to be a react issue with this
+                backgroundSize: 'cover',
                 filter: 'sepia(50%) opacity(.5)',
               }),
               width: '100%',
