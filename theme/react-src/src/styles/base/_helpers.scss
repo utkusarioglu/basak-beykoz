@@ -7,3 +7,24 @@
   min-height: 100%;
   overflow-x: hidden;
 }
+
+.grid-area--image {
+  grid-area: image;
+  width: 100%;
+  height: auto;
+  .wp-block-cover {
+    border-radius: var(--sp);
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  // display: none;
+}
+
+.grid-area--text {
+  grid-area: text;
+}
