@@ -25,10 +25,14 @@ const HeaderLayout = () => {
         top: isDesktop ? 0 : 'auto',
         bottom: isDesktop ? 'auto' : 0,
         minHeight: isDesktop
-          ? 'var(--height-header-desktop)'
+          ? 'var(--height-header-desktop-min)'
           : 'var(--height-header-mobile)',
-        maxHeight: isDesktop ? 100 : 'var(--height-header-mobile)',
-        height: isDesktop ? '10vh' : 'var(--height-header-mobile)',
+        maxHeight: isDesktop
+          ? 'var(--height-header-desktop-max)'
+          : 'var(--height-header-mobile)',
+        height: isDesktop
+          ? 'var(--height-header-desktop-responsive)'
+          : 'var(--height-header-mobile)',
         paddingRight: isDesktop ? VERTICAL_WHITESPACE_DESKTOP : 'var(--sp)',
         paddingLeft: isDesktop ? VERTICAL_WHITESPACE_DESKTOP : 'var(--sp)',
         marginRight: isDesktop ? '17px' : 0, // magic number coming from common browser scrollbar width
