@@ -11,12 +11,11 @@ const FooterLayout = () => {
   return (
     <footer
       style={{
-        height: isDesktop
-          ? 'var(--height-footer-desktop)'
-          : 'calc(var(--height-footer-mobile) + var(--height-header-mobile)',
+        marginTop: isDesktop
+          ? 'calc(var(--height-footer-desktop) * -1)'
+          : 'calc(var(--height-footer-mobile) * -1)',
         position: 'relative',
         textAlign: 'center',
-        marginTop: isDesktop ? 'calc(var(--sp) * 15)' : 'calc(var(--sp) * 10)',
       }}
     >
       <div
@@ -52,6 +51,25 @@ const FooterLayout = () => {
             right: isDesktop ? '22vw' : '5vw',
           }}
         />
+
+        {
+          /**
+           * Creates a `--brush-white` colored empty space for the
+           * mobile header background. This allows the mobile header to appear
+           * clean, devoid of any other colors other than the background color
+           * of this div.
+           *
+           * Refer to FOOTER.md for more details about this div
+           */
+          !isDesktop && (
+            <div
+              style={{
+                height: 'var(--height-header-mobile)',
+                backgroundColor: 'var(--brush-white)',
+              }}
+            />
+          )
+        }
       </div>
     </footer>
   );

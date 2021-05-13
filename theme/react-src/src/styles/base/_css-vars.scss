@@ -33,8 +33,6 @@
 
   /**
   Controls the height of the ladies in the footer. 
-      Controls the height of the ladies in the footer. 
-  Controls the height of the ladies in the footer. 
   This value is also used for the footer reserved space; Pushing the 
   footer below the unscrolled viewport, making the appearance of
   the ladies a surprise to unsuspecting eyes.
@@ -45,10 +43,41 @@
   Controls the height of the footer elements other than the sitting
   ladies. Meaning, it sets the height of the square button and the 
   wavy background color. 
-      wavy background color. 
-  wavy background color. 
   */
   --height-footer-desktop-button: 150px;
+
+  /**
+  Creates some spacing between the footer layout and the content
+  Think of this as the distance between the end of the content and the
+  beginning of the heads of the ladies of the footer.
+  */
+  --height-footer-spacing: 0px;
+
+  /**
+  Shim for footer content that is reserved by the standard layout.
+  This is done because there are transparent sections of the footer
+  and these sections need to reflect the colors of the page they are on.
+  For this, the footer is moved up into the padding of the 
+  content section.
+  */
+
+  /**
+  The value below sets the shim size for the mobile footer. In case you 
+  have to set a custom page shim, such as on the home page, use this value
+  for the mobile footer shim.
+  */
+  --height-footer-shim-mobile: calc(
+    var(--height-footer-mobile) + var(--height-footer-spacing)
+  );
+
+  /**
+  Value for footer shim on desktop footer. In case you 
+  have to set a custom page shim, such as on the home page, use this value
+  for the desktop footer shim.
+  */
+  --height-footer-shim-desktop: calc(
+    var(--height-footer-desktop) + var(--height-footer-spacing)
+  );
 
   /** Spacing unit*/
   --sp: 8px;

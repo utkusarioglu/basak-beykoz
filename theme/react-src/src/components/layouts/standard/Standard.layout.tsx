@@ -13,7 +13,8 @@ interface StandardLayoutProps {
   hideThumbnail?: boolean;
   hideTitle?: boolean;
   thumbnailUrl?: string;
-  sideMargins?: boolean;
+  hideMargins?: boolean;
+  hideFooterShim?: boolean;
 }
 
 const StandardLayout: FC<StandardLayoutProps> = ({
@@ -22,7 +23,8 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   hideThumbnail,
   thumbnailUrl,
   hideTitle,
-  sideMargins = true,
+  hideMargins = false,
+  hideFooterShim = false,
 }) => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
 
@@ -98,22 +100,42 @@ const StandardLayout: FC<StandardLayoutProps> = ({
       )}
 
       <div
-        style={
-          !hideThumbnail && isDesktop
+        style={{
+          ...(!hideThumbnail && isDesktop
             ? {
+                paddingTop: '10vh', // comes from heading and some whitespace creation
                 marginLeft: `calc(${THUMBNAIL_WIDTH_DESKTOP} + ${VERTICAL_WHITESPACE_DESKTOP})`, // VERTICAL_WHITESPACE_DESKTOP ??
                 marginRight: VERTICAL_WHITESPACE_DESKTOP, // VERTICAL_WHITESPACE_DESKTOP ??
-                paddingTop: '12vh', // comes from heading and some whitespace creation
+                minHeight: 'calc(100% - 10vh)',
               }
             : {
                 marginTop: 'var(--sp)',
-                marginLeft: verticalWhitespace(sideMargins, isDesktop),
-                marginRight: verticalWhitespace(sideMargins, isDesktop),
-              }
-        }
+                marginLeft: computeVerticalMargins(hideMargins, isDesktop),
+                marginRight: computeVerticalMargins(hideMargins, isDesktop),
+              }),
+
+          ...(!hideFooterShim &&
+            (isDesktop
+              ? {
+                  paddingBottom: 'var(--height-footer-shim-desktop)',
+                  minHeight: 'calc(100vh + var(--height-footer-desktop))',
+                }
+              : {
+                  paddingBottom: 'var(--height-footer-shim-mobile)',
+                  /**
+                   * TODO
+                   * this doesn't account for the mobile browser address
+                   * bar scroll behavior.
+                   *
+                   * It also doesn't account for the cases where the
+                   * thumbnail may be turned off
+                   */
+                  minHeight: 'calc(40vh + var(--height-footer-mobile))',
+                })),
+        }}
       >
         {isDesktop && !hideTitle && (
-          <h2 style={{ marginBottom: '2em' }}>{title}</h2>
+          <h2 style={{ marginBottom: '3em', marginTop: '2em' }}>{title}</h2>
         )}
         {children}
       </div>
@@ -121,8 +143,16 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   );
 };
 
-function verticalWhitespace(sideMargins: boolean, isDesktop: boolean) {
-  return !sideMargins
+/**
+ * Computes the size of the vertical margins that shall be used for the
+ * component
+ * @param hideMargins hide margins var from the parent
+ * @param isDesktop boolean indicating whether the desktop breakpoint has
+ * been reached
+ * @returns boolean - true to hide the vertical margins
+ */
+function computeVerticalMargins(hideMargins: boolean, isDesktop: boolean) {
+  return hideMargins
     ? 0
     : !isDesktop
     ? 'var(--sp)'

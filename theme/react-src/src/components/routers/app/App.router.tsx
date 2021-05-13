@@ -62,29 +62,27 @@ const AppRouter = () => {
 
       {isDesktop ? <LoaderDesktopView /> : <LoaderEdgeView />}
 
-      <div className="min-height-100-p">
-        <Switch>
-          <Route path={restSlug(HOME_SLUG)} exact>
-            <Redirect to="/" />
+      <Switch>
+        <Route path={restSlug(HOME_SLUG)} exact>
+          <Redirect to="/" />
+        </Route>
+
+        {routes.map(({ path, component: Component }) => (
+          <Route path={path} exact key={path}>
+            <ErrorBoundary FallbackComponent={ErrorFallbackLayout}>
+              <Suspense fallback={<LoaderHtmlView />}>
+                <Component />
+                <FooterLayout />
+              </Suspense>
+            </ErrorBoundary>
           </Route>
+        ))}
 
-          {routes.map(({ path, component: Component }) => (
-            <Route path={path} exact key={path}>
-              <ErrorBoundary FallbackComponent={ErrorFallbackLayout}>
-                <Suspense fallback={<LoaderHtmlView />}>
-                  <Component />
-                </Suspense>
-              </ErrorBoundary>
-            </Route>
-          ))}
+        <Route>
+          <Redirect to="/404" />
+        </Route>
+      </Switch>
 
-          <Route>
-            <Redirect to="/404" />
-          </Route>
-        </Switch>
-      </div>
-
-      <FooterLayout />
       <GraceTopView />
     </Router>
   );
