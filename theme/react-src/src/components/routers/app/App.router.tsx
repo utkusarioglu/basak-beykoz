@@ -22,6 +22,7 @@ import { useMediaQuery } from 'react-responsive';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackLayout from '../../layouts/error-fallback/ErrorFallback.layout';
 import GraceTopView from '../../views/grace-top/GraceTop.view';
+import { restSlug } from '../../../utils/slug.util';
 
 const AppRouter = () => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
@@ -63,7 +64,7 @@ const AppRouter = () => {
 
       <div className="min-height-100-p">
         <Switch>
-          <Route path={`/${HOME_SLUG}`} exact>
+          <Route path={restSlug(HOME_SLUG)} exact>
             <Redirect to="/" />
           </Route>
 
