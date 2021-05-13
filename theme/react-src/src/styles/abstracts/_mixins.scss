@@ -44,3 +44,16 @@ consuming blocks;
 @mixin block-margin-bottom {
   margin-bottom: var(--sp);
 }
+
+/**
+Creates the same footer shim padding that is created by the 
+Standard.layout. This mixin is a must for pages that cannot use
+the standard footer shim logic from the Standard.layout component
+*/
+@mixin footer-shim {
+  padding-bottom: var(--height-footer-shim-mobile);
+
+  @media screen and (min-width: #{$desktop-breakpoint}) {
+    padding-bottom: var(--height-footer-shim-desktop);
+  }
+}
