@@ -35,3 +35,4 @@ build
 dist.zip
 uploads
 plugins
+.vscode/settings.json
