@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import AppRouter from './components/routers/app/App.router';
 import { GOOGLE_ANALYTICS_ID } from './config';
 import './index.scss';
+import 'overlayscrollbars/css/OverlayScrollbars.css';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackLayout from './components/layouts/error-fallback/ErrorFallback.layout';
 

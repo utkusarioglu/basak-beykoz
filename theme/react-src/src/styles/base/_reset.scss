@@ -28,8 +28,17 @@ html {
 }
 
 #root {
-  overflow-x: hidden;
-  overflow-y: scroll;
+  /**
+  App scrolling is handled by overlayscrollbars at the level of routes.
+  See App.router component for the scroll implementation
+
+  @remarks
+  The overflow: hidden setting below ensures that the mobile address bar 
+  is visible at all times. This is intentional for this website as the site 
+  address will not be well known by the audience at this stage. Having the
+  site address shown may help with recognition.
+  */
+  overflow: hidden;
   /** Fixes smooth scrolling issues that emerge with ios */
   -webkit-overflow-scrolling: touch;
 }
