@@ -1,0 +1,17 @@
+$scrollbar-color: var(--brush-gray);
+$handle-size: calc(var(--sp) / 2);
+$track-size: var(--sp);
+$handle-size-active: $track-size;
+
+.mobile-menu-container {
+  &__content-wrapper {
+    &::-webkit-scrollbar {
+      width: calc(var(--sp) / 2);
+
+      &-thumb {
+        border-top-left-radius: calc(var(--sp) / 2);
+        border-bottom-left-radius: calc(var(--sp) / 2);
+      }
+    }
+  }
+}

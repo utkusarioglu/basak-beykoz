@@ -87,6 +87,21 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           }}
         >
           <div
+            /**
+             * This component shape is not compatible with overlay scrollbars
+             * as both the size of the child and the parent are dependent
+             * on each other. For this reason, the decision was made to use
+             * the native scrollbars on mobile and styled scrollbars on
+             * a small device with cursor support.
+             *
+             * The class name below is set to allow access to scss to style the
+             * desktop scrollbars
+             *
+             * Note that the average size desktop will never have any need for
+             * this component at all, as the app will switch to desktop layout
+             * over 800px width
+             */
+            className="mobile-menu-container__content-wrapper"
             style={{
               overflowY: 'auto',
               overflowX: 'hidden',

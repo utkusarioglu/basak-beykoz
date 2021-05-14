@@ -72,3 +72,20 @@ a {
     }
   }
 }
+
+/**
+Mobile sized desktop menu-container scrollbar
+*/
+.mobile-menu-container {
+  &__content-wrapper {
+    &::-webkit-scrollbar {
+      &-track {
+        background: transparent;
+      }
+
+      &-thumb {
+        background: #{$scrollbar-color};
+      }
+    }
+  }
+}

@@ -28,8 +28,12 @@ const NavMobileView = () => {
   return (
     <div
       style={{
-        marginTop: 'calc(var(--sp) * 2)',
-        marginBottom: 'calc(var(--sp) * 2)',
+        /**
+         * paddingTop is created by the default padding of the first
+         * menu item. Setting a paddingTop statement over here may go
+         * overboard with the spacing
+         * */
+        paddingBottom: 'calc(var(--sp) * 2)',
       }}
     >
       <MobileMenuSectionTitleView>Sayfalar</MobileMenuSectionTitleView>
