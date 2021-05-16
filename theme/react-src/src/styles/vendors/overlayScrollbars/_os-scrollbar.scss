@@ -53,3 +53,10 @@ $handle-size-active: $track-size;
     }
   }
 }
+
+/**
+Ensures that the main page vertical scroll bar does not cover the header
+*/
+#main > .os-scrollbar-vertical {
+  height: calc(100% - var(--height-header-mobile));
+}
