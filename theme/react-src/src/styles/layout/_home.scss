@@ -1,0 +1,272 @@
+@import '../abstracts/mixins';
+@import '../abstracts/sass-vars';
+
+$hero-image-height-mobile: 60vh;
+$section-end-margin: calc(var(--sp) * 10);
+
+.home-section {
+  @include enable-horizontal-padding;
+
+  padding-top: var(--sp);
+  padding-bottom: #{$section-end-margin};
+
+  min-height: 100%;
+  margin-bottom: 0;
+  position: relative;
+
+  h2 {
+    margin-top: var(--sp);
+    text-align: center;
+    margin-bottom: calc(var(--sp) * 2);
+  }
+
+  ul {
+    list-style-type: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    padding-inline-start: 0;
+  }
+
+  p {
+    margin-top: 0;
+  }
+}
+
+.home-section__hero {
+  @include disable-horizontal-padding;
+
+  /// remove padding and margins for the image to appear edge to edge
+  margin-top: calc(var(--sp) * -1);
+  padding-top: 0;
+
+  grid-template-areas:
+    'image'
+    'text';
+
+  /// undoes the wp-block-columns gap
+  grid-row-gap: 0;
+
+  .grid-area--image {
+    .wp-block-cover {
+      margin: 0;
+      border-radius: 0;
+      height: 60vh;
+      width: 100vw;
+
+      .wp-block-cover__inner-container {
+        display: none;
+      }
+    }
+  }
+
+  .grid-area--text {
+    @include section-top-decoration;
+    @include enable-horizontal-padding;
+
+    /// these two are for the top decoration to work;
+    overflow: visible;
+    position: relative;
+
+    & .hero-title {
+      min-height: 20vw; // !magic, comes from the aspect ratio of the image plus some safety margins
+      width: 100%;
+      background: url('../../static/hero.svg');
+      background-position: bottom center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-bottom: calc(var(--sp) * 2);
+    }
+  }
+}
+
+.home-section__hello {
+  @include section-top-decoration;
+
+  grid-template-areas:
+    'image'
+    'text';
+
+  .grid-area--image {
+    .wp-block-cover {
+      height: 100vw;
+    }
+  }
+
+  /**
+  h2 in this section has a small image on its immediate left corner 
+  attached through :before pseudoclass. Because of this placement,
+  the width of the element is set to max-content, which required the margin
+  to be set to auto to center the element as text-align center no longer 
+  works with the required width setting.
+  */
+  h2 {
+    margin-top: var(--sp);
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: max-content;
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background: url('../../static/star.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 1.8em;
+      height: 1.8em;
+      left: -0.4em;
+      bottom: 0;
+      z-index: -1;
+    }
+  }
+}
+
+.home-section__how-can-i-help {
+  @include section-top-decoration();
+  @include section-art('../../static/city.svg');
+
+  &__main {
+    grid-template-areas:
+      'image'
+      'text';
+    margin-bottom: calc(var(--sp) * 3);
+
+    .grid-area--image {
+      .wp-block-cover {
+        height: 100vw;
+      }
+    }
+
+    .grid-area--text {
+      ul {
+        li {
+          padding-left: 1em;
+          text-indent: -0.7rem;
+        }
+
+        /**
+        list style type is custom emojis. Every li has their own descriptive 
+        emoji. This mixin helps to assign these emojis in order they are listed
+        One other thing to note is that the list is divided into columns,
+        which means this mixin works at the ul level, not li.
+        */
+        @mixin apply-emojis($emojis) {
+          @for $i from 1 through length($emojis) {
+            & li:nth-child(#{$i}):before {
+              content: nth($emojis, $i);
+              margin-right: var(--sp);
+            }
+          }
+        }
+
+        /**
+        Applies the emojis for the first column
+        */
+        &:nth-of-type(1) {
+          @include apply-emojis(('🍌', '🐱', '🌟', '💙'));
+        }
+
+        /**
+        Applies the emojis for the second column.
+        */
+        &:nth-of-type(2) {
+          @include apply-emojis(('🦆', '☕', '🧠', '🙋‍♀️'));
+        }
+      }
+    }
+  }
+
+  &__restart,
+  &__poy,
+  &__orsc {
+    grid-template-areas:
+      'image'
+      'text';
+    padding: var(--sp);
+    border-radius: var(--sp);
+    background-color: var(--brush-white);
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.home-section__testimonials {
+  @include section-top-decoration();
+  @include section-art('../../static/success.svg');
+  @include disable-horizontal-padding;
+
+  .wp-block-latest-posts {
+    .os-content {
+      li {
+        grid-template-areas: 'thumbnail' 'content' 'title';
+
+        a {
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
+
+.home-section__shares {
+  @include section-top-decoration();
+  @include section-art('../../static/conversation.svg');
+  @include disable-horizontal-padding;
+
+  .wp-block-columns {
+    grid-template-areas:
+      'text'
+      'feature';
+
+    /**
+    Padding in this section is disabled because of the latest posts block
+    Latest posts is the sole member of the grid-area--feature column,
+    which means that the other column named grid-area--text can be set a 
+    padding in order to apply the regular padding to rest of the elements.
+    */
+    .grid-area--text {
+      @include enable-horizontal-padding;
+    }
+  }
+
+  .wp-block-latest-posts {
+    .os-content {
+      li {
+        a {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+.home-section__contact {
+  @include footer-shim;
+  @include section-top-decoration;
+
+  .ContactForm-userInput {
+    & > * {
+      display: grid;
+      grid-row-gap: var(--sp);
+
+      & br {
+        display: none;
+      }
+
+      &:not(:first-of-type) {
+        padding-top: var(--sp);
+      }
+    }
+
+    &-right p:first-of-type {
+      display: none;
+    }
+  }
+
+  margin-bottom: 0;
+}
