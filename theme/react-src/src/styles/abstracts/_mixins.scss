@@ -58,6 +58,44 @@ the standard footer shim logic from the Standard.layout component
   }
 }
 
+/**
+Top of sections usually have curves on the left and right. This
+mixin creates these curved edges for the home page sections
+
+It's used for most sections and the second column in the hero section
+*/
+@mixin section-top-decoration {
+  &:before {
+    content: '';
+    left: 0;
+    right: 0;
+    top: calc(var(--sp) * -1);
+    height: calc(var(--sp) * 2);
+    border-radius: var(--sp);
+    position: absolute;
+  }
+}
+
+/**
+Home page sections have small pieces of art on their bottom padding
+This mixin creates a standardized method for placing and sizing the
+art.
+*/
+@mixin section-art($url) {
+  &:after {
+    content: '';
+    position: absolute;
+    left: var(--sp);
+    right: var(--sp);
+    bottom: var(--sp);
+    height: calc(#{$section-end-margin} - var(--sp) * 2);
+    background: url($url);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: bottom;
+  }
+}
 
 /**
 Disables left and right paddings
