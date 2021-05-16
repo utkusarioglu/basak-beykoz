@@ -1,18 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&family=Raleway:wght@500&display=swap');
 
-$font-name-name: 'HeroFont';
-$hero-font-url: '../../static/hero-font';
-@font-face {
-  font-family: $font-name-name;
-  src: url('#{$hero-font-url}.woff') format('woff'),
-    url('#{$hero-font-url}.ttf') format('truetype'),
-    url('#{$hero-font-url}.svg##{$font-name-name}') format('svg');
-}
-
-h1 {
-  font-family: 'HeroFont', 'Raleway', sans-serif;
-}
-
+h1,
 h2,
 h3,
 h4,
