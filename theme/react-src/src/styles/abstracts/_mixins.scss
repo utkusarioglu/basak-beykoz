@@ -57,3 +57,20 @@ the standard footer shim logic from the Standard.layout component
     padding-bottom: var(--height-footer-shim-desktop);
   }
 }
+
+
+/**
+Disables left and right paddings
+*/
+@mixin disable-horizontal-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/**
+Adds right and left padding with the standardized spacing --sp
+*/
+@mixin enable-horizontal-padding {
+  padding-left: var(--sp);
+  padding-right: var(--sp);
+}
