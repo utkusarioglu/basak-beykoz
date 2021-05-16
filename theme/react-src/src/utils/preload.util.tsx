@@ -59,7 +59,8 @@ export function preloadAndRoute({
 
   if (!('preload' in component)) {
     history.push(to);
-    jumpTopEnabled && jumpTop();
+    // "main" comes from the scrollbar id in app router
+    jumpTopEnabled && jumpTop('main');
     return Promise.resolve();
   }
 
@@ -73,6 +74,8 @@ export function preloadAndRoute({
     .finally(() => {
       cancelIsLoading();
       disableIsLoadingDelayed();
-      jumpTopEnabled && jumpTop();
+      // "main" comes from the scrollbar id in app router
+
+      jumpTopEnabled && jumpTop('main');
     });
 }

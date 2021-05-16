@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import { graceTop } from '../../../utils/scroll.util';
+import type { FC } from 'react';
 import { GoChevronUp } from 'react-icons/go';
 import { useMediaQuery } from 'react-responsive';
 import {
@@ -9,21 +8,12 @@ import {
   HEADER_ICON_MOBILE_VERTICAL_PADDING,
 } from '../../../config';
 
-const root = document.getElementById('root') as HTMLElement;
+export interface GraceTopViewProps {
+  onClick: () => void;
+}
 
-const GraceTopView = () => {
+const GraceTopView: FC<GraceTopViewProps> = ({ onClick }) => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
-  const [scrollPos, setScrollPos] = useState(window.scrollY);
-
-  useEffect(() => {
-    root.addEventListener('scroll', () => {
-      setScrollPos(root.scrollTop);
-    });
-  }, []);
-
-  if (scrollPos < window.innerHeight) {
-    return null;
-  }
 
   return (
     <button
@@ -45,7 +35,7 @@ const GraceTopView = () => {
               right: 'var(--sp)',
             }),
       }}
-      onClick={graceTop}
+      onClick={onClick}
     >
       <GoChevronUp size={HEADER_ICON_MOBILE_SIZE} />
     </button>

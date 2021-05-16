@@ -1,9 +1,15 @@
-const scrollComponent = document.querySelector('#root') as HTMLElement;
+import { scrollbars } from '../components/views/scrollbar/Scrollbar.view';
+import type { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import type { RefObject } from 'react';
 
-export function jumpTop() {
-  scrollComponent.scrollTo(0, 0);
+export function jumpTop(id: string) {
+  try {
+    scrollbars[id].current?.osInstance()?.scroll({ y: 0 });
+  } catch (e) {
+    console.error(e);
+  }
 }
 
-export function graceTop() {
-  scrollComponent.scrollTo({ top: 0, behavior: 'smooth' });
+export function graceTop(ref: RefObject<OverlayScrollbarsComponent>) {
+  ref.current?.osInstance()?.scroll({ y: 0 }, 1000);
 }

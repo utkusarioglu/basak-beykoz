@@ -23,7 +23,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackLayout from '../../layouts/error-fallback/ErrorFallback.layout';
 import GraceTopView from '../../views/grace-top/GraceTop.view';
 import { restSlug } from '../../../utils/slug.util';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import ScrollbarView from '../../views/scrollbar/Scrollbar.view';
 
 const AppRouter = () => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
@@ -72,10 +72,14 @@ const AppRouter = () => {
           <Route path={path} exact key={path}>
             <ErrorBoundary FallbackComponent={ErrorFallbackLayout}>
               <Suspense fallback={<LoaderHtmlView />}>
-                <OverlayScrollbarsComponent>
+                <ScrollbarView
+                  id="main"
+                  enableGraceTop={true}
+                  graceTopComponent={GraceTopView}
+                >
                   <Component />
                   <FooterLayout />
-                </OverlayScrollbarsComponent>
+                </ScrollbarView>
               </Suspense>
             </ErrorBoundary>
           </Route>
@@ -85,8 +89,6 @@ const AppRouter = () => {
           <Redirect to="/404" />
         </Route>
       </Switch>
-
-      <GraceTopView />
     </Router>
   );
 };
