@@ -51,7 +51,7 @@
   Think of this as the distance between the end of the content and the
   beginning of the heads of the ladies of the footer.
   */
-  --height-footer-spacing: 0px;
+  --height-footer-spacing: calc(var(--sp) * 7);
 
   /**
   Shim for footer content that is reserved by the standard layout.
