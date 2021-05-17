@@ -10,6 +10,7 @@ import './index.scss';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackLayout from './components/layouts/error-fallback/ErrorFallback.layout';
+import { HelmetProvider } from 'react-helmet-async';
 
 ReactGA.initialize(GOOGLE_ANALYTICS_ID, { debug: false });
 
@@ -17,7 +18,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary FallbackComponent={ErrorFallbackLayout}>
       <Provider store={store}>
-        <AppRouter />
+        <HelmetProvider>
+          <AppRouter />
+        </HelmetProvider>
       </Provider>
     </ErrorBoundary>
   </React.StrictMode>,

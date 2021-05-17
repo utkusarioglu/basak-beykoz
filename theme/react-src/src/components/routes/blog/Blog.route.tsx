@@ -2,7 +2,7 @@ import React from 'react';
 import CategoryPostsFeedView from '../../views/category-posts-feed/CategoryPostsFeed.view';
 import { BLOG_POSTS_CATEGORY } from '../../../config';
 import ReactGA from 'react-ga';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import StandardLayout from '../../layouts/standard/Standard.layout';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorFallbackView from '../../views/error-fallback-lazy/ErrorFallbackLazy.view';

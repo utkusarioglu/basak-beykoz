@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { selectSingular } from '../../../slices/singular/singular.slice';
 import { HOME_SLUG } from '../../../config';
 import ReactGA from 'react-ga';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import prefetch from '../../../services/prefetch.service';
 import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
 import { useErrorHandler } from 'react-error-boundary';

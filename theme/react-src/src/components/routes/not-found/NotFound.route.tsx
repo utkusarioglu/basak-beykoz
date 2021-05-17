@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactGA from 'react-ga';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import StandardLayout from '../../layouts/standard/Standard.layout';
 
 const NotFoundRoute = () => {
