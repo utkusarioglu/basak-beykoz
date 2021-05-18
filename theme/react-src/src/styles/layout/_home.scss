@@ -249,24 +249,5 @@ $section-end-margin: calc(var(--sp) * 10);
   @include footer-shim;
   @include section-top-decoration;
 
-  .ContactForm-userInput {
-    & > * {
-      display: grid;
-      grid-row-gap: var(--sp);
-
-      & br {
-        display: none;
-      }
-
-      &:not(:first-of-type) {
-        padding-top: var(--sp);
-      }
-    }
-
-    &-right p:first-of-type {
-      display: none;
-    }
-  }
-
   margin-bottom: 0;
 }
