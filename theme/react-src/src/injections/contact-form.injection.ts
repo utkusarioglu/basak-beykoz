@@ -8,7 +8,7 @@ const inputFields = ['your-name', 'your-email', 'your-subject', 'your-message'];
 /**
  * Attaches the listener for the contact from submit
  */
-export const contactFormHandler: InjectionFunction = ({ ref }) => {
+export const contactFormInjection: InjectionFunction = ({ ref }) => {
   const contactFormElem = ref.querySelector<HTMLElement>('.wpcf7-submit');
 
   if (!contactFormElem) {
