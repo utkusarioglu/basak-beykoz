@@ -182,3 +182,43 @@ Mobile sized desktop menu-container scrollbar
     }
   }
 }
+
+/**
+Contact page
+*/
+article.iletisim {
+  .wp-block-column {
+    background-color: var(--brush-gray-light);
+
+    .contact-links__form,
+    .contact-links__social > div > * {
+      background-color: var(--brush-green-light);
+
+      &:hover {
+        background-color: var(--brush-yellow-dark);
+      }
+    }
+  }
+
+  .wpcf7 {
+    &-form-control {
+      background-color: var(--brush-gray-light);
+      border-color: var(--brush-gray-light);
+      color: var(--brush-black);
+
+      &:hover {
+        background-color: var(--brush-yellow-light);
+        border-color: var(--brush-yellow-light);
+      }
+
+      &::placeholder {
+        color: var(--brush-gray);
+      }
+    }
+
+    &-submit {
+      background-color: var(--brush-yellow-dark);
+      border-color: var(--brush-yellow-dark);
+    }
+  }
+}
