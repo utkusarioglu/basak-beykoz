@@ -24,7 +24,10 @@ const GraceTopView: FC<GraceTopViewProps> = ({ onClick }) => {
         background: 'rgba(255, 192, 91, 0.6)',
         color: 'var(--brush-black)',
         backdropFilter: 'blur(5px)',
+        WebkitBackdropFilter: 'blur(5px)',
+        borderRadius: 'var(--sp)',
         cursor: 'pointer',
+        zIndex: 1,
         ...(isDesktop
           ? {
               right: 'calc(17px + var(--sp) * 2)',
