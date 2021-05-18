@@ -86,14 +86,22 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                 width: '100%',
               }}
             >
-              <h2
+              <h1
                 style={{
                   paddingLeft: 'var(--sp)',
                   paddingRight: 'var(--sp)',
+                  /**
+                   * the client plans to use very long page titles h1
+                   * is way too big for small mobile screens this sizing
+                   * makes h1 be the same size as h2 the distinction in
+                   * title hierarchy of h1 and h2 is made through the placement
+                   * of h1 over the page thumbnail
+                   */
+                  fontSize: '1.5em',
                 }}
               >
                 {title}
-              </h2>
+              </h1>
             </div>
           )}
         </div>
@@ -135,7 +143,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
         }}
       >
         {isDesktop && !hideTitle && (
-          <h2 style={{ marginBottom: '3em', marginTop: '2em' }}>{title}</h2>
+          <h1 style={{ marginBottom: '3em', marginTop: '2em' }}>{title}</h1>
         )}
         {children}
       </div>
