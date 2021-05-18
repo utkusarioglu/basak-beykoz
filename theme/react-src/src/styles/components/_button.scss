@@ -2,5 +2,5 @@
 
 /// themed in _default.scss
 button {
-  @include frame-rounded-padded-thin;
+  @include frame-rounded-padded-thin(3px);
 }

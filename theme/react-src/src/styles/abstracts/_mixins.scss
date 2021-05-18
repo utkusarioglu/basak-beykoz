@@ -1,25 +1,38 @@
 /**
-Draws oval area for the components
+Draws oval area for the components.
+
+@param $border-width: thickness of the border, the amount is subtracted 
+from padding, meaning that thicker borders don't make the component bigger
+until the border thickness reaches `var(--sp)`.
 */
-@mixin frame-rounded-padded {
-  padding: var(--sp);
+@mixin frame-rounded-padded($border-width: 0px) {
+  padding: calc(var(--sp) - #{$border-width});
   border-radius: var(--sp);
+  border-width: #{$border-width};
+  border-style: solid;
 
   @media screen and (min-width: 800px) {
-    padding: calc(var(--sp) * 2);
+    padding: calc(var(--sp) * 2 - #{$border-width});
   }
 }
 
 /**
 Draws oval area for the components, this variant produces a
 thinner vertical cross section. Good for objects such as buttons
+
+@param $border-width: thickness of the border, the amount is subtracted 
+from padding, meaning that thicker borders don't make the component bigger
+until the border thickness reaches `var(--sp)`.
 */
-@mixin frame-rounded-padded-thin {
-  padding: var(--sp);
+@mixin frame-rounded-padded-thin($border-width: 0px) {
+  padding: calc(var(--sp) - #{$border-width});
   border-radius: var(--sp);
+  border-width: #{$border-width};
+  border-style: solid;
 
   @media screen and (min-width: 800px) {
-    padding: var(--sp) calc(var(--sp) * 2);
+    padding: calc(var(--sp) - #{$border-width})
+      calc(var(--sp) * 2 - #{$border-width});
   }
 }
 
