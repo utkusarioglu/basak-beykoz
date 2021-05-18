@@ -1,0 +1,31 @@
+@import '../../abstracts/mixins';
+
+.validation_failed,
+.mail_sent,
+.form-error-message {
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.form-error-message {
+  @include frame-rounded-padded;
+
+  //! magic: comes from hiding the top edge of the error message
+  //! under the input field
+  margin-top: -10px;
+  //! magic: read above
+  padding-top: 20px;
+}
+
+.your-message > .form-error-message {
+  //! magic: comes from hiding the top edge of the error message
+  //! under the input field
+  margin-top: -17px;
+}
+
+.validation_failed,
+.mail_sent {
+  @include frame-rounded-padded(2px);
+
+  margin-top: var(--sp);
+}
