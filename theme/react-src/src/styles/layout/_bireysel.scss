@@ -1,0 +1,36 @@
+.bireysel {
+  .adimlar {
+    $colors: (
+      var(--brush-green-light),
+      var(--brush-yellow-light),
+      var(--brush-blue-light),
+      var(--brush-gray)
+    );
+
+    @for $i from 1 through length($colors) {
+      .wp-block-button:nth-of-type(#{$i}) {
+        $color: nth($colors, $i);
+
+        background-color: #{$color};
+        border-color: #{$color};
+        position: relative;
+
+        // Creates an arrow pointing to the bottom of the button
+        &:not(:last-of-type):after {
+          background-color: #{$color};
+          content: '';
+          mask: url('../../static/right-arrow.svg');
+          mask-image: url('../../static/right-arrow.svg');
+          -webkit-mask-image: url('../../static/right-arrow.svg');
+          position: absolute;
+          left: 50%;
+          transform: translate(-50%, 0) rotate(90deg);
+          bottom: -20px;
+          width: 30px;
+          height: 30px;
+          z-index: 1;
+        }
+      }
+    }
+  }
+}
