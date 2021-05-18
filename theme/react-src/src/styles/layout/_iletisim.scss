@@ -1,0 +1,88 @@
+@import '../abstracts/mixins';
+
+article.iletisim {
+  .wp-block-column {
+    @include frame-rounded-padded;
+
+    h4 {
+      margin-top: var(--sp);
+      margin-bottom: calc(var(--sp) * 2);
+    }
+
+    /**
+    This section uses a react component tree rendered to text.
+    */
+    .contact-links__social {
+      @include block-margin-bottom;
+
+      /**
+      This classless div is where the react component render starts.
+      Anything inside this is the same as the social-desktop and its children
+      */
+      & > div {
+        /// Removes the right margin, this is required in the header to
+        /// create alignment with the page margin
+        margin-right: 0 !important;
+
+        & > * {
+          @include frame-rounded-padded;
+
+          &:not(:last-of-type) {
+            margin-right: var(--sp);
+          }
+
+          & a {
+            padding: var(--sp);
+
+            & svg {
+              width: 40px;
+              height: 40px;
+            }
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    /// Contact form link
+    .contact-links__form {
+      @include frame-rounded-padded;
+
+      font-weight: 600;
+      text-decoration: none;
+      width: 100%;
+      display: block;
+      text-align: center;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    /**
+    Styles the address section
+    */
+    &:nth-of-type(2) {
+      position: relative;
+      background-image: url('../../static/earth.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 90%;
+      min-height: 90vw;
+
+      .contact-earth {
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: var(--sp);
+        padding-bottom: 10%;
+        font-weight: 600;
+      }
+    }
+  }
+}
