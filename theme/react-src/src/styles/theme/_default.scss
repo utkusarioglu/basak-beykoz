@@ -17,8 +17,16 @@ a {
 
 .wp-block-button {
   background-color: var(--brush-yellow-dark);
+  border-color: var(--brush-yellow-dark);
+
+  &.is-style-outline {
+    border-color: var(--brush-yellow-dark);
+    background-color: transparent;
+  }
+
   &:hover {
     background-color: var(--brush-green-dark);
+    border-color: var(--brush-green-dark);
     & a {
       color: var(--brush-white);
     }
