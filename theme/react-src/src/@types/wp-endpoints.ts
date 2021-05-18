@@ -1,4 +1,5 @@
-import type { GetMeek } from 'endpoint-tools';
+import type { GetMeek, PostMeek } from 'endpoint-tools';
+import { ContactForm7Success, ContactForm7Fail } from './ContactForm7.types';
 import type {
   WrtSuccessResponse,
   WrtSingularItem,
@@ -52,4 +53,13 @@ export type GetWpMenus = GetMeek<
   {},
   GetWpMenuSuccess,
   GetWpMenuFail
+>;
+
+export type PostContactForm7 = PostMeek<
+  '/wp-json/contact-form-7/v1/contact-forms/135/feedback',
+  {},
+  {},
+  {}, //! this is supposed to be FormData
+  ContactForm7Success,
+  ContactForm7Fail
 >;

@@ -117,6 +117,28 @@ class Rest {
         })
     );
   }
+
+  /**
+   * Sends data to the contact form api
+   * @param formData form data from the contact form handler
+   * @returns server response promise
+   */
+  public async contactForm(
+    formData: FormData
+  ): Promise<PostContactForm7['_res']['Union']> {
+    return this.withTimeout(
+      fetch(
+        prepareEndpoint<PostContactForm7>(
+          '/wp-json/contact-form-7/v1/contact-forms/135/feedback'
+        ),
+        {
+          method: 'post',
+          cache: 'no-cache',
+          body: formData,
+        }
+      ).then((response) => response.json())
+    );
+  }
 }
 
 export default new Rest();
