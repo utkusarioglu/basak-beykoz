@@ -1,7 +1,6 @@
 /// themed in _default.scss
 .wp-block-button {
   @extend button;
-
   text-align: center;
 
   &:hover {
@@ -10,6 +9,9 @@
   }
 
   a {
+    display: block;
+    width: 100%;
+    height: 100%;
     text-decoration: none;
   }
 }
