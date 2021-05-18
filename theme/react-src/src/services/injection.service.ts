@@ -1,5 +1,6 @@
 import type { useHistory } from 'react-router-dom';
 import { HOME_SLUG } from '../config';
+import { hizmetlerimInjection } from '../injections/hizmetlerim.injection';
 import { linkCorrectInjection } from '../injections/link-correct.injection';
 import type { useErrorHandler } from 'react-error-boundary';
 import { iletisimInjection } from '../injections/iletisim.injection';
@@ -47,7 +48,7 @@ class Injection {
 
       case 'hizmetlerim':
         return this.execFunctions(
-          [hizmetlerimInjection, interceptLinks],
+          [hizmetlerimInjection, linkCorrectInjection],
           params
         );
 
