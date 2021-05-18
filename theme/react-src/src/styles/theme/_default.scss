@@ -148,15 +148,19 @@ Layout - Home
     .wpcf7 {
       &-form-control {
         background-color: var(--brush-white);
+        border-color: var(--brush-white);
+
         color: var(--brush-black);
 
         &:hover {
           background-color: var(--brush-yellow-light);
+          border-color: var(--brush-yellow-light);
         }
       }
 
       &-submit {
         background-color: var(--brush-yellow-dark);
+        border-color: var(--brush-yellow-dark);
       }
     }
   }
