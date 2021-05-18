@@ -48,7 +48,9 @@ const FooterLayout = () => {
             maxWidth: '70vw',
             left: '25vw', // reserves space for the footer-button
             // 22 is a magic number that emerges from the behavior of the svg
-            right: isDesktop ? '22vw' : '5vw',
+            // 25px is a magic number that emerges from the content of the svg
+            // 25px covers the plant on the right on the smallest screens
+            right: isDesktop ? '22vw' : 'calc(20px + 5vw)',
           }}
         />
 
