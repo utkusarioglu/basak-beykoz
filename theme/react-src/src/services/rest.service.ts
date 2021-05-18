@@ -2,6 +2,7 @@ import type {
   GetSingular,
   GetCategoryPosts,
   GetWpMenus,
+  PostContactForm7,
 } from '../@types/wp-endpoints';
 import { prepareEndpoint } from 'endpoint-tools';
 import { REST_TIMEOUT } from '../config';
@@ -60,6 +61,7 @@ class Rest {
         .then((response) => response.json())
         .then((data: GetSingular['_res']['Union']) => {
           if (data.state === 'fail') {
+            console.error(data); // ! remove this when the time comes
             throw new Error(data.errorCode);
           }
           addToSingularRepo(data.body);
