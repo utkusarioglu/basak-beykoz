@@ -1,10 +1,18 @@
+@import '../../abstracts/mixins';
+
 .wpcf7-form-control {
-  padding: var(--sp);
-  border-radius: var(--sp);
-  border: none;
+  @include frame-rounded-padded(2px);
+
   width: 100%;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 
   &:focus {
     outline: none;
+  }
+
+  &::placeholder {
+    color: var(--brush-gray);
   }
 }
