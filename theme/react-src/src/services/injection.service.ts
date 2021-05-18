@@ -1,5 +1,6 @@
 import type { useHistory } from 'react-router-dom';
 import { HOME_SLUG } from '../config';
+import { homeInjection } from '../injections/home.injection';
 import { hizmetlerimInjection } from '../injections/hizmetlerim.injection';
 import { linkCorrectInjection } from '../injections/link-correct.injection';
 import type { useErrorHandler } from 'react-error-boundary';
@@ -44,7 +45,10 @@ class Injection {
   ): UnmountFunction {
     switch (slug) {
       case HOME_SLUG:
-        return this.execFunctions([homeInjection, interceptLinks], params);
+        return this.execFunctions(
+          [homeInjection, linkCorrectInjection],
+          params
+        );
 
       case 'hizmetlerim':
         return this.execFunctions(
