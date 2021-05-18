@@ -222,3 +222,23 @@ article.iletisim {
     }
   }
 }
+
+/**
+Contact form
+*/
+.form-error-message {
+  color: var(--brush-red-dark);
+  background-color: var(--brush-red-light);
+}
+
+.mail_sent {
+  color: var(--brush-green-dark);
+  background-color: var(--brush-green-light);
+  border-color: var(--brush-green-dark);
+}
+
+.validation_failed {
+  color: var(--brush-red-dark);
+  border-color: var(--brush-red-dark);
+  background-color: var(--brush-red-light);
+}
