@@ -14,6 +14,8 @@ interface ScrollbarsViewProps {
 export const scrollbars: Record<string, RefObject<OverlayScrollbarsComponent>> =
   {};
 
+const scrollbarRef = createRef<OverlayScrollbarsComponent>();
+
 const ScrollbarView: FC<ScrollbarsViewProps> = ({
   id,
   children,
@@ -21,14 +23,11 @@ const ScrollbarView: FC<ScrollbarsViewProps> = ({
   graceTopComponent: GraceTopComponent,
 }) => {
   const [scrolled, setScrolled] = useState(false);
-  const ref = createRef<OverlayScrollbarsComponent>();
-  // this line makes the scrollbar accessible to jumpTop utility function
-  scrollbars[id] = ref;
 
   return (
     <OverlayScrollbarsComponent
       id={id}
-      ref={ref}
+      ref={scrollbarRef}
       options={{
         scrollbars: {
           autoHide: 'move',
@@ -40,12 +39,15 @@ const ScrollbarView: FC<ScrollbarsViewProps> = ({
             const scrollTop = e?.target.scrollTop;
             setScrolled(scrollTop > window.innerHeight || false);
           },
+          onInitialized: () => {
+            scrollbars[id] = scrollbarRef;
+          },
         },
       }}
     >
       {children}
       {enableGraceTop && scrolled && (
-        <GraceTopComponent onClick={() => graceTop(ref)} />
+        <GraceTopComponent onClick={() => graceTop(scrollbarRef)} />
       )}
     </OverlayScrollbarsComponent>
   );
