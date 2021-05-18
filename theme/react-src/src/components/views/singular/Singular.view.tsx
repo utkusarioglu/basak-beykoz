@@ -19,7 +19,8 @@ const SingularView: FC<SingularViewProps> = ({ content }) => {
 
   return (
     <article
-      className="singular-view"
+      id="singular-view"
+      className={[slug, type].join(' ')}
       dangerouslySetInnerHTML={{ __html: content }}
     />
   );
