@@ -1,8 +1,6 @@
 import type { useHistory } from 'react-router-dom';
 import { HOME_SLUG } from '../config';
-import { homeInjection } from '../injections/home';
-import { hizmetlerimInjection } from '../injections/hizmetlerim';
-import { interceptLinks } from '../injections/interceptLinks';
+import { linkCorrectInjection } from '../injections/link-correct.injection';
 import type { useErrorHandler } from 'react-error-boundary';
 import { iletisimInjection } from '../injections/iletisim';
 

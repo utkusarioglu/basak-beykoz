@@ -21,7 +21,7 @@ import injection from '../services/injection.service';
  * wordpress list items
  * @returns () => injection function
  */
-export const attachAnchorClickCorrection: WrappedInjectionFunction<{
+export const anchorCorrectInjection: WrappedInjectionFunction<{
   elem: HTMLElement;
   parentSelector: string;
 }> = ({ elem, parentSelector }) => {

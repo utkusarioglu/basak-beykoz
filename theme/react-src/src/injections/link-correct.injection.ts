@@ -13,7 +13,7 @@ import { graceScroll } from '../utils/scroll.util';
  * @returns Unmount function for the useLayoutEffect to execute while the
  * component is being unmounted
  */
-export const interceptLinks: InjectionFunction = ({
+export const linkCorrectInjection: InjectionFunction = ({
   ref,
   historyHandler,
   errorHandler,
