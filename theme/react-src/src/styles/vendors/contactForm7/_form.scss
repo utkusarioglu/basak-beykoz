@@ -1,0 +1,18 @@
+.wpcf7-form > div {
+  & > * {
+    display: grid;
+    grid-row-gap: var(--sp);
+
+    & br {
+      display: none;
+    }
+
+    &:not(:first-of-type) {
+      padding-top: var(--sp);
+    }
+  }
+
+  & > div:nth-of-type(2) p:first-of-type {
+    display: none;
+  }
+}
