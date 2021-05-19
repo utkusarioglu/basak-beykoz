@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { GoChevronUp } from 'react-icons/go';
 import { useMediaQuery } from 'react-responsive';
 import {
-  DESKTOP_MIN_WIDTH,
+  W_MD,
   HEADER_ICON_MOBILE_SIZE,
   HEADER_ICON_MOBILE_VERTICAL_PADDING,
 } from '../../../config';
@@ -13,7 +13,7 @@ export interface GraceTopViewProps {
 }
 
 const GraceTopView: FC<GraceTopViewProps> = ({ onClick }) => {
-  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+  const isWMd = useMediaQuery({ minWidth: W_MD });
 
   return (
     <button
@@ -28,7 +28,7 @@ const GraceTopView: FC<GraceTopViewProps> = ({ onClick }) => {
         borderRadius: 'var(--sp)',
         cursor: 'pointer',
         zIndex: 1,
-        ...(isDesktop
+        ...(isWMd
           ? {
               right: 'calc(17px + var(--sp) * 2)',
               bottom: 'calc(var(--sp) * 2)',

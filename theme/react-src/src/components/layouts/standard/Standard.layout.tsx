@@ -1,7 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { DESKTOP_MIN_WIDTH } from '../../../config';
+import { W_MD } from '../../../config';
 
 const THUMBNAIL_WIDTH_DESKTOP = '30vw';
 
@@ -23,14 +23,14 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   hideMargins = false,
   hideFooterShim = false,
 }) => {
-  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+  const isWMd = useMediaQuery({ minWidth: W_MD });
 
   return (
     <>
       {!hideThumbnail && (
         <div
           style={
-            isDesktop
+            isWMd
               ? {
                   position: 'fixed',
                   left: 0,
@@ -61,7 +61,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
               position: 'relative',
             }}
           />
-          {!isDesktop && (
+          {!isWMd && (
             <div
               style={{
                 width: '100%',
@@ -74,7 +74,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
             />
           )}
 
-          {!hideTitle && !isDesktop && (
+          {!hideTitle && !isWMd && (
             <div
               style={{
                 position: 'absolute',
@@ -107,10 +107,10 @@ const StandardLayout: FC<StandardLayoutProps> = ({
       <div
         style={{
           ...(hideThumbnail
-            ? isDesktop // TODO these need to be created
+            ? isWMd // TODO these need to be created
               ? {}
               : {}
-            : isDesktop
+            : isWMd
             ? {
                 paddingTop: '10vh', // comes from heading and some whitespace creation
                 marginLeft: `calc(${THUMBNAIL_WIDTH_DESKTOP} + var(--header-desktop-horizontal-padding))`,
@@ -119,12 +119,12 @@ const StandardLayout: FC<StandardLayoutProps> = ({
               }
             : {
                 marginTop: 'var(--sp)',
-                marginLeft: computeVerticalMargins(hideMargins, isDesktop),
-                marginRight: computeVerticalMargins(hideMargins, isDesktop),
+                marginLeft: computeVerticalMargins(hideMargins, isWMd),
+                marginRight: computeVerticalMargins(hideMargins, isWMd),
               }),
 
           ...(!hideFooterShim &&
-            (isDesktop
+            (isWMd
               ? {
                   paddingBottom: 'var(--height-footer-shim-desktop)',
                   minHeight: 'calc(100vh + var(--height-footer-desktop))',
@@ -143,7 +143,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                 })),
         }}
       >
-        {isDesktop && !hideTitle && (
+        {isWMd && !hideTitle && (
           <h1 style={{ marginBottom: '3em', marginTop: '2em' }}>{title}</h1>
         )}
         {children}
@@ -156,14 +156,14 @@ const StandardLayout: FC<StandardLayoutProps> = ({
  * Computes the size of the vertical margins that shall be used for the
  * component
  * @param hideMargins hide margins var from the parent
- * @param isDesktop boolean indicating whether the desktop breakpoint has
+ * @param isWMd boolean indicating whether the desktop breakpoint has
  * been reached
  * @returns boolean - true to hide the vertical margins
  */
-function computeVerticalMargins(hideMargins: boolean, isDesktop: boolean) {
+function computeVerticalMargins(hideMargins: boolean, isWMd: boolean) {
   return hideMargins
     ? 0
-    : !isDesktop
+    : !isWMd
     ? 'var(--sp)'
     : 'var(--header-desktop-horizontal-padding)';
 }

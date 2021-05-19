@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import { FallbackProps } from 'react-error-boundary';
 import ErrorFallbackLazyView from '../../views/error-fallback-lazy/ErrorFallbackLazy.view';
 import { useMediaQuery } from 'react-responsive';
-import { DESKTOP_MIN_WIDTH } from '../../../config';
+import { W_MD } from '../../../config';
 
 const ErrorFallbackLayout: FC<FallbackProps> = (props) => {
-  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+  const isWMd = useMediaQuery({ minWidth: W_MD });
   return (
     <div
       style={{
@@ -14,7 +14,7 @@ const ErrorFallbackLayout: FC<FallbackProps> = (props) => {
         top: 0,
         left: 0,
         right: 0,
-        bottom: isDesktop ? 'var(--height-header-mobile)' : 0,
+        bottom: isWMd ? 'var(--height-header-mobile)' : 0,
         display: 'grid',
       }}
     >

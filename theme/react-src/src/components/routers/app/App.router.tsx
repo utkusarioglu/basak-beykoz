@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import FooterLayout from '../../layouts/footer/Footer.layout';
 import HeaderLayout from '../../layouts/header/Header.layout';
-import { HOME_SLUG, DESKTOP_MIN_WIDTH } from '../../../config';
+import { HOME_SLUG, W_MD } from '../../../config';
 import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
 import LoaderDesktopView from '../../views/loader-desktop/LoaderDesktop.view';
 import { routes } from './routeConfig';
@@ -26,7 +26,7 @@ import { restSlug } from '../../../utils/slug.util';
 import ScrollbarView from '../../views/scrollbar/Scrollbar.view';
 
 const AppRouter = () => {
-  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+  const isWMd = useMediaQuery({ minWidth: W_MD });
 
   const LazyMobileNav = lazy(
     () => import('../../views/nav-mobile/NavMobile.view')
@@ -44,7 +44,7 @@ const AppRouter = () => {
     <Router>
       <HeaderLayout />
 
-      {!isDesktop && (
+      {!isWMd && (
         <Suspense fallback={null}>
           <LazyMobileMenuContainerView
             menuStateSelector={selectMobileNavState}
@@ -61,7 +61,7 @@ const AppRouter = () => {
         </Suspense>
       )}
 
-      {isDesktop ? <LoaderDesktopView /> : <LoaderEdgeView />}
+      {isWMd ? <LoaderDesktopView /> : <LoaderEdgeView />}
 
       <Switch>
         <Route path={restSlug(HOME_SLUG)} exact>

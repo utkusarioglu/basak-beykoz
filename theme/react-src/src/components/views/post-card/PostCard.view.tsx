@@ -4,7 +4,7 @@ import type { WrtSingularItem } from '../../../@types/wp-types';
 import { LinkPreloaderView } from '../link-preloader/LinkPreloader.view';
 import { urlSlug } from '../../../utils/slug.util';
 import { useMediaQuery } from 'react-responsive';
-import { DESKTOP_MIN_WIDTH } from '../../../config';
+import { W_MD } from '../../../config';
 
 type BlogPostCardViewProps = {
   asSkeleton: boolean;
@@ -34,7 +34,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
   thumbnail,
   categories,
 }) => {
-  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+  const isWMd = useMediaQuery({ minWidth: W_MD });
 
   return (
     <LinkPreloaderView to={urlSlug(slug)} style={{ textDecoration: 'none' }}>
@@ -42,7 +42,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
         style={{
           opacity,
           display: 'grid',
-          ...(isDesktop
+          ...(isWMd
             ? {
                 gridTemplateAreas: `
                     "thumbnail title"
@@ -72,7 +72,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
         <div
           style={{
             gridArea: 'thumbnail',
-            height: isDesktop ? '100%' : '40vw',
+            height: isWMd ? '100%' : '40vw',
             width: '100%',
             borderRadius: 'var(--sp)',
             ...(asSkeleton
@@ -92,7 +92,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
           style={{
             gridArea: 'title',
             marginBottom: 'var(--sp)',
-            ...(!isDesktop && {
+            ...(!isWMd && {
               paddingLeft: 'var(--sp)',
               paddingRight: 'var(--sp)',
             }),
@@ -111,7 +111,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
           style={{
             gridArea: 'date-and-categories',
             marginTop: `calc(${DETAILS_PADDING} * -2)`,
-            ...(!isDesktop && {
+            ...(!isWMd && {
               paddingLeft: 'var(--sp)',
               paddingRight: 'var(--sp)',
             }),
@@ -152,7 +152,7 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
         <div
           style={{
             gridArea: 'summary',
-            ...(!isDesktop && {
+            ...(!isWMd && {
               paddingLeft: 'var(--sp)',
               paddingRight: 'var(--sp)',
             }),

@@ -4,10 +4,10 @@ import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
 import { LinkPreloaderView } from '../../views/link-preloader/LinkPreloader.view';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
 import { useMediaQuery } from 'react-responsive';
-import { DESKTOP_MIN_WIDTH } from '../../../config';
+import { W_MD } from '../../../config';
 
 const HeaderLayout = () => {
-  const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
+  const isWMd = useMediaQuery({ minWidth: W_MD });
 
   return (
     <header
@@ -23,7 +23,7 @@ const HeaderLayout = () => {
         WebkitBackdropFilter: 'blur(10px)',
         zIndex: 100,
 
-        ...(isDesktop
+        ...(isWMd
           ? {
               minHeight: 'var(--height-header-desktop-min)',
               maxHeight: 'var(--height-header-desktop-max)',
@@ -53,7 +53,7 @@ const HeaderLayout = () => {
             height: '100%',
             minWidth: 120,
 
-            ...(isDesktop
+            ...(isWMd
               ? {
                   maxWidth: 180,
                   width: 180,
@@ -67,7 +67,7 @@ const HeaderLayout = () => {
       </LinkPreloaderView>
       <div style={{ flexGrow: 1 }}></div>
 
-      {isDesktop ? (
+      {isWMd ? (
         <>
           <NavDesktopView />
           <SocialDesktopView />
