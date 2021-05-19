@@ -1,3 +1,5 @@
+@import '../abstracts/sass-vars';
+
 /**
 Draws oval area for the components.
 
@@ -66,7 +68,7 @@ the standard footer shim logic from the Standard.layout component
 @mixin footer-shim {
   padding-bottom: var(--height-footer-shim-mobile);
 
-  @media screen and (min-width: #{$desktop-breakpoint}) {
+  @include breakpoint-min-width(#{$w-md}) {
     padding-bottom: var(--height-footer-shim-desktop);
   }
 }
@@ -78,14 +80,16 @@ mixin creates these curved edges for the home page sections
 It's used for most sections and the second column in the hero section
 */
 @mixin section-top-decoration {
-  &:before {
-    content: '';
-    left: 0;
-    right: 0;
-    top: calc(var(--sp) * -1);
-    height: calc(var(--sp) * 2);
-    border-radius: var(--sp);
-    position: absolute;
+  @include breakpoint-max-width($w-md) {
+    &:before {
+      content: '';
+      left: 0;
+      right: 0;
+      top: calc(var(--sp) * -1);
+      height: calc(var(--sp) * 2);
+      border-radius: var(--sp);
+      position: absolute;
+    }
   }
 }
 
@@ -124,4 +128,22 @@ Adds right and left padding with the standardized spacing --sp
 @mixin enable-horizontal-padding {
   padding-left: var(--sp);
   padding-right: var(--sp);
+}
+
+/**
+Includes a media query for min-width for all
+*/
+@mixin breakpoint-min-width($min-width) {
+  @media all and (min-width: #{$min-width}) {
+    @content;
+  }
+}
+
+/**
+Includes a media query for a max-width
+*/
+@mixin breakpoint-max-width($max-width) {
+  @media all and (max-width: #{$max-width}) {
+    @content;
+  }
 }
