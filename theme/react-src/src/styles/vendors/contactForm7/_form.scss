@@ -1,14 +1,22 @@
+@import '../../abstracts//mixins';
+@import '../../abstracts/sass-vars';
+
 .wpcf7-form > div {
   & > * {
-    display: grid;
-    grid-row-gap: var(--sp);
-
     & br {
       display: none;
     }
 
     &:not(:first-of-type) {
       padding-top: var(--sp);
+
+      /**
+      On middle sized screens, "not first" columns need to shed their
+      top padding in order to look aligned with the first column
+      */
+      @include breakpoint-min-width($w-md) {
+        padding-top: 0;
+      }
     }
   }
 
