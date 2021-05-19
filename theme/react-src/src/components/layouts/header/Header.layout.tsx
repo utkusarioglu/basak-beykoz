@@ -4,10 +4,7 @@ import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
 import { LinkPreloaderView } from '../../views/link-preloader/LinkPreloader.view';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
 import { useMediaQuery } from 'react-responsive';
-import {
-  DESKTOP_MIN_WIDTH,
-  VERTICAL_WHITESPACE_DESKTOP,
-} from '../../../config';
+import { DESKTOP_MIN_WIDTH } from '../../../config';
 
 const HeaderLayout = () => {
   const isDesktop = useMediaQuery({ minWidth: DESKTOP_MIN_WIDTH });
@@ -21,25 +18,28 @@ const HeaderLayout = () => {
         position: 'fixed',
         left: 0,
         right: 0,
-
-        top: isDesktop ? 0 : 'auto',
-        bottom: isDesktop ? 'auto' : 0,
-        minHeight: isDesktop
-          ? 'var(--height-header-desktop-min)'
-          : 'var(--height-header-mobile)',
-        maxHeight: isDesktop
-          ? 'var(--height-header-desktop-max)'
-          : 'var(--height-header-mobile)',
-        height: isDesktop
-          ? 'var(--height-header-desktop-responsive)'
-          : 'var(--height-header-mobile)',
-        paddingRight: isDesktop ? VERTICAL_WHITESPACE_DESKTOP : 'var(--sp)',
-        paddingLeft: isDesktop ? VERTICAL_WHITESPACE_DESKTOP : 'var(--sp)',
-
         backgroundColor: 'rgb(251, 251, 251, 0.5)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
         zIndex: 100,
+
+        ...(isDesktop
+          ? {
+              minHeight: 'var(--height-header-desktop-min)',
+              maxHeight: 'var(--height-header-desktop-max)',
+              height: 'var(--height-header-desktop-responsive)',
+              bottom: 'auto',
+              top: 0,
+              paddingRight: 'var(--header-desktop-horizontal-padding)',
+              paddingLeft: 'var(--header-desktop-horizontal-padding)',
+            }
+          : {
+              height: 'var(--height-header-mobile)',
+              top: 'auto',
+              bottom: 0,
+              paddingRight: 'var(--sp)',
+              paddingLeft: 'var(--sp)',
+            }),
       }}
     >
       <LinkPreloaderView to="/">
@@ -51,9 +51,17 @@ const HeaderLayout = () => {
             backgroundRepeat: 'no-repeat',
             backgroundPositionY: 'center',
             height: '100%',
-            maxWidth: isDesktop ? 180 : 150,
             minWidth: 120,
-            width: isDesktop ? '180px' : 'auto',
+
+            ...(isDesktop
+              ? {
+                  maxWidth: 180,
+                  width: 180,
+                }
+              : {
+                  maxWidth: 150,
+                  width: 'auto',
+                }),
           }}
         />
       </LinkPreloaderView>

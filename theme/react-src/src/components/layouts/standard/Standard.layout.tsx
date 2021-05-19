@@ -1,10 +1,7 @@
 import React from 'react';
 import type { FC } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import {
-  DESKTOP_MIN_WIDTH,
-  VERTICAL_WHITESPACE_DESKTOP,
-} from '../../../config';
+import { DESKTOP_MIN_WIDTH } from '../../../config';
 
 const THUMBNAIL_WIDTH_DESKTOP = '30vw';
 
@@ -109,11 +106,15 @@ const StandardLayout: FC<StandardLayoutProps> = ({
 
       <div
         style={{
-          ...(!hideThumbnail && isDesktop
+          ...(hideThumbnail
+            ? isDesktop // TODO these need to be created
+              ? {}
+              : {}
+            : isDesktop
             ? {
                 paddingTop: '10vh', // comes from heading and some whitespace creation
-                marginLeft: `calc(${THUMBNAIL_WIDTH_DESKTOP} + ${VERTICAL_WHITESPACE_DESKTOP})`, // VERTICAL_WHITESPACE_DESKTOP ??
-                marginRight: VERTICAL_WHITESPACE_DESKTOP, // VERTICAL_WHITESPACE_DESKTOP ??
+                marginLeft: `calc(${THUMBNAIL_WIDTH_DESKTOP} + var(--header-desktop-horizontal-padding))`,
+                marginRight: 'var(--header-desktop-horizontal-padding)',
                 minHeight: 'calc(100% - 10vh)',
               }
             : {
@@ -164,7 +165,7 @@ function computeVerticalMargins(hideMargins: boolean, isDesktop: boolean) {
     ? 0
     : !isDesktop
     ? 'var(--sp)'
-    : VERTICAL_WHITESPACE_DESKTOP;
+    : 'var(--header-desktop-horizontal-padding)';
 }
 
 export default StandardLayout;

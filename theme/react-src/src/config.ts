@@ -34,7 +34,6 @@ export const MENU_ITEM_ACTIVE_COLOR = 'var(--brush-yellow-dark)';
 export const MENU_ITEM_HOVERED_COLOR = 'var(--brush-green-light)';
 export const MENU_BORDER_RADIUS = 'calc(var(--sp) * 2)';
 export const MENU_VERTICAL_DECORATION_HEIGHT = 'var(--sp)';
-export const VERTICAL_WHITESPACE_DESKTOP = '8vw';
 
 export const SOCIAL_DESKTOP_ICON_SIZE = '1.5em';
 
