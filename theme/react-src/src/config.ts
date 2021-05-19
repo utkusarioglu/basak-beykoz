@@ -32,6 +32,7 @@ export const W_SM = 600;
 export const W_MD = 800;
 export const W_LG = 1000;
 export const W_XL = 1200;
+export const W_XXL = 1800;
 
 /**
  * Styling
