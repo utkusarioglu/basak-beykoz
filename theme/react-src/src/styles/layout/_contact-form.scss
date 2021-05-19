@@ -1,0 +1,26 @@
+@import '../abstracts/sass-vars';
+@import '../abstracts/mixins';
+
+.wpcf7-form {
+  & .contact-form {
+    &__controls {
+      &__left,
+      &__right {
+        display: grid;
+        grid-row-gap: var(--sp);
+      }
+
+      &__left {
+        grid-area: left;
+      }
+
+      &__right {
+        grid-area: right;
+      }
+
+      &__submit {
+        grid-area: submit;
+      }
+    }
+  }
+}
