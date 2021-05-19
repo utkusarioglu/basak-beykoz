@@ -3,11 +3,14 @@
 article.hizmetlerim {
   .wp-block-column {
     @include frame-rounded-padded;
+    @include disable-horizontal-padding;
 
     background-color: var(--brush-gray-light);
     cursor: pointer;
 
     a {
+      @include enable-horizontal-padding;
+
       text-decoration: none;
     }
 
@@ -17,8 +20,12 @@ article.hizmetlerim {
       max-height: 200px;
     }
 
-    p:last-of-type {
-      margin-bottom: 0;
+    p {
+      @include enable-horizontal-padding;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
   }
 }
