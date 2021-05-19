@@ -5,7 +5,7 @@
   display: grid;
   grid-auto-flow: row;
 
-  @media screen and (min-width: #{$desktop-breakpoint}) {
+  @include breakpoint-min-width(#{$w-md}) {
     grid-auto-flow: column;
     grid-column-gap: var(--sp);
   }
@@ -13,7 +13,7 @@
   figure {
     @include edge-to-edge;
 
-    @media screen and (min-width: #{$desktop-breakpoint}) {
+    @include breakpoint-min-width(#{$w-md}) {
       border-radius: var(--sp);
       overflow: hidden;
     }

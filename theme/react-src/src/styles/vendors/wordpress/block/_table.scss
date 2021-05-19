@@ -10,7 +10,7 @@
   position: relative;
   margin-bottom: var(--sp);
 
-  @media screen and (min-width: #{$desktop-breakpoint}) {
+  @include breakpoint-min-width(#{$w-md}) {
     overflow: hidden;
   }
 
@@ -20,12 +20,12 @@
     margin-left: var(--sp);
     position: relative;
 
-    @media screen and (min-width: #{$desktop-breakpoint}) {
+    @include breakpoint-min-width(#{$w-md}) {
       margin-left: 0;
       width: 100%;
     }
 
-    @media screen and (max-width: #{$desktop-breakpoint}) {
+    @include breakpoint-min-width(#{$w-md}) {
       // creates some margin on the right side of the table
       // this is done because margin-right doesn't create the spacing required.
       &::after {
@@ -43,7 +43,7 @@
       border: 1px solid var(--brush-gray);
       padding: calc(var(--sp) / 2) var(--sp);
 
-      @media screen and (min-width: #{$desktop-breakpoint}) {
+      @include breakpoint-min-width(#{$w-md}) {
         padding: var(--sp) calc(var(--sp) * 2);
       }
     }
@@ -56,7 +56,7 @@
   figcaption {
     margin-left: var(--sp);
 
-    @media screen and (min-width: #{$desktop-breakpoint}) {
+    @include breakpoint-min-width(#{$w-md}) {
       // This aligns with the padding of the table items
       margin-left: calc(var(--sp) * 2);
     }

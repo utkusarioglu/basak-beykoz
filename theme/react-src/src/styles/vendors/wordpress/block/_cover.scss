@@ -28,7 +28,7 @@
   }
 
   /// create a fake margin-right for clearance from the edge
-  @media screen and (max-width: #{$desktop-breakpoint}) {
+  @include breakpoint-min-width(#{$w-md}) {
     &::before {
       content: '';
       position: absolute;

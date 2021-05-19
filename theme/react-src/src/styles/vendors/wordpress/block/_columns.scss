@@ -9,7 +9,7 @@
   grid-column-gap: var(--sp);
   grid-row-gap: var(--sp);
 
-  @media screen and (min-width: #{$desktop-breakpoint}) {
+  @include breakpoint-min-width(#{$w-md}) {
     grid-auto-flow: column;
   }
 }

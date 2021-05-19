@@ -9,7 +9,7 @@
   overflow-x: scroll;
   overflow-y: hidden;
 
-  @media screen and (min-width: #{$desktop-breakpoint}) {
+  @include breakpoint-min-width(#{$w-md}) {
     overflow-x: hidden;
     border-radius: var(--sp);
   }
@@ -24,7 +24,7 @@
     display: inline-flex;
     width: auto;
 
-    @media screen and (min-width: #{$desktop-breakpoint}) {
+    @include breakpoint-min-width(#{$w-md}) {
       width: 100%;
       max-height: 300px;
     }
@@ -40,7 +40,7 @@
       position: relative;
       overflow: hidden;
 
-      @media screen and (min-width: #{$desktop-breakpoint}) {
+      @include breakpoint-min-width(#{$w-md}) {
         width: auto;
         height: 100%;
       }
@@ -50,7 +50,7 @@
         width: 100vw;
         height: auto;
 
-        @media screen and (min-width: #{$desktop-breakpoint}) {
+        @include breakpoint-min-width(#{$w-md}) {
           width: auto;
           height: 100%;
         }
