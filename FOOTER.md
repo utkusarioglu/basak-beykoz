@@ -56,7 +56,7 @@ points that we will cover here for extra clarity:
 .home-section > *:last-child {
   padding-bottom: var(--height-footer-shim-mobile);
 
-  @media screen and (min-width: #{$desktop-breakpoint}) {
+  @include breakpoint-min-width(#{$w-md}) {
     padding-bottom: var(--height-footer-shim-desktop);
   }
 }
