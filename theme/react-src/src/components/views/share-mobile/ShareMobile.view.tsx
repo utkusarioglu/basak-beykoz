@@ -36,7 +36,7 @@ const buttonProps = {
   onClick: closeAllMenus,
 };
 
-const MobileShareView = () => {
+const ShareMobileView = () => {
   const { titleSeparator } = window.config;
   const url = window.location.href;
   const singular = useSelector(selectSingular);
@@ -125,4 +125,4 @@ const MobileShareView = () => {
   );
 };
 
-export default MobileShareView;
+export default ShareMobileView;
