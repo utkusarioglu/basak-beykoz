@@ -3,11 +3,11 @@ import NavDesktopView from '../../views/nav-desktop/NavDesktop.view';
 import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
 import { LinkPreloaderView } from '../../views/link-preloader/LinkPreloader.view';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
-import { useMediaQuery } from 'react-responsive';
-import { W_MD } from '../../../config';
+import { useSelector } from 'react-redux';
+import { selectIsHeaderOpaque } from '../../../slices/app/app.slice';
 
 const HeaderLayout = () => {
-  const isWMd = useMediaQuery({ minWidth: W_MD });
+  const isOpaque = useSelector(selectIsHeaderOpaque);
 
   return (
     <header
@@ -18,7 +18,6 @@ const HeaderLayout = () => {
         position: 'fixed',
         left: 0,
         right: 0,
-        backgroundColor: 'rgb(251, 251, 251, 0.5)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
         zIndex: 100,
@@ -42,6 +41,32 @@ const HeaderLayout = () => {
             }),
       }}
     >
+      {
+        /**
+         * This div covers the back of the header when `isOpaque`
+         * state is true. This happens when the scroll state of the
+         * `main` scrollbar is less than 100px or so.
+         *
+         * This is done to make sure that the header looks clear at initial
+         * moments of the app loading. Especially on small screens where the
+         * hero button falls behind the header, the yellowish colors mix
+         * doesn't look very appealing otherwise.
+         */
+        isOpaque && !isW.lg && (
+          <div
+            style={{
+              position: 'absolute',
+              backgroundColor: 'var(--brush-white)',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              zIndex: -1,
+            }}
+          />
+        )
+      }
+
       <LinkPreloaderView to="/">
         <div
           style={{

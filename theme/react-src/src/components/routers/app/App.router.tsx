@@ -15,6 +15,7 @@ import LoaderHtmlView from '../../views/loader-html/LoaderHtml.view';
 import {
   selectMobileNavState,
   selectMobileShareState,
+  setIsHeaderOpaque,
   setMobileNavState,
   setMobileShareState,
 } from '../../../slices/app/app.slice';
@@ -76,6 +77,12 @@ const AppRouter = () => {
                   id="main"
                   enableGraceTop={true}
                   graceTopComponent={GraceTopView}
+                  onScroll={(target) => {
+                    // @ts-ignore
+                    // TODO this type shall be ok once the scrollbar type
+                    // casting for `event` is resolved
+                    setIsHeaderOpaque(target.scrollTop < 100);
+                  }}
                 >
                   <Component />
                   <FooterLayout />
