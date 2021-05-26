@@ -1,54 +1,106 @@
+@import '../../abstracts/mixins';
+@import '../../abstracts/sass-vars';
+
 $scrollbar-color: var(--brush-gray);
 $handle-size: calc(var(--sp) / 2);
 $track-size: var(--sp);
 $handle-size-active: $track-size;
+
+$handle-size-w-md: var(--sp);
+$track-size-w-md: calc(var(--sp) * 2);
+
+$handle-size-w-xxl: calc(var(--sp) * 1.5);
+$track-size-w-xxl: calc(var(--sp) * 2.5);
 
 .os-scrollbar {
   z-index: 150;
   padding: 0 !important; // fights off the standard padding from the library
 
   &-vertical {
-    width: var(--sp) !important;
+    width: #{$track-size} !important;
 
-    &:active,
-    &:hover {
-      width: var(--sp) !important;
+    @include breakpoint-min-width($w-md) {
+      width: #{$track-size-w-md} !important;
+    }
+
+    @include breakpoint-min-width($w-xxl) {
+      width: #{$track-size-w-xxl} !important;
     }
 
     & .os-scrollbar-handle {
       right: 0;
       border-radius: 0 !important;
+      background-color: #{$scrollbar-color} !important;
       border-top-left-radius: #{$handle-size} !important;
       border-bottom-left-radius: #{$handle-size} !important;
-      background-color: #{$scrollbar-color} !important;
       width: #{$handle-size};
+
+      @include breakpoint-min-width($w-md) {
+        border-top-left-radius: #{$handle-size-w-md} !important;
+        border-bottom-left-radius: #{$handle-size-w-md} !important;
+        width: #{$handle-size-w-md};
+      }
+
+      @include breakpoint-min-width($w-xxl) {
+        border-top-left-radius: #{$handle-size-w-xxl} !important;
+        border-bottom-left-radius: #{$handle-size-w-xxl} !important;
+        width: #{$handle-size-w-xxl};
+      }
 
       &.hover,
       &.active {
-        width: #{$handle-size-active} !important;
+        width: #{$track-size} !important;
+
+        @include breakpoint-min-width($w-md) {
+          width: #{$track-size-w-md} !important;
+        }
+
+        @include breakpoint-min-width($w-xxl) {
+          width: #{$track-size-w-xxl} !important;
+        }
       }
     }
   }
 
   &-horizontal {
-    height: var(--sp) !important;
+    height: #{$track-size} !important;
 
     &:active,
     &:hover {
-      height: var(--sp) !important;
+      height: #{$track-size} !important;
     }
 
     & .os-scrollbar-handle {
       bottom: 0; // This one is to make sure that the handle sticks to the bottom side of the track
       border-radius: 0 !important;
-      border-top-left-radius: #{$handle-size} !important;
-      border-top-right-radius: #{$handle-size} !important;
       background-color: #{$scrollbar-color} !important;
       height: #{$handle-size};
+      border-top-left-radius: #{$handle-size} !important;
+      border-top-right-radius: #{$handle-size} !important;
+
+      @include breakpoint-min-width($w-md) {
+        border-top-left-radius: #{$handle-size-w-md} !important;
+        border-top-right-radius: #{$handle-size-w-md} !important;
+        height: #{$handle-size-w-md};
+      }
+
+      @include breakpoint-min-width($w-xxl) {
+        border-top-left-radius: #{$handle-size-w-xxl} !important;
+        border-top-right-radius: #{$handle-size-w-xxl} !important;
+        height: #{$handle-size-w-xxl};
+      }
 
       &.hover,
       &.active {
-        height: #{$handle-size-active} !important;
+        height: #{$track-size} !important;
+
+        @include breakpoint-min-width($w-md) {
+          height: #{$track-size-w-md} !important;
+        }
+
+        @include breakpoint-min-width($w-xxl) {
+          height: #{$track-size-w-xxl} !important;
+        }
       }
     }
   }
@@ -59,4 +111,12 @@ Ensures that the main page vertical scroll bar does not cover the header
 */
 #main > .os-scrollbar-vertical {
   height: calc(100% - var(--height-header-mobile));
+
+  /**
+  This has to be at the same breakpoint as the header moving to the top of the 
+  screen
+  */
+  @include breakpoint-min-width($w-lg) {
+    height: 100%;
+  }
 }
