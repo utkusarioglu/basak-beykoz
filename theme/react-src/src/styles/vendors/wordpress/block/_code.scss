@@ -3,7 +3,7 @@
 /// themed in _default.scss
 .wp-block-code {
   @include frame-rounded-padded;
-  @include block-margin-bottom;
+  @include responsive-margin-bottom-for-blocks;
 
   font-size: 0.8em;
 }
