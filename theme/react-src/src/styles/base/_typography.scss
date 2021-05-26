@@ -19,10 +19,26 @@ p,
 a,
 span,
 div,
-button {
+button,
+textarea,
+input,
+.wp-block-verse {
   font-family: 'Nunito', sans-serif;
   text-decoration: none;
+}
 
+button {
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+
+p,
+a,
+span,
+div,
+button,
+textarea,
+input {
   @include breakpoint-min-width(#{$w-xs}) {
     font-size: 1.01em;
   }
@@ -32,14 +48,12 @@ button {
   }
 
   @include breakpoint-min-width(#{$w-xxl}) {
-    font-size: 1.04em;
+    font-size: 1.035em;
   }
 }
 
-.wp-block-verse {
-  font-family: 'Nunito', sans-serif;
-}
-
-.wpcf7-submit {
-  font-family: 'Raleway', sans-serif;
+.wp-block-quote {
+  & p {
+    font-style: italic;
+  }
 }
