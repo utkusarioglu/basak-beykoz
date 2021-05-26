@@ -7,6 +7,8 @@
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  /// introduce some minor spacing between the label and the input
+  margin-top: calc(var(--sp) / 2);
 
   &:focus {
     outline: none;
