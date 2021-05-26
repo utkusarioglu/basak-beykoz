@@ -36,7 +36,11 @@ const FooterButtonView = () => {
           <br />
           {new Date(Date.now()).getFullYear()}
           <br />
-          {pageTitle}
+          {pageTitle.split(' ').map((word) => (
+            <div style={{ color: 'var(--brush-white)' }} key={word}>
+              {word}
+            </div>
+          ))}
         </div>
       </div>
     </LinkPreloaderView>
