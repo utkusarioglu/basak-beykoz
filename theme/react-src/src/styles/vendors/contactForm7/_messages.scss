@@ -8,19 +8,22 @@
 }
 
 .form-error-message {
-  @include frame-rounded-padded;
+  @include frame-rounded-padded-thin;
+
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 
   //! magic: comes from hiding the top edge of the error message
   //! under the input field
-  margin-top: -10px;
+  margin-top: -22px;
   //! magic: read above
-  padding-top: 20px;
+  padding-top: 29px;
 }
 
 .your-message > .form-error-message {
   //! magic: comes from hiding the top edge of the error message
   //! under the input field
-  margin-top: -17px;
+  margin-top: -22px;
 }
 
 .validation_failed,
