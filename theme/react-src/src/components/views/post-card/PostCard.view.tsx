@@ -1,10 +1,11 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
+import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import type { FC } from 'react';
 import type { WrtSingularItem } from '../../../@types/wp-types';
 import { LinkPreloaderView } from '../link-preloader/LinkPreloader.view';
 import { urlSlug } from '../../../utils/slug.util';
-import { useMediaQuery } from 'react-responsive';
-import { W_MD } from '../../../config';
+import { useResponsiveWidth } from '../../../utils/responsive.util';
 
 type BlogPostCardViewProps = {
   asSkeleton: boolean;
@@ -34,47 +35,55 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
   thumbnail,
   categories,
 }) => {
-  const isWMd = useMediaQuery({ minWidth: W_MD });
+  const isW = useResponsiveWidth();
+  const [hovered, setHovered] = useState(false);
 
   return (
-    <LinkPreloaderView to={urlSlug(slug)} style={{ textDecoration: 'none' }}>
+    <LinkPreloaderView
+      to={urlSlug(slug)}
+      style={{ textDecoration: 'none', display: 'block' }}
+    >
       <div
+        className={[
+          'has-responsive-vertical-padding-for-blocks',
+          'has-responsive-border-radius',
+        ].join(' ')}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
           opacity,
           display: 'grid',
-          ...(isWMd
+          width: '100%',
+
+          ...(isW.md
             ? {
                 gridTemplateAreas: `
-                    "thumbnail title"
-                    "thumbnail date-and-categories"
-                    "thumbnail summary"
-                  `,
+                  "thumbnail title"
+                  "thumbnail date-and-categories"
+                  "thumbnail summary"
+                `,
                 gridTemplateColumns: '4fr 6fr',
                 paddingRight: 'calc(var(--sp) * 2)',
                 gridColumnGap: 'calc(var(--sp) * 2)',
               }
             : {
                 gridTemplateAreas: `
-                    "thumbnail"
-                    "title"
-                    "date-and-categories"
-                    "summary"
-                  `,
+                  "thumbnail"
+                  "title"
+                  "date-and-categories"
+                  "summary"
+                `,
               }),
           gridRowGap: 'var(--sp)',
-          paddingTop: 'var(--sp)',
-          paddingBottom: 'var(--sp)',
           marginBottom: 'calc(var(--sp) * 3)',
-          borderRadius: 'var(--sp)',
-          backgroundColor: 'var(--brush-gray-light)',
+          backgroundColor: hovered
+            ? 'var(--brush-yellow-light)'
+            : 'var(--brush-gray-light)',
         }}
       >
         <div
+          className="has-responsive-border-radius"
           style={{
-            gridArea: 'thumbnail',
-            height: isWMd ? '100%' : '40vw',
-            width: '100%',
-            borderRadius: 'var(--sp)',
             ...(asSkeleton
               ? {
                   background: SKELETON_COLOR,
@@ -85,6 +94,10 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'center',
                 }),
+
+            gridArea: 'thumbnail',
+            height: isW.md ? '100%' : '40vw',
+            width: '100%',
           }}
         />
 
@@ -92,13 +105,14 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
           style={{
             gridArea: 'title',
             marginBottom: 'var(--sp)',
-            ...(!isWMd && {
+            ...(!isW.md && {
               paddingLeft: 'var(--sp)',
               paddingRight: 'var(--sp)',
             }),
           }}
         >
           <h4
+            className="has-smaller-fonts"
             style={{
               margin: 0,
               ...(asSkeleton && asSkeletonProps),
@@ -111,16 +125,16 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
           style={{
             gridArea: 'date-and-categories',
             marginTop: `calc(${DETAILS_PADDING} * -2)`,
-            ...(!isWMd && {
+            ...(!isW.md && {
               paddingLeft: 'var(--sp)',
               paddingRight: 'var(--sp)',
             }),
           }}
         >
           <time
+            className="has-smallest-fonts"
             dateTime={date}
             style={{
-              fontSize: '0.7em',
               backgroundColor: 'var(--brush-blue-light)',
               padding: DETAILS_PADDING,
               borderRadius: DETAILS_PADDING,
@@ -133,11 +147,11 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
 
           {categories.map((category) => (
             <span
+              className="has-smallest-fonts"
               key={category}
               style={{
                 minWidth: 100,
-                fontSize: '0.7em',
-                backgroundColor: 'var(--brush-yellow-light)',
+                backgroundColor: 'var(--brush-green-light)',
                 padding: DETAILS_PADDING,
                 borderRadius: DETAILS_PADDING,
                 marginRight: DETAILS_PADDING,
@@ -152,14 +166,16 @@ const BlogPostCardView: FC<BlogPostCardViewProps> = ({
         <div
           style={{
             gridArea: 'summary',
-            ...(!isWMd && {
+            margin: 0,
+
+            ...(!isW.md && {
               paddingLeft: 'var(--sp)',
               paddingRight: 'var(--sp)',
             }),
-            margin: 0,
           }}
         >
           <p
+            className="has-smaller-fonts"
             style={{
               margin: 0,
               padding: 0,
