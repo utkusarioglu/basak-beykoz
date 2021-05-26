@@ -8,7 +8,15 @@ export interface AppSliceState {
   isLoading: boolean;
   mobileNavOpen: boolean;
   mobileShareOpen: boolean;
+  isHeaderOpaque: boolean;
 }
+
+export type SetIsHeaderOpaque = (isOpaque: boolean) => void;
+
+export type SelectIsHeaderOpaque = Selector<
+  RootState,
+  AppSliceState['isHeaderOpaque']
+>;
 
 export type SetIsLoading = (isLoading: boolean) => void;
 

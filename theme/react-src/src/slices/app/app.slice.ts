@@ -15,6 +15,8 @@ import type {
   ToggleMobileShareState,
   SelectMobileShareState,
   CloseAllMenus,
+  SelectIsHeaderOpaque,
+  SetIsHeaderOpaque,
 } from './app.slice.types';
 import {
   LOADING_INDICATOR_APPEAR_AFTER,
@@ -25,6 +27,7 @@ const initialState: AppSliceState = {
   isLoading: false,
   mobileNavOpen: false,
   mobileShareOpen: false,
+  isHeaderOpaque: true,
 };
 
 /**
@@ -85,6 +88,16 @@ const { actions, reducer } = createSlice({
         ...state,
         mobileShareOpen: !state.mobileShareOpen,
         mobileNavOpen: false,
+      };
+    },
+
+    setIsHeaderOpaque: (
+      state,
+      { payload: isHeaderOpaque }: PayloadAction<boolean>
+    ) => {
+      return {
+        ...state,
+        isHeaderOpaque,
       };
     },
   },
@@ -190,3 +203,21 @@ export const closeAllMenus: CloseAllMenus = () => {
   dispatch(actions.setMobileNavState(false));
   dispatch(actions.setMobileShareState(false));
 };
+
+/**
+ * There are certain situations where header looks better opaque, such
+ * as when the app is scrolled up. This function sets the state for
+ * the header to comply with its opaqueness
+ * @param isOpaque boolean indicating that the header shall be opaque
+ * @returns void
+ */
+export const setIsHeaderOpaque: SetIsHeaderOpaque = (isOpaque) =>
+  dispatch(actions.setIsHeaderOpaque(isOpaque));
+
+/**
+ * Returns a boolean indicating whether the header shall be opaque
+ * @param state Root state for the app
+ * @returns boolean indicating whether the header shall be opaque
+ */
+export const selectIsHeaderOpaque: SelectIsHeaderOpaque = (state) =>
+  state.app.isHeaderOpaque;
