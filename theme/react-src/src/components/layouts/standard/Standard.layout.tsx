@@ -12,6 +12,7 @@ interface StandardLayoutProps {
   thumbnailUrl?: string;
   hideMargins?: boolean;
   hideFooterShim?: boolean;
+  hideHeaderShim?: boolean;
 }
 
 const StandardLayout: FC<StandardLayoutProps> = ({
@@ -22,6 +23,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   hideTitle,
   hideMargins = false,
   hideFooterShim = false,
+  hideHeaderShim = false,
 }) => {
   const isWMd = useMediaQuery({ minWidth: W_MD });
 
@@ -143,11 +145,21 @@ const StandardLayout: FC<StandardLayoutProps> = ({
                 })),
         }}
       >
-        {isWMd && !hideTitle && (
-          <h1 style={{ marginBottom: '3em', marginTop: '2em' }}>{title}</h1>
-        )}
-        {children}
-      </div>
+          {
+            /**
+             * The large screen header has a variable size.
+             */
+            !hideHeaderShim && isW.lg && (
+              <div
+                style={{
+                  minHeight: 'var(--height-header-desktop-min)',
+                  maxHeight: 'var(--height-header-desktop-max)',
+                  height: 'var(--height-header-desktop-responsive)',
+                  width: '100%',
+                }}
+              />
+            )
+          }
     </>
   );
 };
