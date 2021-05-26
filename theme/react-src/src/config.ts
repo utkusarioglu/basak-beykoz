@@ -30,8 +30,8 @@ export const LOADING_INDICATOR_DISAPPEAR_AFTER = 200;
 export const W_XS = 400;
 export const W_SM = 600;
 export const W_MD = 800;
-export const W_LG = 1000;
-export const W_XL = 1200;
+export const W_LG = 1100;
+export const W_XL = 1250;
 export const W_XXL = 1800;
 
 /**
