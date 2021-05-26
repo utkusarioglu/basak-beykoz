@@ -5,10 +5,11 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { graceTop } from '../../../utils/scroll.util';
 import type { GraceTopViewProps } from '../grace-top/GraceTop.view';
 
-interface ScrollbarsViewProps {
+interface ScrollbarViewProps {
   id: string;
   enableGraceTop: boolean;
   graceTopComponent: FC<GraceTopViewProps>;
+  onScroll?: (target: EventTarget) => void;
 }
 
 export const scrollbars: Record<string, RefObject<OverlayScrollbarsComponent>> =
@@ -16,11 +17,12 @@ export const scrollbars: Record<string, RefObject<OverlayScrollbarsComponent>> =
 
 const scrollbarRef = createRef<OverlayScrollbarsComponent>();
 
-const ScrollbarView: FC<ScrollbarsViewProps> = ({
+const ScrollbarView: FC<ScrollbarViewProps> = ({
   id,
   children,
   enableGraceTop,
   graceTopComponent: GraceTopComponent,
+  onScroll,
 }) => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -36,8 +38,11 @@ const ScrollbarView: FC<ScrollbarsViewProps> = ({
           onScroll: (e) => {
             // @ts-ignore
             // TODO figure out what type casting is needed for this object
-            const scrollTop = e?.target.scrollTop;
+            const target = e?.target as any;
+            const scrollTop = target.scrollTop;
             setScrolled(scrollTop > window.innerHeight || false);
+
+            onScroll && onScroll(target);
           },
           onInitialized: () => {
             scrollbars[id] = scrollbarRef;
