@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import FooterLayout from '../../layouts/footer/Footer.layout';
 import HeaderLayout from '../../layouts/header/Header.layout';
-import { HOME_SLUG, W_MD } from '../../../config';
+import { HOME_SLUG, W_LG } from '../../../config';
 import LoaderEdgeView from '../../views/loader-edge/LoaderEdge.view';
 import LoaderDesktopView from '../../views/loader-desktop/LoaderDesktop.view';
 import { routes } from './routeConfig';
@@ -27,13 +27,13 @@ import { restSlug } from '../../../utils/slug.util';
 import ScrollbarView from '../../views/scrollbar/Scrollbar.view';
 
 const AppRouter = () => {
-  const isWMd = useMediaQuery({ minWidth: W_MD });
+  const isWLg = useMediaQuery({ minWidth: W_LG });
 
   const LazyMobileNav = lazy(
     () => import('../../views/nav-mobile/NavMobile.view')
   );
 
-  const LazyMobileShare = lazy(
+  const LazyShareMobile = lazy(
     () => import('../../views/share-mobile/ShareMobile.view')
   );
 
@@ -45,7 +45,7 @@ const AppRouter = () => {
     <Router>
       <HeaderLayout />
 
-      {!isWMd && (
+      {!isWLg && (
         <Suspense fallback={null}>
           <LazyMobileMenuContainerView
             menuStateSelector={selectMobileNavState}
@@ -57,12 +57,12 @@ const AppRouter = () => {
             menuStateSelector={selectMobileShareState}
             menuStateSetter={setMobileShareState}
           >
-            <LazyMobileShare />
+            <LazyShareMobile iconSize={35} />
           </LazyMobileMenuContainerView>
         </Suspense>
       )}
 
-      {isWMd ? <LoaderDesktopView /> : <LoaderEdgeView />}
+      {isWLg ? <LoaderDesktopView /> : <LoaderEdgeView />}
 
       <Switch>
         <Route path={restSlug(HOME_SLUG)} exact>
