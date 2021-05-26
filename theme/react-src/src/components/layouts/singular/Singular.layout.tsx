@@ -19,6 +19,7 @@ const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
       hideTitle={hideTitle(singular.slug)}
       hideMargins={hideMargins(singular.slug)}
       hideFooterShim={hideFooterShim(singular.slug)}
+      hideHeaderShim={hideHeaderShim(singular.slug)}
     >
       <SingularView {...singular} />
 
@@ -124,4 +125,19 @@ function hideFooterShim(slug: string) {
   }
 }
 
+/**
+ * Some pages require no space to be reserved for the lg header
+ * This function determines which slugs will have their header shim hidden
+ * @param slug slug of the page
+ * @returns boolean indicating whether the header shim shall be hidden
+ */
+function hideHeaderShim(slug: string) {
+  switch (slug) {
+    case HOME_SLUG:
+      return true;
+
+    default:
+      return false;
+  }
+}
 export default SingularLayout;
