@@ -1,9 +1,14 @@
 @import '../../../abstracts/mixins';
 
 .wp-block-buttons {
-  @include block-margin-bottom;
+  @include responsive-margin-bottom-for-blocks;
+  @include responsive-row-gap;
 
   display: grid;
-  gap: var(--sp);
   grid-auto-flow: row;
+
+  @include breakpoint-min-width($w-md) {
+    grid-column-gap: var(--sp);
+    grid-auto-flow: column;
+  }
 }
