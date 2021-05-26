@@ -1,3 +1,6 @@
+@import '../abstracts/mixins';
+@import '../abstracts/sass-vars';
+
 .bireysel {
   .adimlar {
     $colors: (
@@ -7,28 +10,53 @@
       var(--brush-gray)
     );
 
-    @for $i from 1 through length($colors) {
-      .wp-block-button:nth-of-type(#{$i}) {
-        $color: nth($colors, $i);
+    .wp-block-button {
+      position: relative;
 
-        background-color: #{$color};
-        border-color: #{$color};
-        position: relative;
+      /**
+      These are set as important because the `nth-of-type` selectors
+      below that are used for setting individual colors beat these
+      unless we use !important.
+      */
+      &:hover {
+        &:after {
+          background-color: var(--brush-green-dark) !important;
+        }
+      }
 
-        // Creates an arrow pointing to the bottom of the button
-        &:not(:last-of-type):after {
-          background-color: #{$color};
-          content: '';
-          mask: url('../../static/right-arrow.svg');
-          mask-image: url('../../static/right-arrow.svg');
-          -webkit-mask-image: url('../../static/right-arrow.svg');
-          position: absolute;
-          left: 50%;
-          transform: translate(-50%, 0) rotate(90deg);
-          bottom: -20px;
-          width: 30px;
-          height: 30px;
-          z-index: 1;
+      a {
+        width: 100%;
+        height: 100%;
+      }
+
+      /** 
+      Creates an arrow pointing to the bottom of the button 
+      the color for this component is set in the themes
+      */
+      &:not(:last-of-type):after {
+        pointer-events: none;
+        content: '';
+        mask: url('../../static/right-arrow.svg');
+        mask-image: url('../../static/right-arrow.svg');
+        -webkit-mask-image: url('../../static/right-arrow.svg');
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0) rotate(90deg);
+        bottom: -20px;
+        width: 30px;
+        height: 30px;
+        z-index: 1;
+
+        /**
+          The layout changes at this breakpoint, the buttons become inline.
+          Hence, the position of the arrow moves to the right
+          */
+        @include breakpoint-min-width($w-md) {
+          left: auto;
+          right: -20px;
+          transform: translate(0, -50%);
+          bottom: auto;
+          top: 50%;
         }
       }
     }
