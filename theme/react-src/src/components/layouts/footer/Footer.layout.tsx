@@ -3,15 +3,15 @@ import FooterButtonView from '../../views/footer-button/FooterButton.view';
 import { ReactComponent as FooterArtBg } from '../../../static/footer-art-bg.svg';
 import { ReactComponent as FooterArtFg } from '../../../static/footer-art-fg.svg';
 import { useMediaQuery } from 'react-responsive';
-import { W_MD } from '../../../config';
+import { W_LG } from '../../../config';
 
 const FooterLayout = () => {
-  const isWMd = useMediaQuery({ minWidth: W_MD });
+  const isWLg = useMediaQuery({ minWidth: W_LG });
 
   return (
     <footer
       style={{
-        marginTop: isWMd
+        marginTop: isWLg
           ? 'calc(var(--height-footer-desktop) * -1)'
           : 'calc(var(--height-footer-mobile) * -1)',
         position: 'relative',
@@ -21,7 +21,7 @@ const FooterLayout = () => {
       <div
         style={{
           position: 'absolute',
-          top: isWMd
+          top: isWLg
             ? 'calc(var(--height-footer-desktop) - var(--height-footer-desktop-button))'
             : 0,
           left: 0,
@@ -50,7 +50,7 @@ const FooterLayout = () => {
             // 22 is a magic number that emerges from the behavior of the svg
             // 25px is a magic number that emerges from the content of the svg
             // 25px covers the plant on the right on the smallest screens
-            right: isWMd ? '22vw' : 'calc(20px + 5vw)',
+            right: isWLg ? '22vw' : 'calc(20px + 5vw)',
           }}
         />
 
@@ -63,7 +63,7 @@ const FooterLayout = () => {
            *
            * Refer to FOOTER.md for more details about this div
            */
-          !isWMd && (
+          !isWLg && (
             <div
               style={{
                 height: 'var(--height-header-mobile)',
