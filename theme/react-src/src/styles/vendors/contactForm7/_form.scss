@@ -8,13 +8,13 @@
     }
 
     &:not(:first-of-type) {
-      padding-top: var(--sp);
+      @include responsive-padding-top-for-blocks;
 
       /**
       On middle sized screens, "not first" columns need to shed their
       top padding in order to look aligned with the first column
       */
-      @include breakpoint-min-width($w-md) {
+      @include breakpoint-min-width($w-lg) {
         padding-top: 0;
       }
     }
