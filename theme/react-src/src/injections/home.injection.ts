@@ -32,6 +32,9 @@ export const homeInjection: InjectionFunction = (params) => {
   );
 
   const scrollbarOptions: Options = {
+    overflowBehavior: {
+      y: 'hidden',
+    },
     scrollbars: {
       autoHide: 'leave',
     },
