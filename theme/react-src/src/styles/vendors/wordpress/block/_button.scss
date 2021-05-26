@@ -1,17 +1,16 @@
-/// themed in _default.scss
+@import '../../../components/button';
+
 .wp-block-button {
-  @extend button;
-  text-align: center;
-
-  &:hover {
-    // wp block button contains an anchor, not a button
-    cursor: pointer;
-  }
-
   a {
+    @extend button;
+
+    text-align: center;
     display: block;
-    width: 100%;
-    height: 100%;
     text-decoration: none;
+    cursor: pointer;
+
+    @include breakpoint-min-width($w-md) {
+      width: max-content;
+    }
   }
 }
