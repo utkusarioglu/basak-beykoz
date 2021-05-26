@@ -7,6 +7,7 @@ import { W_MD } from '../../../config';
 
 const ErrorFallbackLayout: FC<FallbackProps> = (props) => {
   const isWMd = useMediaQuery({ minWidth: W_MD });
+
   return (
     <div
       style={{
@@ -14,8 +15,8 @@ const ErrorFallbackLayout: FC<FallbackProps> = (props) => {
         top: 0,
         left: 0,
         right: 0,
-        bottom: isWMd ? 'var(--height-header-mobile)' : 0,
         display: 'grid',
+        bottom: isWMd ? 'var(--height-header-mobile)' : 0,
       }}
     >
       <div
