@@ -3,14 +3,17 @@ import NavDesktopView from '../../views/nav-desktop/NavDesktop.view';
 import SocialDesktopView from '../../views/social-desktop/SocialDesktop.view';
 import { LinkPreloaderView } from '../../views/link-preloader/LinkPreloader.view';
 import MobileHeaderButtonsView from '../../views/mobile-header-buttons/MobileHeaderButtons.view';
+import { useResponsiveWidth } from '../../../utils/responsive.util';
 import { useSelector } from 'react-redux';
 import { selectIsHeaderOpaque } from '../../../slices/app/app.slice';
 
 const HeaderLayout = () => {
+  const isW = useResponsiveWidth();
   const isOpaque = useSelector(selectIsHeaderOpaque);
 
   return (
     <header
+      className="has-responsive-horizontal-padding-for-hero"
       style={{
         boxSizing: 'content-box',
         display: 'flex',
@@ -21,24 +24,18 @@ const HeaderLayout = () => {
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
         zIndex: 100,
+        height: 'var(--height-header-mobile)',
+        top: 'auto',
+        bottom: 0,
+        backgroundColor: 'var(--brush-white-half)',
 
-        ...(isWMd
-          ? {
-              minHeight: 'var(--height-header-desktop-min)',
-              maxHeight: 'var(--height-header-desktop-max)',
-              height: 'var(--height-header-desktop-responsive)',
-              bottom: 'auto',
-              top: 0,
-              paddingRight: 'var(--header-desktop-horizontal-padding)',
-              paddingLeft: 'var(--header-desktop-horizontal-padding)',
-            }
-          : {
-              height: 'var(--height-header-mobile)',
-              top: 'auto',
-              bottom: 0,
-              paddingRight: 'var(--sp)',
-              paddingLeft: 'var(--sp)',
-            }),
+        ...(isW.lg && {
+          minHeight: 'var(--height-header-desktop-min)',
+          maxHeight: 'var(--height-header-desktop-max)',
+          height: 'var(--height-header-desktop-responsive)',
+          bottom: 'auto',
+          top: 0,
+        }),
       }}
     >
       {
@@ -77,22 +74,20 @@ const HeaderLayout = () => {
             backgroundPositionY: 'center',
             height: '100%',
             minWidth: 120,
+            maxWidth: 150,
+            width: 'auto',
 
-            ...(isWMd
-              ? {
-                  maxWidth: 180,
-                  width: 180,
-                }
-              : {
-                  maxWidth: 150,
-                  width: 'auto',
-                }),
+            ...(isW.lg && {
+              maxWidth: 'none',
+              //! magic - this number creates a balanced size for the logo
+              width: '30vh',
+            }),
           }}
         />
       </LinkPreloaderView>
       <div style={{ flexGrow: 1 }}></div>
 
-      {isWMd ? (
+      {isW.lg ? (
         <>
           <NavDesktopView />
           <SocialDesktopView />
