@@ -3,7 +3,7 @@
 
 .wp-block-embed {
   @include edge-to-edge;
-  @include block-margin-bottom;
+  @include responsive-margin-bottom-for-blocks;
 
   height: 100vw;
   overflow: hidden;

@@ -1,7 +1,7 @@
 @import '../../../abstracts/mixins';
 
 .wp-block-image {
-  @include block-margin-bottom;
+  @include responsive-margin-bottom-for-blocks;
 
   img {
     object-fit: cover;
@@ -19,8 +19,9 @@
   /// This one has rounded corners
   /// it adheres with the padding established by its lineage
   &.is-style-rounded img {
+    @include responsive-border-radius;
+
     width: 100%;
     height: auto;
-    border-radius: var(--sp);
   }
 }
