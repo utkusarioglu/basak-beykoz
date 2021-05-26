@@ -1,3 +1,5 @@
+@import '../abstracts/mixins';
+
 ///
 /// Styles that help create a layout
 ///
@@ -8,13 +10,18 @@
   overflow-x: hidden;
 }
 
+/**
+This class comes up a lot on the homepage. It's intended to house the
+section image.
+*/
 .grid-area--image {
   grid-area: image;
   width: 100%;
   height: auto;
 
   .wp-block-cover {
-    border-radius: var(--sp);
+    @include responsive-border-radius;
+
     width: 100%;
     margin: 0;
     overflow: hidden;
@@ -27,6 +34,10 @@
   }
 }
 
+/**
+This class comes up a lot on the homepage. It's intended to house the
+section text.
+*/
 .grid-area--text {
   grid-area: text;
 }
