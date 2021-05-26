@@ -9,7 +9,7 @@ article.hizmetlerim {
     cursor: pointer;
 
     a {
-      @include enable-horizontal-padding;
+      @include responsive-horizontal-padding-for-blocks;
 
       text-decoration: none;
     }
@@ -21,7 +21,7 @@ article.hizmetlerim {
     }
 
     p {
-      @include enable-horizontal-padding;
+      @include responsive-horizontal-padding-for-blocks;
 
       &:last-of-type {
         margin-bottom: 0;
