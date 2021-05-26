@@ -1,3 +1,5 @@
+/// HTML COMPONENTS
+
 body {
   background-color: var(--brush-white);
 }
@@ -12,24 +14,28 @@ button {
 a {
   color: var(--brush-blue-dark);
   text-decoration: underline;
+  // This doesn't have widespread support yet
   text-decoration-thickness: 3px;
 }
 
-.wp-block-button {
-  background-color: var(--brush-yellow-dark);
-  border-color: var(--brush-yellow-dark);
+/// VENDOR COMPONENTS
 
-  &.is-style-outline {
-    border-color: var(--brush-yellow-dark);
-    background-color: transparent;
+/*
+Wordpress
+*/
+
+/** 
+this component extends `button` structurally. The definition made here is
+to cover the `is-style-outlined` that is featured by wp
+*/
+.wp-block-button {
+  a {
+    @include button-colors;
   }
 
-  &:hover {
-    background-color: var(--brush-green-dark);
-    border-color: var(--brush-green-dark);
-    & a {
-      color: var(--brush-white);
-    }
+  &.is-style-outline a {
+    border-color: var(--brush-yellow-dark);
+    background-color: transparent;
   }
 }
 
@@ -81,9 +87,51 @@ a {
   }
 }
 
-/**
-Layout - Home
+/*
+Contact form
 */
+
+.form-error-message {
+  color: var(--brush-red-dark);
+  background-color: var(--brush-red-light);
+}
+
+.mail_sent {
+  color: var(--brush-green-dark);
+  background-color: var(--brush-green-light);
+  border-color: var(--brush-green-dark);
+}
+
+.validation_failed {
+  color: var(--brush-red-dark);
+  border-color: var(--brush-red-dark);
+  background-color: var(--brush-red-light);
+}
+
+.wpcf7-submit {
+  @include button-colors;
+}
+
+/*
+OverlayScrollbars
+*/
+
+.os-scrollbar {
+  &-vertical {
+    & .os-scrollbar-handle {
+      background-color: var(--brush-gray) !important;
+    }
+  }
+
+  &-horizontal {
+    & .os-scrollbar-handle {
+      background-color: var(--brush-gray) !important;
+    }
+  }
+}
+
+/// LAYOUTS
+
 .home-section {
   &__hero {
     $bg-color: var(--brush-white);
@@ -146,7 +194,7 @@ Layout - Home
     }
 
     .wpcf7 {
-      &-form-control {
+      &-form-control:not(.wpcf7-submit) {
         background-color: var(--brush-white);
         border-color: var(--brush-white);
 
@@ -157,14 +205,77 @@ Layout - Home
           border-color: var(--brush-yellow-light);
         }
       }
+    }
+  }
+}
 
-      &-submit {
+article.iletisim {
+  .wp-block-column {
+    background-color: var(--brush-gray-light);
+
+    .contact-links__form,
+    .contact-links__social > div > * {
+      background-color: var(--brush-green-light);
+
+      &:hover {
         background-color: var(--brush-yellow-dark);
-        border-color: var(--brush-yellow-dark);
+      }
+    }
+  }
+
+  .wpcf7 {
+    &-form-control:not(.wpcf7-submit) {
+      background-color: var(--brush-gray-light);
+      border-color: var(--brush-gray-light);
+      color: var(--brush-black);
+
+      &:hover {
+        background-color: var(--brush-yellow-light);
+        border-color: var(--brush-yellow-light);
+      }
+
+      &::placeholder {
+        color: var(--brush-gray);
       }
     }
   }
 }
+
+.bireysel {
+  .adimlar {
+    $colors: (
+      var(--brush-green-light),
+      var(--brush-yellow-light),
+      var(--brush-blue-light),
+      var(--brush-gray)
+    );
+
+    @for $i from 1 through length($colors) {
+      .wp-block-button:nth-of-type(#{$i}) {
+        $color: nth($colors, $i);
+
+        a {
+          background-color: #{$color};
+          border-color: #{$color};
+        }
+
+        &:after {
+          background-color: #{$color};
+        }
+      }
+    }
+  }
+}
+
+article.hizmetlerim {
+  .wp-block-column {
+    &:hover {
+      background-color: var(--brush-yellow-light);
+    }
+  }
+}
+
+/// REACT COMPONENTS
 
 /**
 Mobile sized desktop menu-container scrollbar
@@ -181,64 +292,4 @@ Mobile sized desktop menu-container scrollbar
       }
     }
   }
-}
-
-/**
-Contact page
-*/
-article.iletisim {
-  .wp-block-column {
-    background-color: var(--brush-gray-light);
-
-    .contact-links__form,
-    .contact-links__social > div > * {
-      background-color: var(--brush-green-light);
-
-      &:hover {
-        background-color: var(--brush-yellow-dark);
-      }
-    }
-  }
-
-  .wpcf7 {
-    &-form-control {
-      background-color: var(--brush-gray-light);
-      border-color: var(--brush-gray-light);
-      color: var(--brush-black);
-
-      &:hover {
-        background-color: var(--brush-yellow-light);
-        border-color: var(--brush-yellow-light);
-      }
-
-      &::placeholder {
-        color: var(--brush-gray);
-      }
-    }
-
-    &-submit {
-      background-color: var(--brush-yellow-dark);
-      border-color: var(--brush-yellow-dark);
-    }
-  }
-}
-
-/**
-Contact form
-*/
-.form-error-message {
-  color: var(--brush-red-dark);
-  background-color: var(--brush-red-light);
-}
-
-.mail_sent {
-  color: var(--brush-green-dark);
-  background-color: var(--brush-green-light);
-  border-color: var(--brush-green-dark);
-}
-
-.validation_failed {
-  color: var(--brush-red-dark);
-  border-color: var(--brush-red-dark);
-  background-color: var(--brush-red-light);
 }
