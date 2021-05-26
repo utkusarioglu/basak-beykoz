@@ -13,6 +13,7 @@ import LoaderMobileMenuView from '../loader-mobile-menu/LoaderMobileMenu.view';
 import { GrClose } from 'react-icons/gr';
 import { ErrorBoundary } from 'react-error-boundary';
 import ErrorBoundaryLazyView from '../error-fallback-lazy/ErrorFallbackLazy.view';
+import { useResponsiveWidth } from '../../../utils/responsive.util';
 
 interface MobileMenuContainerViewProps {
   menuStateSelector: (state: any) => boolean;
@@ -24,6 +25,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
   menuStateSetter: closer,
   children,
 }) => {
+  const isW = useResponsiveWidth();
   const menuOpen = useSelector(selector);
 
   if (!menuOpen) {
@@ -47,10 +49,9 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
 
       <button
         onClick={() => closer(false)}
+        className="has-responsive-right-for-blocks"
         style={{
           position: 'fixed',
-          top: 'var(--sp)',
-          right: 'var(--sp)',
           backgroundColor: 'var(--brush-white)',
           borderRadius: '50%',
           border: 0,
@@ -59,31 +60,52 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           height: 32,
           zIndex: 110,
           display: 'grid', // fixes centering issues
+          top: 'var(--sp)',
+
+          ...(isW.xs && {
+            top: 'calc(var(--sp) * 1.5)',
+          }),
+
+          ...(isW.sm && {
+            top: 'calc(var(--sp) * 2)',
+          }),
         }}
       >
         <GrClose size={16} style={{ color: 'var(--brush-black)' }} />
       </button>
 
       <div
+        className={[
+          'has-responsive-right-for-blocks',
+          'has-responsive-border-radius',
+        ].join(' ')}
         style={{
           position: 'fixed',
           bottom: `calc(var(--height-header-mobile) - ${MENU_VERTICAL_DECORATION_HEIGHT})`,
           minWidth: 190,
           maxWidth: 'calc(100vw - var(--sp) * 2)',
-          right: 'var(--sp)',
-          borderRadius: 'var(--sp)',
           backgroundColor: MENU_DECORATION_COLOR,
           minHeight: 50,
           zIndex: 115,
         }}
       >
         <div
+          className="has-responsive-border-radius"
           style={{
             backgroundColor: MENU_BG_COLOR,
-            borderRadius: 'var(--sp)',
+            minHeight: '2em',
             marginTop: 'var(--sp)',
             marginBottom: 'var(--sp)',
-            minHeight: '2em',
+
+            ...(isW.xs && {
+              marginTop: 'calc(var(--sp) * 1.5)',
+              marginBottom: 'calc(var(--sp) * 1.5)',
+            }),
+
+            ...(isW.sm && {
+              marginTop: 'calc(var(--sp) * 2)',
+              marginBottom: 'calc(var(--sp) * 2)',
+            }),
           }}
         >
           <div
@@ -99,7 +121,7 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
              *
              * Note that the average size desktop will never have any need for
              * this component at all, as the app will switch to desktop layout
-             * over 800px width
+             * at `lg` breakpoint
              */
             className="mobile-menu-container__content-wrapper"
             style={{
@@ -118,6 +140,10 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
       </div>
 
       <div
+        className={[
+          'has-responsive-border-radius',
+          'has-responsive-horizontal-margin-for-blocks',
+        ].join(' ')}
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -127,10 +153,8 @@ const MobileMenuContainerView: FC<MobileMenuContainerViewProps> = ({
           height: 'var(--height-header-mobile)',
           backgroundColor: MENU_BG_COLOR,
           zIndex: 110,
-          marginRight: 'var(--sp)',
-          marginLeft: 'var(--sp)',
-          borderBottomLeftRadius: 'var(--sp)',
-          borderBottomRightRadius: 'var(--sp)',
+          borderTopRightRadius: 0,
+          borderTopLeftRadius: 0,
         }}
       >
         <MobileHeaderButtonsView />
