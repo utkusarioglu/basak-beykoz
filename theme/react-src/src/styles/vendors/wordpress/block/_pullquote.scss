@@ -4,6 +4,7 @@
 .wp-block-pullquote {
   & blockquote {
     @include frame-rounded-padded;
+    @include smaller-fonts;
 
     margin: 0;
     margin-bottom: var(--sp);
@@ -13,10 +14,6 @@
       margin-top: 0;
       margin-bottom: var(--sp);
       font-size: 1.3em;
-    }
-
-    cite {
-      font-style: initial;
     }
 
     br {
