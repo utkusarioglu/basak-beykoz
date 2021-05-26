@@ -27,12 +27,13 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
 }) => {
   const urlfulSlug = urlSlug(slug);
   const location = useLocation();
-  let [hovered, setHovered] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const hasChildren = child_items && child_items.length > 0;
   const isActive = urlfulSlug === location.pathname;
 
   return (
     <div
+      // This div is for the parent + the children
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -43,8 +44,24 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
           backgroundColor: hovered ? MENU_ITEM_HOVERED_COLOR : 'transparent',
           borderTopLeftRadius: MENU_BORDER_RADIUS,
           borderTopRightRadius: MENU_BORDER_RADIUS,
-          borderBottomRightRadius: hasChildren ? 0 : MENU_BORDER_RADIUS,
-          borderBottomLeftRadius: hasChildren ? 0 : MENU_BORDER_RADIUS,
+
+          ...(!depth && {
+            display: 'grid',
+            alignContent: 'center',
+            minHeight: 'var(--height-header-desktop-min)',
+            maxHeight: 'var(--height-header-desktop-max)',
+            height: 'var(--height-header-desktop-responsive)',
+          }),
+
+          ...(hasChildren
+            ? {
+                borderBottomRightRadius: 0,
+                borderBottomLeftRadius: 0,
+              }
+            : {
+                borderBottomRightRadius: MENU_BORDER_RADIUS,
+                borderBottomLeftRadius: MENU_BORDER_RADIUS,
+              }),
         }}
       >
         <LinkPreloaderView to={urlfulSlug} style={{ textDecoration: 'none' }}>
@@ -52,11 +69,10 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
             style={{
               width: 'max-content',
               position: 'relative',
-              marginLeft:
-                depth > 1
-                  ? `calc(${DESKTOP_MENU_ITEM_HORIZONTAL_SPACING} * ${depth})`
-                  : DESKTOP_MENU_ITEM_HORIZONTAL_SPACING,
               marginRight: DESKTOP_MENU_ITEM_HORIZONTAL_SPACING,
+              marginLeft: `calc(${DESKTOP_MENU_ITEM_HORIZONTAL_SPACING} * ${
+                !depth ? 1 : depth
+              })`,
             }}
           >
             {isActive && <ActiveIndicatorView depth={depth} />}
@@ -64,8 +80,16 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
             <h4
               style={{
                 position: 'relative',
-                marginTop: depth > 0 ? MENU_ITEM_VERTICAL_SPACING_DEEP : '',
-                marginBottom: depth > 0 ? MENU_ITEM_VERTICAL_SPACING_DEEP : '',
+
+                ...(depth > 0
+                  ? {
+                      marginTop: MENU_ITEM_VERTICAL_SPACING_DEEP,
+                      marginBottom: MENU_ITEM_VERTICAL_SPACING_DEEP,
+                    }
+                  : {
+                      marginTop: '',
+                      marginBottom: '',
+                    }),
               }}
             >
               {title}
@@ -89,7 +113,7 @@ export const NavDesktopItemView: FC<NavDesktopItemViewProps> = ({
       </div>
 
       {hovered && hasChildren && (
-        <NavDesktopChildItemsView children={child_items} depth={depth + 1} />
+        <NavDesktopChildItemsView children={child_items} depth={++depth} />
       )}
     </div>
   );
