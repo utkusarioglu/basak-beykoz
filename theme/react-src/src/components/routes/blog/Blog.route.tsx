@@ -21,7 +21,7 @@ const BlogRoute = () => {
         </title>
       </Helmet>
       <StandardLayout
-        title="Blog"
+        title={routeTitle}
         thumbnailUrl="/wp-content/uploads/yazilar-feature-image.jpg"
       >
         <ErrorBoundary FallbackComponent={ErrorFallbackView}>
