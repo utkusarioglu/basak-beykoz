@@ -6,13 +6,17 @@
   --sp * 2 is for creating some margins on top and bottom of the li,
   --height-header-mobile is for accounting for the mobile header
 
-  ! 85% is a magic number derived from iphone 5 screen size, as the 
+  ! 80% is a magic number derived from iphone 5 screen size, as the 
   smallest actively used phone.
   */
-  $list-height: calc(85vh - var(--sp) * 2 - var(--height-header-mobile));
+  $list-height: calc(80vh - var(--sp) * 2 - var(--height-header-mobile));
+  $list-min-height: 400px;
 
   height: #{$list-height} !important;
+  min-height: #{$list-min-height};
+
   width: 100vw;
+  position: relative;
 
   .os-content {
     display: grid;
@@ -22,14 +26,25 @@
       $width: 70vw;
       $max-width: 300px;
 
+      @include responsive-border-radius;
+      @include responsive-margin-right-for-blocks;
+      @include smaller-fonts;
+      /** 
+      This next one has a counterpart in 
+      `wp-block-latest-posts__featured-image`. Change these in tandem
+       */
+      @include responsive-prop-w(
+        max-width,
+        300px,
+        (($w-lg, 0, 350px), ($w-xl, 0, 400px))
+      );
+
       display: grid;
       grid-template-areas: 'thumbnail' 'title' 'content';
       cursor: pointer;
       height: #{$list-height};
+      min-height: #{$list-min-height};
       width: #{$width};
-      max-width: #{$max-width};
-      margin-right: var(--sp);
-      border-radius: var(--sp);
       background-color: var(--brush-gray-light);
       position: relative;
 
@@ -39,16 +54,25 @@
       align-content: start;
 
       .wp-block-latest-posts__featured-image {
+        @include responsive-border-radius;
+        @include responsive-margin-bottom-for-blocks;
+        @include responsive-margin-top-for-blocks;
+        /** 
+        This next one has a counterpart in `li`, the parent of this. 
+        Change these in tandem
+        */
+        @include responsive-prop-w(
+          max-width,
+          300px,
+          (($w-lg, 0, 350px), ($w-xl, 0, 400px))
+        );
+
         grid-area: thumbnail;
-        margin-top: var(--sp);
-        margin-bottom: var(--sp);
-        border-radius: var(--sp);
         overflow: hidden;
         width: #{$width};
-        max-width: #{$max-width};
 
         height: 50vw;
-        max-height: 200px;
+        max-height: 150px;
 
         img {
           width: 100%;
@@ -59,21 +83,21 @@
       }
 
       a {
-        @include enable-horizontal-padding;
+        @include responsive-horizontal-padding-for-blocks;
+        @include responsive-margin-bottom-for-blocks;
 
         grid-area: title;
-        margin-bottom: var(--sp);
         text-decoration: none;
       }
 
       .wp-block-latest-posts__post-full-content {
-        @include enable-horizontal-padding;
+        @include responsive-horizontal-padding-for-blocks;
+        @include responsive-margin-bottom-for-blocks;
 
         grid-area: content;
         overflow: hidden;
         height: auto;
         overflow: hidden;
-        margin-bottom: var(--sp);
         position: relative;
 
         &::after {
@@ -92,20 +116,19 @@
 
         p {
           margin-top: 0;
-          margin-bottom: 1em;
         }
       }
 
       &:first-of-type {
-        margin-left: var(--sp);
+        @include responsive-margin-left-for-blocks;
       }
 
       &:last-of-type::after {
+        @include responsive-right-shim;
+
         content: '';
         position: absolute;
-        width: var(--sp);
         height: 1px;
-        right: calc(var(--sp) * -1);
         bottom: 0;
       }
     }
