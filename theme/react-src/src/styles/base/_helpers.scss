@@ -30,3 +30,47 @@
 .grid-area--text {
   grid-area: text;
 }
+
+/// The classes below create hooks for react components to adopt
+/// css responsive declarations instead of creating their own
+/// Please refer to mixins module for documentation for these.
+
+.has-responsive-horizontal-padding-for-blocks {
+  @include responsive-horizontal-padding-for-blocks;
+}
+
+.has-responsive-vertical-padding-for-blocks {
+  @include responsive-vertical-padding-for-blocks;
+}
+
+.has-responsive-horizontal-padding-for-sections {
+  @include responsive-horizontal-padding-for-sections;
+}
+
+.has-responsive-horizontal-padding-for-hero {
+  @include responsive-horizontal-padding-for-hero;
+}
+
+.has-responsive-right-for-blocks {
+  @include responsive-right-for-blocks;
+}
+
+.has-responsive-size-for-decoration-block {
+  @include responsive-size-for-decoration-block;
+}
+
+.has-responsive-border-radius {
+  @include responsive-border-radius;
+}
+
+.has-smaller-fonts {
+  @include smaller-fonts;
+}
+
+.has-smallest-fonts {
+  @include smallest-fonts;
+}
+
+.has-responsive-horizontal-margin-for-blocks {
+  @include responsive-horizontal-margin-for-blocks;
+}
