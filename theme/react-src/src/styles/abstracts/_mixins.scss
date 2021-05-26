@@ -8,14 +8,12 @@ from padding, meaning that thicker borders don't make the component bigger
 until the border thickness reaches `var(--sp)`.
 */
 @mixin frame-rounded-padded($border-width: 0px) {
-  padding: calc(var(--sp) - #{$border-width});
-  border-radius: var(--sp);
+  @include responsive-horizontal-padding-for-blocks($border-width);
+  @include responsive-vertical-padding-for-blocks($border-width);
+  @include responsive-border-radius;
+
   border-width: #{$border-width};
   border-style: solid;
-
-  @media screen and (min-width: 800px) {
-    padding: calc(var(--sp) * 2 - #{$border-width});
-  }
 }
 
 /**
@@ -27,15 +25,12 @@ from padding, meaning that thicker borders don't make the component bigger
 until the border thickness reaches `var(--sp)`.
 */
 @mixin frame-rounded-padded-thin($border-width: 0px) {
-  padding: calc(var(--sp) - #{$border-width});
-  border-radius: var(--sp);
+  @include responsive-horizontal-padding-for-blocks;
+  @include static-vertical-thin-padding;
+  @include responsive-border-radius;
+
   border-width: #{$border-width};
   border-style: solid;
-
-  @media screen and (min-width: 800px) {
-    padding: calc(var(--sp) - #{$border-width})
-      calc(var(--sp) * 2 - #{$border-width});
-  }
 }
 
 /**
@@ -50,14 +45,6 @@ Width returns to 100% on bigger screns
     margin-left: 0;
     width: 100%;
   }
-}
-
-/**
-Adds a standardized margin at the bottom of the 
-consuming blocks;
-*/
-@mixin block-margin-bottom {
-  margin-bottom: var(--sp);
 }
 
 /**
@@ -80,16 +67,29 @@ mixin creates these curved edges for the home page sections
 It's used for most sections and the second column in the hero section
 */
 @mixin section-top-decoration {
-  @include breakpoint-max-width($w-md) {
-    &:before {
-      content: '';
-      left: 0;
-      right: 0;
-      top: calc(var(--sp) * -1);
-      height: calc(var(--sp) * 2);
-      border-radius: var(--sp);
-      position: absolute;
-    }
+  &:before {
+    content: '';
+    left: 0;
+    right: 0;
+    position: absolute;
+
+    @include responsive-prop-w(
+      top,
+      calc(var(--sp) * -1),
+      (($w-xs, -1.5), ($w-sm, -2), ($w-md, -3))
+    );
+
+    @include responsive-prop-w(
+      height,
+      calc(var(--sp) * 2),
+      (($w-xs, 3), ($w-sm, 4), ($w-md, 6))
+    );
+
+    @include responsive-prop-w(
+      border-radius,
+      var(--sp),
+      (($w-xs, 1), ($w-sm, 2), ($w-md, 3))
+    );
   }
 }
 
@@ -105,29 +105,378 @@ art.
     left: var(--sp);
     right: var(--sp);
     bottom: var(--sp);
-    height: calc(#{$section-end-margin} - var(--sp) * 2);
     background: url($url);
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: bottom;
+
+    @include responsive-prop-w(
+      height,
+      calc(var(--sp) * 8),
+      (($w-xs, 10), ($w-sm, 11), ($w-md, 12))
+    );
+    @include responsive-prop-w(
+      bottom,
+      var(--sp),
+      (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3))
+    );
   }
 }
 
 /**
-Disables left and right paddings
+Disables left and right paddings for all breakpoints
 */
 @mixin disable-horizontal-padding {
-  padding-left: 0;
-  padding-right: 0;
+  @include disable-padding-left;
+  @include disable-padding-right;
 }
 
 /**
-Adds right and left padding with the standardized spacing --sp
+Sets padding-left: 0px on all breakpoints.
+This allows avoiding using !important on the tag
 */
-@mixin enable-horizontal-padding {
-  padding-left: var(--sp);
-  padding-right: var(--sp);
+@mixin disable-padding-left {
+  @include responsive-prop-w(
+    padding-left,
+    0,
+    (($w-xs, 0), ($w-sm, 0), ($w-md, 0), ($w-lg, 0), ($w-xl, 0), ($w-xxl, 0))
+  );
+}
+
+/**
+Sets padding-right: 0px on all breakpoints.
+This allows avoiding using !important on the tag
+*/
+@mixin disable-padding-right {
+  @include responsive-prop-w(
+    padding-right,
+    0,
+    (($w-xs, 0), ($w-sm, 0), ($w-md, 0), ($w-lg, 0), ($w-xl, 0), ($w-xxl, 0))
+  );
+}
+
+/**
+Adds right and left padding with the standardized, responsive spacing
+*/
+@mixin responsive-horizontal-padding-for-blocks($border-width: 0px) {
+  @include responsive-padding-left($border-width);
+  @include responsive-padding-right($border-width);
+}
+
+/**
+Adds right and left padding with the standardized, responsive spacing
+
+@remarks
+The difference between this and `responsive-horizontal-padding` is that this one
+scales with `vw` after `$-lg`
+*/
+@mixin responsive-horizontal-padding-for-sections($border-width: 0px) {
+  @include responsive-padding-left-for-sections($border-width);
+  @include responsive-padding-right-for-sections($border-width);
+}
+
+/**
+Adds right and left padding with the standardized, responsive spacing
+
+@remarks
+The difference between this and `responsive-horizontal-padding` is that this one
+scales with `vw` after `$-lg`
+*/
+@mixin responsive-horizontal-padding-for-hero($border-width: 0px) {
+  @include responsive-padding-left-for-hero($border-width);
+  @include responsive-padding-right-for-hero($border-width);
+}
+
+/**
+Sets a standardized padding-left
+*/
+@mixin responsive-padding-left($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-left,
+    calc(var(--sp) - #{$border-width}),
+    (
+      ($w-xs, 1.5, $border-width),
+      ($w-sm, 2, $border-width),
+      ($w-md, 3, $border-width)
+    )
+  );
+}
+
+/**
+Sets a standardized padding-left for page content
+
+@remarks
+The difference between this and `responsive-padding-left` is that this one
+scales with `vw` after `$-lg`
+*/
+@mixin responsive-padding-left-for-sections($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-left,
+    calc(var(--sp) - #{$border-width}),
+    (
+      ($w-xs, 1.5, $border-width),
+      ($w-sm, 2, $border-width),
+      ($w-md, 3, $border-width),
+      ($w-lg, var(--w-lg-sections-horizontal-padding), $border-width, false),
+      ($w-xl, var(--w-xl-sections-horizontal-padding), $border-width, false)
+    )
+  );
+}
+
+/**
+Sets a standardized padding-left for page content
+
+@remarks
+The difference between this and `responsive-padding-left` is that this one
+scales with `vw` after `$-lg`
+*/
+@mixin responsive-padding-left-for-hero($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-left,
+    calc(var(--sp) - #{$border-width}),
+    (
+      ($w-xs, 1.5, $border-width),
+      ($w-sm, 2, $border-width),
+      ($w-md, 3, $border-width),
+      ($w-lg, var(--w-lg-hero-horizontal-padding), $border-width, false),
+      ($w-xl, var(--w-xl-hero-horizontal-padding), $border-width, false)
+    )
+  );
+}
+
+/**
+Sets a standardized padding-right
+*/
+@mixin responsive-padding-right($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-right,
+    calc(var(--sp) - #{$border-width}),
+    (
+      ($w-xs, 1.5, $border-width),
+      ($w-sm, 2, $border-width),
+      ($w-md, 3, $border-width)
+    )
+  );
+}
+
+/**
+Sets a standardized padding-left for page content
+
+@remarks
+The difference between this and `responsive-padding-right` is that this one
+scales with `vw` after `$-lg`
+*/
+@mixin responsive-padding-right-for-sections($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-right,
+    calc(var(--sp) - #{$border-width}),
+    (
+      ($w-xs, 1.5, $border-width),
+      ($w-sm, 2, $border-width),
+      ($w-md, 3, $border-width),
+      ($w-lg, var(--w-lg-sections-horizontal-padding), $border-width, false),
+      ($w-xl, var(--w-xl-sections-horizontal-padding), $border-width, false)
+    )
+  );
+}
+
+/**
+Sets a standardized padding-left for page content
+
+@remarks
+The difference between this and `responsive-padding-right` is that this one
+scales with `vw` after `$-lg`
+*/
+@mixin responsive-padding-right-for-hero($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-right,
+    calc(var(--sp) - #{$border-width}),
+    (
+      ($w-xs, 1.5, $border-width),
+      ($w-sm, 2, $border-width),
+      ($w-md, 3, $border-width),
+      ($w-lg, var(--w-lg-hero-horizontal-padding), $border-width, false),
+      ($w-xl, var(--w-xl-hero-horizontal-padding), $border-width, false)
+    )
+  );
+}
+
+/**
+Adds top and bottom padding with the standardized, responsive spacing
+*/
+@mixin responsive-vertical-padding-for-blocks($border-width: 0px) {
+  @include responsive-padding-top-for-blocks($border-width);
+  @include responsive-padding-bottom-for-blocks($border-width);
+}
+
+/**
+Sets a standardized padding-top
+*/
+@mixin responsive-padding-top-for-blocks($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-top,
+    calc(var(--sp) - #{$border-width}),
+    (($w-xs, 1.5, $border-width), ($w-sm, 2, $border-width))
+  );
+}
+
+/**
+Sets a standardized padding-bottom
+*/
+@mixin responsive-padding-bottom-for-blocks($border-width: 0px) {
+  @include responsive-prop-w(
+    padding-bottom,
+    calc(var(--sp) - #{$border-width}),
+    (($w-xs, 1.5, $border-width), ($w-sm, 2, $border-width))
+  );
+}
+
+/**
+Adds bottom responsive margin
+This is used in places where setting a margin causes issues
+*/
+@mixin responsive-margin-bottom-for-blocks {
+  @include responsive-prop-w(
+    margin-bottom,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3))
+  );
+}
+
+/**
+Adds bottom responsive margin compatible with section spacing
+This is used in places where setting a margin causes issues
+*/
+@mixin responsive-margin-bottom-for-sections {
+  @include responsive-prop-w(
+    margin-bottom,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 6), ($w-lg, 10))
+  );
+}
+
+/**
+Adds top responsive margin
+This is used in places where setting a margin causes issues
+*/
+@mixin responsive-margin-top-for-blocks {
+  @include responsive-prop-w(margin-top, var(--sp), (($w-xs, 1.5), ($w-sm, 2)));
+}
+
+/**
+Adds right responsive margin
+This is used in places where setting a margin causes issues
+*/
+@mixin responsive-margin-right-for-blocks {
+  @include responsive-prop-w(
+    margin-right,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3))
+  );
+}
+
+/**
+Adds right responsive margin
+This is used in places where setting a margin causes issues
+*/
+@mixin responsive-margin-left-for-blocks {
+  @include responsive-prop-w(
+    margin-left,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3))
+  );
+}
+
+/**
+Adds responsive right and left margins for blocks
+*/
+@mixin responsive-horizontal-margin-for-blocks {
+  @include responsive-margin-left-for-blocks;
+  @include responsive-margin-right-for-blocks;
+}
+
+/**
+Adds top and bottom padding that doesn't respond to screen size
+*/
+@mixin static-vertical-thin-padding {
+  padding-top: var(--sp);
+  padding-bottom: var(--sp);
+}
+
+/**
+Sets border radius that is equivalent to the responsive padding
+*/
+@mixin responsive-border-radius {
+  @include responsive-prop-w(
+    border-radius,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2))
+  );
+}
+
+/**
+Sets border radius only for the top right corner
+
+@remarks
+Currently this is only used by the hero cover image
+If the usage of this method goes more commonplace, please create
+the conjugates of this for other corners and convert `responsive-border-radius`
+to consume these.
+*/
+@mixin responsive-border-top-right-radius {
+  @include responsive-prop-w(
+    border-top-right-radius,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2))
+  );
+}
+
+/**
+Sets column gap that responds with the same size as the responsive padding
+*/
+@mixin responsive-column-gap-for-blocks {
+  @include responsive-prop-w(
+    column-gap,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3))
+  );
+}
+
+/**
+Sets column gap that is compatible with home page section spacing
+*/
+@mixin responsive-column-gap-for-sections {
+  @include responsive-prop-w(
+    column-gap,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3), ($w-lg, 5vw, 0px, false))
+  );
+}
+
+/**
+Sets row gap that responds with the same size as the responsive padding
+*/
+@mixin responsive-row-gap {
+  @include responsive-prop-w(row-gap, var(--sp), (($w-xs, 1.5), ($w-sm, 2)));
+}
+
+/**
+Sets a unit width that enlarges with the same behavior as 
+responsive padding
+*/
+@mixin responsive-right-shim {
+  @include responsive-prop-w(
+    right,
+    calc((var(--sp) * -1)),
+    (($w-xs, -1.5), ($w-sm, -2), ($w-md, -3))
+  );
+
+  @include responsive-prop-w(
+    width,
+    var(--sp),
+    (($w-xs, 1), ($w-sm, 1.5), ($w-md, 3))
+  );
 }
 
 /**
@@ -146,4 +495,206 @@ Includes a media query for a max-width
   @media all and (max-width: #{$max-width}) {
     @content;
   }
+}
+
+/**
+Reduces the size of the fonts within scope to 90%
+*/
+@mixin smaller-fonts {
+  font-size: 0.9em;
+}
+
+/**
+Reduces the size of the fonts within scope to 70%
+*/
+@mixin smallest-fonts {
+  font-size: 0.7em;
+}
+
+/**
+Sets a value for a given property at the given min width breakpoint
+The method uses var(--sp) for unit spacing, multiplies this with $multiplier 
+and adds the $offset to this value before assigning it to the $property
+
+@param $breakpoint - width breakpoint for the assignment
+@param $property - name of the property. ex: `padding-left`
+@param $multiplier - multiplication factor with the unit spacing `--sp`
+@param $offset - a fixed value to add to the product of `--sp` and 
+`$multiplier`. This is useful for reserving fixed size for elements such
+as borders.
+*/
+@mixin prop-breakpoint-w(
+  $breakpoint,
+  $property,
+  $multiplier: 1,
+  $offset: 0px,
+  $use-sp: true
+) {
+  @include breakpoint-min-width($breakpoint) {
+    @if $multiplier == 0 {
+      #{$property}: #{$offset};
+    } @else if $use-sp {
+      #{$property}: calc(var(--sp) * #{$multiplier} + #{$offset});
+    } @else {
+      #{$property}: calc(#{$multiplier} + #{$offset});
+    }
+  }
+}
+
+/**
+Sets a series of values for a prop at given breakpoints for width
+
+@param $property - the name of the property ex: `padding-left`
+@param $start - start value for the prop, before all the min-width 
+breakpoints. Setting `false` to this will tell the method that there is no
+start value for this prop; only the `$breakpoints` values will be assigned.
+@param $breakpoints - list of breakpoints along with the value assignments
+
+@example
+```sass
+@include responsive-prop-w(padding-left, 10px, (600px, 15px), (1000px, 10vw)))
+```  
+In this example, we are defining a `padding-left: 10px` for smallest screens.
+This value will be replaced by `15px` when the screen width passes `600px`
+and that will be replaced by `10vw` when the screen width passes `1000px`
+*/
+@mixin responsive-prop-w($property, $start: false, $breakpoints: list()) {
+  @if ($start != false) {
+    #{$property}: $start;
+  }
+
+  @if (length($breakpoints) > 0) {
+    @each $set in $breakpoints {
+      $breakpoint: nth($set, 1);
+      $multiplier: 1;
+      $offset: 0px;
+      $use-sp: true;
+
+      @if length($set) > 3 {
+        $use-sp: nth($set, 4);
+      }
+
+      @if length($set) > 2 {
+        $offset: nth($set, 3);
+      }
+
+      @if length($set) > 1 {
+        $multiplier: nth($set, 2);
+      }
+
+      @include prop-breakpoint-w(
+        $breakpoint,
+        $property,
+        $multiplier,
+        $offset,
+        $use-sp
+      );
+    }
+  }
+}
+
+/**
+Adds linear gradients to before and after of the wp latest posts block
+*/
+@mixin wp-block-latest-posts-edge-decoration(
+  $edge-color,
+  $half-transparent-color,
+  $transparent-color
+) {
+  &::before {
+    z-index: 10;
+    content: '';
+    position: absolute;
+    width: calc(var(--sp) * 2);
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      #{$edge-color},
+      #{$half-transparent-color} 40%,
+      #{$transparent-color}
+    );
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    z-index: 10;
+    content: '';
+    position: absolute;
+    width: calc(var(--sp) * 2);
+    height: 100%;
+    background: linear-gradient(
+      to left,
+      #{$edge-color},
+      #{$half-transparent-color} 40%,
+      #{$transparent-color}
+    );
+    top: 0;
+    right: 0;
+  }
+}
+
+/**
+Attach a hover color to wp-block-latest-posts in scope
+*/
+@mixin wp-block-latest-posts-hover-color($color-base) {
+  .wp-block-latest-posts {
+    .os-content {
+      li {
+        &:hover {
+          background-color: var(#{$color-base});
+
+          .wp-block-latest-posts__post-full-content {
+            &::after {
+              background: linear-gradient(
+                to bottom,
+                var(#{$color-base}-transparent),
+                var(#{$color-base})
+              );
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/**
+There are a few different blocks that act like buttons while having
+varying different structures. @extend button causes issues with
+js governed button elements.
+
+including this mixin in button-like components allows uniform 
+button look while avoiding clashes with react elements.
+*/
+@mixin button-colors {
+  background-color: var(--brush-yellow-dark);
+  border-color: var(--brush-yellow-dark);
+  color: var(--brush-black);
+
+  &:hover {
+    background-color: var(--brush-green-dark) !important;
+    border-color: var(--brush-green-dark) !important;
+    color: var(--brush-white) !important;
+  }
+}
+
+/**
+Creates responsive `right` prop for absolute and fixed blocks
+*/
+@mixin responsive-right-for-blocks {
+  @include responsive-prop-w(
+    right,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3))
+  );
+}
+
+/**
+Unit width and height dictated by --sp and responsive convention used 
+by this app, which is centered around the padding values in this mixin module
+*/
+@mixin responsive-size-for-decoration-block {
+  @include responsive-prop-w(width, var(--sp), (($w-xs, 1.5), ($w-sm, 2)));
+  @include responsive-prop-w(height, var(--sp), (($w-xs, 1.5), ($w-sm, 2)));
 }
