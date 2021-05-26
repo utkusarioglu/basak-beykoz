@@ -4,13 +4,14 @@
 /// themed in _default.scss
 .wp-block-gallery {
   @include edge-to-edge;
-  @include block-margin-bottom;
+  @include responsive-margin-bottom-for-blocks;
 
   overflow-x: scroll;
   overflow-y: hidden;
 
   @include breakpoint-min-width(#{$w-md}) {
     overflow-x: hidden;
+    // ! this is not standard responsive behavior for this app
     border-radius: var(--sp);
   }
 
@@ -59,7 +60,6 @@
       figcaption {
         position: absolute;
         bottom: 0;
-        color: white;
         margin-left: var(--sp);
         margin-top: 0;
         margin-bottom: var(--sp);
