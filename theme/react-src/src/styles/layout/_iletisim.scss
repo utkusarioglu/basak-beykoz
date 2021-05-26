@@ -1,6 +1,14 @@
 @import '../abstracts/mixins';
 
 article.iletisim {
+  .wp-block-columns {
+    @include responsive-margin-bottom-for-sections;
+
+    @include breakpoint-min-width($w-md) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
   .wp-block-column {
     @include frame-rounded-padded;
 
@@ -13,7 +21,7 @@ article.iletisim {
     This section uses a react component tree rendered to text.
     */
     .contact-links__social {
-      @include block-margin-bottom;
+      @include responsive-margin-bottom-for-blocks;
 
       /**
       This classless div is where the react component render starts.
@@ -32,7 +40,8 @@ article.iletisim {
           }
 
           & a {
-            padding: var(--sp);
+            // unset padding from react component
+            padding: 0 !important;
 
             & svg {
               width: 40px;
@@ -71,7 +80,11 @@ article.iletisim {
       background-repeat: no-repeat;
       background-position: center;
       background-size: 90%;
-      min-height: 90vw;
+      height: 200px; //! magic: this height looks good
+
+      @include breakpoint-min-width($w-md) {
+        height: 100%;
+      }
 
       .contact-earth {
         text-align: center;
