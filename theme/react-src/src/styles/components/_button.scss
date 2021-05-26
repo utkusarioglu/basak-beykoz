@@ -2,5 +2,7 @@
 
 /// themed in _default.scss
 button {
-  @include frame-rounded-padded-thin(3px);
+  @include frame-rounded-padded(3px);
+
+  cursor: pointer;
 }
