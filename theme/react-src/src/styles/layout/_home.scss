@@ -2,22 +2,38 @@
 @import '../abstracts/sass-vars';
 
 $hero-image-height-mobile: 60vh;
-$section-end-margin: calc(var(--sp) * 10);
 
 .home-section {
-  @include enable-horizontal-padding;
+  @include responsive-horizontal-padding-for-sections;
+  @include responsive-prop-w(
+    padding-top,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3), ($w-lg, 10vh, 0px, false))
+  );
 
-  padding-top: var(--sp);
-  padding-bottom: #{$section-end-margin};
+  @include responsive-prop-w(
+    padding-bottom,
+    calc(var(--sp) * 12),
+    (($w-xs, 14), ($w-sm, 16), ($w-md, 18), ($w-lg, 22))
+  );
 
   min-height: 100%;
   margin-bottom: 0;
   position: relative;
 
   h2 {
-    margin-top: var(--sp);
     text-align: center;
-    margin-bottom: calc(var(--sp) * 2);
+
+    @include breakpoint-min-width($w-md) {
+      /**
+      this balances whitespace around the content
+      and the section coming before
+      the reason for this is `section-top-decoration`
+      introducing some extra whitespace
+      */
+      margin-bottom: 1.6em;
+      text-align: left;
+    }
   }
 
   ul {
@@ -32,6 +48,20 @@ $section-end-margin: calc(var(--sp) * 10);
   p {
     margin-top: 0;
   }
+
+  .wp-block-cover {
+    height: 80vw;
+    max-height: 250px;
+
+    .wp-block-cover__inner-container {
+      display: none;
+    }
+
+    @include breakpoint-min-width($w-md) {
+      max-height: none;
+      height: 100%;
+    }
+  }
 }
 
 .home-section__hero {
@@ -40,58 +70,174 @@ $section-end-margin: calc(var(--sp) * 10);
   /// remove padding and margins for the image to appear edge to edge
   margin-top: calc(var(--sp) * -1);
   padding-top: 0;
-
   grid-template-areas:
     'image'
     'text';
-
   /// undoes the wp-block-columns gap
   grid-row-gap: 0;
 
+  @include breakpoint-min-width($w-md) {
+    /// undoes the wp-block-columns gap
+    grid-column-gap: 0;
+    margin-top: 0;
+
+    /** 
+    --sp * 3 comes from the curved top of the next section 
+    because this height assertion is introduced at the last breakpoint
+    where the top and bottom paddings change, there is no need to make
+    this value responsive.
+    */
+    height: calc(100vh + var(--sp) * 3);
+
+    grid-template-areas: 'image text';
+    padding-bottom: 0; /// undoes home-section setting
+  }
+
+  @include breakpoint-min-width($w-lg) {
+    @include responsive-border-top-right-radius;
+
+    grid-template-areas:
+      'shim shim'
+      'image text';
+    grid-template-rows: auto 1fr;
+
+    &::before {
+      grid-area: shim;
+      content: '';
+      display: block;
+      width: 100%;
+      min-height: var(--height-header-desktop-min);
+      max-height: var(--height-header-desktop-max);
+      height: var(--height-header-desktop-responsive);
+      background-color: var(--brush-white);
+    }
+  }
+
   .grid-area--image {
+    $desktop-width: 45vw;
+
+    position: relative;
+
+    @include breakpoint-min-width($w-md) {
+      width: #{$desktop-width};
+    }
+
     .wp-block-cover {
+      // undo max height setting by .home-section
+      max-height: none;
       margin: 0;
       border-radius: 0;
       height: 60vh;
       width: 100vw;
 
-      .wp-block-cover__inner-container {
-        display: none;
+      @include breakpoint-min-width($w-md) {
+        height: 100%;
+        width: #{$desktop-width};
+      }
+
+      @include breakpoint-min-width($w-lg) {
+        @include responsive-border-top-right-radius;
       }
     }
   }
 
   .grid-area--text {
-    @include section-top-decoration;
-    @include enable-horizontal-padding;
+    $max-width-until-w-md: 450px;
+
+    @include responsive-horizontal-padding-for-hero;
 
     /// these two are for the top decoration to work;
     overflow: visible;
     position: relative;
 
+    @include breakpoint-min-width($w-md) {
+      display: grid;
+      align-content: center;
+    }
+
+    /**
+    Section top decoration is disabled for this section because above this height,
+    the placement of the cover image changes and this removes the need for this
+    element
+    */
+    @include breakpoint-max-width($w-md) {
+      @include section-top-decoration;
+    }
+
+    & > * {
+      @include responsive-prop-w(
+        margin-bottom,
+        calc(var(--sp) * 2),
+        (($w-md, 4), ($w-lg, 5))
+      );
+
+      @include breakpoint-max-width($w-md) {
+        max-width: #{$max-width-until-w-md};
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
     & .hero-title {
-      min-height: 20vw; // !magic, comes from the aspect ratio of the image plus some safety margins
+      /**
+      TODO the svg file has some issues, which causes the top of the image to
+      crop on when the height is lowered. This should be fixed.
+      */
       width: 100%;
+      height: calc(24vw - var(--sp) * 2);
+      max-height: 95px;
+
       background: url('../../static/hero.svg');
-      background-position: bottom center;
+      background-position-y: bottom;
+      background-position-x: center;
       background-repeat: no-repeat;
       background-size: contain;
-      margin-bottom: calc(var(--sp) * 2);
+
+      @include breakpoint-min-width($w-md) {
+        background-position-x: left;
+      }
+
+      @include breakpoint-min-width($w-lg) {
+        max-height: 7vw;
+      }
+    }
+
+    & p {
+      @include responsive-prop-w(
+        font-size,
+        false,
+        (($w-md, 0, 1.1em), ($w-lg, 0, 1.2em))
+      );
+    }
+
+    & .wp-block-buttons {
+      @include breakpoint-min-width($w-md) {
+        & a {
+          padding-top: calc(var(--sp) * 2);
+          padding-bottom: calc(var(--sp) * 2);
+          padding-left: calc(var(--sp) * 4);
+          padding-right: calc(var(--sp) * 4);
+        }
+      }
     }
   }
 }
 
 .home-section__hello {
   @include section-top-decoration;
+  @include responsive-column-gap-for-sections;
+  @include section-art('../../static/conversation.svg');
+
+  /// undoes wp-block-columns styling
+  grid-row-gap: 0;
 
   grid-template-areas:
     'image'
     'text';
 
-  .grid-area--image {
-    .wp-block-cover {
-      height: 100vw;
-    }
+  @include breakpoint-min-width($w-md) {
+    grid-template-areas: 'text image';
+    grid-template-columns: 2fr 1fr;
   }
 
   /**
@@ -102,7 +248,6 @@ $section-end-margin: calc(var(--sp) * 10);
   works with the required width setting.
   */
   h2 {
-    margin-top: var(--sp);
     margin-left: auto;
     margin-right: auto;
     position: relative;
@@ -125,26 +270,31 @@ $section-end-margin: calc(var(--sp) * 10);
 }
 
 .home-section__how-can-i-help {
-  @include section-top-decoration();
+  @include section-top-decoration;
   @include section-art('../../static/city.svg');
 
   &__main {
+    @include responsive-column-gap-for-sections;
+    @include responsive-margin-bottom-for-sections;
+
     grid-template-areas:
       'image'
       'text';
     margin-bottom: calc(var(--sp) * 3);
+    grid-row-gap: 0;
 
-    .grid-area--image {
-      .wp-block-cover {
-        height: 100vw;
-      }
+    @include breakpoint-min-width($w-md) {
+      grid-template-areas: 'image text';
+      grid-template-columns: 1fr 2fr;
     }
 
     .grid-area--text {
-      ul {
-        li {
-          padding-left: 1em;
-          text-indent: -0.7rem;
+      .wp-block-column {
+        ul {
+          li {
+            padding-left: 1em;
+            text-indent: -0.7rem;
+          }
         }
 
         /**
@@ -163,34 +313,58 @@ $section-end-margin: calc(var(--sp) * 10);
         }
 
         /**
-        Applies the emojis for the first column
+        Applies the emojis for the columns
         */
         &:nth-of-type(1) {
           @include apply-emojis(('🍌', '🐱', '🌟', '💙'));
         }
-
-        /**
-        Applies the emojis for the second column.
-        */
         &:nth-of-type(2) {
           @include apply-emojis(('🦆', '☕', '🧠', '🙋‍♀️'));
         }
       }
     }
+
+    // "En cok kocluk sundugum alanlar"
+    .wp-block-columns {
+      grid-row-gap: 0; // columns have to appear merged in small screens
+
+      @include breakpoint-min-width(#{$w-sm}) {
+        grid-auto-flow: column;
+      }
+    }
   }
 
-  &__restart,
-  &__poy,
-  &__orsc {
-    grid-template-areas:
-      'image'
-      'text';
-    padding: var(--sp);
-    border-radius: var(--sp);
-    background-color: var(--brush-white);
+  .home-section__how-can-i-help__cards {
+    .wp-block-group__inner-container {
+      @include responsive-column-gap-for-sections;
+      @include responsive-column-gap-for-blocks;
 
-    p {
-      margin: 0;
+      @include breakpoint-min-width($w-md) {
+        display: grid;
+        grid-auto-flow: column;
+      }
+
+      .home-section__how-can-i-help__restart,
+      .home-section__how-can-i-help__poy,
+      .home-section__how-can-i-help__orsc {
+        @include frame-rounded-padded;
+        @include disable-horizontal-padding;
+        @include smaller-fonts;
+
+        grid-template-areas:
+          'image'
+          'text';
+        background-color: var(--brush-white);
+
+        p {
+          @include responsive-horizontal-padding-for-blocks;
+          margin: 0;
+        }
+
+        .wp-block-cover {
+          height: 100px;
+        }
+      }
     }
   }
 }
@@ -199,8 +373,31 @@ $section-end-margin: calc(var(--sp) * 10);
   @include section-top-decoration();
   @include section-art('../../static/success.svg');
   @include disable-horizontal-padding;
+  @include wp-block-latest-posts-hover-color(--brush-yellow-light);
+
+  @include breakpoint-min-width($w-md) {
+    @include responsive-horizontal-padding-for-sections;
+  }
+
+  h2 {
+    /// overrides .home-section setting
+    /// centered text looks better in all sizes for this section
+    text-align: center;
+
+    @include breakpoint-min-width($w-lg) {
+      margin-top: -0.5em;
+    }
+  }
 
   .wp-block-latest-posts {
+    @include breakpoint-min-width($w-md) {
+      @include wp-block-latest-posts-edge-decoration(
+        var(--brush-white),
+        var(--brush-white-half),
+        var(--brush-white-transparent)
+      );
+    }
+
     .os-content {
       li {
         grid-template-areas: 'thumbnail' 'content' 'title';
@@ -217,11 +414,24 @@ $section-end-margin: calc(var(--sp) * 10);
   @include section-top-decoration();
   @include section-art('../../static/conversation.svg');
   @include disable-horizontal-padding;
+  @include wp-block-latest-posts-hover-color(--brush-green-light);
 
   .wp-block-columns {
     grid-template-areas:
       'text'
       'feature';
+
+    @include breakpoint-min-width($w-md) {
+      @include responsive-horizontal-padding-for-sections;
+
+      grid-template-areas: 'text feature';
+      grid-template-columns: 1fr 1fr;
+      // grid-column-gap: 5vw;
+    }
+
+    @include breakpoint-min-width($w-xxl) {
+      grid-template-columns: 1fr 2fr;
+    }
 
     /**
     Padding in this section is disabled because of the latest posts block
@@ -230,13 +440,27 @@ $section-end-margin: calc(var(--sp) * 10);
     padding in order to apply the regular padding to rest of the elements.
     */
     .grid-area--text {
-      @include enable-horizontal-padding;
+      @include responsive-horizontal-padding-for-blocks;
     }
   }
 
   .wp-block-latest-posts {
+    @include breakpoint-min-width($w-md) {
+      @include wp-block-latest-posts-edge-decoration(
+        var(--brush-yellow-light),
+        var(--brush-yellow-light-half),
+        var(--brush-yellow-light-transparent)
+      );
+
+      height: 100% !important;
+    }
+
     .os-content {
       li {
+        @include breakpoint-min-width($w-md) {
+          height: 100%;
+        }
+
         a {
           font-weight: 600;
         }
@@ -250,4 +474,14 @@ $section-end-margin: calc(var(--sp) * 10);
   @include section-top-decoration;
 
   margin-bottom: 0;
+
+  h2 {
+    /// overrides .home-section setting
+    /// centered text looks better in all sizes for this section
+    text-align: center;
+
+    @include breakpoint-min-width($w-lg) {
+      margin-top: -0.5em;
+    }
+  }
 }
