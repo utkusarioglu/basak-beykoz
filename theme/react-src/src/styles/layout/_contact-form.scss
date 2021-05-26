@@ -6,8 +6,10 @@
     &__controls {
       &__left,
       &__right {
+        @include responsive-row-gap;
+
         display: grid;
-        grid-row-gap: var(--sp);
+        align-content: center;
       }
 
       &__left {
@@ -16,11 +18,43 @@
 
       &__right {
         grid-area: right;
+
+        textarea {
+          //! magic: 150px is a personal preference for the mobile size
+          //! other numbers such as 173 are assigned to balance the
+          //! left column height, which is created by font size, responsive
+          //! row gap and padding sizes
+          @include responsive-prop-w(
+            height,
+            150px,
+            (($w-lg, 0, 173px), ($w-xl, 0, 183px), ($w-xxl, 0, 205px))
+          );
+        }
       }
 
       &__submit {
         grid-area: submit;
       }
+    }
+
+    @include breakpoint-min-width($w-lg) {
+      @include responsive-column-gap-for-blocks;
+
+      /**
+      Contact form needed some extra gap between the submit button and 
+      the controls, the standard row gap wasn't enough
+      */
+      @include responsive-prop-w(
+        grid-row-gap,
+        calc(var(--sp) * 2),
+        (($w-lg, 4), ($w-xl, 5))
+      );
+
+      display: grid;
+      grid-template-areas:
+        'left right'
+        'submit submit';
+      grid-template-columns: 1fr 1fr;
     }
   }
 }
