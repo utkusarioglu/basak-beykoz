@@ -1,5 +1,5 @@
+@import '../../components/button';
+
 .wpcf7-submit {
-  padding: calc(var(--sp) * 2);
-  font-weight: 600;
-  cursor: pointer;
+  @extend button;
 }
