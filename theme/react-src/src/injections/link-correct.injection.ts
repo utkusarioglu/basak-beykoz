@@ -2,6 +2,7 @@ import { preloadAndRoute } from '../utils/preload.util';
 import type { InjectionFunction } from '../services/injection.service';
 import injection from '../services/injection.service';
 import { graceScroll } from '../utils/scroll.util';
+import { W_LG } from '../config';
 
 /**
  * Intercepts anchor elements to make sure that in-site links are handled by
@@ -32,7 +33,14 @@ export const linkCorrectInjection: InjectionFunction = ({
     /// bookmarks
     if (e.target.hash) {
       const id = e.target.hash.slice(1);
-      graceScroll('main', id);
+      const margin = window.innerWidth > W_LG ? 100 : 20;
+      /**
+       * the margin used here is a round number that is precise enough
+       * for this purpose at the time of this commit. The margin set here
+       * is to account for the header that get fixed on top at w.lg
+       * breakpoint.
+       */
+      graceScroll('main', id, margin);
       return;
     }
 
