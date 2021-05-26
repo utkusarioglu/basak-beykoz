@@ -1,7 +1,9 @@
 import React from 'react';
+import { useResponsiveWidth } from '../../../utils/responsive.util';
 import LinkPreloaderView from '../link-preloader/LinkPreloader.view';
 
 const FooterButtonView = () => {
+  const isW = useResponsiveWidth();
   const { pageTitle } = window.config;
 
   return (
@@ -27,10 +29,23 @@ const FooterButtonView = () => {
       >
         <div
           // this div fixes text placement issues with ios devices
+          className={[
+            'has-responsive-horizontal-padding-for-blocks',
+            'has-responsive-vertical-padding-for-blocks',
+          ].join(' ')}
           style={{
             color: 'var(--brush-white)',
             // static font size looks better for this component
             fontSize: 14,
+
+            /**
+             * This alteration in paddingLeft is to make footer button look good
+             * on its own account, there is nothing around the footer at this
+             * breakpoint. It should set its own style.
+             */
+            ...(isW.lg && {
+              paddingLeft: 'calc(var(--sp) * 2)',
+            }),
           }}
         >
           ♡
