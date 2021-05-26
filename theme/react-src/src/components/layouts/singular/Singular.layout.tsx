@@ -13,7 +13,7 @@ interface SingularLayoutProps {
 const SingularLayout: FC<SingularLayoutProps> = ({ singular }) => {
   return (
     <StandardLayout
-      title={singular.title}
+      title={processTitle(singular)}
       hideThumbnail={hideThumbnail(singular.slug)}
       thumbnailUrl={singular.thumbnail}
       hideTitle={hideTitle(singular.slug)}
@@ -140,4 +140,19 @@ function hideHeaderShim(slug: string) {
       return false;
   }
 }
+
+/**
+ * There are some categories that require some special treatment with
+ * their titles. This function handles these processes before the
+ * view component receives the title.
+ * @param singular singular object to process
+ * @returns processed string title
+ */
+function processTitle(singular: SingularSliceRenderEnabled) {
+  if (singular.categories.includes('Ne deneyimlediler')) {
+    return singular.title.split('-')[0].trim();
+  }
+  return singular.title;
+}
+
 export default SingularLayout;
