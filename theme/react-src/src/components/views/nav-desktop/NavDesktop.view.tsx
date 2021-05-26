@@ -22,11 +22,16 @@ const NavDesktopView = () => {
   }, []);
 
   if (isLoading) {
+    /*
+    Displaying a loading screen for this component ends up looking worse,
+    hence `null` is returned until there is something useful to show.
+    */
     return null;
   }
 
   if (menu.length === 0) {
     if (fetchTime !== 0) {
+      /** Nav _should_ have items to show */
       throw new Error('nav_has_no_items');
     }
     return null;
