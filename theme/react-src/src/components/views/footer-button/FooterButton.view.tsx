@@ -29,7 +29,8 @@ const FooterButtonView = () => {
           // this div fixes text placement issues with ios devices
           style={{
             color: 'var(--brush-white)',
-            margin: 'var(--sp)',
+            // static font size looks better for this component
+            fontSize: 14,
           }}
         >
           ♡
