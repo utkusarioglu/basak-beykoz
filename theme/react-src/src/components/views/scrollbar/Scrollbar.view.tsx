@@ -4,6 +4,7 @@ import { createRef, useState } from 'react';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { graceTop } from '../../../utils/scroll.util';
 import type { GraceTopViewProps } from '../grace-top/GraceTop.view';
+import type OverlayScrollbars from 'overlayscrollbars';
 
 interface ScrollbarViewProps {
   id: string;
@@ -12,8 +13,7 @@ interface ScrollbarViewProps {
   onScroll?: (target: EventTarget) => void;
 }
 
-export const scrollbars: Record<string, RefObject<OverlayScrollbarsComponent>> =
-  {};
+const scrollbars: Record<string, RefObject<OverlayScrollbarsComponent>> = {};
 
 const scrollbarRef = createRef<OverlayScrollbarsComponent>();
 
@@ -57,5 +57,20 @@ const ScrollbarView: FC<ScrollbarViewProps> = ({
     </OverlayScrollbarsComponent>
   );
 };
+
+/**
+ * Returns the scrollbar instance for the given Id
+ * @param id scrollbar Id
+ * @returns scrollbar instance
+ */
+export function getScrollbarInstance(
+  id: string
+): NonNullable<OverlayScrollbars> {
+  const instance = scrollbars[id].current?.osInstance();
+  if (!instance) {
+    throw new Error('instance_not_found');
+  }
+  return instance;
+}
 
 export default ScrollbarView;

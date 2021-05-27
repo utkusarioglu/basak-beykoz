@@ -1,4 +1,4 @@
-import { scrollbars } from '../components/views/scrollbar/Scrollbar.view';
+import { getScrollbarInstance } from '../components/views/scrollbar/Scrollbar.view';
 import type { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import type { RefObject } from 'react';
 
@@ -8,11 +8,7 @@ import type { RefObject } from 'react';
  * @param id id for the scrollbar at which the jump will occur
  */
 export function jumpTop(id: string) {
-  try {
-    scrollbars[id].current?.osInstance()?.scroll({ y: 0 });
-  } catch (e) {
-    console.error(e);
-  }
+  getScrollbarInstance(id).scroll({ y: 0 });
 }
 
 /**
@@ -34,16 +30,11 @@ export function graceTop(ref: RefObject<OverlayScrollbarsComponent>) {
  */
 export function graceScroll(id: string, targetId: string, margin: number = 0) {
   const elem = document.getElementById(targetId);
-  const current = scrollbars[id].current;
 
   if (!elem) {
     console.log(`${targetId} not found`);
     return;
   }
 
-  if (!current) {
-    return;
-  }
-
-  current.osInstance()?.scroll({ el: elem, margin }, 600);
+  getScrollbarInstance(id).scroll({ el: elem, margin }, 600);
 }
