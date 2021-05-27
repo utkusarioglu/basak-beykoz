@@ -1,4 +1,5 @@
 import React from 'react';
+import { lazy } from 'react';
 import type { FC } from 'react';
 import { useResponsiveWidth } from '../../../utils/responsive.util';
 
@@ -25,7 +26,11 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   hideHeaderShim = false,
 }) => {
   const isW = useResponsiveWidth();
-  const isWMd = useMediaQuery({ minWidth: W_MD });
+
+  const LazyShareDesktop = lazy(
+    () =>
+      import('../../views/share-desktop-container/ShareDesktopContainer.view')
+  );
 
   return (
     <>
@@ -93,8 +98,6 @@ const StandardLayout: FC<StandardLayoutProps> = ({
               )
             }
 
-            {isW.lg && <LazyShareDesktop />}
-
             {!hideTitle && !isW.md && (
               <div
                 style={{
@@ -139,6 +142,12 @@ const StandardLayout: FC<StandardLayoutProps> = ({
             !hideMargins ? 'has-responsive-horizontal-padding-for-hero' : ''
           }
           style={{
+            /**
+             * Needed for proper placement of the share component
+             * when the thumbnail is hidden
+             */
+            position: 'relative',
+
             ...(!hideThumbnail && {
               marginTop: 'var(--sp)',
 
@@ -186,8 +195,25 @@ const StandardLayout: FC<StandardLayoutProps> = ({
             <h1 style={{ marginBottom: '2.5em', marginTop: '2em' }}>{title}</h1>
           )}
           {children}
+          {
+            /**
+             * share component appears below the child content if there is no
+             * thumbnail column
+             */
+            hideThumbnail && isW.lg && (
+              <LazyShareDesktop position="page-bottom" />
+            )
+          }
         </div>
       </div>
+
+      {
+        /**
+         * Share is placed here to make sure that it's z-index works as expected.
+         * This component only appears if the thumbnail column is enabled.
+         */
+        isW.lg && !hideThumbnail && <LazyShareDesktop position="fixed" />
+      }
     </>
   );
 };

@@ -34,7 +34,7 @@ const AppRouter = () => {
   );
 
   const LazyShareMobile = lazy(
-    () => import('../../views/share-mobile/ShareMobile.view')
+    () => import('../../views/share-list/ShareList.view')
   );
 
   const LazyMobileMenuContainerView = lazy(
