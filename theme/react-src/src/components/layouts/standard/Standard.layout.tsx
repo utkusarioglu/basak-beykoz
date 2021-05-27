@@ -1,7 +1,7 @@
 import React from 'react';
-import { lazy } from 'react';
 import type { FC } from 'react';
 import { useResponsiveWidth } from '../../../utils/responsive.util';
+import ShareDesktopContainer from '../../views/share-desktop-container/ShareDesktopContainer.view';
 
 const THUMBNAIL_WIDTH_DESKTOP = '30vw';
 
@@ -26,11 +26,6 @@ const StandardLayout: FC<StandardLayoutProps> = ({
   hideHeaderShim = false,
 }) => {
   const isW = useResponsiveWidth();
-
-  const LazyShareDesktop = lazy(
-    () =>
-      import('../../views/share-desktop-container/ShareDesktopContainer.view')
-  );
 
   return (
     <>
@@ -201,7 +196,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
              * thumbnail column
              */
             hideThumbnail && isW.lg && (
-              <LazyShareDesktop position="page-bottom" />
+              <ShareDesktopContainer position="page-bottom" />
             )
           }
         </div>
@@ -212,7 +207,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
          * Share is placed here to make sure that it's z-index works as expected.
          * This component only appears if the thumbnail column is enabled.
          */
-        isW.lg && !hideThumbnail && <LazyShareDesktop position="fixed" />
+        isW.lg && !hideThumbnail && <ShareDesktopContainer position="fixed" />
       }
     </>
   );
