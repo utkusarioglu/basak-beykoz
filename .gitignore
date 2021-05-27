@@ -36,3 +36,5 @@ dist.zip
 uploads
 plugins
 .vscode/settings.json
+
+/*.zip
