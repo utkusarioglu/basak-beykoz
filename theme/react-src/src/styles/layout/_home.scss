@@ -153,6 +153,7 @@ $hero-image-height-mobile: 60vh;
     @include breakpoint-min-width($w-md) {
       display: grid;
       align-content: center;
+      padding-top: 6vh;
     }
 
     /**
