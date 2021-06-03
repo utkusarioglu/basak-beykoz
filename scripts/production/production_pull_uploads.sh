@@ -1,5 +1,6 @@
 #! /bin/bash
 
+source scripts/shared/check_env.sh
 source .env
 source scripts/shared/vars.sh
 source scripts/shared/check_ownership.sh
