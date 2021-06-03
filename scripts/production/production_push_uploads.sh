@@ -1,12 +1,47 @@
 #! /bin/bash
 
-cat << EOF
-Usage: wrt production push uploads
+source scripts/shared/check_env.sh
+source .env
+source scripts/shared/vars.sh
 
-This is an empty script file intended for you to place your code for 
-uploading wp upload files used in development. This allows you to run your 
-production with the wp upload files that you use in development.
+PRODUCTION_UPLOADS_DIR="$REMOTE_PROJECT_DIR/wp-content/uploads"
 
-You can edit this file at scripts/production/production_push_uploads.sh
+echo "Creating directories..."
+gcloud compute ssh \
+  $USER@$VM \
+  --zone $ZONE \
+  --project "$PROJECT" \
+  --command \
+  "sudo mkdir -p  $PRODUCTION_UPLOADS_DIR"
 
-EOF
+echo "Setting ownership and permissions for $PRODUCTION_UPLOADS_DIR..."
+gcloud compute ssh \
+  $USER@$VM \
+  --zone $ZONE \
+  --project "$PROJECT" \
+  --command \
+  "sudo chown www-data:www-data $PRODUCTION_UPLOADS_DIR"
+
+gcloud compute ssh \
+  $USER@$VM \
+  --zone $ZONE \
+  --project "$PROJECT" \
+  --command \
+  "sudo chmod 777 $PRODUCTION_UPLOADS_DIR"
+
+echo "Pushing uploads to $PRODUCTION_UPLOADS_DIR..."
+gcloud compute scp \
+  --recurse \
+  --compress \
+  --zone "$ZONE" \
+  --project "$PROJECT" \
+  $HOST_UPLOADS_DIR/* \
+  $USER@$VM:$PRODUCTION_UPLOADS_DIR 
+
+echo "Adjusting permissions for $PRODUCTION_UPLOADS_DIR..."
+gcloud compute ssh \
+  $USER@$VM \
+  --zone $ZONE \
+  --project "$PROJECT" \
+  --command \
+  "sudo chmod 755 $PRODUCTION_UPLOADS_DIR"
