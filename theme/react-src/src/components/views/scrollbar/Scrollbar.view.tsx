@@ -11,6 +11,7 @@ interface ScrollbarViewProps {
   enableGraceTop: boolean;
   graceTopComponent: FC<GraceTopViewProps>;
   onScroll?: (target: EventTarget) => void;
+  onInit?: () => void;
 }
 
 const scrollbars: Record<string, RefObject<OverlayScrollbarsComponent>> = {};
@@ -23,6 +24,7 @@ const ScrollbarView: FC<ScrollbarViewProps> = ({
   enableGraceTop,
   graceTopComponent: GraceTopComponent,
   onScroll,
+  onInit,
 }) => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -46,6 +48,7 @@ const ScrollbarView: FC<ScrollbarViewProps> = ({
           },
           onInitialized: () => {
             scrollbars[id] = scrollbarRef;
+            onInit && onInit();
           },
         },
       }}

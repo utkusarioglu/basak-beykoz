@@ -83,6 +83,9 @@ const AppRouter = () => {
                     // casting for `event` is resolved
                     setIsHeaderOpaque(target.scrollTop < 100);
                   }}
+                  onInit={() => {
+                    setIsHeaderOpaque(true);
+                  }}
                 >
                   <Component />
                   <FooterLayout />
