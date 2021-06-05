@@ -638,19 +638,21 @@ Adds linear gradients to before and after of the wp latest posts block
 Attach a hover color to wp-block-latest-posts in scope
 */
 @mixin wp-block-latest-posts-hover-color($color-base) {
-  .wp-block-latest-posts {
-    .os-content {
-      li {
-        &:hover {
-          background-color: var(#{$color-base});
+  @media (hover: hover) and (pointer: fine) {
+    .wp-block-latest-posts {
+      .os-content {
+        li {
+          &:hover {
+            background-color: var(#{$color-base});
 
-          .wp-block-latest-posts__post-full-content {
-            &::after {
-              background: linear-gradient(
-                to bottom,
-                var(#{$color-base}-transparent),
-                var(#{$color-base})
-              );
+            .wp-block-latest-posts__post-full-content {
+              &::after {
+                background: linear-gradient(
+                  to bottom,
+                  var(#{$color-base}-transparent),
+                  var(#{$color-base})
+                );
+              }
             }
           }
         }
