@@ -7,7 +7,7 @@
       "name": "Launch",
       "port": 9222,
       "url": "http://localhost",
-      "runtimeArgs": ["--incognito"]
+      "runtimeArgs": ["--incognito", "--auto-open-devtools-for-tabs"]
     }
   ]
 }
