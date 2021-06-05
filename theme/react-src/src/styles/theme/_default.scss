@@ -1,3 +1,5 @@
+@import '../abstracts/mixins';
+
 /// HTML COMPONENTS
 
 body {
@@ -166,6 +168,8 @@ OverlayScrollbars
   }
 
   &__testimonials {
+    @include wp-block-latest-posts-hover-color(--brush-yellow-light);
+
     $bg-color: var(--brush-white);
 
     background-color: #{$bg-color};
@@ -176,6 +180,8 @@ OverlayScrollbars
   }
 
   &__shares {
+    @include wp-block-latest-posts-hover-color(--brush-green-light);
+
     $bg-color: var(--brush-yellow-light);
 
     background-color: #{$bg-color};

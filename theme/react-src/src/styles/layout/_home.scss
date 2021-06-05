@@ -374,7 +374,7 @@ $hero-image-height-mobile: 60vh;
   @include section-top-decoration();
   @include section-art('../../static/success.svg');
   @include disable-horizontal-padding;
-  @include wp-block-latest-posts-hover-color(--brush-yellow-light);
+  // @include wp-block-latest-posts-hover-color(--brush-yellow-light);
 
   @include breakpoint-min-width($w-md) {
     @include responsive-horizontal-padding-for-sections;
@@ -415,7 +415,7 @@ $hero-image-height-mobile: 60vh;
   @include section-top-decoration();
   @include section-art('../../static/conversation.svg');
   @include disable-horizontal-padding;
-  @include wp-block-latest-posts-hover-color(--brush-green-light);
+  // @include wp-block-latest-posts-hover-color(--brush-green-light);
 
   .wp-block-columns {
     grid-template-areas:
