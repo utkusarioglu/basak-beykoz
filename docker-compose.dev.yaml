@@ -34,6 +34,8 @@ services:
       - ./uploads:/var/www/html/wp-content/uploads
       # standalone access to scripts inside the container
       - ./scripts/wp:/scripts
+      - vscode-exts:/root/.vscode-server/extensions
+      - vscode-exts-insiders:/root/.vscode-server-insiders/extensions
 
   db:
     image: mysql:5.7
@@ -51,3 +53,5 @@ services:
 
 volumes:
   db:
+  vscode-exts:
+  vscode-exts-insiders:
