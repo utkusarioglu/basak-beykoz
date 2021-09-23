@@ -43,10 +43,10 @@
       <div class="loader-html">
         <div>
           <span role="img" aria-label="cat">
-            😺
+            ⏳
           </span>
         </div>
-        <h4>Kedi sayfayı yüklüyor...</h4>
+        <h4>Sayfa yükleniyor...</h4>
       </div>
     </div>
   </div>

@@ -64,9 +64,9 @@ const LoaderEdge = () => {
           }}
         >
           <span role="img" aria-label="loading">
-            😺
+            ⏳
           </span>
-          Kedi çalışıyor
+          Yükleniyor...
         </div>
       </div>
     </>
