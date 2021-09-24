@@ -18,6 +18,16 @@
   width: 100vw;
   position: relative;
 
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(var(--sp) * 2);
+    background-color: linear-gradient(transparent, black);
+  }
+
   .os-content {
     display: grid;
     grid-auto-flow: column;
@@ -29,6 +39,7 @@
       @include responsive-border-radius;
       @include responsive-margin-right-for-blocks;
       @include smaller-fonts;
+
       /** 
       This next one has a counterpart in 
       `wp-block-latest-posts__featured-image`. Change these in tandem
@@ -36,7 +47,7 @@
       @include responsive-prop-w(
         max-width,
         300px,
-        (($w-lg, 0, 350px), ($w-xl, 0, 400px))
+        (($w-lg, 0, 350px), ($w-xl, 0, 380px))
       );
 
       display: grid;
@@ -64,7 +75,7 @@
         @include responsive-prop-w(
           max-width,
           300px,
-          (($w-lg, 0, 350px), ($w-xl, 0, 400px))
+          (($w-lg, 0, 350px), ($w-xl, 0, 380px))
         );
 
         grid-area: thumbnail;
@@ -72,7 +83,7 @@
         width: #{$width};
 
         height: 50vw;
-        max-height: 150px;
+        max-height: 220px;
 
         img {
           width: 100%;
