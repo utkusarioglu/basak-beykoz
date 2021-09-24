@@ -13,7 +13,7 @@ const GraceTopView: FC<GraceTopViewProps> = ({ onClick }) => {
 
   return (
     <button
-      className="has-responsive-right-for-blocks"
+      className="has-responsive-left-for-blocks"
       style={{
         position: 'fixed',
         border: 'none',
@@ -38,7 +38,7 @@ const GraceTopView: FC<GraceTopViewProps> = ({ onClick }) => {
 
         ...(isW.lg && {
           right: 'calc(var(--sp) * 2)',
-          bottom: 'calc(var(--sp) * 2)',
+          bottom: 'calc(var(--sp) * 4)',
         }),
       }}
       onClick={onClick}

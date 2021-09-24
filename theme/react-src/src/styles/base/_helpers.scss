@@ -66,6 +66,10 @@ section text.
   @include responsive-right-for-blocks;
 }
 
+.has-responsive-left-for-blocks {
+  @include responsive-left-for-blocks;
+}
+
 .has-responsive-size-for-decoration-block {
   @include responsive-size-for-decoration-block;
 }

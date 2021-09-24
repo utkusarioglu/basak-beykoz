@@ -716,6 +716,17 @@ Creates responsive `right` prop for absolute and fixed blocks
 }
 
 /**
+Creates responsive `left` prop for absolute and fixed blocks
+*/
+@mixin responsive-left-for-blocks {
+  @include responsive-prop-w(
+    left,
+    var(--sp),
+    (($w-xs, 1.5), ($w-sm, 2), ($w-md, 3))
+  );
+}
+
+/**
 Unit width and height dictated by --sp and responsive convention used 
 by this app, which is centered around the padding values in this mixin module
 */

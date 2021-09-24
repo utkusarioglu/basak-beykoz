@@ -46,11 +46,18 @@ const FooterLayout = () => {
             // fixes svg sizing issues with ios (70 + 25 + 5)vw = 100vw
             // The numbers come from the 3 props below.
             maxWidth: '70vw',
-            left: '25vw', // reserves space for the footer-button
+            right: '25vw', // reserves space for the footer-button
             // 22 is a magic number that emerges from the behavior of the svg
             // 25px is a magic number that emerges from the content of the svg
             // 25px covers the plant on the right on the smallest screens
-            right: isWLg ? '22vw' : 'calc(20px + 5vw)',
+            left: isWLg ? '22vw' : 'calc(20px + 5vw)',
+            ...(isWLg && {
+              // 52vw is a magic number that is a combination of 50vw for dead
+              // center + 2 vw for the artistic center of the image.
+              left: '52vw',
+              right: 'none',
+              transform: 'translateX(-50%)',
+            }),
           }}
         />
 

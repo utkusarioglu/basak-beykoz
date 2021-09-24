@@ -2,8 +2,7 @@ import React from 'react';
 import type { FC } from 'react';
 import ShareListView from '../share-list/ShareList.view';
 import { useMediaQuery } from 'react-responsive';
-import { W_XL, MOBILE_MENU_PADDING } from '../../../config';
-
+import { W_XL, MOBILE_MENU_PADDING, W_LG } from '../../../config';
 interface ShareDesktopContainerViewProps {
   position: 'fixed' | 'page-bottom';
 }
@@ -12,6 +11,7 @@ const ShareDesktopContainerView: FC<ShareDesktopContainerViewProps> = ({
   position,
 }) => {
   const isWXl = useMediaQuery({ minWidth: W_XL });
+  const isWLg = useMediaQuery({ minWidth: W_LG });
 
   return (
     <div
@@ -28,15 +28,22 @@ const ShareDesktopContainerView: FC<ShareDesktopContainerViewProps> = ({
           backgroundColor: 'var(--brush-white-half)',
           position: 'fixed',
           bottom: 'calc(var(--sp) * 2)',
+          ...(isWXl && {
+            left: 'var(--w-xl-hero-horizontal-padding)',
+          }),
         }),
 
         ...(position === 'page-bottom' && {
           position: 'absolute',
           bottom: 0,
-        }),
-
-        ...(isWXl && {
-          left: 'var(--w-xl-hero-horizontal-padding)',
+          // backdropFilter: 'blur(4px)',
+          // backgroundColor: 'var(--brush-white-half)',
+          ...(isWLg && {
+            left: 'var(--w-lg-sections-horizontal-padding)',
+          }),
+          ...(isWXl && {
+            left: 'var(--w-xl-sections-horizontal-padding)',
+          }),
         }),
       }}
     >
