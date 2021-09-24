@@ -187,7 +187,7 @@ const StandardLayout: FC<StandardLayoutProps> = ({
             )
           }
           {isW.md && !hideTitle && (
-            <h1 style={{ marginBottom: '2.5em', marginTop: '2em' }}>{title}</h1>
+            <h1 style={{ marginBottom: '1.5em', marginTop: '1em' }}>{title}</h1>
           )}
           {children}
           {
