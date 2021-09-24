@@ -80,7 +80,7 @@ const HeaderLayout = () => {
             ...(isW.lg && {
               maxWidth: 'none',
               //! magic - this number creates a balanced size for the logo
-              width: '30vh',
+              width: '32vh',
             }),
           }}
         />
