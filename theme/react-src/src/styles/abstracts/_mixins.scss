@@ -601,6 +601,23 @@ Adds linear gradients to before and after of the wp latest posts block
   $half-transparent-color,
   $transparent-color
 ) {
+  @include wp-block-latest-posts-edge-decoration-left(
+    $edge-color,
+    $half-transparent-color,
+    $transparent-color
+  );
+  @include wp-block-latest-posts-edge-decoration-right(
+    $edge-color,
+    $half-transparent-color,
+    $transparent-color
+  );
+}
+
+@mixin wp-block-latest-posts-edge-decoration-right(
+  $edge-color,
+  $half-transparent-color,
+  $transparent-color
+) {
   &::before {
     z-index: 10;
     content: '';
@@ -616,7 +633,13 @@ Adds linear gradients to before and after of the wp latest posts block
     top: 0;
     left: 0;
   }
+}
 
+@mixin wp-block-latest-posts-edge-decoration-left(
+  $edge-color,
+  $half-transparent-color,
+  $transparent-color
+) {
   &::after {
     z-index: 10;
     content: '';
