@@ -34,6 +34,10 @@ $hero-image-height-mobile: 60vh;
       margin-bottom: 1.6em;
       text-align: left;
     }
+
+    & > a {
+      text-decoration: none;
+    }
   }
 
   ul {
@@ -212,6 +216,8 @@ $hero-image-height-mobile: 60vh;
     }
 
     & .wp-block-buttons {
+      padding-top: 1em;
+
       @include breakpoint-min-width($w-md) {
         & a {
           padding-top: calc(var(--sp) * 2);
@@ -352,6 +358,13 @@ $hero-image-height-mobile: 60vh;
         @include disable-horizontal-padding;
         @include smaller-fonts;
 
+        // this has been added upon client's request
+        @include responsive-prop-w(
+          margin-bottom,
+          calc(var(--sp) * 2),
+          (($w-md, 0), ($w-lg, 0))
+        );
+
         grid-template-areas:
           'image'
           'text';
@@ -391,13 +404,11 @@ $hero-image-height-mobile: 60vh;
   }
 
   .wp-block-latest-posts {
-    @include breakpoint-min-width($w-md) {
-      @include wp-block-latest-posts-edge-decoration(
-        var(--brush-white),
-        var(--brush-white-half),
-        var(--brush-white-transparent)
-      );
-    }
+    @include wp-block-latest-posts-edge-decoration(
+      var(--brush-white),
+      var(--brush-white-half),
+      var(--brush-white-transparent)
+    );
 
     .os-content {
       li {
@@ -415,7 +426,6 @@ $hero-image-height-mobile: 60vh;
   @include section-top-decoration();
   @include section-art('../../static/conversation.svg');
   @include disable-horizontal-padding;
-  // @include wp-block-latest-posts-hover-color(--brush-green-light);
 
   .wp-block-columns {
     grid-template-areas:
@@ -427,7 +437,6 @@ $hero-image-height-mobile: 60vh;
 
       grid-template-areas: 'text feature';
       grid-template-columns: 1fr 1fr;
-      // grid-column-gap: 5vw;
     }
 
     @include breakpoint-min-width($w-xxl) {
@@ -446,13 +455,13 @@ $hero-image-height-mobile: 60vh;
   }
 
   .wp-block-latest-posts {
-    @include breakpoint-min-width($w-md) {
-      @include wp-block-latest-posts-edge-decoration(
-        var(--brush-yellow-light),
-        var(--brush-yellow-light-half),
-        var(--brush-yellow-light-transparent)
-      );
+    @include wp-block-latest-posts-edge-decoration(
+      var(--brush-yellow-light),
+      var(--brush-yellow-light-half),
+      var(--brush-yellow-light-transparent)
+    );
 
+    @include breakpoint-min-width($w-md) {
       height: 100% !important;
     }
 
