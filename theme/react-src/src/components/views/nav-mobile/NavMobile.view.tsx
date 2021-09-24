@@ -36,7 +36,7 @@ const NavMobileView = () => {
         paddingBottom: 'calc(var(--sp) * 2)',
       }}
     >
-      <MobileMenuSectionTitleView>Sayfalar</MobileMenuSectionTitleView>
+      {/* <MobileMenuSectionTitleView>Sayfalar</MobileMenuSectionTitleView> */}
       <nav
         style={{
           display: 'flex',
